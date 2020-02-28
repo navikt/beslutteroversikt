@@ -1,4 +1,5 @@
 import { OrNothing } from '../../utils/types/ornothing';
+import { doNothing } from '../../utils';
 
 export interface Toggles {
 	visVeilder: boolean;
@@ -19,6 +20,9 @@ export interface DecoratorConfig {
 
 	contextholder?: true | Contextholder;
 	autoSubmitOnMount?: boolean;
+
+	onEnhetChange: (enhet: string) => void;
+	onSok(fnr: string): void;
 }
 
 export function lagDecoratorConfig(): DecoratorConfig {
@@ -32,6 +36,8 @@ export function lagDecoratorConfig(): DecoratorConfig {
 			visEnhetVelger: false,
 			visSokefelt: false,
 			visVeilder: true
-		}
+		},
+		onEnhetChange: doNothing,
+		onSok: doNothing
 	};
 }
