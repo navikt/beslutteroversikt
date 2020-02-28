@@ -1,12 +1,13 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Input } from 'nav-frontend-skjema';
 import './sokefelt.less';
+import { useFilterStore } from '../../stores/filter-store';
 
 export const Sokefelt = () => {
-	const [query, setQuery] = useState('');
+	const { fnrOrNameFilter, setFnrOrNameFilter } = useFilterStore();
 
 	function handleOnQueryChanged(e: React.ChangeEvent<HTMLInputElement>) {
-		setQuery(e.target.value);
+		setFnrOrNameFilter(e.target.value);
 	}
 
     return (
@@ -15,7 +16,7 @@ export const Sokefelt = () => {
 			    label=""
 			    placeholder="Søk etter navn eller fødselsnummer"
 			    onChange={handleOnQueryChanged}
-			    value={query}
+			    value={fnrOrNameFilter}
 		    />
 	    </div>
     );

@@ -1,14 +1,14 @@
 import React from 'react';
 import { useFetchStore } from './fetch-store';
+import { useFilterStore } from './filter-store';
+import { ChildrenProps } from '../utils/types/children-props';
 
-interface StoreProviderProps {
-	children: React.ReactNode;
-}
-
-const StoreProvider = (props: StoreProviderProps) => {
+const StoreProvider = (props: ChildrenProps) => {
 	return (
 		<useFetchStore.Provider>
-			{props.children}
+			<useFilterStore.Provider>
+				{props.children}
+			</useFilterStore.Provider>
 		</useFetchStore.Provider>
 	);
 };
