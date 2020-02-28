@@ -1,12 +1,12 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { DataFetcher } from '../components/datafetcher';
-import './hovedside.less';
-import { StatusFilter } from '../components/status-filter/status-filter';
-import { EnhetFilter } from '../components/enhet-filter/enhet-filter';
+import { StatusFilter } from '../components/filter-paneler/status-filter/status-filter';
+import { EnhetFilter } from '../components/filter-paneler/enhet-filter/enhet-filter';
 import { Sokefelt } from '../components/sokefelt/sokefelt';
 import { UserTable } from '../components/user-table/user-table';
 import { FilterEtiketter } from '../components/filter-etiketter/filter-etiketter';
 import { useFilteredUsersStore } from '../stores/filtered-users-store';
+import './hovedside.less';
 
 export const Hovedside = () => {
 	const { filteredUsers } = useFilteredUsersStore();
