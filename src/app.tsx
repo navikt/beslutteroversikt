@@ -3,6 +3,7 @@ import StoreProvider from './stores/store-provider';
 import { Header } from './components/header/header';
 import { InternflateDecorator } from './components/internflate-decorator/internflate-decorator';
 import { Hovedside } from './hovedside/hovedside';
+import { FilterSync } from './components/filter-sync';
 
 function App() {
 	return (
@@ -10,6 +11,7 @@ function App() {
 			<InternflateDecorator />
 			<Header />
 			<Hovedside />
+			<FilterSync />
 		</StoreProvider>
 	);
 }

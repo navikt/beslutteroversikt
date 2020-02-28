@@ -1,9 +1,21 @@
 import createUseContext from 'constate';
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
+
+export interface Filters {
+	fnrOrName: string;
+	enheter: string[];
+}
 
 export const useFilterStore = createUseContext(() => {
 	const [fnrOrNameFilter, setFnrOrNameFilter] = useState<string>('');
 	const [enheterFilter, setEnheterFilter] = useState<string[]>([]);
 
-	return { fnrOrNameFilter, setFnrOrNameFilter, enheterFilter, setEnheterFilter };
+	const filters: Filters = useMemo(() => {
+		return {
+			fnrOrName: fnrOrNameFilter,
+			enheter: enheterFilter
+		};
+	}, [fnrOrNameFilter, enheterFilter]);
+
+	return { filters, setFnrOrNameFilter, setEnheterFilter };
 });
