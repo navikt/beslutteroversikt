@@ -1,6 +1,6 @@
 import React from 'react';
 import { Bruker } from '../../rest/data/bruker';
-import { formatDateStr, formatDateTime } from '../../utils/date-utils';
+import { formatDateTime, dagerSiden } from '../../utils/date-utils';
 
 export const UserRow = (props: {bruker: Bruker}) => {
 	const {
@@ -13,7 +13,7 @@ export const UserRow = (props: {bruker: Bruker}) => {
     	<tr className="user-table__row">
 		    <td>{fnr}</td>
 		    <td>{fornavn + ' ' + etternavn}</td>
-		    <td>{formatDateStr(oppfolgingStartet)}</td>
+		    <td>{dagerSiden(oppfolgingStartet)}</td>
 		    <td>{oppfolgingsenhetNavn}</td>
 		    <td>{beslutterNavn}</td>
 		    <td>{status}</td>
