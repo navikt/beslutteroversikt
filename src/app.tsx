@@ -1,17 +1,18 @@
 import React from 'react';
 import { DataFetcher } from './components/datafetcher';
 import StoreProvider from './stores/store-provider';
-import './app.less';
+import { Header } from './components/header/header';
 
 function App() {
 	return (
-		<main>
-			<StoreProvider>
+		<StoreProvider>
+			<Header />
+			<main>
 				<DataFetcher>
-					<p>Hello world</p>
+					<p />
 				</DataFetcher>
-			</StoreProvider>
-		</main>
+			</main>
+		</StoreProvider>
 	);
 }
 
