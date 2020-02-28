@@ -8,9 +8,8 @@ import {
 } from './enhet-dropdown/enhet-dropdown';
 import { useFetchStore } from '../../../stores/fetch-store';
 import { useFilterStore } from '../../../stores/filter-store';
-import './enhet-filter.less';
 
-export const EnhetFilter = () => {
+export const EnhetFilterPanel = () => {
 	const { filters, setEnheterFilter } = useFilterStore();
 	const { innloggetVeileder } = useFetchStore();
 

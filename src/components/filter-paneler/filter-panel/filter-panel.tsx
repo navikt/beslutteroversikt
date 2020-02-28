@@ -11,7 +11,9 @@ export const FilterPanel = (props: FilterPanelProps) => {
     return (
     	<div className="filter-panel">
 		    <Undertittel>{props.tittel}</Undertittel>
-		    {props.children}
+		    <div className="filter-panel__innhold">
+		        {props.children}
+		    </div>
 	    </div>
     );
 };

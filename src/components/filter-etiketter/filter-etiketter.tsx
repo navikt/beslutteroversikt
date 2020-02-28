@@ -1,5 +1,5 @@
 import React from 'react';
-import { Filters, useFilterStore } from '../../stores/filter-store';
+import { Filters, StatusFilter, useFilterStore } from '../../stores/filter-store';
 import { FilterEtikett } from './etikett/filter-etikett';
 import './filter-etiketter.less';
 import { isEmpty } from '../../utils';
@@ -8,9 +8,10 @@ export type OnRemoveClicked = (id: string) => void;
 
 const NAVN_ELLER_FNR_FILTER = 'NAVN_ELLER_FNR_FILTER';
 const ENHET_FILTER = 'ENHET_FILTER';
+const STATUS_FILTER = 'STATUS_FILTER';
 
 function lagFilterEtiketter(filters: Filters, onRemoveClicked: OnRemoveClicked) {
-	const { fnrOrName, enheter } = filters;
+	const { fnrOrName, enheter, status } = filters;
 	const filterEtiketter = [];
 
 	if (!isEmpty(fnrOrName)) {
@@ -25,17 +26,25 @@ function lagFilterEtiketter(filters: Filters, onRemoveClicked: OnRemoveClicked) 
 		);
 	}
 
+	if (status !== StatusFilter.ALLE) {
+		filterEtiketter.push(
+			<FilterEtikett key={STATUS_FILTER} id={STATUS_FILTER} tekst="Søk på status" onRemoveClicked={onRemoveClicked} />
+		);
+	}
+
 	return filterEtiketter;
 }
 
 export const FilterEtiketter = () => {
-	const { filters, setFnrOrNameFilter, setEnheterFilter } = useFilterStore();
+	const { filters, setFnrOrNameFilter, setEnheterFilter, setStatusFilter } = useFilterStore();
 
 	function handleOnRemoveClicked(id: string) {
 		if (id === NAVN_ELLER_FNR_FILTER) {
 			setFnrOrNameFilter('');
 		} else if (id === ENHET_FILTER) {
 			setEnheterFilter([]);
+		} else if (id === STATUS_FILTER) {
+			setStatusFilter(StatusFilter.ALLE);
 		}
 	}
 

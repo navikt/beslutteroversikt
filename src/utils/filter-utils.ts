@@ -1,5 +1,5 @@
-import { Filters } from '../stores/filter-store';
-import { Bruker } from '../rest/data/bruker';
+import { Filters, StatusFilter } from '../stores/filter-store';
+import { Bruker, BrukerStatus } from '../rest/data/bruker';
 import { isEmpty } from './index';
 import { Enhet } from '../rest/data/innlogget-veileder';
 
@@ -18,7 +18,23 @@ export const filterUsers = (filters: Filters, users: Bruker[]): Bruker[] => {
 		filteredUsers = filteredUsers.filter(u => matchesEnheter(filters.enheter, u));
 	}
 
+	if (filters.status !== StatusFilter.ALLE) {
+		filteredUsers = filteredUsers.filter(u => matchesStatusFilter(filters.status, u));
+	}
+
 	return filteredUsers;
+};
+
+const matchesStatusFilter = (status: StatusFilter, bruker: Bruker): boolean => {
+	if (status === StatusFilter.VENTER_PA_VEILEDER && bruker.status === BrukerStatus.VENTER_PA_VEILEDER) {
+		return true;
+	} else if (status === StatusFilter.VENTER_PA_BESLUTTER && bruker.status === BrukerStatus.VENTER_PA_BESLUTTER) {
+		return true;
+	} else if (status === StatusFilter.KLAR_TIL_UTSENDING && bruker.status === BrukerStatus.KLAR_TIL_UTSENDING) {
+		return true;
+	}
+
+	return false;
 };
 
 const matchesEnheter = (enheter: Enhet[], bruker: Bruker): boolean => {

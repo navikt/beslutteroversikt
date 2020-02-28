@@ -1,7 +1,7 @@
 import React from 'react';
 import { DataFetcher } from '../components/datafetcher';
-import { StatusFilter } from '../components/filter-paneler/status-filter/status-filter';
-import { EnhetFilter } from '../components/filter-paneler/enhet-filter/enhet-filter';
+import { StatusFilterPanel } from '../components/filter-paneler/status-filter-panel/status-filter-panel';
+import { EnhetFilterPanel } from '../components/filter-paneler/enhet-filter-panel/enhet-filter-panel';
 import { Sokefelt } from '../components/sokefelt/sokefelt';
 import { UserTable } from '../components/user-table/user-table';
 import { FilterEtiketter } from '../components/filter-etiketter/filter-etiketter';
@@ -14,14 +14,16 @@ export const Hovedside = () => {
     return (
 	    <main className="hovedside">
 		    <DataFetcher>
-			    <div className="filter-column">
-				    <Sokefelt/>
-				    <StatusFilter/>
-				    <EnhetFilter/>
-			    </div>
-			    <div className="table-column">
-				    <FilterEtiketter/>
-				    <UserTable brukere={filteredUsers}/>
+			    <div className="hovedside__innhold">
+				    <div className="filter-column">
+					    <Sokefelt/>
+					    <StatusFilterPanel/>
+					    <EnhetFilterPanel/>
+				    </div>
+				    <div className="table-column">
+					    <FilterEtiketter/>
+					    <UserTable brukere={filteredUsers}/>
+				    </div>
 			    </div>
 		    </DataFetcher>
 	    </main>
