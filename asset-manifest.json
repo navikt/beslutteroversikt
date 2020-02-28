@@ -1,0 +1,11 @@
+{
+  "files": {
+    "main.css": "/beslutteroversikt/static/css/main.css",
+    "main.js": "/beslutteroversikt/static/js/main.js",
+    "main.js.map": "/beslutteroversikt/static/js/main.js.map",
+    "index.html": "/beslutteroversikt/index.html",
+    "precache-manifest.f3e093e38e5836609b3e09bdfe42a6c0.js": "/beslutteroversikt/precache-manifest.f3e093e38e5836609b3e09bdfe42a6c0.js",
+    "service-worker.js": "/beslutteroversikt/service-worker.js",
+    "static/css/main.css.map": "/beslutteroversikt/static/css/main.css.map"
+  }
+}
