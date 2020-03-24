@@ -1,0 +1,25 @@
+@import "~nav-frontend-core/less/_variabler";
+
+.user-table-header {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr) 200px;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid @navGra60;
+
+  .table-header-field {
+    font-size: 1rem;
+    font-weight: bolder;
+    color: @navBla;
+
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    white-space: nowrap;
+  }
+
+  .table-header-field__order-icon {
+    width: 16px;
+    height: 16px;
+    margin-left: 0.25rem;
+  }
+}

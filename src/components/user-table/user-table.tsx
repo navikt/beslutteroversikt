@@ -1,9 +1,10 @@
 import React from 'react';
 import { Bruker } from '../../rest/data/bruker';
-import { UserRow } from './user-table-row';
-import { UserTableHeader } from './user-table-header';
+import { UserTableHeader } from './header/user-table-header';
 import { AlertStripeInfo } from 'nav-frontend-alertstriper';
+import { UserTableBody } from './body/user-table-body';
 import './user-table.less';
+import { OrderByData } from './table-utils';
 
 export const UserTable = (props: { brukere: Bruker[] }) => {
 	const { brukere } = props;
@@ -16,14 +17,14 @@ export const UserTable = (props: { brukere: Bruker[] }) => {
 		);
 	}
 
+	function handleOnOrderByChanged(orderByData: OrderByData) {
+
+	}
+
     return (
-    	<table className="user-table">
-		    <thead>
-		        <UserTableHeader />
-		    </thead>
-		    <tbody>
-		        {props.brukere.map((bruker, idx) => <UserRow bruker={bruker} key={idx} />)}
-		    </tbody>
-	    </table>
+    	<section className="user-table">
+		    <UserTableHeader onOrderByChanged={handleOnOrderByChanged} />
+			<UserTableBody brukere={brukere} />
+	    </section>
     );
 };
