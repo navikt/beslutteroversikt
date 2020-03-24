@@ -1,7 +1,8 @@
 import React from 'react';
 import { EtikettInfo } from 'nav-frontend-etiketter';
-import './filter-etikett.less';
 import { OnRemoveClicked } from '../filter-etiketter';
+import xIcon from './x.svg';
+import './filter-etikett.less';
 
 interface FilterEtikettProps {
     id: string;
@@ -14,7 +15,9 @@ export const FilterEtikett = (props: FilterEtikettProps) => {
 
     return (
         <button className="filter-etikett" onClick={() => onRemoveClicked(id)}>
-            <EtikettInfo>{tekst}</EtikettInfo>
+            <EtikettInfo>
+                {tekst} <img className="filter-etikett__icon" src={xIcon} alt="Fjern etikett" />
+            </EtikettInfo>
         </button>
     );
 };

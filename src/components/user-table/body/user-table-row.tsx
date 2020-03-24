@@ -2,7 +2,7 @@ import React from 'react';
 import { Bruker } from '../../../rest/data/bruker';
 import { formatDateStr, tidSiden } from '../../../utils/date-utils';
 import { Normaltekst, Element } from 'nav-frontend-typografi';
-import { fjernNavFraEnhetNavn } from '../../../utils';
+import { fjernNavFraEnhetNavn, mapBrukerStatusTilTekst } from '../../../utils';
 
 export const UserRow = (props: {bruker: Bruker}) => {
 	const {
@@ -16,7 +16,7 @@ export const UserRow = (props: {bruker: Bruker}) => {
 		    <Normaltekst>{etternavn + ', ' + fornavn}</Normaltekst>
 		    <Element>{fnr}</Element>
 		    <Normaltekst>{formatDateStr(vedtakStartet)}</Normaltekst>
-		    <Normaltekst>{status}</Normaltekst>
+		    <Normaltekst>{mapBrukerStatusTilTekst(status)}</Normaltekst>
 		    <Element>{beslutterNavn}</Element>
 		    <Normaltekst>{veilederNavn}</Normaltekst>
 		    <Normaltekst>{fjernNavFraEnhetNavn(oppfolgingsenhetNavn)}</Normaltekst>
