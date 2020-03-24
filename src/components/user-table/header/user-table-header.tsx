@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import cls from 'classnames';
 import { UserTablePagination } from './user-table-pagination';
 import {
 	INITIAL_DIRECTION,
@@ -8,7 +9,6 @@ import {
 	toggleOrderByDirection
 } from '../table-utils';
 import Show from '../../felles/show';
-import arrowUpIcon from './arrow-up.svg';
 import arrowDownIcon from './arrow-down.svg';
 import './user-table-header.less';
 
@@ -69,13 +69,16 @@ interface HeaderFieldProps {
 
 const HeaderField = (props: HeaderFieldProps) => {
 	const { name, text, orderByData, onOrderByChanged } = props;
-	const icon = orderByData.direction === OrderByDirection.ASC ? arrowUpIcon : arrowDownIcon;
 	const alt = 'Sortert ' + (orderByData.direction === OrderByDirection.ASC ? 'økende' : 'synkenede');
+	const iconClasses = cls('table-header-field__order-icon', {
+		'table-header-field__order-icon--asc': orderByData.direction === OrderByDirection.ASC
+	});
+
 	return (
 		<button onClick={() => onOrderByChanged(name)} className="table-header-field">
 			{text}
 			<Show if={orderByData.fieldName === name && orderByData.direction !== OrderByDirection.NONE}>
-				<img className="table-header-field__order-icon" src={icon} alt={alt} />
+				<img className={iconClasses} src={arrowDownIcon} alt={alt} />
 			</Show>
 		</button>
 	);

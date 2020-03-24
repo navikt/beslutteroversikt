@@ -11,7 +11,7 @@ export const UserTable = (props: { brukere: Bruker[] }) => {
 
 	if (brukere.length === 0) {
 		return (
-			<AlertStripeInfo>
+			<AlertStripeInfo className="user-table__no-users">
                 Fant ingen brukere
 			</AlertStripeInfo>
 		);

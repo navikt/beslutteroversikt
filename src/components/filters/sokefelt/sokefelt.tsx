@@ -1,6 +1,6 @@
 import React from 'react';
 import { Input } from 'nav-frontend-skjema';
-import { useFilterStore } from '../../stores/filter-store';
+import { useFilterStore } from '../../../stores/filter-store';
 import './sokefelt.less';
 
 export const Sokefelt = () => {
