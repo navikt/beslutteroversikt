@@ -9,3 +9,7 @@ export function isEmpty(str: string): boolean {
 export function randBetween(from: number, to: number): number {
 	return Math.round(Math.random() * (to - from) + from);
 }
+
+export function fjernNavFraEnhetNavn(enhetNavn: string): string {
+	return enhetNavn.replace('NAV', '').trim();
+}

@@ -11,9 +11,10 @@ export interface Bruker {
 	etternavn: string;
 	status: BrukerStatus;
 	beslutterNavn: string;
+	veilederNavn: string;
 	utkastSistEndret: string; // dato
 
-	oppfolgingStartet: string; // dato
+	vedtakStartet: string; // dato
 	oppfolgingsenhetId: string;
 	oppfolgingsenhetNavn: string;
 }

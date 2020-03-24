@@ -19,10 +19,11 @@ interface UserTableHeaderProps {
 export enum HeaderFieldName {
 	NAVN = 'NAVN',
 	FNR = 'FNR',
-	OPPFOLGING_STARTET = 'OPPFOLGING_STARTET',
-	OPFOLGING_ENHET = 'OPFOLGING_ENHET',
-	BESLUTTER = 'BESLUTTER',
+	VEDTAK_STARTET = 'VEDTAK_STARTET',
 	STATUS = 'STATUS',
+	BESLUTTER = 'BESLUTTER',
+	VEILEDER = 'VEILEDER',
+	OPFOLGING_ENHET = 'OPFOLGING_ENHET',
 	UTKAST_ENDRET = 'UTKAST_ENDRET'
 }
 
@@ -48,11 +49,12 @@ export const UserTableHeader = (props: UserTableHeaderProps) => {
     	<div className="user-table-header">
 		    <HeaderField name={HeaderFieldName.NAVN} text="Etternavn, Fornavn" orderByData={orderByData} onOrderByChanged={handleOnOrderByChanged} />
 		    <HeaderField name={HeaderFieldName.FNR} text="Fødselsnummer" orderByData={orderByData} onOrderByChanged={handleOnOrderByChanged} />
-		    <HeaderField name={HeaderFieldName.OPPFOLGING_STARTET} text="Oppfølging startet" orderByData={orderByData} onOrderByChanged={handleOnOrderByChanged} />
-		    <HeaderField name={HeaderFieldName.OPFOLGING_ENHET} text="Oppfølgingsenhet" orderByData={orderByData} onOrderByChanged={handleOnOrderByChanged} />
-		    <HeaderField name={HeaderFieldName.BESLUTTER} text="Beslutter" orderByData={orderByData} onOrderByChanged={handleOnOrderByChanged} />
+		    <HeaderField name={HeaderFieldName.VEDTAK_STARTET} text="Vedtak startet" orderByData={orderByData} onOrderByChanged={handleOnOrderByChanged} />
 		    <HeaderField name={HeaderFieldName.STATUS} text="Status" orderByData={orderByData} onOrderByChanged={handleOnOrderByChanged} />
-		    <HeaderField name={HeaderFieldName.UTKAST_ENDRET} text="Utkast sist endret" orderByData={orderByData} onOrderByChanged={handleOnOrderByChanged} />
+		    <HeaderField name={HeaderFieldName.BESLUTTER} text="Beslutter" orderByData={orderByData} onOrderByChanged={handleOnOrderByChanged} />
+		    <HeaderField name={HeaderFieldName.VEILEDER} text="Veileder" orderByData={orderByData} onOrderByChanged={handleOnOrderByChanged} />
+		    <HeaderField name={HeaderFieldName.OPFOLGING_ENHET} text="Enhet" orderByData={orderByData} onOrderByChanged={handleOnOrderByChanged} />
+		    <HeaderField name={HeaderFieldName.UTKAST_ENDRET} text="Sist endret" orderByData={orderByData} onOrderByChanged={handleOnOrderByChanged} />
 			<UserTablePagination />
 	    </div>
     );

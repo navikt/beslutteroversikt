@@ -5,7 +5,7 @@ export function formatDateTime(dateStr: string) {
 }
 
 export function formatDateStr(dateStr: string) {
-	return dayjs(dateStr).format('DD. MMM YYYY');
+	return dayjs(dateStr).format('DD.MM.YYYY');
 }
 
 export function formatDate(date: Date, format: string = 'DD.MM.YYYY') {
@@ -28,4 +28,8 @@ export function dagerSiden(dateStr: string): string {
 	}
 
 	return formatDate(date);
+}
+
+export function tidSiden(dateStr: string): string {
+	return '10 timer siden';
 }

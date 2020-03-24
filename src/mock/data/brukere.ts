@@ -22,10 +22,11 @@ export const lagBrukere = (antallBrukere: number): Bruker[] => {
 		const randomEnhet = faker.random.arrayElement(enheter);
 		const bruker: Bruker = {
 			beslutterNavn: faker.name.firstName() + ' ' + faker.name.lastName(),
+			veilederNavn: faker.name.firstName() + ' ' + faker.name.lastName(),
 			fnr: randomFnr(),
 			fornavn: faker.name.firstName(),
 			etternavn: faker.name.lastName(),
-			oppfolgingStartet: faker.date.recent(30).toISOString(),
+			vedtakStartet: faker.date.recent(30).toISOString(),
 			oppfolgingsenhetId: randomEnhet.enhetId,
 			oppfolgingsenhetNavn: randomEnhet.navn,
 			status: faker.random.objectElement(BrukerStatus) as BrukerStatus,
