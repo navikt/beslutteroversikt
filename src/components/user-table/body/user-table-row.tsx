@@ -17,10 +17,10 @@ export const UserRow = (props: {bruker: Bruker}) => {
 		    <Element>{fnr}</Element>
 		    <Normaltekst>{formatDateStr(vedtakStartet)}</Normaltekst>
 		    <Normaltekst>{mapBrukerStatusTilTekst(status)}</Normaltekst>
-		    <Element>{beslutterNavn}</Element>
+		    <Element>{beslutterNavn || '-'}</Element>
 		    <Normaltekst>{veilederNavn}</Normaltekst>
-		    <Normaltekst>{fjernNavFraEnhetNavn(oppfolgingsenhetNavn)}</Normaltekst>
 		    <Normaltekst>{tidSiden(utkastSistEndret)}</Normaltekst>
+		    <Normaltekst>{fjernNavFraEnhetNavn(oppfolgingsenhetNavn)}</Normaltekst>
 	    </li>
     );
 };

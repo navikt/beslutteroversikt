@@ -15,13 +15,18 @@ function randomFnr(): string {
 	return `${dag.toString().padStart(2, '0')}${mnd.toString().padStart(2, '0')}${ar.toString().padStart(2, '0')}${individsifre}${kontrollsifre}`;
 }
 
+function tEllerNull<T>(t: T): T | null {
+	if (randBetween(1, 5) === 1) return null;
+	else return t;
+}
+
 export const lagBrukere = (antallBrukere: number): Bruker[] => {
 	const brukere: Bruker[] = [];
 
 	for (let i = 0; i < antallBrukere; i++) {
 		const randomEnhet = faker.random.arrayElement(enheter);
 		const bruker: Bruker = {
-			beslutterNavn: faker.name.firstName() + ' ' + faker.name.lastName(),
+			beslutterNavn: tEllerNull(faker.name.firstName() + ' ' + faker.name.lastName()),
 			veilederNavn: faker.name.firstName() + ' ' + faker.name.lastName(),
 			fnr: randomFnr(),
 			fornavn: faker.name.firstName(),

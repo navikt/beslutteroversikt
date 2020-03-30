@@ -12,7 +12,7 @@ export interface Bruker {
 	fornavn: string;
 	etternavn: string;
 	status: BrukerStatus;
-	beslutterNavn: string;
+	beslutterNavn: string | null;
 	veilederNavn: string;
 	utkastSistEndret: string; // dato
 
