@@ -1,5 +1,5 @@
 
-export enum BrukerStatus {
+export enum UtkastStatus {
 	KLAR_FOR_BESLUTTER = 'KLAR_FOR_BESLUTTER',
 	HAR_BESLUTTER = 'HAR_BESLUTTER',
 	VENTER_PA_VEILEDER = 'VENTER_PA_VEILEDER',
@@ -11,7 +11,7 @@ export interface Bruker {
 	fnr: string;
 	fornavn: string;
 	etternavn: string;
-	status: BrukerStatus;
+	status: UtkastStatus;
 	beslutterNavn: string | null;
 	veilederNavn: string;
 	utkastSistEndret: string; // dato

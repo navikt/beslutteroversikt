@@ -1,5 +1,5 @@
 import faker from 'faker';
-import { Bruker, BrukerStatus } from '../../rest/data/bruker';
+import { Bruker, UtkastStatus } from '../../rest/data/bruker';
 import { enheter } from './enheter';
 import { randBetween } from '../../utils';
 
@@ -34,7 +34,7 @@ export const lagBrukere = (antallBrukere: number): Bruker[] => {
 			vedtakStartet: faker.date.recent(30).toISOString(),
 			oppfolgingsenhetId: randomEnhet.enhetId,
 			oppfolgingsenhetNavn: randomEnhet.navn,
-			status: faker.random.objectElement(BrukerStatus) as BrukerStatus,
+			status: faker.random.objectElement(UtkastStatus) as UtkastStatus,
 			utkastSistEndret: faker.date.recent().toISOString()
 		};
 
