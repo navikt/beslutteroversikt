@@ -5,7 +5,7 @@ export function formatDateTime(dateStr: string) {
 }
 
 export function formatDateStr(dateStr: string) {
-	return dayjs(dateStr).format('DD. MMM YYYY');
+	return dayjs(dateStr).format('DD.MM.YYYY');
 }
 
 export function formatDate(date: Date, format: string = 'DD.MM.YYYY') {
@@ -17,15 +17,16 @@ export function daysFromToday(date: Date): number {
 	return today.diff(dayjs(date), 'day');
 }
 
-export function dagerSiden(dateStr: string): string {
+export function tidSiden(dateStr: string): string {
 	const date = dayjs(dateStr).toDate();
-	const days = daysFromToday(date);
+	const now = dayjs();
 
-	if (days <= 0) {
-		return 'i dag';
-	} else if (days < 30) {
-		return `${days} dager siden`;
-	}
+	const dager = now.diff(dayjs(date), 'day');
+	const timer = now.diff(dayjs(date), 'hour');
+	const minutter = now.diff(dayjs(date), 'minute');
 
-	return formatDate(date);
+	if (dager > 0) return `${dager} dager siden`;
+	else if (timer > 0) return `${timer} timer siden`;
+	else if (minutter > 0) return `${minutter} min siden`;
+	else return 'nå';
 }

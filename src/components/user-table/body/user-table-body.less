@@ -1,0 +1,33 @@
+.user-table-body {
+  padding: 0;
+  margin: 0;
+
+  .user-table-row:nth-child(even) {
+    background-color: white;
+  }
+
+  .user-table-row:nth-child(odd) {
+    background-color: #f7f7f7;
+  }
+}
+
+.user-table-row {
+  display: grid;
+  grid-template-columns: 2.5fr repeat(2, 2fr) 3fr repeat(3, 2fr) 1fr 200px;
+  justify-items: start;
+  padding: 1.25rem 0 1.75rem 7px;
+
+  text-align: center;
+
+  align-items: end;
+
+  .status {
+    display: grid;
+    grid-template-columns: 2rem auto;
+    align-items: end;
+    .status_ikon {
+      max-width: 26px;
+    }
+
+  }
+}

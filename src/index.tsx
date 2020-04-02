@@ -8,7 +8,8 @@ import './index.less';
 
 dayjs.locale('nb');
 
-if (env.isDevelopment) {
+// Bruk mock i testmiljøet til vi har fått backend på plass
+if (true || env.isDevelopment) {
 	require('./mock');
 }
 

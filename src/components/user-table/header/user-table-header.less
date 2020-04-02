@@ -1,0 +1,30 @@
+@import "~nav-frontend-core/less/_variabler";
+
+.user-table-header {
+  display: grid;
+  grid-template-columns: 2.5fr repeat(2, 2fr) 3fr repeat(3, 2fr) 1fr 200px;
+  justify-items: start;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid @navGra60;
+
+  .table-header-field {
+    font-size: 1rem;
+    font-weight: bolder;
+    color: @navBla;
+
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    white-space: nowrap;
+  }
+
+  .table-header-field__order-icon {
+    width: 16px;
+    height: 16px;
+    margin-left: 0.25rem;
+  }
+
+  .table-header-field__order-icon--asc {
+    transform: rotate(180deg);
+  }
+}
