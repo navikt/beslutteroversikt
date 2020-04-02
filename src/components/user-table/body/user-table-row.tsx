@@ -50,7 +50,7 @@ const UtkastStatusData = (props: { status: UtkastStatus }) => {
 			break;
 	}
 	return (
-		<span className={'user-table-row__status'}>
+		<span className={'status'}>
 			<img className={'status_ikon'} src={statusIkon} alt={'status ikon'} />
 		<Normaltekst>{mapBrukerStatusTilTekst(props.status)}</Normaltekst>
 	</span>);

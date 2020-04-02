@@ -13,24 +13,20 @@
 
 .user-table-row {
   display: grid;
-  grid-template-columns: repeat(3, 2fr) 3fr repeat(3, 2fr) 1fr 200px;
+  grid-template-columns: 2.5fr repeat(2, 2fr) 3fr repeat(3, 2fr) 1fr 200px;
   justify-items: start;
-  padding: 1.3rem 0 1.7rem 0;
-
-  & > {
-    padding-left: 7px;
-  }
+  padding: 1.25rem 0 1.75rem 7px;
 
   text-align: center;
 
   align-items: end;
 
-  &__status {
+  .status {
     display: grid;
     grid-template-columns: 2rem auto;
     align-items: end;
     .status_ikon {
-      max-width: 1.6rem;
+      max-width: 26px;
     }
 
   }
