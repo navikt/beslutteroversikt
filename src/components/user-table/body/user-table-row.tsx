@@ -1,9 +1,8 @@
 import React from 'react';
 import { Bruker, UtkastStatus } from '../../../rest/data/bruker';
-import { formatDateStr, tidSiden } from '../../../utils/date-utils';
+import { formatDateStr, formatDateTime } from '../../../utils/date-utils';
 import { Normaltekst, Element } from 'nav-frontend-typografi';
 import { fjernNavFraEnhetNavn, mapBrukerStatusTilTekst } from '../../../utils';
-import harBeslutterIcon from './status/har_beslutter.svg';
 import klarForUtsendelseIcon from './status/klar_for_utsendelse.svg';
 import trengerBeslutterIcon from './status/trenger_beslutter.svg';
 import trengerTilbakemeldingIcon from './status/trenger_tilbakemelding.svg';
@@ -11,21 +10,21 @@ import venterPaResponsIcon from './status/venter_pa_respons.svg';
 
 export const UserRow = (props: {bruker: Bruker}) => {
 	const {
-		fnr, fornavn, etternavn, utkastSistEndret,
-		oppfolgingsenhetNavn, vedtakStartet,
+		brukerFnr, brukerFornavn, brukerEtternavn, statusEndret,
+		brukerOppfolgingsenhetNavn, vedtakStartet,
 		beslutterNavn, veilederNavn, status
 	} = props.bruker;
 
     return (
     	<li className="user-table-row">
-		    <Normaltekst>{etternavn + ', ' + fornavn}</Normaltekst>
-		    <Element>{fnr}</Element>
+		    <Normaltekst>{brukerEtternavn + ', ' + brukerFornavn}</Normaltekst>
+		    <Element>{brukerFnr}</Element>
 		    <Normaltekst>{formatDateStr(vedtakStartet)}</Normaltekst>
 			<UtkastStatusData status={status}/>
 		    <Element>{beslutterNavn || '-'}</Element>
 		    <Normaltekst>{veilederNavn}</Normaltekst>
-		    <Normaltekst>{tidSiden(utkastSistEndret)}</Normaltekst>
-		    <Normaltekst>{fjernNavFraEnhetNavn(oppfolgingsenhetNavn)}</Normaltekst>
+		    <Normaltekst>{formatDateTime(statusEndret)}</Normaltekst>
+		    <Normaltekst>{fjernNavFraEnhetNavn(brukerOppfolgingsenhetNavn)}</Normaltekst>
 	    </li>
     );
 };
@@ -33,19 +32,16 @@ export const UserRow = (props: {bruker: Bruker}) => {
 const UtkastStatusData = (props: { status: UtkastStatus }) => {
 	let statusIkon;
 	switch (props.status) {
-		case UtkastStatus.KLAR_FOR_BESLUTTER:
+		case UtkastStatus.TRENGER_BESLUTTER:
 			statusIkon = trengerBeslutterIcon;
 			break;
-		case UtkastStatus.HAR_BESLUTTER:
-			statusIkon = harBeslutterIcon;
-			break;
-		case UtkastStatus.VENTER_PA_VEILEDER:
+		case UtkastStatus.KLAR_TIL_BESLUTTER:
 			statusIkon = trengerTilbakemeldingIcon;
 			break;
-		case UtkastStatus.VENTER_PA_BESLUTTER:
+		case UtkastStatus.KLAR_TIL_VEILEDER:
 			statusIkon = venterPaResponsIcon;
 			break;
-		case UtkastStatus.KLAR_TIL_UTSENDING:
+		case UtkastStatus.GODKJENT_AV_BESLUTTER:
 			statusIkon = klarForUtsendelseIcon;
 			break;
 	}

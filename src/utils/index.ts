@@ -17,15 +17,13 @@ export function fjernNavFraEnhetNavn(enhetNavn: string): string {
 
 export function mapBrukerStatusTilTekst(status: UtkastStatus): string {
 	switch (status) {
-		case UtkastStatus.KLAR_FOR_BESLUTTER:
+		case UtkastStatus.TRENGER_BESLUTTER:
 			return 'Trenger beslutter';
-		case UtkastStatus.HAR_BESLUTTER:
-			return 'Har beslutter';
-		case UtkastStatus.VENTER_PA_VEILEDER:
-			return 'Venter på respons';
-		case UtkastStatus.VENTER_PA_BESLUTTER:
+		case UtkastStatus.KLAR_TIL_VEILEDER:
+			return 'Venter på veileder';
+		case UtkastStatus.KLAR_TIL_BESLUTTER:
 			return 'Trenger tilbakemelding';
-		case UtkastStatus.KLAR_TIL_UTSENDING:
+		case UtkastStatus.GODKJENT_AV_BESLUTTER:
 			return 'Klar for utsendelse';
 		default:
 			return '';

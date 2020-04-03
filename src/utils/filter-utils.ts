@@ -1,10 +1,13 @@
-import { Filters, StatusFilter } from '../stores/filter-store';
-import { Bruker, UtkastStatus } from '../rest/data/bruker';
+import { Bruker } from '../rest/data/bruker';
 import { isEmpty } from './index';
 import { Enhet } from '../rest/data/innlogget-veileder';
+import { Filters } from '../stores/sok-store';
 
 export const hasFilters = (filters: Filters): boolean => {
-	return !isEmpty(filters.fnrOrName);
+	return !isEmpty(filters.fnrOrName)
+		|| (filters.enheter && filters.enheter.length > 0)
+		|| filters.status != null
+		|| filters.visMineBrukere;
 };
 
 export const filterUsers = (filters: Filters, users: Bruker[]): Bruker[] => {
@@ -18,30 +21,18 @@ export const filterUsers = (filters: Filters, users: Bruker[]): Bruker[] => {
 		filteredUsers = filteredUsers.filter(u => matchesEnheter(filters.enheter, u));
 	}
 
-	if (filters.status !== StatusFilter.ALLE) {
-		filteredUsers = filteredUsers.filter(u => matchesStatusFilter(filters.status, u));
+	if (filters.status) {
+		filteredUsers = filteredUsers.filter(u => filters.status === u.status);
 	}
 
 	return filteredUsers;
 };
 
-const matchesStatusFilter = (status: StatusFilter, bruker: Bruker): boolean => {
-	if (status === StatusFilter.VENTER_PA_VEILEDER && bruker.status === UtkastStatus.VENTER_PA_VEILEDER) {
-		return true;
-	} else if (status === StatusFilter.VENTER_PA_BESLUTTER && bruker.status === UtkastStatus.VENTER_PA_BESLUTTER) {
-		return true;
-	} else if (status === StatusFilter.KLAR_TIL_UTSENDING && bruker.status === UtkastStatus.KLAR_TIL_UTSENDING) {
-		return true;
-	}
-
-	return false;
-};
-
 const matchesEnheter = (enheter: Enhet[], bruker: Bruker): boolean => {
-	return enheter.find(enhet => enhet.enhetId === bruker.oppfolgingsenhetId) != null;
+	return enheter.find(enhet => enhet.enhetId === bruker.brukerOppfolgingsenhetId) != null;
 };
 
 const matchesFnrOrName = (fnrOrName: string, bruker: Bruker): boolean => {
-	const brukerNavn = bruker.fornavn + ' ' + bruker.etternavn;
-	return bruker.fnr.includes(fnrOrName) || brukerNavn.toLowerCase().includes(fnrOrName.toLowerCase());
+	const brukerNavn = bruker.brukerFornavn + ' ' + bruker.brukerEtternavn;
+	return bruker.brukerFnr.includes(fnrOrName) || brukerNavn.toLowerCase().includes(fnrOrName.toLowerCase());
 };

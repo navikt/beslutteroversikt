@@ -1,13 +1,21 @@
-import React from 'react';
+import React, { useCallback, useState } from 'react';
 import { Input } from 'nav-frontend-skjema';
-import { useFilterStore } from '../../../stores/filter-store';
+import debounce from 'lodash.debounce';
+import { useSokStore } from '../../../stores/sok-store';
 import './sokefelt.less';
 
 export const Sokefelt = () => {
-	const { filters, setFnrOrNameFilter } = useFilterStore();
+	const { filters, setFnrOrNameFilter } = useSokStore();
+	const [tekst, setTekst] = useState(filters.fnrOrName);
+
+	const oppdaterFilter = useCallback(debounce((nyTekst) => {
+		setFnrOrNameFilter(nyTekst);
+	}, 500), []);
 
 	function handleOnQueryChanged(e: React.ChangeEvent<HTMLInputElement>) {
-		setFnrOrNameFilter(e.target.value);
+		const nyTekst = e.target.value;
+		setTekst(nyTekst);
+		oppdaterFilter(nyTekst);
 	}
 
     return (
@@ -16,7 +24,7 @@ export const Sokefelt = () => {
 			    label=""
 			    placeholder="Søk etter navn eller fødselsnummer"
 			    onChange={handleOnQueryChanged}
-			    value={filters.fnrOrName}
+			    value={tekst}
 		    />
 	    </div>
     );

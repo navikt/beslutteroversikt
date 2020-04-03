@@ -25,17 +25,18 @@ export const lagBrukere = (antallBrukere: number): Bruker[] => {
 
 	for (let i = 0; i < antallBrukere; i++) {
 		const randomEnhet = faker.random.arrayElement(enheter);
+		const beslutterNavn = tEllerNull(faker.name.firstName() + ' ' + faker.name.lastName());
 		const bruker: Bruker = {
 			beslutterNavn: tEllerNull(faker.name.firstName() + ' ' + faker.name.lastName()),
 			veilederNavn: faker.name.firstName() + ' ' + faker.name.lastName(),
-			fnr: randomFnr(),
-			fornavn: faker.name.firstName(),
-			etternavn: faker.name.lastName(),
+			brukerFnr: randomFnr(),
+			brukerFornavn: faker.name.firstName(),
+			brukerEtternavn: faker.name.lastName(),
 			vedtakStartet: faker.date.recent(30).toISOString(),
-			oppfolgingsenhetId: randomEnhet.enhetId,
-			oppfolgingsenhetNavn: randomEnhet.navn,
-			status: faker.random.objectElement(UtkastStatus) as UtkastStatus,
-			utkastSistEndret: faker.date.recent().toISOString()
+			brukerOppfolgingsenhetId: randomEnhet.enhetId,
+			brukerOppfolgingsenhetNavn: randomEnhet.navn,
+			status: !beslutterNavn ? UtkastStatus.TRENGER_BESLUTTER : faker.random.objectElement(UtkastStatus) as UtkastStatus,
+			statusEndret: faker.date.recent().toISOString()
 		};
 
 		brukere.push(bruker);

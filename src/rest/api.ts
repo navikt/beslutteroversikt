@@ -1,10 +1,46 @@
 import { FetchInfo } from './utils';
+import { OrNothing } from '../utils/types/ornothing';
+import { UtkastStatus } from './data/bruker';
 
 export const VEILARBVEDTAKSSTOTTE_API = '/veilarbvedtaksstotte/api';
 export const VEILARBVEILEDER_API = '/veilarbveileder/api';
 
-export const lagHentBrukereFetchInfo = (): FetchInfo => ({
-	url: `${VEILARBVEDTAKSSTOTTE_API}/beslutter/brukere`
+export interface BeslutteroversiktSok {
+	fra: number;
+	antall: number;
+
+	filter: OrNothing<BeslutterOversiktSokFilter>;
+
+	orderByField: OrNothing<OrderByField>;
+	orderByDirection: OrNothing<OrderByDirection>;
+}
+
+export interface BeslutterOversiktSokFilter {
+	enheter: OrNothing<string[]>;
+	status: OrNothing<UtkastStatus>;
+	visMineBrukere: OrNothing<boolean>;
+	navnEllerFnr: OrNothing<string>;
+}
+
+export enum OrderByField {
+	BRUKER_ETTERNAVN = 'BRUKER_ETTERNAVN',
+	BRUKER_OPPFOLGINGSENHET_NAVN = 'BRUKER_OPPFOLGINGSENHET_NAVN',
+	BRUKER_FNR = 'BRUKER_FNR',
+	VEDTAK_STARTET = 'VEDTAK_STARTET',
+	STATUS = 'STATUS',
+	STATUS_ENDRET = 'STATUS_ENDRET',
+	BESLUTTER_NAVN = 'BESLUTTER_NAVN',
+	VEILEDER_NAVN = 'VEILEDER_NAVN'
+}
+
+export enum OrderByDirection {
+	ASC, DESC
+}
+
+export const lagHentBrukereFetchInfo = (params: { sok: BeslutteroversiktSok }): FetchInfo => ({
+	url: `${VEILARBVEDTAKSSTOTTE_API}/beslutteroversikt/sok`,
+	method: 'POST',
+	body: JSON.stringify(params.sok)
 });
 
 export const lagHentInnloggetVeilederFetchInfo = (): FetchInfo => ({
