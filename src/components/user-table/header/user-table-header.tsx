@@ -10,51 +10,39 @@ import {
 import Show from '../../felles/show';
 import arrowDownIcon from './arrow-down.svg';
 import './user-table-header.less';
-import { OrderByDirection } from '../../../rest/api';
+import { OrderByDirection, OrderByField as HeaderFieldName } from '../../../rest/api';
 
 interface UserTableHeaderProps {
 	onOrderByChanged: OnOrderByChanged;
-}
-
-export enum HeaderFieldName {
-	NAVN = 'NAVN',
-	FNR = 'FNR',
-	VEDTAK_STARTET = 'VEDTAK_STARTET',
-	STATUS = 'STATUS',
-	BESLUTTER = 'BESLUTTER',
-	VEILEDER = 'VEILEDER',
-	OPFOLGING_ENHET = 'OPFOLGING_ENHET',
-	UTKAST_ENDRET = 'UTKAST_ENDRET'
+	orderByData: OrderByData;
 }
 
 export const UserTableHeader = (props: UserTableHeaderProps) => {
-	const [orderByData, setOrderByData] = useState<OrderByData>({ fieldName: HeaderFieldName.NAVN, direction: undefined });
+	const { orderByData, onOrderByChanged } = props;
 
 	function handleOnOrderByChanged(fieldName: HeaderFieldName) {
 		const newOrderByData: OrderByData = {
-			fieldName,
+			field: fieldName,
 			direction: INITIAL_DIRECTION
 		};
 
-		if (fieldName === orderByData.fieldName) {
+		if (fieldName === orderByData.field) {
 			newOrderByData.direction = toggleOrderByDirection(orderByData.direction);
 		}
 
-		console.log('orderByData', newOrderByData); // tslint:disable-line
-		setOrderByData(newOrderByData);
-		props.onOrderByChanged(newOrderByData);
+		onOrderByChanged(newOrderByData);
 	}
 
     return (
     	<div className="user-table-header">
-		    <HeaderField name={HeaderFieldName.NAVN} text="Etternavn, Fornavn" orderByData={orderByData} onOrderByChanged={handleOnOrderByChanged} />
-		    <HeaderField name={HeaderFieldName.FNR} text="Fødselsnummer" orderByData={orderByData} onOrderByChanged={handleOnOrderByChanged} />
+		    <HeaderField name={HeaderFieldName.BRUKER_ETTERNAVN} text="Etternavn, Fornavn" orderByData={orderByData} onOrderByChanged={handleOnOrderByChanged} />
+		    <HeaderField name={HeaderFieldName.BRUKER_FNR} text="Fødselsnummer" orderByData={orderByData} onOrderByChanged={handleOnOrderByChanged} />
 		    <HeaderField name={HeaderFieldName.VEDTAK_STARTET} text="Vedtak startet" orderByData={orderByData} onOrderByChanged={handleOnOrderByChanged} />
 		    <HeaderField name={HeaderFieldName.STATUS} text="Status" orderByData={orderByData} onOrderByChanged={handleOnOrderByChanged} />
-		    <HeaderField name={HeaderFieldName.BESLUTTER} text="Beslutter" orderByData={orderByData} onOrderByChanged={handleOnOrderByChanged} />
-		    <HeaderField name={HeaderFieldName.VEILEDER} text="Veileder" orderByData={orderByData} onOrderByChanged={handleOnOrderByChanged} />
-		    <HeaderField name={HeaderFieldName.UTKAST_ENDRET} text="Status endret" orderByData={orderByData} onOrderByChanged={handleOnOrderByChanged} />
-		    <HeaderField name={HeaderFieldName.OPFOLGING_ENHET} text="Enhet" orderByData={orderByData} onOrderByChanged={handleOnOrderByChanged} />
+		    <HeaderField name={HeaderFieldName.BESLUTTER_NAVN} text="Beslutter" orderByData={orderByData} onOrderByChanged={handleOnOrderByChanged} />
+		    <HeaderField name={HeaderFieldName.VEILEDER_NAVN} text="Veileder" orderByData={orderByData} onOrderByChanged={handleOnOrderByChanged} />
+		    <HeaderField name={HeaderFieldName.STATUS_ENDRET} text="Status endret" orderByData={orderByData} onOrderByChanged={handleOnOrderByChanged} />
+		    <HeaderField name={HeaderFieldName.BRUKER_OPPFOLGINGSENHET_NAVN} text="Enhet" orderByData={orderByData} onOrderByChanged={handleOnOrderByChanged} />
 			<UserTablePagination />
 	    </div>
     );
@@ -77,7 +65,7 @@ const HeaderField = (props: HeaderFieldProps) => {
 	return (
 		<button onClick={() => onOrderByChanged(name)} className="table-header-field">
 			{text}
-			<Show if={orderByData.fieldName === name && orderByData.direction !== undefined}>
+			<Show if={orderByData.field === name && orderByData.direction !== undefined}>
 				<img className={iconClasses} src={arrowDownIcon} alt={alt} />
 			</Show>
 		</button>

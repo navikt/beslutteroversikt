@@ -15,8 +15,8 @@ export interface Filters {
 export const useSokStore = createUseContext(() => {
 	const [totalPages, setTotalPages] = useState(-1); // TODO: Start using
 	const [currentPage, setCurrentPage] = useState(0);
-	const [orderByField, setOrderByField] = useState<OrderByField>();
-	const [orderByDirection, setOrderByDirection] = useState<OrderByDirection>();
+	const [orderByField, setOrderByField] = useState<OrNothing<OrderByField>>();
+	const [orderByDirection, setOrderByDirection] = useState<OrNothing<OrderByDirection>>();
 
 	const [fnrOrNameFilter, setFnrOrNameFilter] = useState<string>('');
 	const [enheterFilter, setEnheterFilter] = useState<Enhet[]>([]);

@@ -4,9 +4,9 @@ import { BeslutteroversiktSok, lagHentBrukereFetchInfo, lagHentInnloggetVeileder
 import { Bruker } from '../rest/data/bruker';
 import { InnloggetVeileder } from '../rest/data/innlogget-veileder';
 
-export const useFetchStore = createUseContext(() => {
-	const brukere = useFetch<Bruker[], { sok: BeslutteroversiktSok }>(lagHentBrukereFetchInfo);
-	const innloggetVeileder = useFetch<InnloggetVeileder>(lagHentInnloggetVeilederFetchInfo);
+export const useDataFetcherStore = createUseContext(() => {
+	const brukereFetcher = useFetch<Bruker[], { sok: BeslutteroversiktSok }>(lagHentBrukereFetchInfo);
+	const innloggetVeilederFetcher = useFetch<InnloggetVeileder>(lagHentInnloggetVeilederFetchInfo);
 
-	return { brukere, innloggetVeileder };
+	return { brukereFetcher, innloggetVeilederFetcher };
 });

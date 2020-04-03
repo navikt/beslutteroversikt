@@ -1,7 +1,7 @@
 import React from 'react';
 import Select from 'react-select';
 import { Enhet } from '../../../rest/data/innlogget-veileder';
-import { useFetchStore } from '../../../stores/fetch-store';
+import { useDataFetcherStore } from '../../../stores/data-fetcher-store';
 import './enhet-dropdown.less';
 import { Element } from 'nav-frontend-typografi';
 import { useSokStore } from '../../../stores/sok-store';
@@ -21,10 +21,10 @@ export function mapDropdownOptionTilEnhet(dropdownOption: DropdownOption): Enhet
 
 export const EnhetDropdown = () => {
 	const { filters, setEnheterFilter } = useSokStore();
-	const { innloggetVeileder } = useFetchStore();
+	const { innloggetVeilederFetcher } = useDataFetcherStore();
 
 	const valgteEnheter = filters.enheter.map(mapEnhetTilDropdownOption);
-	const enheter = innloggetVeileder.data.enheter.map(mapEnhetTilDropdownOption);
+	const enheter = innloggetVeilederFetcher.data.enheter.map(mapEnhetTilDropdownOption);
 
 	function handleOnEnhetSelectedChanged(selectedOptions: DropdownOption[] | null) {
 		if (selectedOptions == null) {

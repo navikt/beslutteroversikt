@@ -1,16 +1,16 @@
 import React from 'react';
-import { useFetchStore } from './fetch-store';
+import { useDataFetcherStore } from './data-fetcher-store';
 import { useSokStore } from './sok-store';
 
 import { ChildrenProps } from '../utils/types/children-props';
 
 const StoreProvider = (props: ChildrenProps) => {
 	return (
-		<useFetchStore.Provider>
+		<useDataFetcherStore.Provider>
 			<useSokStore.Provider>
 				{props.children}
 			</useSokStore.Provider>
-		</useFetchStore.Provider>
+		</useDataFetcherStore.Provider>
 	);
 };
 

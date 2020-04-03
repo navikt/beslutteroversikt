@@ -1,4 +1,4 @@
-import { OrderByDirection } from '../../rest/api';
+import { OrderByDirection, OrderByField } from '../../rest/api';
 import { OrNothing } from '../../utils/types/ornothing';
 
 export const INITIAL_DIRECTION = OrderByDirection.ASC;
@@ -6,7 +6,7 @@ export const INITIAL_DIRECTION = OrderByDirection.ASC;
 export type OnOrderByChanged = (orderByData: OrderByData) => void;
 
 export interface OrderByData {
-	fieldName: string;
+	field: OrNothing<OrderByField>;
 	direction: OrNothing<OrderByDirection>;
 }
 
