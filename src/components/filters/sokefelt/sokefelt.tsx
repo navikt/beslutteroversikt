@@ -1,10 +1,10 @@
 import React from 'react';
 import { Input } from 'nav-frontend-skjema';
-import { useFilterStore } from '../../../stores/filter-store';
 import './sokefelt.less';
+import { useSokStore } from '../../../stores/sok-store';
 
 export const Sokefelt = () => {
-	const { filters, setFnrOrNameFilter } = useFilterStore();
+	const { filters, setFnrOrNameFilter } = useSokStore();
 
 	function handleOnQueryChanged(e: React.ChangeEvent<HTMLInputElement>) {
 		setFnrOrNameFilter(e.target.value);

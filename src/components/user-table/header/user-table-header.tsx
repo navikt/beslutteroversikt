@@ -5,12 +5,12 @@ import {
 	INITIAL_DIRECTION,
 	OnOrderByChanged,
 	OrderByData,
-	OrderByDirection,
 	toggleOrderByDirection
 } from '../table-utils';
 import Show from '../../felles/show';
 import arrowDownIcon from './arrow-down.svg';
 import './user-table-header.less';
+import { OrderByDirection } from '../../../rest/api';
 
 interface UserTableHeaderProps {
 	onOrderByChanged: OnOrderByChanged;
@@ -28,7 +28,7 @@ export enum HeaderFieldName {
 }
 
 export const UserTableHeader = (props: UserTableHeaderProps) => {
-	const [orderByData, setOrderByData] = useState<OrderByData>({ fieldName: HeaderFieldName.NAVN, direction: OrderByDirection.NONE });
+	const [orderByData, setOrderByData] = useState<OrderByData>({ fieldName: HeaderFieldName.NAVN, direction: undefined });
 
 	function handleOnOrderByChanged(fieldName: HeaderFieldName) {
 		const newOrderByData: OrderByData = {
@@ -53,7 +53,7 @@ export const UserTableHeader = (props: UserTableHeaderProps) => {
 		    <HeaderField name={HeaderFieldName.STATUS} text="Status" orderByData={orderByData} onOrderByChanged={handleOnOrderByChanged} />
 		    <HeaderField name={HeaderFieldName.BESLUTTER} text="Beslutter" orderByData={orderByData} onOrderByChanged={handleOnOrderByChanged} />
 		    <HeaderField name={HeaderFieldName.VEILEDER} text="Veileder" orderByData={orderByData} onOrderByChanged={handleOnOrderByChanged} />
-		    <HeaderField name={HeaderFieldName.UTKAST_ENDRET} text="Sist endret" orderByData={orderByData} onOrderByChanged={handleOnOrderByChanged} />
+		    <HeaderField name={HeaderFieldName.UTKAST_ENDRET} text="Status endret" orderByData={orderByData} onOrderByChanged={handleOnOrderByChanged} />
 		    <HeaderField name={HeaderFieldName.OPFOLGING_ENHET} text="Enhet" orderByData={orderByData} onOrderByChanged={handleOnOrderByChanged} />
 			<UserTablePagination />
 	    </div>
@@ -77,7 +77,7 @@ const HeaderField = (props: HeaderFieldProps) => {
 	return (
 		<button onClick={() => onOrderByChanged(name)} className="table-header-field">
 			{text}
-			<Show if={orderByData.fieldName === name && orderByData.direction !== OrderByDirection.NONE}>
+			<Show if={orderByData.fieldName === name && orderByData.direction !== undefined}>
 				<img className={iconClasses} src={arrowDownIcon} alt={alt} />
 			</Show>
 		</button>

@@ -1,28 +1,29 @@
 import React, { ChangeEvent } from 'react';
 import Select from 'react-select';
 import { Element } from 'nav-frontend-typografi';
-import { StatusFilter, useFilterStore } from '../../../stores/filter-store';
 import { DropdownOption, mapDropdownOptionTilEnhet } from '../enhet-dropdown/enhet-dropdown';
 import './status-dropdown.less';
+import { UtkastStatus } from '../../../rest/data/bruker';
+import { mapBrukerStatusTilTekst } from '../../../utils';
+import { useSokStore } from '../../../stores/sok-store';
 
-export function mapStatusTilDropdownOption(status: StatusFilter): DropdownOption {
-	return { value: status, label: status.toString() };
+export function mapStatusTilDropdownOption(status: UtkastStatus): DropdownOption {
+	return { value: status, label: mapBrukerStatusTilTekst(status) };
 }
 
-export function mapDropdownOptionTilStatus(dropdownOption: DropdownOption): StatusFilter {
-	return dropdownOption.value as StatusFilter;
+export function mapDropdownOptionTilStatus(dropdownOption: DropdownOption): UtkastStatus {
+	return dropdownOption.value as UtkastStatus;
 }
 
 const statusOptions: DropdownOption[] = [
-	mapStatusTilDropdownOption(StatusFilter.ALLE),
-	mapStatusTilDropdownOption(StatusFilter.KLAR_TIL_UTSENDING),
-	mapStatusTilDropdownOption(StatusFilter.VENTER_PA_BESLUTTER),
-	mapStatusTilDropdownOption(StatusFilter.VENTER_PA_VEILEDER),
+	mapStatusTilDropdownOption(UtkastStatus.TRENGER_BESLUTTER),
+	mapStatusTilDropdownOption(UtkastStatus.KLAR_TIL_VEILEDER),
+	mapStatusTilDropdownOption(UtkastStatus.KLAR_TIL_BESLUTTER),
+	mapStatusTilDropdownOption(UtkastStatus.GODKJENT_AV_BESLUTTER),
 ];
 
 export const StatusDropdown = () => {
-	const { filters, setStatusFilter } = useFilterStore();
-	const statusFilter = filters.status;
+	const { filters, setStatusFilter } = useSokStore();
 
 	function handleOnStatusSelectedChanged(selectedOption: DropdownOption | null) {
 		console.log('selectedOption', selectedOption); // tslint:disable-line
@@ -35,6 +36,8 @@ export const StatusDropdown = () => {
 				inputId="status-filter"
 				placeholder="Velg status"
 				// value={mapStatusTilDropdownOption(statusFilter)}
+				isClearable
+				isSearchable={false}
 				options={statusOptions}
 				onChange={handleOnStatusSelectedChanged as any}
 			/>

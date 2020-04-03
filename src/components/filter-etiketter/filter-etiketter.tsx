@@ -1,8 +1,8 @@
 import React from 'react';
-import { Filters, StatusFilter, useFilterStore } from '../../stores/filter-store';
 import { FilterEtikett } from './etikett/filter-etikett';
-import './filter-etiketter.less';
 import { isEmpty } from '../../utils';
+import './filter-etiketter.less';
+import { Filters, useSokStore } from '../../stores/sok-store';
 
 export type OnRemoveClicked = (id: string) => void;
 
@@ -26,7 +26,7 @@ function lagFilterEtiketter(filters: Filters, onRemoveClicked: OnRemoveClicked) 
 		);
 	}
 
-	if (status !== StatusFilter.ALLE) {
+	if (status) {
 		filterEtiketter.push(
 			<FilterEtikett key={STATUS_FILTER} id={STATUS_FILTER} tekst="Søk på status" onRemoveClicked={onRemoveClicked} />
 		);
@@ -36,7 +36,7 @@ function lagFilterEtiketter(filters: Filters, onRemoveClicked: OnRemoveClicked) 
 }
 
 export const FilterEtiketter = () => {
-	const { filters, setFnrOrNameFilter, setEnheterFilter, setStatusFilter } = useFilterStore();
+	const { filters, setFnrOrNameFilter, setEnheterFilter, setStatusFilter } = useSokStore();
 
 	function handleOnRemoveClicked(id: string) {
 		if (id === NAVN_ELLER_FNR_FILTER) {
@@ -44,7 +44,7 @@ export const FilterEtiketter = () => {
 		} else if (id === ENHET_FILTER) {
 			setEnheterFilter([]);
 		} else if (id === STATUS_FILTER) {
-			setStatusFilter(StatusFilter.ALLE);
+			setStatusFilter(undefined);
 		}
 	}
 
