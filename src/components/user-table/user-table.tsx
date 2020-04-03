@@ -1,5 +1,4 @@
-import React, { useState } from 'react';
-import { Bruker } from '../../rest/data/bruker';
+import React from 'react';
 import { UserTableHeader } from './header/user-table-header';
 import { AlertStripeInfo } from 'nav-frontend-alertstriper';
 import { UserTableBody } from './body/user-table-body';

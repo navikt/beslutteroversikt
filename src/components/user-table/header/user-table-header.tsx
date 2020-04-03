@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import cls from 'classnames';
 import { UserTablePagination } from './user-table-pagination';
 import {
