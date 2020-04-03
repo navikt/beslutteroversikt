@@ -1,18 +1,14 @@
-import React, { ChangeEvent } from 'react';
+import React from 'react';
 import Select from 'react-select';
 import { Element } from 'nav-frontend-typografi';
-import { DropdownOption, mapDropdownOptionTilEnhet } from '../enhet-dropdown/enhet-dropdown';
-import './status-dropdown.less';
+import { DropdownOption } from '../enhet-dropdown/enhet-dropdown';
 import { UtkastStatus } from '../../../rest/data/bruker';
 import { mapBrukerStatusTilTekst } from '../../../utils';
 import { useSokStore } from '../../../stores/sok-store';
+import './status-dropdown.less';
 
 export function mapStatusTilDropdownOption(status: UtkastStatus): DropdownOption {
 	return { value: status, label: mapBrukerStatusTilTekst(status) };
-}
-
-export function mapDropdownOptionTilStatus(dropdownOption: DropdownOption): UtkastStatus {
-	return dropdownOption.value as UtkastStatus;
 }
 
 const statusOptions: DropdownOption[] = [
@@ -24,9 +20,11 @@ const statusOptions: DropdownOption[] = [
 
 export const StatusDropdown = () => {
 	const { filters, setStatusFilter } = useSokStore();
+	const value = filters.status ? mapStatusTilDropdownOption(filters.status) : null;
 
 	function handleOnStatusSelectedChanged(selectedOption: DropdownOption | null) {
-		console.log('selectedOption', selectedOption); // tslint:disable-line
+		const nyStatus = selectedOption ? selectedOption.value as UtkastStatus : undefined;
+		setStatusFilter(nyStatus)
 	}
 
 	return (
@@ -35,7 +33,7 @@ export const StatusDropdown = () => {
 			<Select
 				inputId="status-filter"
 				placeholder="Velg status"
-				// value={mapStatusTilDropdownOption(statusFilter)}
+				value={value}
 				isClearable
 				isSearchable={false}
 				options={statusOptions}

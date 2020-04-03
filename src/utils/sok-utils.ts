@@ -1,16 +1,9 @@
 import { BeslutteroversiktSok, BeslutterOversiktSokFilter, OrderByDirection, OrderByField } from '../rest/api';
 import { Filters } from '../stores/sok-store';
 import { OrNothing } from './types/ornothing';
+import { hasFilters } from './filter-utils';
 
 export const PAGINATION_SIZE = 30;
-
-export const defaultBeslutteroversiktSok: BeslutteroversiktSok = {
-	antall: PAGINATION_SIZE,
-	fra: 0,
-	filter: undefined,
-	orderByDirection: undefined,
-	orderByField: undefined
-};
 
 export const lagBeslutterOversiktSok = (
 	filters: Filters, currentPage: number,
@@ -26,5 +19,14 @@ export const lagBeslutterOversiktSok = (
 };
 
 export const lagBeslutterOversiktSokFilter = (filters: Filters): OrNothing<BeslutterOversiktSokFilter> => {
-	return undefined;
+	if (!hasFilters(filters)) {
+		return undefined;
+	}
+
+	return {
+		enheter: filters.enheter.map(e => e.enhetId),
+		navnEllerFnr: filters.fnrOrName,
+		status: filters.status,
+		visMineBrukere: filters.visMineBrukere
+	};
 };

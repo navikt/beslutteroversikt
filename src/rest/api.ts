@@ -16,10 +16,10 @@ export interface BeslutteroversiktSok {
 }
 
 export interface BeslutterOversiktSokFilter {
-	enheter: string[];
-	status: UtkastStatus;
-	visMineBrukere: boolean;
-	navnEllerFnr: string;
+	enheter: OrNothing<string[]>;
+	status: OrNothing<UtkastStatus>;
+	visMineBrukere: OrNothing<boolean>;
+	navnEllerFnr: OrNothing<string>;
 }
 
 export enum OrderByField {

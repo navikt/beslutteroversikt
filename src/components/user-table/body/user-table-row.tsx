@@ -1,6 +1,6 @@
 import React from 'react';
 import { Bruker, UtkastStatus } from '../../../rest/data/bruker';
-import { formatDateStr, tidSiden } from '../../../utils/date-utils';
+import { formatDateStr, formatDateTime } from '../../../utils/date-utils';
 import { Normaltekst, Element } from 'nav-frontend-typografi';
 import { fjernNavFraEnhetNavn, mapBrukerStatusTilTekst } from '../../../utils';
 import klarForUtsendelseIcon from './status/klar_for_utsendelse.svg';
@@ -23,7 +23,7 @@ export const UserRow = (props: {bruker: Bruker}) => {
 			<UtkastStatusData status={status}/>
 		    <Element>{beslutterNavn || '-'}</Element>
 		    <Normaltekst>{veilederNavn}</Normaltekst>
-		    <Normaltekst>{tidSiden(statusEndret)}</Normaltekst>
+		    <Normaltekst>{formatDateTime(statusEndret)}</Normaltekst>
 		    <Normaltekst>{fjernNavFraEnhetNavn(brukerOppfolgingsenhetNavn)}</Normaltekst>
 	    </li>
     );
