@@ -5,15 +5,20 @@ import { AlertStripeFeil } from 'nav-frontend-alertstriper';
 import Spinner from './felles/spinner/spinner';
 
 export function DataFetcher(props: { children: any }) {
-	const { innloggetVeilederFetcher } = useDataFetcherStore();
+	const { innloggetVeilederFetcher, aktivEnhetFetcher } = useDataFetcherStore();
 
 	useEffect(() => {
 		if (isNotStarted(innloggetVeilederFetcher)) {
 			innloggetVeilederFetcher.fetch(null);
 		}
+
+		if (isNotStarted(aktivEnhetFetcher)) {
+			aktivEnhetFetcher.fetch(null);
+		}
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [innloggetVeilederFetcher]);
 
+	// Trenger ikke å sjekke om aktivEnhetFetcher er ferdig
 	if (isAnyNotStartedOrPending([innloggetVeilederFetcher])) {
 		return <Spinner />;
 	} else if (hasAnyFailed([innloggetVeilederFetcher])) {

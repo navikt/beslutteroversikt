@@ -7,8 +7,9 @@ import klarForUtsendelseIcon from './status/klar_for_utsendelse.svg';
 import trengerBeslutterIcon from './status/trenger_beslutter.svg';
 import trengerTilbakemeldingIcon from './status/trenger_tilbakemelding.svg';
 import venterPaResponsIcon from './status/venter_pa_respons.svg';
+import { OrNothing } from '../../../utils/types/ornothing';
 
-export const UserRow = (props: {bruker: Bruker}) => {
+export const UserRow = (props: {bruker: Bruker, aktivEnhet: OrNothing<string>}) => {
 	const {
 		brukerFnr, brukerFornavn, brukerEtternavn, statusEndret,
 		brukerOppfolgingsenhetNavn, vedtakStartet,
@@ -16,7 +17,8 @@ export const UserRow = (props: {bruker: Bruker}) => {
 	} = props.bruker;
 
 	function handleOnUserRowClicked() {
-		window.location.href = `/veilarbpersonflatefs/${brukerFnr}#visVedtaksstotte`;
+		const enhetQueryParam = props.aktivEnhet ? `?enhet=${props.aktivEnhet}` : '';
+		window.location.href = `/veilarbpersonflatefs/${brukerFnr}${enhetQueryParam}#visVedtaksstotte`;
 	}
 
     return (

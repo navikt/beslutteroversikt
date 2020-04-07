@@ -1,7 +1,8 @@
 import FetchMock, { HandlerArgument, MiddlewareUtils, ResponseData } from 'yet-another-fetch-mock';
 import { mockBeslutteroversiktSok } from './sok-mock';
-import { VEILARBVEILEDER_API } from '../rest/api';
+import { MODIACONTEXTHOLDER_API, VEILARBVEILEDER_API } from '../rest/api';
 import { innloggetVeileder } from './data/innlogget-veileder';
+import { aktivEnhet } from './data/aktiv-enhet';
 
 export interface Mock {
 	url: string;
@@ -15,3 +16,4 @@ const fetchMock = FetchMock.configure({
 
 fetchMock.post(mockBeslutteroversiktSok.url, mockBeslutteroversiktSok.handler);
 fetchMock.get(`${VEILARBVEILEDER_API}/veileder/v2/me`, innloggetVeileder as any);
+fetchMock.get(`${MODIACONTEXTHOLDER_API}/context/aktivenhet`, aktivEnhet as any);

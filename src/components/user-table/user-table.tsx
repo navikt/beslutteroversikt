@@ -11,9 +11,10 @@ import Show from '../felles/show';
 import Spinner from '../felles/spinner/spinner';
 
 export const UserTable = () => {
-	const { brukereFetcher } = useDataFetcherStore();
+	const { brukereFetcher, aktivEnhetFetcher } = useDataFetcherStore();
 	const { orderByField, orderByDirection, setOrderByField, setOrderByDirection } = useSokStore();
 	const tableBrukere = brukereFetcher.data || [];
+	const aktivEnhet = aktivEnhetFetcher.data ? aktivEnhetFetcher.data.aktivEnhet : undefined;
 	const orderByData: OrderByData = {
 		field: orderByField,
 		direction: orderByDirection
@@ -38,7 +39,7 @@ export const UserTable = () => {
 						    Fant ingen brukere
 					    </AlertStripeInfo>
 			        )
-				    : <UserTableBody brukere={tableBrukere} />
+				    : <UserTableBody brukere={tableBrukere} aktivEnhet={aktivEnhet} />
 		    }
 	    </section>
     );

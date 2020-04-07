@@ -4,6 +4,7 @@ import { UtkastStatus } from './data/bruker';
 
 export const VEILARBVEDTAKSSTOTTE_API = '/veilarbvedtaksstotte/api';
 export const VEILARBVEILEDER_API = '/veilarbveileder/api';
+export const MODIACONTEXTHOLDER_API = '/modiacontextholder/api';
 
 export interface BeslutteroversiktSok {
 	fra: number;
@@ -45,4 +46,8 @@ export const lagHentBrukereFetchInfo = (params: { sok: BeslutteroversiktSok }): 
 
 export const lagHentInnloggetVeilederFetchInfo = (): FetchInfo => ({
 	url: `${VEILARBVEILEDER_API}/veileder/v2/me`
+});
+
+export const lagHentAktivEnhetFetchInfo = (): FetchInfo => ({
+	url: `${MODIACONTEXTHOLDER_API}/context/aktivenhet`
 });
