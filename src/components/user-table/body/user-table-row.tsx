@@ -15,8 +15,12 @@ export const UserRow = (props: {bruker: Bruker}) => {
 		beslutterNavn, veilederNavn, status
 	} = props.bruker;
 
+	function handleOnUserRowClicked() {
+		window.location.href = `/veilarbpersonflatefs/${brukerFnr}#visVedtaksstotte`;
+	}
+
     return (
-    	<li className="user-table-row">
+    	<li className="user-table-row" onClick={handleOnUserRowClicked}>
 		    <Normaltekst>{brukerEtternavn + ', ' + brukerFornavn}</Normaltekst>
 		    <Element>{brukerFnr}</Element>
 		    <Normaltekst>{formatDateStr(vedtakStartet)}</Normaltekst>
