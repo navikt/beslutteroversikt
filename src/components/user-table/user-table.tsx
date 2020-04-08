@@ -13,7 +13,7 @@ import Spinner from '../felles/spinner/spinner';
 export const UserTable = () => {
 	const { brukereFetcher, aktivEnhetFetcher } = useDataFetcherStore();
 	const { orderByField, orderByDirection, setOrderByField, setOrderByDirection } = useSokStore();
-	const tableBrukere = brukereFetcher.data || [];
+	const tableBrukere = (brukereFetcher.data && brukereFetcher.data.brukere) || [];
 	const aktivEnhet = aktivEnhetFetcher.data ? aktivEnhetFetcher.data.aktivEnhet : undefined;
 	const orderByData: OrderByData = {
 		field: orderByField,

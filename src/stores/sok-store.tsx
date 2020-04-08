@@ -4,6 +4,7 @@ import { Enhet } from '../rest/data/innlogget-veileder';
 import { UtkastStatus } from '../rest/data/bruker';
 import { OrNothing } from '../utils/types/ornothing';
 import { OrderByDirection, OrderByField } from '../rest/api';
+import { DEFAULT_PAGINATION_SIZE } from '../utils/sok-utils';
 
 export interface Filters {
 	fnrOrName: string;
@@ -13,11 +14,17 @@ export interface Filters {
 }
 
 export const useSokStore = createUseContext(() => {
-	const [totalPages, setTotalPages] = useState(-1); // TODO: Start using
-	const [currentPage, setCurrentPage] = useState(0);
+	// Paginering
+	const [totalPages, setTotalPages] = useState(1);
+	const [currentPage, setCurrentPage] = useState(1);
+	const [seeAll, setSeeAll] = useState(false);
+	const [pageSize, setPageSize] = useState(DEFAULT_PAGINATION_SIZE);
+
+	// Sortering
 	const [orderByField, setOrderByField] = useState<OrNothing<OrderByField>>();
 	const [orderByDirection, setOrderByDirection] = useState<OrNothing<OrderByDirection>>();
 
+	// Filtrering
 	const [fnrOrNameFilter, setFnrOrNameFilter] = useState<string>('');
 	const [enheterFilter, setEnheterFilter] = useState<Enhet[]>([]);
 	const [statusFilter, setStatusFilter] = useState<UtkastStatus>();
@@ -33,12 +40,14 @@ export const useSokStore = createUseContext(() => {
 	}, [fnrOrNameFilter, enheterFilter, statusFilter, visMineBrukere]);
 
 	return {
+		totalPages, setTotalPages,
+		currentPage, setCurrentPage,
+		seeAll, setSeeAll,
+		pageSize, setPageSize,
+		orderByField, setOrderByField,
+		orderByDirection, setOrderByDirection,
 		filters,
 		setFnrOrNameFilter, setEnheterFilter,
 		setStatusFilter, setVisMineBrukere,
-		totalPages, setTotalPages,
-		currentPage, setCurrentPage,
-		orderByField, setOrderByField,
-		orderByDirection, setOrderByDirection
 	};
 });

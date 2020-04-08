@@ -6,13 +6,13 @@ import {
 	lagHentBrukereFetchInfo,
 	lagHentInnloggetVeilederFetchInfo
 } from '../rest/api';
-import { Bruker } from '../rest/data/bruker';
+import { BrukereMedAntall } from '../rest/data/bruker';
 import { InnloggetVeileder } from '../rest/data/innlogget-veileder';
 import { AktivEnhet } from '../rest/data/aktiv-enhet';
 import { OrNothing } from '../utils/types/ornothing';
 
 export const useDataFetcherStore = createUseContext(() => {
-	const brukereFetcher = useFetch<Bruker[], { sok: BeslutteroversiktSok }>(lagHentBrukereFetchInfo);
+	const brukereFetcher = useFetch<BrukereMedAntall, { sok: BeslutteroversiktSok }>(lagHentBrukereFetchInfo);
 	const innloggetVeilederFetcher = useFetch<InnloggetVeileder>(lagHentInnloggetVeilederFetchInfo);
 	const aktivEnhetFetcher = useFetch<OrNothing<AktivEnhet>>(lagHentAktivEnhetFetchInfo);
 

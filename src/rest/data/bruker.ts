@@ -6,6 +6,11 @@ export enum UtkastStatus {
 	GODKJENT_AV_BESLUTTER = 'GODKJENT_AV_BESLUTTER'
 }
 
+export interface BrukereMedAntall {
+	brukere: Bruker[];
+	totaltAntall: number;
+}
+
 export interface Bruker {
 	brukerFnr: string;
 	brukerFornavn: string;

@@ -1,6 +1,5 @@
 import React from 'react';
 import cls from 'classnames';
-import { UserTablePagination } from './user-table-pagination';
 import {
 	INITIAL_DIRECTION,
 	OnOrderByChanged,
@@ -11,6 +10,7 @@ import Show from '../../felles/show';
 import arrowDownIcon from './arrow-down.svg';
 import './user-table-header.less';
 import { OrderByDirection, OrderByField as HeaderFieldName } from '../../../rest/api';
+import { UserTablePagination } from '../pagination/user-table-pagination';
 
 interface UserTableHeaderProps {
 	onOrderByChanged: OnOrderByChanged;
