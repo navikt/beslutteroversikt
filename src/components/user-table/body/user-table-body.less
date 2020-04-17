@@ -3,6 +3,7 @@
 .user-table-body {
   padding: 0;
   margin: 0;
+  border: 1px solid @navLysGra;
 
   .user-table-row:nth-child(even) {
     background-color: white;
@@ -15,9 +16,9 @@
 
 .user-table-row {
   display: grid;
-  grid-template-columns: 2.5fr repeat(2, 2fr) 3fr repeat(3, 2fr) 1fr 250px;
+  grid-template-columns: 2.5fr repeat(2, 2fr) 3fr repeat(3, 2fr) 1fr;
   justify-items: start;
-  padding: 1.25rem 0 1.75rem 7px;
+  padding: 1.5rem 2rem;
   cursor: pointer;
   text-align: center;
   align-items: end;

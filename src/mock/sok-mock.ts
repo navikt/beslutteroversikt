@@ -3,7 +3,7 @@ import { BeslutteroversiktSok, VEILARBVEDTAKSSTOTTE_API } from '../rest/api';
 import { lagBrukere } from './data/brukere';
 import { Mock } from './index';
 
-const alleBrukere = lagBrukere(100);
+const alleBrukere = lagBrukere(85);
 
 export const mockBeslutteroversiktSok: Mock = {
 	url: `${VEILARBVEDTAKSSTOTTE_API}/beslutteroversikt/sok`,

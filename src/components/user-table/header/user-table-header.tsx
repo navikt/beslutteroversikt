@@ -10,7 +10,6 @@ import Show from '../../felles/show';
 import arrowDownIcon from './arrow-down.svg';
 import './user-table-header.less';
 import { OrderByDirection, OrderByField as HeaderFieldName } from '../../../rest/api';
-import { UserTablePagination } from '../pagination/user-table-pagination';
 
 interface UserTableHeaderProps {
 	onOrderByChanged: OnOrderByChanged;
@@ -43,7 +42,6 @@ export const UserTableHeader = (props: UserTableHeaderProps) => {
 		    <HeaderField name={HeaderFieldName.VEILEDER_NAVN} text="Veileder" orderByData={orderByData} onOrderByChanged={handleOnOrderByChanged} />
 		    <HeaderField name={HeaderFieldName.STATUS_ENDRET} text="Status endret" orderByData={orderByData} onOrderByChanged={handleOnOrderByChanged} />
 		    <HeaderField name={HeaderFieldName.BRUKER_OPPFOLGINGSENHET_NAVN} text="Enhet" orderByData={orderByData} onOrderByChanged={handleOnOrderByChanged} />
-			<UserTablePagination />
 	    </div>
     );
 };
