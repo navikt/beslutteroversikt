@@ -3,7 +3,6 @@ import { HoyreChevron, VenstreChevron } from 'nav-frontend-chevron';
 import cls from 'classnames';
 import { useSokStore } from '../../stores/sok-store';
 import './pagination-bar.less';
-import { DEFAULT_PAGINATION_SIZE, SEE_ALL_PAGINATION_SIZE } from '../../utils/sok-utils';
 import Show from '../felles/show';
 import { useDataFetcherStore } from '../../stores/data-fetcher-store';
 import { Element } from 'nav-frontend-typografi';
@@ -19,7 +18,7 @@ function PagineringKnapp(props: React.DetailedHTMLProps<React.ButtonHTMLAttribut
 }
 
 export function PaginationBar() {
-    const { currentPage, totalPages, seeAll, setCurrentPage, setSeeAll, pageSize, setPageSize } = useSokStore();
+    const { currentPage, totalPages, seeAll, setCurrentPage, pageSize } = useSokStore();
     const { brukereFetcher } = useDataFetcherStore();
 
     const erPaForsteSide: boolean = currentPage === 1;
@@ -33,18 +32,18 @@ export function PaginationBar() {
         setCurrentPage(newPage);
     }
 
-    function handleSeeAllChanged() {
-        const toggledSeeAll = !seeAll;
-
-        if (toggledSeeAll) {
-            setPageSize(SEE_ALL_PAGINATION_SIZE);
-        } else {
-            setPageSize(DEFAULT_PAGINATION_SIZE);
-        }
-
-        setCurrentPage(1);
-        setSeeAll(toggledSeeAll);
-    }
+    // function handleSeeAllChanged() {
+    //     const toggledSeeAll = !seeAll;
+    //
+    //     if (toggledSeeAll) {
+    //         setPageSize(SEE_ALL_PAGINATION_SIZE);
+    //     } else {
+    //         setPageSize(DEFAULT_PAGINATION_SIZE);
+    //     }
+    //
+    //     setCurrentPage(1);
+    //     setSeeAll(toggledSeeAll);
+    // }
 
     return (
         <div className="pagination-bar">
