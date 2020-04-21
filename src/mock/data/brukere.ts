@@ -23,6 +23,8 @@ function tEllerNull<T>(t: T): T | null {
 export const lagBrukere = (antallBrukere: number): Bruker[] => {
 	const brukere: Bruker[] = [];
 
+	let maskerteBrukere = 4;
+
 	for (let i = 0; i < antallBrukere; i++) {
 		const randomEnhet = faker.random.arrayElement(enheter);
 		const beslutterNavn = tEllerNull(faker.name.firstName() + ' ' + faker.name.lastName());
@@ -38,6 +40,14 @@ export const lagBrukere = (antallBrukere: number): Bruker[] => {
 			status: !beslutterNavn ? UtkastStatus.TRENGER_BESLUTTER : faker.random.objectElement(UtkastStatus) as UtkastStatus,
 			statusEndret: faker.date.recent().toISOString()
 		};
+
+		if (maskerteBrukere > 0) {
+			bruker.brukerFnr = '';
+			bruker.brukerFornavn = '';
+			bruker.brukerEtternavn = '';
+
+			maskerteBrukere--;
+		}
 
 		brukere.push(bruker);
 	}

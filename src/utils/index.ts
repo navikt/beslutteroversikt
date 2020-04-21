@@ -15,6 +15,20 @@ export function fjernNavFraEnhetNavn(enhetNavn: string): string {
 	return enhetNavn.replace('NAV', '').trim();
 }
 
+export function lagBrukerNavn(fornavn: string, etternavn: string): string {
+	const manglerFornavn = fornavn === '';
+	const manglerEtternavn = etternavn === '';
+
+	if (manglerFornavn && manglerEtternavn) {
+		return '';
+	} else if (manglerFornavn || manglerEtternavn) {
+		// Skal egentlig ikke skje, men hvis ett av navnene mangler så trenger vi ikke å separere med ","
+		return fornavn + etternavn;
+	}
+
+	return fornavn + ', ' + etternavn;
+}
+
 export function mapBrukerStatusTilTekst(status: UtkastStatus): string {
 	switch (status) {
 		case UtkastStatus.TRENGER_BESLUTTER:
