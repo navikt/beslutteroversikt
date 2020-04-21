@@ -32,7 +32,7 @@ export const StatusDropdown = () => {
 			<Element>Status</Element>
 			<Select
 				inputId="status-filter"
-				placeholder="Velg status"
+				placeholder="Filtrer på status"
 				value={value}
 				isClearable
 				isSearchable={false}

@@ -39,7 +39,7 @@ export const EnhetDropdown = () => {
 			<Element>Enhet</Element>
 			<Select
 				inputId="enhet-filter"
-				placeholder="Velg enheter"
+				placeholder="Filtrer på enheter"
 				isMulti={true}
 				value={valgteEnheter}
 				isClearable
