@@ -15,11 +15,6 @@ function randomFnr(): string {
 	return `${dag.toString().padStart(2, '0')}${mnd.toString().padStart(2, '0')}${ar.toString().padStart(2, '0')}${individsifre}${kontrollsifre}`;
 }
 
-function tEllerNull<T>(t: T): T | null {
-	if (randBetween(1, 5) === 1) return null;
-	else return t;
-}
-
 export const lagBrukere = (antallBrukere: number): Bruker[] => {
 	const brukere: Bruker[] = [];
 
@@ -27,9 +22,13 @@ export const lagBrukere = (antallBrukere: number): Bruker[] => {
 
 	for (let i = 0; i < antallBrukere; i++) {
 		const randomEnhet = faker.random.arrayElement(enheter);
-		const beslutterNavn = tEllerNull(faker.name.firstName() + ' ' + faker.name.lastName());
+		const randomStatus = faker.random.objectElement(UtkastStatus) as UtkastStatus;
+		const beslutterNavn = randomStatus === UtkastStatus.TRENGER_BESLUTTER
+			? null
+			: faker.name.firstName() + ' ' + faker.name.lastName();
+
 		const bruker: Bruker = {
-			beslutterNavn: tEllerNull(faker.name.firstName() + ' ' + faker.name.lastName()),
+			beslutterNavn,
 			veilederNavn: faker.name.firstName() + ' ' + faker.name.lastName(),
 			brukerFnr: randomFnr(),
 			brukerFornavn: faker.name.firstName(),
@@ -37,7 +36,7 @@ export const lagBrukere = (antallBrukere: number): Bruker[] => {
 			vedtakStartet: faker.date.recent(30).toISOString(),
 			brukerOppfolgingsenhetId: randomEnhet.enhetId,
 			brukerOppfolgingsenhetNavn: randomEnhet.navn,
-			status: !beslutterNavn ? UtkastStatus.TRENGER_BESLUTTER : faker.random.objectElement(UtkastStatus) as UtkastStatus,
+			status: randomStatus,
 			statusEndret: faker.date.recent().toISOString()
 		};
 

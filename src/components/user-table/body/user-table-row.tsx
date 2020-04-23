@@ -19,23 +19,27 @@ export const UserRow = (props: { bruker: Bruker, aktivEnhet: OrNothing<string> }
 
 	const erMaskert = brukerFnr === '';
 
-	function handleOnUserRowClicked() {
+	function lagBrukerUrl() {
 		if (!erMaskert) {
 			const enhetQueryParam = props.aktivEnhet ? `?enhet=${props.aktivEnhet}` : '';
-			window.location.href = `/veilarbpersonflatefs/${brukerFnr}${enhetQueryParam}#visVedtaksstotte`;
+			return `/veilarbpersonflatefs/${brukerFnr}${enhetQueryParam}#visVedtaksstotte`;
 		}
+
+		return undefined;
 	}
 
 	return (
-		<li className={cls('user-table-row', {'user-table-row--maskert': erMaskert})} onClick={handleOnUserRowClicked}>
-			<Normaltekst>{lagBrukerNavn(brukerFornavn, brukerEtternavn)}</Normaltekst>
-			<Element>{brukerFnr}</Element>
-			<Normaltekst>{formatDateStr(vedtakStartet)}</Normaltekst>
-			<UtkastStatusData status={status}/>
-			<Element>{beslutterNavn || '-'}</Element>
-			<Normaltekst>{veilederNavn}</Normaltekst>
-			<Normaltekst>{formatDateTime(statusEndret)}</Normaltekst>
-			<Normaltekst>{fjernNavFraEnhetNavn(brukerOppfolgingsenhetNavn)}</Normaltekst>
+		<li className="user-table-row">
+			<a className={cls('user-table-row__innhold', {'user-table-row__innhold--maskert': erMaskert})} href={lagBrukerUrl()}>
+				<Normaltekst>{lagBrukerNavn(brukerFornavn, brukerEtternavn)}</Normaltekst>
+				<Element>{brukerFnr}</Element>
+				<Normaltekst>{formatDateStr(vedtakStartet)}</Normaltekst>
+				<UtkastStatusData status={status}/>
+				<Element>{beslutterNavn || '-'}</Element>
+				<Normaltekst>{veilederNavn}</Normaltekst>
+				<Normaltekst>{formatDateTime(statusEndret)}</Normaltekst>
+				<Normaltekst>{fjernNavFraEnhetNavn(brukerOppfolgingsenhetNavn)}</Normaltekst>
+			</a>
 		</li>
 	);
 };
