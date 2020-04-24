@@ -8,12 +8,12 @@ metadata:
     team: pto
 spec:
   image: docker.pkg.github.com/navikt/beslutteroversikt/beslutteroversikt:{{version}}
-  port: 80
+  port: 8080
   liveness:
-    path: /isAlive
+    path: beslutteroversikt/internal/isReady
     initialDelay: 15
   readiness:
-    path: /isReady
+    path: beslutteroversikt/internal/isReady
     initialDelay: 15
   replicas:
     min: 1
