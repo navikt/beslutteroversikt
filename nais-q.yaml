@@ -29,3 +29,5 @@ spec:
   ingresses:
     - https://beslutteroversikt-{{namespace}}.nais.preprod.local
     - https://app-{{namespace}}.adeo.no/beslutteroversikt
+  envFrom:
+    - configmap: pto-config
