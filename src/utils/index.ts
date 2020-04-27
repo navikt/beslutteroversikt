@@ -1,5 +1,17 @@
 // tslint:disable-next-line:no-empty
 import { UtkastStatus } from '../rest/data/bruker';
+import { useEffect, useRef } from 'react';
+
+export function usePrevious<T> (value: T) {
+	const ref = useRef<T>(value);
+
+	// Store current value in ref
+	useEffect(() => {
+		ref.current = value;
+	}, [value]);
+
+	return ref.current;
+}
 
 export function doNothing() {}
 

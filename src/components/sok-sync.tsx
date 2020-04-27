@@ -3,13 +3,21 @@ import { useDataFetcherStore } from '../stores/data-fetcher-store';
 import { lagBeslutterOversiktSok } from '../utils/sok-utils';
 import { useSokStore } from '../stores/sok-store';
 import { hasFinishedWithData } from '../rest/utils';
+import { usePrevious } from '../utils';
 
 export const SokSync = () => {
 	const { brukereFetcher } = useDataFetcherStore();
-	const { filters, currentPage, pageSize, orderByDirection, orderByField, seeAll, setTotalPages } = useSokStore();
+	const { filters, currentPage, pageSize, orderByDirection, orderByField, seeAll, setTotalPages, setCurrentPage } = useSokStore();
+	const previousFilters = usePrevious(filters);
 
 	useEffect(() => {
-		const sok = lagBeslutterOversiktSok(filters, currentPage, pageSize, seeAll, orderByDirection, orderByField);
+		let curPage = currentPage;
+		if (previousFilters !== filters) {
+			curPage = 1; // When filters change, start from first page
+			setCurrentPage(curPage);
+		}
+
+		const sok = lagBeslutterOversiktSok(filters, curPage, pageSize, seeAll, orderByDirection, orderByField);
 		brukereFetcher.fetch({ sok });
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [filters, currentPage, orderByDirection, orderByField, seeAll]);
