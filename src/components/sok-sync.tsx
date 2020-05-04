@@ -17,12 +17,12 @@ function logSokMetrikker(sok: BeslutteroversiktSok, currentPage: number): void {
 		filterMetrikker.visMineBrukere = sok.filter.visMineBrukere || false;
 	}
 
-	frontendlogger.logMetrikk('sok', {}, {
+	frontendlogger.logMetrikk('sok', {
 		page: currentPage,
 		orderByField: sok.orderByField,
 		orderByDirection: sok.orderByDirection,
 		...filterMetrikker
-	});
+	}, {});
 }
 
 export const SokSync = () => {
