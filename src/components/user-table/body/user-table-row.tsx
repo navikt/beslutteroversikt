@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { CSSProperties } from 'react';
 import cls from 'classnames';
 import { Bruker, UtkastStatus } from '../../../rest/data/bruker';
 import { formatDateStr, formatDateTime } from '../../../utils/date-utils';
@@ -28,15 +28,17 @@ export const UserRow = (props: { bruker: Bruker, aktivEnhet: OrNothing<string> }
 		return undefined;
 	}
 
+	const alignStart: CSSProperties = { textAlign: 'start' };
+
 	return (
 		<li className="user-table-row">
 			<a className={cls('user-table-row__innhold', {'user-table-row__innhold--maskert': erMaskert})} href={lagBrukerUrl()}>
-				<Normaltekst style={{ textAlign: 'start' }}>{lagBrukerNavn(brukerFornavn, brukerEtternavn)}</Normaltekst>
+				<Normaltekst style={alignStart}>{lagBrukerNavn(brukerFornavn, brukerEtternavn)}</Normaltekst>
 				<Element>{brukerFnr}</Element>
 				<Normaltekst>{formatDateStr(vedtakStartet)}</Normaltekst>
 				<UtkastStatusData status={status}/>
-				<Element>{beslutterNavn || '-'}</Element>
-				<Normaltekst>{veilederNavn}</Normaltekst>
+				<Element style={alignStart}>{beslutterNavn || '-'}</Element>
+				<Normaltekst style={alignStart}>{veilederNavn}</Normaltekst>
 				<Normaltekst>{formatDateTime(statusEndret)}</Normaltekst>
 				<Normaltekst>{fjernNavFraEnhetNavn(brukerOppfolgingsenhetNavn)}</Normaltekst>
 			</a>
