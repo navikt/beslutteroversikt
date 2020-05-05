@@ -1,9 +1,8 @@
 import React from 'react';
-import { Sokefelt } from './sokefelt/sokefelt';
-import './filters.less';
 import { EnhetDropdown } from './enhet-dropdown/enhet-dropdown';
 import { StatusDropdown } from './status-dropwdown/status-dropdown';
 import { BrukerFilter } from './bruker-filter/bruker-filter';
+import './filters.less';
 
 export const Filters = () => {
     return (
@@ -13,7 +12,10 @@ export const Filters = () => {
 			    <BrukerFilter />
 			    <StatusDropdown />
 		    </div>
-		    <Sokefelt/>
+		    {/*
+		        Se FO-2883
+		        <Sokefelt/>
+		    */}
 	    </div>
     );
 };
