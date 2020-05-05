@@ -31,7 +31,7 @@ export const UserRow = (props: { bruker: Bruker, aktivEnhet: OrNothing<string> }
 	return (
 		<li className="user-table-row">
 			<a className={cls('user-table-row__innhold', {'user-table-row__innhold--maskert': erMaskert})} href={lagBrukerUrl()}>
-				<Normaltekst>{lagBrukerNavn(brukerFornavn, brukerEtternavn)}</Normaltekst>
+				<Normaltekst style={{ textAlign: 'start' }}>{lagBrukerNavn(brukerFornavn, brukerEtternavn)}</Normaltekst>
 				<Element>{brukerFnr}</Element>
 				<Normaltekst>{formatDateStr(vedtakStartet)}</Normaltekst>
 				<UtkastStatusData status={status}/>
