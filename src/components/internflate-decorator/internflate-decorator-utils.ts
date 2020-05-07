@@ -30,7 +30,7 @@ export function lagDecoratorConfig(): DecoratorConfig {
 		appname: 'Arbeidsrettet oppfølging',
 		fnr: null,
 		enhet: null,
-		contextholder: true,
+		contextholder: undefined,
 		toggles: {
 			visEnhet: false,
 			visEnhetVelger: false,
