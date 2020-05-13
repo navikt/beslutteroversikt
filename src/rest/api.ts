@@ -41,6 +41,9 @@ export enum OrderByDirection {
 export const lagHentBrukereFetchInfo = (params: { sok: BeslutteroversiktSok }): FetchInfo => ({
 	url: `${VEILARBVEDTAKSSTOTTE_API}/beslutteroversikt/sok`,
 	method: 'POST',
+	headers: {
+		'Content-Type': 'application/json'
+	},
 	body: JSON.stringify(params.sok)
 });
 
