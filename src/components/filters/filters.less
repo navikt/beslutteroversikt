@@ -1,0 +1,22 @@
+.filters {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  margin-bottom: 2rem;
+  padding: 1rem 2rem;
+  background-color: white;
+
+  > * {
+    margin-bottom: 1rem;
+  }
+
+  &__dropdowns {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+
+    > *:not(:first-child)  {
+      margin-left: 2rem;
+    }
+  }
+}

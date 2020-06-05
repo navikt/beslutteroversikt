@@ -1,17 +1,18 @@
 import React from 'react';
-import { DataFetcher } from './components/datafetcher';
 import StoreProvider from './stores/store-provider';
-import './app.less';
+import { Header } from './components/header/header';
+import { InternflateDecorator } from './components/internflate-decorator/internflate-decorator';
+import { Hovedside } from './hovedside/hovedside';
+import { SokSync } from './components/sok-sync';
 
 function App() {
 	return (
-		<main>
-			<StoreProvider>
-				<DataFetcher>
-					<p>Hello world</p>
-				</DataFetcher>
-			</StoreProvider>
-		</main>
+		<StoreProvider>
+			<InternflateDecorator />
+			<Header />
+			<Hovedside />
+			<SokSync />
+		</StoreProvider>
 	);
 }
 

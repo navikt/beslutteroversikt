@@ -1,2 +1,2 @@
-FROM navikt/pus-nginx
-COPY build /usr/share/nginx/html/beslutteroversikt
+FROM docker.pkg.github.com/navikt/pus-fss-frontend/pus-fss-frontend
+COPY build /app
