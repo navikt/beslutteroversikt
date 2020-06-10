@@ -5,6 +5,7 @@ import { UtkastStatus } from '../rest/data/bruker';
 import { OrNothing } from '../utils/types/ornothing';
 import { OrderByDirection, OrderByField } from '../rest/api';
 import { DEFAULT_PAGINATION_SIZE } from '../utils/sok-utils';
+import { Features } from '../rest/feature';
 
 export interface Filters {
 	fnrOrName: string;
@@ -30,6 +31,8 @@ export const useSokStore = createUseContext(() => {
 	const [statusFilter, setStatusFilter] = useState<UtkastStatus>();
 	const [visMineBrukere, setVisMineBrukere] = useState<boolean>(false);
 
+	const [features, setFeatures] = useState<Features>({} as any);
+
 	const filters: Filters = useMemo(() => {
 		return {
 			fnrOrName: fnrOrNameFilter,
@@ -49,5 +52,6 @@ export const useSokStore = createUseContext(() => {
 		filters,
 		setFnrOrNameFilter, setEnheterFilter,
 		setStatusFilter, setVisMineBrukere,
+		features, setFeatures,
 	};
 });

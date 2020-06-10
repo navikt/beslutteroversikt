@@ -26,8 +26,8 @@ function logSokMetrikker(sok: BeslutteroversiktSok, currentPage: number): void {
 }
 
 export const SokSync = () => {
-	const { brukereFetcher } = useDataFetcherStore();
-	const { filters, currentPage, pageSize, orderByDirection, orderByField, seeAll, setTotalPages, setCurrentPage } = useSokStore();
+	const { brukereFetcher, featuresFetcher } = useDataFetcherStore();
+	const { filters, currentPage, pageSize, orderByDirection, orderByField, seeAll, setTotalPages, setCurrentPage, setFeatures } = useSokStore();
 	const previousFilters = usePrevious(filters);
 
 	useEffect(() => {
@@ -51,6 +51,13 @@ export const SokSync = () => {
 		}
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [brukereFetcher]);
+
+	useEffect(() => {
+		if (hasFinishedWithData(featuresFetcher)) {
+			setFeatures(featuresFetcher.data);
+		}
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [featuresFetcher.status]);
 
 	return null;
 };
