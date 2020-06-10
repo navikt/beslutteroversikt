@@ -1,10 +1,9 @@
-export const PRELANSERING_INFO_OM_LOSNING_TOGGLE = 'pto.vedtaksstotte.pilot';
-
+export const PTO_VEDTAKSSTOTTE_PILOT = 'pto.vedtaksstotte.pilot';
 
 export const TOGGLES = [
-    PRELANSERING_INFO_OM_LOSNING_TOGGLE,
+    PTO_VEDTAKSSTOTTE_PILOT,
 ];
 
 export interface Features {
-    [PRELANSERING_INFO_OM_LOSNING_TOGGLE]: boolean;
+    [PTO_VEDTAKSSTOTTE_PILOT]: boolean;
 }

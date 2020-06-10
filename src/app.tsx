@@ -5,8 +5,8 @@ import { InternflateDecorator } from './components/internflate-decorator/internf
 import { Hovedside } from './hovedside/hovedside';
 import { DataFetcher } from './components/datafetcher';
 import { useDataFetcherStore } from './stores/data-fetcher-store';
-import { PRELANSERING_INFO_OM_LOSNING_TOGGLE } from './rest/feature';
-import { Prelansering } from './prelansering-side/prelansering';
+import { PTO_VEDTAKSSTOTTE_PILOT } from './rest/feature';
+import { PrelanseringInfoSide } from './prelansering-side/prelansering-side';
 
 function App() {
 	return (
@@ -21,10 +21,10 @@ function App() {
 
 function Innhold() {
 	const { featuresFetcher } = useDataFetcherStore();
-	const erPrelanseringPa = featuresFetcher.data[PRELANSERING_INFO_OM_LOSNING_TOGGLE];
+	const erPilotTogglePa = featuresFetcher.data[PTO_VEDTAKSSTOTTE_PILOT];
 
-	return erPrelanseringPa ? (
-		<Prelansering />
+	return !erPilotTogglePa ? (
+		<PrelanseringInfoSide />
 	) : (
 		<>
 			<Header />

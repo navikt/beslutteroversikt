@@ -8,14 +8,12 @@ import './hovedside.less';
 export const Hovedside = () => {
     return (
 	    <main className="hovedside">
-		    <DataFetcher>
 			    <Filters />
 			    {/*<FilterEtiketter/>*/}
 			    <div className="hovedside__table">
 				    <PaginationBar />
 				    <UserTable />
 			    </div>
-		    </DataFetcher>
 	    </main>
     );
 };
