@@ -1,10 +1,12 @@
 import { FetchInfo } from './utils';
 import { OrNothing } from '../utils/types/ornothing';
 import { UtkastStatus } from './data/bruker';
+import { TOGGLES } from './feature';
 
 export const VEILARBVEDTAKSSTOTTE_API = '/veilarbvedtaksstotte/api';
 export const VEILARBVEILEDER_API = '/veilarbveileder/api';
 export const MODIACONTEXTHOLDER_API = '/modiacontextholder/api';
+export const FEATURE_TOGGLE_URL = '/veilarbpersonflatefs/api/feature';
 
 export interface BeslutteroversiktSok {
 	fra: number;
@@ -37,6 +39,11 @@ export enum OrderByField {
 export enum OrderByDirection {
 	ASC, DESC
 }
+
+export const lagHentFeaturesFetchInfo = (): FetchInfo => {
+	const toggles = TOGGLES.map(element => 'feature=' + element).join('&');
+	return { url: `${FEATURE_TOGGLE_URL}/?${toggles}` };
+};
 
 export const lagHentBrukereFetchInfo = (params: { sok: BeslutteroversiktSok }): FetchInfo => ({
 	url: `${VEILARBVEDTAKSSTOTTE_API}/beslutteroversikt/sok`,
