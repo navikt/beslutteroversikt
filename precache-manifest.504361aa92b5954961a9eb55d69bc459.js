@@ -4,11 +4,11 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/beslutteroversikt/index.html"
   },
   {
-    "revision": "215c15b6f3b931bb979e",
+    "revision": "cba815aacac54e8da37f",
     "url": "/beslutteroversikt/static/css/main.css"
   },
   {
-    "revision": "215c15b6f3b931bb979e",
+    "revision": "cba815aacac54e8da37f",
     "url": "/beslutteroversikt/static/js/main.js"
   },
   {
@@ -18,6 +18,10 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
     "revision": "a2ef3c1aea3411853c5f379c313fb451",
     "url": "/beslutteroversikt/static/media/klar_for_utsendelse.a2ef3c1a.svg"
+  },
+  {
+    "revision": "fa11dc9082d12e87475938b0ff24c3c6",
+    "url": "/beslutteroversikt/static/media/prelansering_info_pc.fa11dc90.svg"
   },
   {
     "revision": "1fc576bfc1bdb617ef4de3982882dd2e",

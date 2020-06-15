@@ -4,11 +4,12 @@
     "main.js": "/beslutteroversikt/static/js/main.js",
     "main.js.map": "/beslutteroversikt/static/js/main.js.map",
     "index.html": "/beslutteroversikt/index.html",
-    "precache-manifest.67aa6d318e6d897fb4842cf7beba242b.js": "/beslutteroversikt/precache-manifest.67aa6d318e6d897fb4842cf7beba242b.js",
+    "precache-manifest.504361aa92b5954961a9eb55d69bc459.js": "/beslutteroversikt/precache-manifest.504361aa92b5954961a9eb55d69bc459.js",
     "service-worker.js": "/beslutteroversikt/service-worker.js",
     "static/css/main.css.map": "/beslutteroversikt/static/css/main.css.map",
     "static/media/arrow-down.svg": "/beslutteroversikt/static/media/arrow-down.97d2dfd1.svg",
     "static/media/klar_for_utsendelse.svg": "/beslutteroversikt/static/media/klar_for_utsendelse.a2ef3c1a.svg",
+    "static/media/prelansering_info_pc.svg": "/beslutteroversikt/static/media/prelansering_info_pc.fa11dc90.svg",
     "static/media/trenger_beslutter.svg": "/beslutteroversikt/static/media/trenger_beslutter.1fc576bf.svg",
     "static/media/trenger_tilbakemelding.svg": "/beslutteroversikt/static/media/trenger_tilbakemelding.3adc36e4.svg",
     "static/media/venter_pa_respons.svg": "/beslutteroversikt/static/media/venter_pa_respons.ca9fdcb2.svg"
