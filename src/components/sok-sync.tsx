@@ -47,7 +47,7 @@ export const SokSync = () => {
 		brukereFetcher.fetch({ sok });
 		logSokMetrikker(sok, currentPage);
 		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [filters, currentPage, orderByDirection, orderByField, seeAll]);
+	}, [filters, currentPage, orderByDirection, orderByField, seeAll, featuresFetcher.data]);
 
 	useEffect(() => {
 		if (hasFinishedWithData(brukereFetcher)) {
