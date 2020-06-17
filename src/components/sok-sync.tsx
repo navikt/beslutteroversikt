@@ -6,6 +6,7 @@ import { hasFinishedWithData } from '../rest/utils';
 import { usePrevious } from '../utils';
 import { frontendlogger } from '../utils/frontend-logger';
 import { BeslutteroversiktSok } from '../rest/api';
+import { PTO_VEDTAKSSTOTTE_PILOT } from '../rest/feature';
 
 function logSokMetrikker(sok: BeslutteroversiktSok, currentPage: number): void {
 	const filterMetrikker: any = {};
@@ -26,11 +27,16 @@ function logSokMetrikker(sok: BeslutteroversiktSok, currentPage: number): void {
 }
 
 export const SokSync = () => {
-	const { brukereFetcher } = useDataFetcherStore();
+	const { brukereFetcher, featuresFetcher } = useDataFetcherStore();
 	const { filters, currentPage, pageSize, orderByDirection, orderByField, seeAll, setTotalPages, setCurrentPage } = useSokStore();
 	const previousFilters = usePrevious(filters);
 
 	useEffect(() => {
+		// Ikke søk hvis man ikke har tilgang til piloten
+		if (!featuresFetcher.data || !featuresFetcher.data[PTO_VEDTAKSSTOTTE_PILOT]) {
+			return;
+		}
+
 		let curPage = currentPage;
 		if (previousFilters !== filters) {
 			curPage = 1; // When filters change, start from first page
