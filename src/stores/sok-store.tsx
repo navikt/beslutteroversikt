@@ -1,4 +1,4 @@
-import createUseContext from 'constate';
+import constate from 'constate';
 import { useMemo, useState } from 'react';
 import { Enhet } from '../rest/data/innlogget-veileder';
 import { UtkastStatus } from '../rest/data/bruker';
@@ -13,7 +13,7 @@ export interface Filters {
 	visMineBrukere: boolean;
 }
 
-export const useSokStore = createUseContext(() => {
+export const [SokStoreProvider, useSokStore] = constate(() => {
 	// Paginering
 	const [totalPages, setTotalPages] = useState(1);
 	const [currentPage, setCurrentPage] = useState(1);

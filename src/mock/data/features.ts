@@ -1,7 +1,6 @@
-import { JSONObject } from 'yet-another-fetch-mock';
 import { Features, PTO_VEDTAKSSTOTTE_PILOT } from '../../rest/feature';
 
-const features: Features & JSONObject = {
+const features: Features = {
     [PTO_VEDTAKSSTOTTE_PILOT]: true,
 };
 
