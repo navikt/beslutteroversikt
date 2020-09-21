@@ -1,4 +1,4 @@
-import createUseContext from 'constate';
+import constate from 'constate';
 import useFetch from '../rest/use-fetch';
 import {
 	BeslutteroversiktSok,
@@ -12,7 +12,7 @@ import { AktivEnhet } from '../rest/data/aktiv-enhet';
 import { OrNothing } from '../utils/types/ornothing';
 import { Features } from '../rest/feature';
 
-export const useDataFetcherStore = createUseContext(() => {
+export const [DataFetcherStoreProvider, useDataFetcherStore] = constate(() => {
 	const brukereFetcher = useFetch<BrukereMedAntall, { sok: BeslutteroversiktSok }>(lagHentBrukereFetchInfo);
 	const innloggetVeilederFetcher = useFetch<InnloggetVeileder>(lagHentInnloggetVeilederFetchInfo);
 	const aktivEnhetFetcher = useFetch<OrNothing<AktivEnhet>>(lagHentAktivEnhetFetchInfo);
