@@ -48,6 +48,7 @@ export const lagHentFeaturesFetchInfo = (): FetchInfo => {
 export const lagHentBrukereFetchInfo = (params: { sok: BeslutteroversiktSok }): FetchInfo => ({
 	url: `${VEILARBVEDTAKSSTOTTE_API}/beslutteroversikt/sok`,
 	method: 'POST',
+	credentials: 'same-origin',
 	headers: {
 		'Content-Type': 'application/json'
 	},
@@ -55,9 +56,11 @@ export const lagHentBrukereFetchInfo = (params: { sok: BeslutteroversiktSok }): 
 });
 
 export const lagHentInnloggetVeilederFetchInfo = (): FetchInfo => ({
+	credentials: 'same-origin',
 	url: `${VEILARBVEILEDER_API}/veileder/v2/me`
 });
 
 export const lagHentAktivEnhetFetchInfo = (): FetchInfo => ({
+	credentials: 'same-origin',
 	url: `${MODIACONTEXTHOLDER_API}/context/aktivenhet`
 });

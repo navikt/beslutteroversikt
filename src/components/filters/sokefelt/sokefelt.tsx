@@ -8,7 +8,7 @@ export const Sokefelt = () => {
 	const { filters, setFnrOrNameFilter } = useSokStore();
 	const [tekst, setTekst] = useState(filters.fnrOrName);
 
-	const oppdaterFilter = useCallback(debounce((nyTekst) => {
+	const oppdaterFilter = useCallback(debounce((nyTekst: string) => {
 		setFnrOrNameFilter(nyTekst);
 	}, 500), []);
 

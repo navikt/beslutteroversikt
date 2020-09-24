@@ -59,25 +59,25 @@ export function PaginationBar() {
                 {/*<PagineringKnapp onClick={handleSeeAllChanged}>*/}
                 {/*    {!seeAll ? 'Se alle' : 'Se færre'}*/}
                 {/*</PagineringKnapp>*/}
-                <PagineringKnapp disabled={erPaForsteSide} onClick={() => handlePageChanged(currentPage - 1)}>
+                <PagineringKnapp aria-label="Forrige side" disabled={erPaForsteSide} onClick={() => handlePageChanged(currentPage - 1)}>
                     <VenstreChevron/>
                 </PagineringKnapp>
 
                 <Show if={!erPaForsteSide}>
-                    <PagineringKnapp onClick={() => handlePageChanged(1)}>1</PagineringKnapp>
+                    <PagineringKnapp aria-label="Første side" onClick={() => handlePageChanged(1)}>1</PagineringKnapp>
                 </Show>
 
-                <PagineringKnapp>
+                <PagineringKnapp aria-label="Valgt side">
                     <strong>{currentPage}</strong>
                 </PagineringKnapp>
 
                 <Show if={!erPaSisteSide && !seeAll}>
-                    <PagineringKnapp onClick={() => handlePageChanged(totalPages)}>
+                    <PagineringKnapp aria-label="Siste side" onClick={() => handlePageChanged(totalPages)}>
                         {totalPages}
                     </PagineringKnapp>
                 </Show>
 
-                <PagineringKnapp disabled={erPaSisteSide || seeAll} onClick={() => handlePageChanged(currentPage + 1)}>
+                <PagineringKnapp aria-label="Neste side" disabled={erPaSisteSide || seeAll} onClick={() => handlePageChanged(currentPage + 1)}>
                     <HoyreChevron/>
                 </PagineringKnapp>
             </div>
