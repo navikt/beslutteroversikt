@@ -14,8 +14,7 @@ export function mapStatusTilDropdownOption(status: UtkastStatus): DropdownOption
 const statusOptions: DropdownOption[] = [
 	mapStatusTilDropdownOption(UtkastStatus.TRENGER_BESLUTTER),
 	mapStatusTilDropdownOption(UtkastStatus.KLAR_TIL_VEILEDER),
-	mapStatusTilDropdownOption(UtkastStatus.KLAR_TIL_BESLUTTER),
-	mapStatusTilDropdownOption(UtkastStatus.GODKJENT_AV_BESLUTTER),
+	mapStatusTilDropdownOption(UtkastStatus.KLAR_TIL_BESLUTTER)
 ];
 
 export const StatusDropdown = () => {
