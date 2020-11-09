@@ -48,7 +48,7 @@ export function mapBrukerStatusTilTekst(status: UtkastStatus): string {
 		case UtkastStatus.KLAR_TIL_VEILEDER:
 			return 'Venter på veileder';
 		case UtkastStatus.KLAR_TIL_BESLUTTER:
-			return 'Trenger tilbakemelding';
+			return 'Venter på beslutter';
 		case UtkastStatus.GODKJENT_AV_BESLUTTER:
 			return 'Klar til utsendelse';
 		default:
