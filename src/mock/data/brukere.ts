@@ -15,6 +15,13 @@ function randomFnr(): string {
 	return `${dag.toString().padStart(2, '0')}${mnd.toString().padStart(2, '0')}${ar.toString().padStart(2, '0')}${individsifre}${kontrollsifre}`;
 }
 
+// TODO: Kan byttes ut med vanlig UtkastStatus når godkjent status er fjernet
+enum UtkastStatusUtenGodkjent {
+	TRENGER_BESLUTTER = 'TRENGER_BESLUTTER',
+	KLAR_TIL_BESLUTTER = 'KLAR_TIL_BESLUTTER',
+	KLAR_TIL_VEILEDER = 'KLAR_TIL_VEILEDER'
+}
+
 export const lagBrukere = (antallBrukere: number): Bruker[] => {
 	const brukere: Bruker[] = [];
 
@@ -22,7 +29,7 @@ export const lagBrukere = (antallBrukere: number): Bruker[] => {
 
 	for (let i = 0; i < antallBrukere; i++) {
 		const randomEnhet = faker.random.arrayElement(enheter);
-		const randomStatus = faker.random.objectElement(UtkastStatus) as UtkastStatus;
+		const randomStatus = faker.random.objectElement(UtkastStatusUtenGodkjent) as UtkastStatus;
 		const beslutterNavn = randomStatus === UtkastStatus.TRENGER_BESLUTTER
 			? null
 			: faker.name.firstName() + ' ' + faker.name.lastName();
