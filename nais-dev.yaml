@@ -27,6 +27,8 @@ spec:
       memory: 1Gi
   ingresses:
     - https://beslutteroversikt-q1.nais.preprod.local
+    - https://app.dev.adeo.no/beslutteroversikt
+    - https://app-q1.dev.adeo.no/beslutteroversikt
     - https://app-q1.adeo.no/beslutteroversikt
   envFrom:
     - configmap: pto-config
