@@ -1,20 +1,22 @@
 import * as React from 'react';
 import NAVSPA from '@navikt/navspa';
-import { DecoratorConfig, lagDecoratorConfig } from './internflate-decorator-utils';
-import env from '../../utils/environment';
+import { DecoratorConfig } from './internflate-decorator-config';
 
 const Decorator: React.ComponentType<DecoratorConfig> = NAVSPA.importer<DecoratorConfig>('internarbeidsflatefs');
 
 export function InternflateDecorator() {
-    const config = lagDecoratorConfig();
-
-    if (env.isDevelopment) {
-        return null;
-    }
-
     return (
         <nav>
-            <Decorator {...config} />
+            <Decorator {...lagDecoratorConfig()} />
         </nav>
     );
+}
+
+function lagDecoratorConfig(): DecoratorConfig {
+    return {
+        appname: 'Arbeidsrettet oppfølging',
+        toggles: {
+            visVeileder: true
+        }
+    };
 }
