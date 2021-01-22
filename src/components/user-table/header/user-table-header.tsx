@@ -38,7 +38,7 @@ export const UserTableHeader = (props: UserTableHeaderProps) => {
 		    <HeaderField name={HeaderFieldName.BRUKER_FNR} text="Fødselsnummer" orderByData={orderByData} onOrderByChanged={handleOnOrderByChanged} />
 		    <HeaderField name={HeaderFieldName.VEDTAK_STARTET} text="Vedtak startet" orderByData={orderByData} onOrderByChanged={handleOnOrderByChanged} />
 		    <HeaderField name={HeaderFieldName.STATUS} text="Status" orderByData={orderByData} onOrderByChanged={handleOnOrderByChanged} />
-		    <HeaderField name={HeaderFieldName.BESLUTTER_NAVN} text="Beslutter" orderByData={orderByData} onOrderByChanged={handleOnOrderByChanged} />
+		    <HeaderField name={HeaderFieldName.BESLUTTER_NAVN} text="Kvalitetssikrer" orderByData={orderByData} onOrderByChanged={handleOnOrderByChanged} />
 		    <HeaderField name={HeaderFieldName.VEILEDER_NAVN} text="Veileder" orderByData={orderByData} onOrderByChanged={handleOnOrderByChanged} />
 		    <HeaderField name={HeaderFieldName.STATUS_ENDRET} text="Status endret" orderByData={orderByData} onOrderByChanged={handleOnOrderByChanged} />
 		    <HeaderField name={HeaderFieldName.BRUKER_OPPFOLGINGSENHET_NAVN} text="Enhet" orderByData={orderByData} onOrderByChanged={handleOnOrderByChanged} />
