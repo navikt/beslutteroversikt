@@ -1,20 +1,19 @@
 import { useCallback, useMemo, useState } from 'react';
 import { FetchInfo, FetchState, FetchStatus } from './utils';
-import { logger } from '../utils/logger';
 
 export interface Fetch<D = any, FP = any> extends FetchState<D> {
 	fetch: (fetchParams: FP, onFinished?: (fetchState: FetchState<D>) => void) => void;
 	reset: () => void;
 }
 
-const createInitialFetchState = (): FetchState<any> => ({
+const createInitialFetchState = (): FetchState => ({
 	status: FetchStatus.NOT_STARTED,
 	error: null,
 	data: null as any,
 	httpCode: -1
 });
 
-const createPendingFetchState = (): FetchState<any> => ({
+const createPendingFetchState = (): FetchState => ({
 	status: FetchStatus.PENDING,
 	error: null,
 	data: null as any,
@@ -59,10 +58,6 @@ const useFetch = <D = {}, FP = any>(createFetchInfo: (fetchParams: FP) => FetchI
 				return createFinishedFetchState(null as any, error, -1);
 			})
 			.then(state => {
-				if (state.httpCode >= 400) {
-					logger.error('API kall feilet', state);
-				}
-
 				if (onFinished) {
 					onFinished(state);
 				}

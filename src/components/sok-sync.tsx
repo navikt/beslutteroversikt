@@ -4,9 +4,9 @@ import { lagBeslutterOversiktSok } from '../utils/sok-utils';
 import { useSokStore } from '../stores/sok-store';
 import { hasFinishedWithData } from '../rest/utils';
 import { usePrevious } from '../utils';
-import { frontendlogger } from '../utils/frontend-logger';
 import { BeslutteroversiktSok } from '../rest/api';
 import { PTO_VEDTAKSSTOTTE_PILOT } from '../rest/feature';
+import { logMetrikk } from '../utils/logger';
 
 function logSokMetrikker(sok: BeslutteroversiktSok, currentPage: number): void {
 	const filterMetrikker: any = {};
@@ -18,7 +18,7 @@ function logSokMetrikker(sok: BeslutteroversiktSok, currentPage: number): void {
 		filterMetrikker.visMineBrukere = sok.filter.visMineBrukere || false;
 	}
 
-	frontendlogger.logMetrikk('sok', {
+	logMetrikk('sok', {
 		page: currentPage,
 		orderByField: sok.orderByField,
 		orderByDirection: sok.orderByDirection,
