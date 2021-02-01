@@ -44,11 +44,11 @@ export function lagBrukerNavn(fornavn: string, etternavn: string): string {
 export function mapBrukerStatusTilTekst(status: UtkastStatus): string {
 	switch (status) {
 		case UtkastStatus.TRENGER_BESLUTTER:
-			return 'Trenger beslutter';
+			return 'Trenger kvalitetssikring';
 		case UtkastStatus.KLAR_TIL_VEILEDER:
 			return 'Venter på veileder';
 		case UtkastStatus.KLAR_TIL_BESLUTTER:
-			return 'Venter på beslutter';
+			return 'Venter på tilbakemelding';
 		case UtkastStatus.GODKJENT_AV_BESLUTTER:
 			return 'Klar til utsendelse';
 		default:
