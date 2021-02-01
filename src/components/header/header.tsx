@@ -5,7 +5,7 @@ import './header.less';
 export const Header = () => {
 	return (
 		<div className="header">
-			<Sidetittel>Beslutteroversikt</Sidetittel>
+			<Sidetittel>Kvalitetssikring 14a</Sidetittel>
 		</div>
 	);
 };

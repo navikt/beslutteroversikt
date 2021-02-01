@@ -1,4 +1,4 @@
-import { frontendlogger } from '../utils/frontend-logger';
+import { logError } from '../utils/logger';
 
 export type FetchInfo = RequestInit & { url: string };
 
@@ -62,7 +62,7 @@ export const fetchWithInfo = (fetchInfo: FetchInfo) => {
 			res.clone()
 				.text()
 				.then(txt => {
-					frontendlogger.logError({ error: txt });
+					logError({ error: txt });
 				})
 				.catch();
 
