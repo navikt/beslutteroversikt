@@ -26,12 +26,11 @@ export const UserTable = () => {
 	}
 
     return (
-    	<section className="user-table">
+    	<div role="table" aria-label="Brukere som trenger kvalitetssikring" aria-rowcount={tableBrukere.length} className="user-table">
 		    <UserTableHeader orderByData={orderByData} onOrderByChanged={handleOnOrderByChanged} />
 		    <Show if={isNotStartedOrPending(brukereFetcher)}>
 			    <Spinner />
 		    </Show>
-
 		    {
 		    	tableBrukere.length === 0 && hasFinished(brukereFetcher)
 				    ? (
@@ -41,6 +40,6 @@ export const UserTable = () => {
 			        )
 				    : <UserTableBody brukere={tableBrukere} aktivEnhet={aktivEnhet} />
 		    }
-	    </section>
+	    </div>
     );
 };

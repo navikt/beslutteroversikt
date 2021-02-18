@@ -10,7 +10,7 @@ import trengerTilbakemeldingIcon from './status/trenger_tilbakemelding.svg';
 import venterPaResponsIcon from './status/venter_pa_respons.svg';
 import { OrNothing } from '../../../utils/types/ornothing';
 
-export const UserRow = (props: { bruker: Bruker, aktivEnhet: OrNothing<string> }) => {
+export const UserRow = (props: { idx: number, bruker: Bruker, aktivEnhet: OrNothing<string> }) => {
 	const {
 		brukerFnr, brukerFornavn, brukerEtternavn, statusEndret,
 		brukerOppfolgingsenhetNavn, vedtakStartet,
@@ -31,18 +31,18 @@ export const UserRow = (props: { bruker: Bruker, aktivEnhet: OrNothing<string> }
 	const alignStart: CSSProperties = { textAlign: 'start' };
 
 	return (
-		<li className="user-table-row">
+		<div role="row" aria-rowindex={props.idx} className="user-table-row">
 			<a className={cls('user-table-row__innhold', {'user-table-row__innhold--maskert': erMaskert})} href={lagBrukerUrl()}>
-				<Normaltekst style={alignStart}>{lagBrukerNavn(brukerFornavn, brukerEtternavn)}</Normaltekst>
-				<Element>{brukerFnr}</Element>
-				<Normaltekst>{formatDateStr(vedtakStartet)}</Normaltekst>
+				<Normaltekst tag="span" role="cell" style={alignStart}>{lagBrukerNavn(brukerFornavn, brukerEtternavn)}</Normaltekst>
+				<Element tag="span" role="cell">{brukerFnr}</Element>
+				<Normaltekst tag="span" role="cell">{formatDateStr(vedtakStartet)}</Normaltekst>
 				<UtkastStatusData status={status}/>
-				<Element style={alignStart}>{beslutterNavn || '-'}</Element>
-				<Normaltekst style={alignStart}>{veilederNavn}</Normaltekst>
-				<Normaltekst>{formatDateTime(statusEndret)}</Normaltekst>
-				<Normaltekst>{fjernNavFraEnhetNavn(brukerOppfolgingsenhetNavn)}</Normaltekst>
+				<Element tag="span" role="cell" style={alignStart}>{beslutterNavn || '-'}</Element>
+				<Normaltekst tag="span" role="cell" style={alignStart}>{veilederNavn}</Normaltekst>
+				<Normaltekst tag="span" role="cell">{formatDateTime(statusEndret)}</Normaltekst>
+				<Normaltekst tag="span" role="cell">{fjernNavFraEnhetNavn(brukerOppfolgingsenhetNavn)}</Normaltekst>
 			</a>
-		</li>
+		</div>
 	);
 };
 
@@ -65,7 +65,7 @@ const UtkastStatusData = (props: { status: UtkastStatus }) => {
 	}
 
 	return (
-		<span className={'status'}>
+		<span role="cell" className={'status'}>
 			<img className={'status_ikon'} src={statusIkon} alt={'status ikon'}/>
 			<Normaltekst>{mapBrukerStatusTilTekst(props.status)}</Normaltekst>
 		</span>

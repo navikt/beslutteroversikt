@@ -37,7 +37,8 @@ export enum OrderByField {
 }
 
 export enum OrderByDirection {
-	ASC, DESC
+	ASC = 'ASC',
+	DESC = 'DESC'
 }
 
 export const lagHentFeaturesFetchInfo = (): FetchInfo => {
