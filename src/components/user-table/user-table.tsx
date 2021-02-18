@@ -35,7 +35,7 @@ export const UserTable = () => {
 		    	tableBrukere.length === 0 && hasFinished(brukereFetcher)
 				    ? (
 					    <AlertStripeInfo className="user-table__no-users">
-						    Fant ingen brukere
+						    <span role="alert" aria-live="polite">Fant ingen brukere</span>
 					    </AlertStripeInfo>
 			        )
 				    : <UserTableBody brukere={tableBrukere} aktivEnhet={aktivEnhet} />
