@@ -1,12 +1,10 @@
 import { FetchInfo } from './utils';
 import { OrNothing } from '../utils/types/ornothing';
 import { UtkastStatus } from './data/bruker';
-import { TOGGLES } from './feature';
 
 export const VEILARBVEDTAKSSTOTTE_API = '/veilarbvedtaksstotte/api';
 export const VEILARBVEILEDER_API = '/veilarbveileder/api';
 export const MODIACONTEXTHOLDER_API = '/modiacontextholder/api';
-export const FEATURE_TOGGLE_URL = '/veilarbpersonflatefs/api/feature';
 
 export interface BeslutteroversiktSok {
 	fra: number;
@@ -41,11 +39,6 @@ export enum OrderByDirection {
 	DESC = 'DESC'
 }
 
-export const lagHentFeaturesFetchInfo = (): FetchInfo => {
-	const toggles = TOGGLES.map(element => 'feature=' + element).join('&');
-	return { url: `${FEATURE_TOGGLE_URL}/?${toggles}` };
-};
-
 export const lagHentBrukereFetchInfo = (params: { sok: BeslutteroversiktSok }): FetchInfo => ({
 	url: `${VEILARBVEDTAKSSTOTTE_API}/beslutteroversikt/sok`,
 	method: 'POST',
@@ -64,4 +57,9 @@ export const lagHentInnloggetVeilederFetchInfo = (): FetchInfo => ({
 export const lagHentAktivEnhetFetchInfo = (): FetchInfo => ({
 	credentials: 'same-origin',
 	url: `${MODIACONTEXTHOLDER_API}/context/aktivenhet`
+});
+
+export const lagHentTilhorerVeilederUtrulletKontor = (): FetchInfo => ({
+	credentials: 'same-origin',
+	url: `${VEILARBVEDTAKSSTOTTE_API}/utrulling/tilhorerVeilederUtrulletKontor`
 });
