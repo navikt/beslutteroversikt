@@ -11,8 +11,8 @@ interface UserTableBodyProps {
 
 export const UserTableBody = (props: UserTableBodyProps) => {
     return (
-	    <ul className="user-table-body">
-		    {props.brukere.map((bruker, idx) => <UserRow bruker={bruker} aktivEnhet={props.aktivEnhet} key={idx} />)}
-	    </ul>
+	    <div role="rowgroup" className="user-table-body">
+		    {props.brukere.map((bruker, idx) => <UserRow idx={idx} bruker={bruker} aktivEnhet={props.aktivEnhet} key={idx} />)}
+	    </div>
     );
 };

@@ -30,6 +30,7 @@ export const StatusDropdown = () => {
 		<div className="status-dropdown">
 			<Element>Status</Element>
 			<Select
+				aria-label="Filtrer på status"
 				inputId="status-filter"
 				placeholder="Filtrer på status"
 				value={value}

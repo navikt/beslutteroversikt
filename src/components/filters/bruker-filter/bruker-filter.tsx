@@ -15,6 +15,7 @@ export const BrukerFilter = () => {
 		<div className="bruker-filter">
 			<Element>Bruker</Element>
 			<Checkbox
+				aria-label="Filtrer mine brukere"
 				label="Mine brukere"
 				className="bruker-filter__checkbox"
 				checked={filters.visMineBrukere}

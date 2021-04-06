@@ -5,7 +5,7 @@ import { AlertStripeFeil } from 'nav-frontend-alertstriper';
 import Spinner from './felles/spinner/spinner';
 
 export function DataFetcher(props: { children: any }) {
-	const { innloggetVeilederFetcher, aktivEnhetFetcher, featuresFetcher } = useDataFetcherStore();
+	const { innloggetVeilederFetcher, aktivEnhetFetcher, tilhorerVeilederUtrulletKontorFetcher } = useDataFetcherStore();
 
 	useEffect(() => {
 		if (isNotStarted(innloggetVeilederFetcher)) {
@@ -16,16 +16,16 @@ export function DataFetcher(props: { children: any }) {
 			aktivEnhetFetcher.fetch(null);
 		}
 
-		if (isNotStarted(featuresFetcher)) {
-			featuresFetcher.fetch(null);
+		if (isNotStarted(tilhorerVeilederUtrulletKontorFetcher)) {
+			tilhorerVeilederUtrulletKontorFetcher.fetch(null);
 		}
 		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [innloggetVeilederFetcher, aktivEnhetFetcher, featuresFetcher]);
+	}, [innloggetVeilederFetcher, aktivEnhetFetcher, tilhorerVeilederUtrulletKontorFetcher]);
 
 	// Trenger ikke å sjekke om aktivEnhetFetcher er ferdig
-	if (isAnyNotStartedOrPending([innloggetVeilederFetcher, aktivEnhetFetcher, featuresFetcher])) {
+	if (isAnyNotStartedOrPending([innloggetVeilederFetcher, aktivEnhetFetcher, tilhorerVeilederUtrulletKontorFetcher])) {
 		return <Spinner />;
-	} else if (hasAnyFailed([innloggetVeilederFetcher, aktivEnhetFetcher, featuresFetcher])) {
+	} else if (hasAnyFailed([innloggetVeilederFetcher, aktivEnhetFetcher, tilhorerVeilederUtrulletKontorFetcher])) {
 		return (
 			<AlertStripeFeil className="vedtaksstotte-alert">
 				Det oppnås for tiden ikke kontakt med alle baksystemer.

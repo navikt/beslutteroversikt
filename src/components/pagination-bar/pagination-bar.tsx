@@ -49,7 +49,7 @@ export function PaginationBar() {
         <div className="pagination-bar">
             <div>
                 <Show if={hasData(brukereFetcher)}>
-                    <Element>
+                    <Element aria-live="polite">
                         Viser {fraBruker}-{tilBruker} av totalt {totaltBrukere} brukere
                     </Element>
                 </Show>
@@ -67,7 +67,7 @@ export function PaginationBar() {
                     <PagineringKnapp aria-label="Første side" onClick={() => handlePageChanged(1)}>1</PagineringKnapp>
                 </Show>
 
-                <PagineringKnapp aria-label="Valgt side">
+                <PagineringKnapp aria-live="polite" aria-label="Valgt side">
                     <strong>{currentPage}</strong>
                 </PagineringKnapp>
 
