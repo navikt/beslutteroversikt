@@ -5,7 +5,6 @@ import { InternflateDecorator } from './components/internflate-decorator/internf
 import { Hovedside } from './hovedside/hovedside';
 import { DataFetcher } from './components/datafetcher';
 import { useDataFetcherStore } from './stores/data-fetcher-store';
-import { PTO_VEDTAKSSTOTTE_PILOT } from './rest/feature';
 import { PrelanseringInfoSide } from './prelansering-side/prelansering-side';
 
 function App() {
@@ -20,16 +19,16 @@ function App() {
 }
 
 function Innhold() {
-	const { featuresFetcher } = useDataFetcherStore();
-	const erPilotTogglePa = featuresFetcher.data[PTO_VEDTAKSSTOTTE_PILOT];
+	const { tilhorerVeilederUtrulletKontorFetcher } = useDataFetcherStore();
+	const harTilgang = tilhorerVeilederUtrulletKontorFetcher.data;
 
-	return !erPilotTogglePa ? (
-		<PrelanseringInfoSide />
-	) : (
+	return harTilgang ? (
 		<>
 			<Header />
 			<Hovedside />
 		</>
+	) : (
+		<PrelanseringInfoSide />
 	);
 }
 

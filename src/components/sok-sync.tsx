@@ -5,7 +5,6 @@ import { useSokStore } from '../stores/sok-store';
 import { hasFinishedWithData } from '../rest/utils';
 import { usePrevious } from '../utils';
 import { BeslutteroversiktSok } from '../rest/api';
-import { PTO_VEDTAKSSTOTTE_PILOT } from '../rest/feature';
 import { logMetrikk } from '../utils/logger';
 
 function logSokMetrikker(sok: BeslutteroversiktSok, currentPage: number): void {
@@ -27,13 +26,13 @@ function logSokMetrikker(sok: BeslutteroversiktSok, currentPage: number): void {
 }
 
 export const SokSync = () => {
-	const { brukereFetcher, featuresFetcher } = useDataFetcherStore();
+	const { brukereFetcher, tilhorerVeilederUtrulletKontorFetcher } = useDataFetcherStore();
 	const { filters, currentPage, pageSize, orderByDirection, orderByField, seeAll, setTotalPages, setCurrentPage } = useSokStore();
 	const previousFilters = usePrevious(filters);
 
 	useEffect(() => {
 		// Ikke søk hvis man ikke har tilgang til piloten
-		if (!featuresFetcher.data || !featuresFetcher.data[PTO_VEDTAKSSTOTTE_PILOT]) {
+		if (!tilhorerVeilederUtrulletKontorFetcher.data) {
 			return;
 		}
 
@@ -47,7 +46,7 @@ export const SokSync = () => {
 		brukereFetcher.fetch({ sok });
 		logSokMetrikker(sok, currentPage);
 		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [filters, currentPage, orderByDirection, orderByField, seeAll, featuresFetcher.data]);
+	}, [filters, currentPage, orderByDirection, orderByField, seeAll, tilhorerVeilederUtrulletKontorFetcher.data]);
 
 	useEffect(() => {
 		if (hasFinishedWithData(brukereFetcher)) {
