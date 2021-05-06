@@ -22,7 +22,7 @@ export const UserRow = (props: { idx: number, bruker: Bruker, aktivEnhet: OrNoth
 	function lagBrukerUrl() {
 		if (!erMaskert) {
 			const enhetQueryParam = props.aktivEnhet ? `?enhet=${props.aktivEnhet}` : '';
-			return `/veilarbpersonflatefs/${brukerFnr}${enhetQueryParam}#visVedtaksstotte`;
+			return `/veilarbpersonflatefs/${brukerFnr}${enhetQueryParam}#visVedtaksstotte#visUtkast`
 		}
 
 		return undefined;
