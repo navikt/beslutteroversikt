@@ -4,11 +4,10 @@ import { Bruker, UtkastStatus } from '../../../rest/data/bruker';
 import { formatDateStr, formatDateTime } from '../../../utils/date-utils';
 import { Normaltekst, Element } from 'nav-frontend-typografi';
 import { fjernNavFraEnhetNavn, lagBrukerNavn, mapBrukerStatusTilTekst } from '../../../utils';
-import klarForUtsendelseIcon from './status/klar_for_utsendelse.svg';
-import trengerBeslutterIcon from './status/trenger_beslutter.svg';
-import trengerTilbakemeldingIcon from './status/trenger_tilbakemelding.svg';
-import venterPaResponsIcon from './status/venter_pa_respons.svg';
 import { OrNothing } from '../../../utils/types/ornothing';
+import { DialogDots, DialogReport } from '@navikt/ds-icons';
+import { AddPeople } from '@navikt/ds-icons';
+import './user-table-body.less';
 
 export const UserRow = (props: { idx: number, bruker: Bruker, aktivEnhet: OrNothing<string> }) => {
 	const {
@@ -47,26 +46,36 @@ export const UserRow = (props: { idx: number, bruker: Bruker, aktivEnhet: OrNoth
 };
 
 const UtkastStatusData = (props: { status: UtkastStatus }) => {
-	let statusIkon;
+	let StatusIkon;
+	const ariaLabel = 'Systemikon';
+	let ikonFarge;
 
 	switch (props.status) {
 		case UtkastStatus.TRENGER_BESLUTTER:
-			statusIkon = trengerBeslutterIcon;
+			StatusIkon = AddPeople;
+			ikonFarge = ''
 			break;
 		case UtkastStatus.KLAR_TIL_BESLUTTER:
-			statusIkon = trengerTilbakemeldingIcon;
+			StatusIkon = DialogReport;
+			ikonFarge = 'status_ikon__oransje'
 			break;
 		case UtkastStatus.KLAR_TIL_VEILEDER:
-			statusIkon = venterPaResponsIcon;
+			StatusIkon = DialogDots;
+			ikonFarge = 'status_ikon__bla'
 			break;
 		case UtkastStatus.GODKJENT_AV_BESLUTTER:
-			statusIkon = klarForUtsendelseIcon;
+			StatusIkon = DialogDots;
+			ikonFarge = 'status_ikon__bla'
 			break;
 	}
 
 	return (
 		<span role="cell" className={'status'}>
-			<img className={'status_ikon'} src={statusIkon} alt={'status ikon'}/>
+			<StatusIkon className={ikonFarge}
+			aria-label={ariaLabel}
+			role="img"
+			focusable="false"
+			/>
 			<Normaltekst>{mapBrukerStatusTilTekst(props.status)}</Normaltekst>
 		</span>
 	);

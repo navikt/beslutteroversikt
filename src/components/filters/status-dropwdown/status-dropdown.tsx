@@ -1,6 +1,5 @@
 import React from 'react';
 import Select from 'react-select';
-import { Element } from 'nav-frontend-typografi';
 import { DropdownOption } from '../enhet-dropdown/enhet-dropdown';
 import { UtkastStatus } from '../../../rest/data/bruker';
 import { mapBrukerStatusTilTekst } from '../../../utils';
@@ -22,13 +21,15 @@ export const StatusDropdown = () => {
 	const value = filters.status ? mapStatusTilDropdownOption(filters.status) : null;
 
 	function handleOnStatusSelectedChanged(selectedOption: DropdownOption | null) {
-		const nyStatus = selectedOption ? selectedOption.value as UtkastStatus : undefined;
-		setStatusFilter(nyStatus)
+		const nyStatus = selectedOption ? (selectedOption.value as UtkastStatus) : undefined;
+		setStatusFilter(nyStatus);
 	}
 
 	return (
-		<div className="status-dropdown">
-			<Element>Status</Element>
+		<>
+			<label className="typo-element status-dropdown-label" htmlFor="status-filter">
+				Status
+			</label>
 			<Select
 				aria-label="Filtrer på status"
 				inputId="status-filter"
@@ -39,6 +40,6 @@ export const StatusDropdown = () => {
 				options={statusOptions}
 				onChange={handleOnStatusSelectedChanged as any}
 			/>
-		</div>
+		</>
 	);
 };

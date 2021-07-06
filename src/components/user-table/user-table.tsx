@@ -26,7 +26,7 @@ export const UserTable = () => {
 	}
 
     return (
-    	<div role="table" aria-label="Brukere som trenger kvalitetssikring" aria-rowcount={tableBrukere.length} className="user-table">
+    	<div role="table" aria-label="Brukere som trenger kvalitetssikring" aria-rowcount={tableBrukere.length} className="user-table flex flex--center">
 		    <UserTableHeader orderByData={orderByData} onOrderByChanged={handleOnOrderByChanged} />
 		    <Show if={isNotStartedOrPending(brukereFetcher)}>
 			    <Spinner />
