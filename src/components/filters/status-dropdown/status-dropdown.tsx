@@ -4,7 +4,8 @@ import { DropdownOption } from '../enhet-dropdown/enhet-dropdown';
 import { UtkastStatus } from '../../../rest/data/bruker';
 import { mapBrukerStatusTilTekst } from '../../../utils';
 import { useSokStore } from '../../../stores/sok-store';
-import './status-dropdown.less';
+import '../../filters/filters.less';
+
 
 export function mapStatusTilDropdownOption(status: UtkastStatus): DropdownOption {
 	return { value: status, label: mapBrukerStatusTilTekst(status) };
@@ -27,7 +28,7 @@ export const StatusDropdown = () => {
 
 	return (
 		<>
-			<label className="typo-element status-dropdown-label" htmlFor="status-filter">
+			<label className="typo-element" htmlFor="status-filter">
 				Status
 			</label>
 			<Select
