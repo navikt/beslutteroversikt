@@ -44,10 +44,19 @@
   .status {
     display: grid;
     grid-template-columns: 2rem auto;
-    align-items: end;
+    align-items: center;
 
     .status_ikon {
       max-width: 26px;
+      &__bla{
+        stroke: @navLysBlaDarken40;
+      }
+      &__oransje{
+        stroke: @navOransjeDarken20;
+      }
+      &__default{
+        stroke: @navMorkGra;
+      }
     }
   }
 
