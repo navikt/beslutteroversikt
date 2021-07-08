@@ -1,7 +1,7 @@
 import React from 'react';
 import { Sidetittel } from 'nav-frontend-typografi';
 import './header.less';
-import { StatusDropdown } from '../filters/status-dropwdown/status-dropdown';
+import { StatusDropdown } from '../filters/status-dropdown/status-dropdown';
 import { BrukerFilter } from '../filters/bruker-filter/bruker-filter';
 
 export const Header = () => {

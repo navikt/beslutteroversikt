@@ -53,19 +53,19 @@ const UtkastStatusData = (props: { status: UtkastStatus }) => {
 	switch (props.status) {
 		case UtkastStatus.TRENGER_BESLUTTER:
 			StatusIkon = AddPeople;
-			ikonFarge = ''
+			ikonFarge = '';
 			break;
 		case UtkastStatus.KLAR_TIL_BESLUTTER:
 			StatusIkon = DialogReport;
-			ikonFarge = 'status_ikon__oransje'
+			ikonFarge = 'status_ikon__oransje';
 			break;
 		case UtkastStatus.KLAR_TIL_VEILEDER:
 			StatusIkon = DialogDots;
-			ikonFarge = 'status_ikon__bla'
+			ikonFarge = 'status_ikon__bla';
 			break;
 		case UtkastStatus.GODKJENT_AV_BESLUTTER:
 			StatusIkon = DialogDots;
-			ikonFarge = 'status_ikon__bla'
+			ikonFarge = 'status_ikon__bla';
 			break;
 	}
 
