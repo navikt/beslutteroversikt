@@ -1,8 +1,7 @@
 import React from 'react';
-import { Element } from 'nav-frontend-typografi';
 import { Checkbox } from 'nav-frontend-skjema';
 import { useSokStore } from '../../../stores/sok-store';
-import './bruker-filter.less';
+import '../../filters/filters.less';
 
 export const BrukerFilter = () => {
 	const { filters, setVisMineBrukere } = useSokStore();
@@ -12,12 +11,10 @@ export const BrukerFilter = () => {
 	}
 
 	return (
-		<div className="bruker-filter">
-			<Element>Bruker</Element>
+		<div>
 			<Checkbox
-				aria-label="Filtrer mine brukere"
 				label="Mine brukere"
-				className="bruker-filter__checkbox"
+				aria-label="Filtrer mine brukere"
 				checked={filters.visMineBrukere}
 				onChange={handleOnVisMineBrukereChanged}
 			/>
