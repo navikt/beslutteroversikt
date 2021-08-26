@@ -42,7 +42,7 @@ export const UserRow = (props: { idx: number; bruker: Bruker; aktivEnhet: OrNoth
 				href={lagBrukerUrl()}
 			>
 				<Normaltekst tag="span" role="cell" style={alignStart}>
-					{lagBrukerNavn(brukerFornavn, brukerEtternavn)}
+					{lagBrukerNavn(brukerEtternavn, brukerFornavn)}
 				</Normaltekst>
 				<Element tag="span" role="cell">
 					{brukerFnr}
@@ -76,7 +76,7 @@ const UtkastStatusData = (props: { status: UtkastStatus }) => {
 	switch (props.status) {
 		case UtkastStatus.TRENGER_BESLUTTER:
 			StatusIkon = AddPeople;
-			ikonFarge = '';
+			ikonFarge = 'status_ikon__default';
 			break;
 		case UtkastStatus.KLAR_TIL_BESLUTTER:
 			StatusIkon = DialogReport;
@@ -94,7 +94,7 @@ const UtkastStatusData = (props: { status: UtkastStatus }) => {
 
 	return (
 		<span role="cell" className={'status'}>
-			<StatusIkon className={ikonFarge} aria-label={ariaLabel} role="img" focusable="false" />
+			<StatusIkon className={`status_ikon ${ikonFarge}`} aria-label={ariaLabel} role="img" focusable="false" />
 			<Normaltekst>{mapBrukerStatusTilTekst(props.status)}</Normaltekst>
 		</span>
 	);
