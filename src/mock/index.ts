@@ -6,7 +6,7 @@ import { aktivEnhet } from './data/aktiv-enhet';
 
 export interface Mock {
 	url: string;
-	handler: MockHandler
+	handler: MockHandler;
 }
 
 const fetchMock = FetchMock.configure({

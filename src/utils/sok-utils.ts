@@ -8,8 +8,12 @@ export const DEFAULT_PAGINATION_SIZE = 10;
 export const SEE_ALL_PAGINATION_SIZE = 10000;
 
 export const lagBeslutterOversiktSok = (
-	filters: Filters, currentPage: number, pageSize: number, seeAll: boolean,
-    orderByDirection: OrNothing<OrderByDirection>, orderByField: OrNothing<OrderByField>
+	filters: Filters,
+	currentPage: number,
+	pageSize: number,
+	seeAll: boolean,
+	orderByDirection: OrNothing<OrderByDirection>,
+	orderByField: OrNothing<OrderByField>
 ): BeslutteroversiktSok => {
 	const antall = seeAll ? SEE_ALL_PAGINATION_SIZE : pageSize;
 	const fra = seeAll ? 0 : (currentPage - 1) * pageSize;

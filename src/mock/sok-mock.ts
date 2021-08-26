@@ -13,7 +13,10 @@ export const mockBeslutteroversiktSok: Mock = {
 		const sok = args.body as BeslutteroversiktSok;
 		const filtrerteBrukere = filtrerBrukere(sok, alleBrukere);
 		const paginerteBrukere = filtrerteBrukere.slice(sok.fra, sok.fra + sok.antall);
-		return { status: 200, body: JSON.stringify({ brukere: paginerteBrukere, totaltAntall: filtrerteBrukere.length }) };
+		return {
+			status: 200,
+			body: JSON.stringify({ brukere: paginerteBrukere, totaltAntall: filtrerteBrukere.length })
+		};
 	}
 };
 
@@ -24,7 +27,7 @@ const filtrerBrukere = (sok: BeslutteroversiktSok, brukere: Bruker[]): Bruker[] 
 		}
 
 		if (sok.filter.visMineBrukere) {
-			if (bruker.beslutterNavn !== (innloggetVeileder.fornavn + ' ' + innloggetVeileder.etternavn)) {
+			if (bruker.beslutterNavn !== innloggetVeileder.fornavn + ' ' + innloggetVeileder.etternavn) {
 				return false;
 			}
 		}

@@ -27,20 +27,60 @@ export const UserTableHeader = (props: UserTableHeaderProps) => {
 		onOrderByChanged(newOrderByData);
 	}
 
-    return (
-    	<div role="rowgroup">
-		    <div role="row" className="user-table-header">
-			    <HeaderField name={HeaderFieldName.BRUKER_ETTERNAVN} text="Etternavn, Fornavn" orderByData={orderByData} onOrderByChanged={handleOnOrderByChanged} />
-			    <HeaderField name={HeaderFieldName.BRUKER_FNR} text="Fødselsnummer" orderByData={orderByData} onOrderByChanged={handleOnOrderByChanged} />
-			    <HeaderField name={HeaderFieldName.VEDTAK_STARTET} text="Vedtak startet" orderByData={orderByData} onOrderByChanged={handleOnOrderByChanged} />
-			    <HeaderField name={HeaderFieldName.STATUS} text="Status" orderByData={orderByData} onOrderByChanged={handleOnOrderByChanged} />
-			    <HeaderField name={HeaderFieldName.BESLUTTER_NAVN} text="Kvalitetssikrer" orderByData={orderByData} onOrderByChanged={handleOnOrderByChanged} />
-			    <HeaderField name={HeaderFieldName.VEILEDER_NAVN} text="Veileder" orderByData={orderByData} onOrderByChanged={handleOnOrderByChanged} />
-			    <HeaderField name={HeaderFieldName.STATUS_ENDRET} text="Status endret" orderByData={orderByData} onOrderByChanged={handleOnOrderByChanged} />
-			    <HeaderField name={HeaderFieldName.BRUKER_OPPFOLGINGSENHET_NAVN} text="Enhet" orderByData={orderByData} onOrderByChanged={handleOnOrderByChanged} />
-		    </div>
-	    </div>
-    );
+	return (
+		<div role="rowgroup">
+			<div role="row" className="user-table-header">
+				<HeaderField
+					name={HeaderFieldName.BRUKER_ETTERNAVN}
+					text="Etternavn, Fornavn"
+					orderByData={orderByData}
+					onOrderByChanged={handleOnOrderByChanged}
+				/>
+				<HeaderField
+					name={HeaderFieldName.BRUKER_FNR}
+					text="Fødselsnummer"
+					orderByData={orderByData}
+					onOrderByChanged={handleOnOrderByChanged}
+				/>
+				<HeaderField
+					name={HeaderFieldName.VEDTAK_STARTET}
+					text="Vedtak startet"
+					orderByData={orderByData}
+					onOrderByChanged={handleOnOrderByChanged}
+				/>
+				<HeaderField
+					name={HeaderFieldName.STATUS}
+					text="Status"
+					orderByData={orderByData}
+					onOrderByChanged={handleOnOrderByChanged}
+				/>
+				<HeaderField
+					name={HeaderFieldName.BESLUTTER_NAVN}
+					text="Kvalitetssikrer"
+					orderByData={orderByData}
+					onOrderByChanged={handleOnOrderByChanged}
+				/>
+				<HeaderField
+					name={HeaderFieldName.VEILEDER_NAVN}
+					text="Veileder"
+					orderByData={orderByData}
+					onOrderByChanged={handleOnOrderByChanged}
+				/>
+				<HeaderField
+					name={HeaderFieldName.STATUS_ENDRET}
+					text="Status endret"
+					orderByData={orderByData}
+					onOrderByChanged={handleOnOrderByChanged}
+				/>
+				<HeaderField
+					name={HeaderFieldName.BRUKER_OPPFOLGINGSENHET_NAVN}
+					text="Enhet"
+					orderByData={orderByData}
+					onOrderByChanged={handleOnOrderByChanged}
+				/>
+			</div>
+		</div>
+	);
 };
 
 interface HeaderFieldProps {
@@ -57,12 +97,20 @@ const HeaderField = (props: HeaderFieldProps) => {
 		'table-header-field__order-icon--asc': orderByData.direction === OrderByDirection.ASC
 	});
 
-	const ariaSort = name === orderByData.field && orderByData.direction
-			? (orderByData.direction === OrderByDirection.ASC ? 'ascending' : 'descending')
+	const ariaSort =
+		name === orderByData.field && orderByData.direction
+			? orderByData.direction === OrderByDirection.ASC
+				? 'ascending'
+				: 'descending'
 			: 'none';
 
 	return (
-		<button role="columnheader" aria-sort={ariaSort} onClick={() => onOrderByChanged(name)} className="table-header-field">
+		<button
+			role="columnheader"
+			aria-sort={ariaSort}
+			onClick={() => onOrderByChanged(name)}
+			className="table-header-field"
+		>
 			{text}
 			<Show if={orderByData.field === name && orderByData.direction !== undefined}>
 				<img className={iconClasses} src={arrowDownIcon} alt={alt} />

@@ -16,19 +16,34 @@ function lagFilterEtiketter(filters: Filters, onRemoveClicked: OnRemoveClicked) 
 
 	if (!isEmpty(fnrOrName)) {
 		filterEtiketter.push(
-			<FilterEtikett key={NAVN_ELLER_FNR_FILTER} id={NAVN_ELLER_FNR_FILTER} tekst="Søk på navn eller fnr" onRemoveClicked={onRemoveClicked} />
+			<FilterEtikett
+				key={NAVN_ELLER_FNR_FILTER}
+				id={NAVN_ELLER_FNR_FILTER}
+				tekst="Søk på navn eller fnr"
+				onRemoveClicked={onRemoveClicked}
+			/>
 		);
 	}
 
 	if (enheter.length > 0) {
 		filterEtiketter.push(
-			<FilterEtikett key={ENHET_FILTER} id={ENHET_FILTER} tekst="Søk på enhet" onRemoveClicked={onRemoveClicked} />
+			<FilterEtikett
+				key={ENHET_FILTER}
+				id={ENHET_FILTER}
+				tekst="Søk på enhet"
+				onRemoveClicked={onRemoveClicked}
+			/>
 		);
 	}
 
 	if (status) {
 		filterEtiketter.push(
-			<FilterEtikett key={STATUS_FILTER} id={STATUS_FILTER} tekst="Søk på status" onRemoveClicked={onRemoveClicked} />
+			<FilterEtikett
+				key={STATUS_FILTER}
+				id={STATUS_FILTER}
+				tekst="Søk på status"
+				onRemoveClicked={onRemoveClicked}
+			/>
 		);
 	}
 
@@ -54,9 +69,5 @@ export const FilterEtiketter = () => {
 		return null;
 	}
 
-    return (
-    	<div className="filter-etiketter">
-		    {etiketter}
-	    </div>
-    );
+	return <div className="filter-etiketter">{etiketter}</div>;
 };
