@@ -13,21 +13,35 @@ function logSokMetrikker(sok: BeslutteroversiktSok, currentPage: number): void {
 	if (sok.filter) {
 		filterMetrikker.antallEnheter = sok.filter.enheter ? sok.filter.enheter.length : 0;
 		filterMetrikker.status = sok.filter.status;
-		filterMetrikker.soktPaNavnEllerFnr = sok.filter.navnEllerFnr != null && sok.filter.navnEllerFnr.trim().length > 0;
+		filterMetrikker.soktPaNavnEllerFnr =
+			sok.filter.navnEllerFnr != null && sok.filter.navnEllerFnr.trim().length > 0;
 		filterMetrikker.visMineBrukere = sok.filter.visMineBrukere || false;
 	}
 
-	logMetrikk('sok', {
-		page: currentPage,
-		orderByField: sok.orderByField,
-		orderByDirection: sok.orderByDirection,
-		...filterMetrikker
-	}, {});
+	logMetrikk(
+		'sok',
+		{
+			page: currentPage,
+			orderByField: sok.orderByField,
+			orderByDirection: sok.orderByDirection,
+			...filterMetrikker
+		},
+		{}
+	);
 }
 
 export const SokSync = () => {
 	const { brukereFetcher, tilhorerVeilederUtrulletKontorFetcher } = useDataFetcherStore();
-	const { filters, currentPage, pageSize, orderByDirection, orderByField, seeAll, setTotalPages, setCurrentPage } = useSokStore();
+	const {
+		filters,
+		currentPage,
+		pageSize,
+		orderByDirection,
+		orderByField,
+		seeAll,
+		setTotalPages,
+		setCurrentPage
+	} = useSokStore();
 	const previousFilters = usePrevious(filters);
 
 	useEffect(() => {

@@ -5,13 +5,13 @@ import './hovedside.less';
 import { Header } from '../components/header/header';
 
 export const Hovedside = () => {
-    return (
-	    <main className="hovedside">
-			    <div className="hovedside__table">
-					<Header />
-				    <PaginationBar />
-				    <UserTable />
-			    </div>
-	    </main>
-    );
+	return (
+		<main className="hovedside">
+			<div className="hovedside__table">
+				<Header />
+				<PaginationBar />
+				<UserTable />
+			</div>
+		</main>
+	);
 };

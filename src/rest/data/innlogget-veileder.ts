@@ -1,4 +1,3 @@
-
 export interface Enhet {
 	enhetId: string;
 	navn: string;

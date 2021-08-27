@@ -8,9 +8,12 @@ export const Sokefelt = () => {
 	const { filters, setFnrOrNameFilter } = useSokStore();
 	const [tekst, setTekst] = useState(filters.fnrOrName);
 
-	const oppdaterFilter = useCallback(debounce((nyTekst: string) => {
-		setFnrOrNameFilter(nyTekst);
-	}, 500), []);
+	const oppdaterFilter = useCallback(
+		debounce((nyTekst: string) => {
+			setFnrOrNameFilter(nyTekst);
+		}, 500),
+		[]
+	);
 
 	function handleOnQueryChanged(e: React.ChangeEvent<HTMLInputElement>) {
 		const nyTekst = e.target.value;
@@ -18,14 +21,14 @@ export const Sokefelt = () => {
 		oppdaterFilter(nyTekst);
 	}
 
-    return (
-    	<div className="sokefelt">
-		    <Input
-			    label=""
-			    placeholder="Søk etter navn eller fødselsnummer"
-			    onChange={handleOnQueryChanged}
-			    value={tekst}
-		    />
-	    </div>
-    );
+	return (
+		<div className="sokefelt">
+			<Input
+				label=""
+				placeholder="Søk etter navn eller fødselsnummer"
+				onChange={handleOnQueryChanged}
+				value={tekst}
+			/>
+		</div>
+	);
 };

@@ -6,7 +6,6 @@ import { mapBrukerStatusTilTekst } from '../../../utils';
 import { useSokStore } from '../../../stores/sok-store';
 import '../../filters/filters.less';
 
-
 export function mapStatusTilDropdownOption(status: UtkastStatus): DropdownOption {
 	return { value: status, label: mapBrukerStatusTilTekst(status) };
 }
