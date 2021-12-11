@@ -8,6 +8,7 @@ metadata:
 spec:
   image: docker.pkg.github.com/navikt/beslutteroversikt/beslutteroversikt:{{version}}
   port: 8080
+  webproxy: true
   liveness:
     path: beslutteroversikt/internal/isAlive
     initialDelay: 15
