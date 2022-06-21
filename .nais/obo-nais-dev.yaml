@@ -57,6 +57,11 @@ spec:
             "bucketName": "obo-beslutteroversikt-dev"
           },
           "redirects": [
+            {
+              "fromPath": "/internarbeidsflatedecorator/*",
+              "toUrl": "https://internarbeidsflatedecorator-q1.dev.intern.nav.no",
+              "preserveFromPath": true
+            }
           ],
           "proxies": [
           ]
