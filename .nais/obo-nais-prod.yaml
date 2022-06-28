@@ -64,7 +64,7 @@ spec:
             },
             {
               "fromPath": "/veilarbpersonflatefs/*",
-              "toUrl": "https://adeo.nav.no",
+              "toUrl": "https://app.adeo.no",
               "preserveFromPath": true
             }
           ],
