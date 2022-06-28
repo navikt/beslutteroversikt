@@ -5,7 +5,11 @@ import { AlertStripeFeil } from 'nav-frontend-alertstriper';
 import Spinner from './felles/spinner/spinner';
 
 export function DataFetcher(props: { children: any }) {
-	const { innloggetVeilederFetcher, aktivEnhetFetcher, tilhorerVeilederUtrulletKontorFetcher } = useDataFetcherStore();
+	const {
+		innloggetVeilederFetcher,
+		aktivEnhetFetcher,
+		tilhorerVeilederUtrulletKontorFetcher
+	} = useDataFetcherStore();
 
 	useEffect(() => {
 		if (isNotStarted(innloggetVeilederFetcher)) {
@@ -23,13 +27,15 @@ export function DataFetcher(props: { children: any }) {
 	}, [innloggetVeilederFetcher, aktivEnhetFetcher, tilhorerVeilederUtrulletKontorFetcher]);
 
 	// Trenger ikke å sjekke om aktivEnhetFetcher er ferdig
-	if (isAnyNotStartedOrPending([innloggetVeilederFetcher, aktivEnhetFetcher, tilhorerVeilederUtrulletKontorFetcher])) {
+	if (
+		isAnyNotStartedOrPending([innloggetVeilederFetcher, aktivEnhetFetcher, tilhorerVeilederUtrulletKontorFetcher])
+	) {
 		return <Spinner />;
 	} else if (hasAnyFailed([innloggetVeilederFetcher, aktivEnhetFetcher, tilhorerVeilederUtrulletKontorFetcher])) {
 		return (
 			<AlertStripeFeil className="vedtaksstotte-alert">
-				Det oppnås for tiden ikke kontakt med alle baksystemer.
-				Vi jobber med å løse saken. Vennligst prøv igjen senere.
+				Det oppnås for tiden ikke kontakt med alle baksystemer. Vi jobber med å løse saken. Vennligst prøv igjen
+				senere.
 			</AlertStripeFeil>
 		);
 	}

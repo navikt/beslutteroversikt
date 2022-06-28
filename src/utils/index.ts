@@ -2,7 +2,7 @@
 import { UtkastStatus } from '../rest/data/bruker';
 import { useEffect, useRef } from 'react';
 
-export function usePrevious<T> (value: T) {
+export function usePrevious<T>(value: T) {
 	const ref = useRef<T>(value);
 
 	// Store current value in ref
@@ -53,6 +53,5 @@ export function mapBrukerStatusTilTekst(status: UtkastStatus): string {
 			return 'Klar til utsendelse';
 		default:
 			return '';
-
 	}
 }

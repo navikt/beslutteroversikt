@@ -27,7 +27,6 @@ const storedSearchJson = window.sessionStorage.getItem(SOK_STORAGE_NAME);
 const storedSearch: StoredSearch = storedSearchJson ? JSON.parse(storedSearchJson) : {};
 
 export const [SokStoreProvider, useSokStore] = constate(() => {
-
 	// Paginering
 	const [totalPages, setTotalPages] = useState(1);
 	const [currentPage, setCurrentPage] = useState(storedSearch.currentPage || 1);
@@ -36,7 +35,9 @@ export const [SokStoreProvider, useSokStore] = constate(() => {
 
 	// Sortering
 	const [orderByField, setOrderByField] = useState<OrNothing<OrderByField>>(storedSearch.orderByField);
-	const [orderByDirection, setOrderByDirection] = useState<OrNothing<OrderByDirection>>(storedSearch.orderByDirection);
+	const [orderByDirection, setOrderByDirection] = useState<OrNothing<OrderByDirection>>(
+		storedSearch.orderByDirection
+	);
 
 	// Filtrering
 	const [fnrOrNameFilter, setFnrOrNameFilter] = useState<string>('');
@@ -65,14 +66,22 @@ export const [SokStoreProvider, useSokStore] = constate(() => {
 	}, [filters, orderByDirection, orderByField, currentPage]);
 
 	return {
-		totalPages, setTotalPages,
-		currentPage, setCurrentPage,
-		seeAll, setSeeAll,
-		pageSize, setPageSize,
-		orderByField, setOrderByField,
-		orderByDirection, setOrderByDirection,
+		totalPages,
+		setTotalPages,
+		currentPage,
+		setCurrentPage,
+		seeAll,
+		setSeeAll,
+		pageSize,
+		setPageSize,
+		orderByField,
+		setOrderByField,
+		orderByDirection,
+		setOrderByDirection,
 		filters,
-		setFnrOrNameFilter, setEnheterFilter,
-		setStatusFilter, setVisMineBrukere,
+		setFnrOrNameFilter,
+		setEnheterFilter,
+		setStatusFilter,
+		setVisMineBrukere
 	};
 });

@@ -6,5 +6,5 @@ export const innloggetVeileder: InnloggetVeileder = {
 	fornavn: 'Ola',
 	ident: 'Z1234',
 	navn: 'Ola Nordmann',
-	enheter,
+	enheter
 };

@@ -4,7 +4,8 @@ import {
 	BeslutteroversiktSok,
 	lagHentAktivEnhetFetchInfo,
 	lagHentBrukereFetchInfo,
-	lagHentInnloggetVeilederFetchInfo, lagHentTilhorerVeilederUtrulletKontor
+	lagHentInnloggetVeilederFetchInfo,
+	lagHentTilhorerVeilederUtrulletKontor
 } from '../rest/api';
 import { BrukereMedAntall } from '../rest/data/bruker';
 import { InnloggetVeileder } from '../rest/data/innlogget-veileder';

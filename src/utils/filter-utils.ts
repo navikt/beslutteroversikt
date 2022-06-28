@@ -4,10 +4,12 @@ import { Enhet } from '../rest/data/innlogget-veileder';
 import { Filters } from '../stores/sok-store';
 
 export const hasFilters = (filters: Filters): boolean => {
-	return !isEmpty(filters.fnrOrName)
-		|| (filters.enheter && filters.enheter.length > 0)
-		|| filters.status != null
-		|| filters.visMineBrukere;
+	return (
+		!isEmpty(filters.fnrOrName) ||
+		(filters.enheter && filters.enheter.length > 0) ||
+		filters.status != null ||
+		filters.visMineBrukere
+	);
 };
 
 export const filterUsers = (filters: Filters, users: Bruker[]): Bruker[] => {

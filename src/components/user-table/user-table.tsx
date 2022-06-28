@@ -25,21 +25,26 @@ export const UserTable = () => {
 		setOrderByDirection(nyData.direction);
 	}
 
-    return (
-    	<div role="table" aria-label="Brukere som trenger kvalitetssikring" aria-rowcount={tableBrukere.length} className="user-table">
-		    <UserTableHeader orderByData={orderByData} onOrderByChanged={handleOnOrderByChanged} />
-		    <Show if={isNotStartedOrPending(brukereFetcher)}>
-			    <Spinner />
-		    </Show>
-		    {
-		    	tableBrukere.length === 0 && hasFinished(brukereFetcher)
-				    ? (
-					    <AlertStripeInfo className="user-table__no-users">
-						    <span role="alert" aria-live="polite">Fant ingen brukere</span>
-					    </AlertStripeInfo>
-			        )
-				    : <UserTableBody brukere={tableBrukere} aktivEnhet={aktivEnhet} />
-		    }
-	    </div>
-    );
+	return (
+		<div
+			role="table"
+			aria-label="Brukere som trenger kvalitetssikring"
+			aria-rowcount={tableBrukere.length}
+			className="user-table"
+		>
+			<UserTableHeader orderByData={orderByData} onOrderByChanged={handleOnOrderByChanged} />
+			<Show if={isNotStartedOrPending(brukereFetcher)}>
+				<Spinner />
+			</Show>
+			{tableBrukere.length === 0 && hasFinished(brukereFetcher) ? (
+				<AlertStripeInfo className="user-table__no-users">
+					<span role="alert" aria-live="polite">
+						Fant ingen brukere
+					</span>
+				</AlertStripeInfo>
+			) : (
+				<UserTableBody brukere={tableBrukere} aktivEnhet={aktivEnhet} />
+			)}
+		</div>
+	);
 };
