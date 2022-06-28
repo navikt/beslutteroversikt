@@ -64,8 +64,8 @@ spec:
             },
             {
               "fromPath": "/veilarbpersonflatefs/*",
-              "toUrl": "https://veilarbpersonflatefs.intern.nav.no",
-              "preserveFromPath": false
+              "toUrl": "https://adeo.nav.no",
+              "preserveFromPath": true
             }
           ],
           "proxies": [
