@@ -15,6 +15,10 @@ export interface FetchState<D = any> {
 	httpCode: number;
 }
 
+export function erGCP(): boolean {
+	return window.location.hostname.endsWith('intern.nav.no');
+}
+
 export const isAnyNotStartedOrPending = (fetch: FetchState | FetchState[]): boolean => {
 	if (Array.isArray(fetch)) {
 		return fetch.some(f => isNotStartedOrPending(f));
