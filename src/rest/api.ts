@@ -1,6 +1,7 @@
 import { FetchInfo } from './utils';
 import { OrNothing } from '../utils/types/ornothing';
 import { UtkastStatus } from './data/bruker';
+import { FrontendEvent } from '../utils/logger';
 
 export const VEILARBVEDTAKSSTOTTE_API = '/veilarbvedtaksstotte/api';
 export const VEILARBVEILEDER_API = '/veilarbveileder/api';
@@ -63,3 +64,19 @@ export const lagHentTilhorerVeilederUtrulletKontor = (): FetchInfo => ({
 	credentials: 'same-origin',
 	url: `${VEILARBVEDTAKSSTOTTE_API}/utrulling/tilhorerVeilederUtrulletKontor`
 });
+
+export function sendEventTilVedtaksstotte(event: FrontendEvent) {
+	const url = `${VEILARBVEDTAKSSTOTTE_API}/logger/event`;
+	const config = {
+		method: 'post',
+		credentials: 'same-origin',
+		headers: {
+			'Nav-Consumer-Id': 'beslutteroversikt',
+			'Content-Type': 'application/json'
+		},
+		body: JSON.stringify(event)
+	};
+
+	// @ts-ignore
+	return fetch(url, config);
+}
