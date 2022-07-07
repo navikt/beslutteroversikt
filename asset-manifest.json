@@ -1,18 +1,15 @@
 {
   "files": {
-    "main.css": "/beslutteroversikt/static/css/main.css",
-    "main.js": "/beslutteroversikt/static/js/main.js",
-    "main.js.map": "/beslutteroversikt/static/js/main.js.map",
+    "main.css": "/beslutteroversikt/static/css/main.fcfd29e2.css",
+    "main.js": "/beslutteroversikt/static/js/main.c1d8a225.js",
+    "static/media/prelansering_info_pc.svg": "/beslutteroversikt/static/media/prelansering_info_pc.5ac1d2c8cec3c3193b2bc9facc7527aa.svg",
     "index.html": "/beslutteroversikt/index.html",
-    "precache-manifest.a43794011e3ba02a037cc902b3c5cc3d.js": "/beslutteroversikt/precache-manifest.a43794011e3ba02a037cc902b3c5cc3d.js",
-    "service-worker.js": "/beslutteroversikt/service-worker.js",
-    "static/css/main.css.map": "/beslutteroversikt/static/css/main.css.map",
-    "static/js/main.js.LICENSE.txt": "/beslutteroversikt/static/js/main.js.LICENSE.txt",
-    "static/media/arrow-down.svg": "/beslutteroversikt/static/media/arrow-down.97d2dfd1.svg",
-    "static/media/prelansering_info_pc.svg": "/beslutteroversikt/static/media/prelansering_info_pc.fa11dc90.svg"
+    "static/media/arrow-down.svg": "/beslutteroversikt/static/media/arrow-down.f2b5771bf4fa2b46f79a119eff5dae31.svg",
+    "main.fcfd29e2.css.map": "/beslutteroversikt/static/css/main.fcfd29e2.css.map",
+    "main.c1d8a225.js.map": "/beslutteroversikt/static/js/main.c1d8a225.js.map"
   },
   "entrypoints": [
-    "static/css/main.css",
-    "static/js/main.js"
+    "static/css/main.fcfd29e2.css",
+    "static/js/main.c1d8a225.js"
   ]
 }
