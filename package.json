@@ -6,7 +6,6 @@
   "scripts": {
     "start": "cross-env REACT_APP_DEV=true craco start",
     "build": "cross-env REACT_APP_DEV=false PUBLIC_URL=/ craco build --config craco.config.js",
-    "build:gcp": "cross-env REACT_APP_DEV=false PUBLIC_URL=/ craco build --config craco.config.js",
     "build:mock": "cross-env REACT_APP_DEV=true craco build",
     "lint": "tslint ./src/**/*.ts*",
     "lint:fix": "tslint ./src/**/**/**/**/*.ts* --fix",
