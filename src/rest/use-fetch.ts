@@ -66,7 +66,7 @@ const useFetch = <D = {}, FP = any>(createFetchInfo: (fetchParams: FP) => FetchI
 			});
 	};
 
-	const apiFetchCallback = useCallback(apiFetch, []);
+	const apiFetchCallback = useCallback(apiFetch, [createFetchInfo]);
 	const resetCallback = useCallback(() => setFetchState(createInitialFetchState()), []);
 
 	return useMemo(() => {

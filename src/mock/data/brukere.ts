@@ -1,4 +1,4 @@
-import faker from 'faker';
+import { faker } from '@faker-js/faker';
 import { Bruker, UtkastStatus } from '../../rest/data/bruker';
 import { enheter } from './enheter';
 import { randBetween } from '../../utils';
@@ -8,7 +8,7 @@ function randomFnr(): string {
 	const mnd = randBetween(1, 12);
 	const ar = randBetween(0, 99);
 	const arhundre = randBetween(0, 99).toString().padStart(2, '0');
-	const kjonnsiffer = faker.random.boolean() ? 4 : 1;
+	const kjonnsiffer = Math.random() < 0.5 ? 4 : 1;
 	const individsifre = `${arhundre}${kjonnsiffer}`;
 	const kontrollsifre = `${randBetween(0, 9)}${randBetween(0, 9)}`;
 
@@ -30,8 +30,11 @@ export const lagBrukere = (antallBrukere: number): Bruker[] => {
 	let maskerteBrukere = 4;
 
 	for (let i = 0; i < antallBrukere; i++) {
-		const randomEnhet = faker.random.arrayElement(enheter);
-		const randomStatus = faker.random.objectElement(UtkastStatusUtenGodkjent) as UtkastStatus;
+		const randomEnhet = enheter[randBetween(0,enheter.length-1)];
+
+		const lengde = Math.floor(Math.random()*Object.keys(UtkastStatusUtenGodkjent).length)
+		const randomStatus: UtkastStatus = UtkastStatus[Object.keys(UtkastStatus)[lengde] as keyof typeof UtkastStatusUtenGodkjent];
+
 		const beslutterNavn =
 			randomStatus === UtkastStatus.TRENGER_BESLUTTER
 				? null
