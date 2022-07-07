@@ -6,7 +6,7 @@ import { Normaltekst, Element } from 'nav-frontend-typografi';
 import { fjernNavFraEnhetNavn, lagBrukerNavn, mapBrukerStatusTilTekst } from '../../../utils';
 import { OrNothing } from '../../../utils/types/ornothing';
 import { DialogDots, DialogReport } from '@navikt/ds-icons';
-import { AddPeople } from '@navikt/ds-icons';
+import { AddPerson } from '@navikt/ds-icons';
 import './user-table-body.less';
 
 export const UserRow = (props: { idx: number; bruker: Bruker; aktivEnhet: OrNothing<string> }) => {
@@ -75,7 +75,7 @@ const UtkastStatusData = (props: { status: UtkastStatus }) => {
 
 	switch (props.status) {
 		case UtkastStatus.TRENGER_BESLUTTER:
-			StatusIkon = AddPeople;
+			StatusIkon = AddPerson;
 			ikonFarge = 'status_ikon__default';
 			break;
 		case UtkastStatus.KLAR_TIL_BESLUTTER:

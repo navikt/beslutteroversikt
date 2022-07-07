@@ -1,6 +1,5 @@
 import React from 'react';
 import Select from 'react-select';
-import { DropdownOption } from '../enhet-dropdown/enhet-dropdown';
 import { UtkastStatus } from '../../../rest/data/bruker';
 import { mapBrukerStatusTilTekst } from '../../../utils';
 import { useSokStore } from '../../../stores/sok-store';
@@ -8,6 +7,11 @@ import '../../filters/filters.less';
 
 export function mapStatusTilDropdownOption(status: UtkastStatus): DropdownOption {
 	return { value: status, label: mapBrukerStatusTilTekst(status) };
+}
+
+interface DropdownOption {
+	value: string;
+	label: string;
 }
 
 const statusOptions: DropdownOption[] = [

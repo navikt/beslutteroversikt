@@ -1,5 +1,3 @@
-import { logError } from '../utils/logger';
-
 export type FetchInfo = RequestInit & { url: string };
 
 export enum FetchStatus {
@@ -57,22 +55,4 @@ export const hasFailed = (fetch: FetchState): boolean => {
 
 export const hasData = (fetch: FetchState): boolean => {
 	return fetch.data != null;
-};
-
-export const fetchWithInfo = (fetchInfo: FetchInfo) => {
-	const { url, ...rest } = fetchInfo;
-	return fetch(url, rest).then(res => {
-		if (res.status >= 400) {
-			res.clone()
-				.text()
-				.then(txt => {
-					logError({ error: txt });
-				})
-				.catch();
-
-			throw new Error('Kall feilet med status ' + res.status);
-		}
-
-		return res;
-	});
 };
