@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/beslutteroversikt/static/css/main.fcfd29e2.css",
-    "main.js": "/beslutteroversikt/static/js/main.c1d8a225.js",
+    "main.js": "/beslutteroversikt/static/js/main.c14ab1e9.js",
     "static/media/prelansering_info_pc.svg": "/beslutteroversikt/static/media/prelansering_info_pc.5ac1d2c8cec3c3193b2bc9facc7527aa.svg",
     "index.html": "/beslutteroversikt/index.html",
     "static/media/arrow-down.svg": "/beslutteroversikt/static/media/arrow-down.f2b5771bf4fa2b46f79a119eff5dae31.svg",
     "main.fcfd29e2.css.map": "/beslutteroversikt/static/css/main.fcfd29e2.css.map",
-    "main.c1d8a225.js.map": "/beslutteroversikt/static/js/main.c1d8a225.js.map"
+    "main.c14ab1e9.js.map": "/beslutteroversikt/static/js/main.c14ab1e9.js.map"
   },
   "entrypoints": [
     "static/css/main.fcfd29e2.css",
-    "static/js/main.c1d8a225.js"
+    "static/js/main.c14ab1e9.js"
   ]
 }
