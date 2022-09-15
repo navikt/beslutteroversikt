@@ -5,11 +5,8 @@ import { AlertStripeFeil } from 'nav-frontend-alertstriper';
 import Spinner from './felles/spinner/spinner';
 
 export function DataFetcher(props: { children: any }) {
-	const {
-		innloggetVeilederFetcher,
-		aktivEnhetFetcher,
-		tilhorerVeilederUtrulletKontorFetcher
-	} = useDataFetcherStore();
+	const { innloggetVeilederFetcher, aktivEnhetFetcher, tilhorerVeilederUtrulletKontorFetcher } =
+		useDataFetcherStore();
 
 	useEffect(() => {
 		if (isNotStarted(innloggetVeilederFetcher)) {
