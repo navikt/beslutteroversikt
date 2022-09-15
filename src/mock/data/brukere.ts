@@ -30,10 +30,11 @@ export const lagBrukere = (antallBrukere: number): Bruker[] => {
 	let maskerteBrukere = 4;
 
 	for (let i = 0; i < antallBrukere; i++) {
-		const randomEnhet = enheter[randBetween(0,enheter.length-1)];
+		const randomEnhet = enheter[randBetween(0, enheter.length - 1)];
 
-		const lengde = Math.floor(Math.random()*Object.keys(UtkastStatusUtenGodkjent).length)
-		const randomStatus: UtkastStatus = UtkastStatus[Object.keys(UtkastStatus)[lengde] as keyof typeof UtkastStatusUtenGodkjent];
+		const lengde = Math.floor(Math.random() * Object.keys(UtkastStatusUtenGodkjent).length);
+		const randomStatus: UtkastStatus =
+			UtkastStatus[Object.keys(UtkastStatus)[lengde] as keyof typeof UtkastStatusUtenGodkjent];
 
 		const beslutterNavn =
 			randomStatus === UtkastStatus.TRENGER_BESLUTTER

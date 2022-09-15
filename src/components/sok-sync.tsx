@@ -32,16 +32,8 @@ function logSokMetrikker(sok: BeslutteroversiktSok, currentPage: number): void {
 
 export const SokSync = () => {
 	const { brukereFetcher, tilhorerVeilederUtrulletKontorFetcher } = useDataFetcherStore();
-	const {
-		filters,
-		currentPage,
-		pageSize,
-		orderByDirection,
-		orderByField,
-		seeAll,
-		setTotalPages,
-		setCurrentPage
-	} = useSokStore();
+	const { filters, currentPage, pageSize, orderByDirection, orderByField, seeAll, setTotalPages, setCurrentPage } =
+		useSokStore();
 	const previousFilters = usePrevious(filters);
 
 	useEffect(() => {
