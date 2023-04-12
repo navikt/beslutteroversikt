@@ -45,6 +45,10 @@ spec:
       rules:
         - application: poao-unleash
           namespace: poao
+      external:
+        - host: modiacontextholder.prod-fss-pub.nais.io
+        - host: veilarbveileder.prod-fss-pub.nais.io
+        - host: veilarbvedtaksstotte.prod-fss-pub.nais.io
   env:
     - name: JSON_CONFIG
       value: >
