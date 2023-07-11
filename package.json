@@ -74,7 +74,7 @@
     "@types/react-select": "^5.0.1",
     "cross-env": "^7.0.3",
     "file-loader": "^6.2.0",
-    "husky": "^8.0.1",
+    "husky": "^8.0.3",
     "lint-staged": "^13.0.3",
     "prettier": "^2.7.1",
     "yet-another-fetch-mock": "^4.1.0"
