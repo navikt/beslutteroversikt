@@ -1,6 +1,7 @@
 // tslint:disable-next-line:no-empty
 import { UtkastStatus } from '../rest/data/bruker';
 import { useEffect, useRef } from 'react';
+import { type RefObject } from 'react';
 
 export function usePrevious<T>(value: T) {
 	const ref = useRef<T>(value);
@@ -55,3 +56,9 @@ export function mapBrukerStatusTilTekst(status: UtkastStatus): string {
 			return '';
 	}
 }
+
+export const vedKlikkUtenfor = (refs: RefObject<HTMLElement>[], klikkTarget: Node | null, fn: () => void) => {
+	if (!refs.some(ref => ref.current?.contains(klikkTarget))) {
+		fn();
+	}
+};

@@ -2,14 +2,15 @@ import React, { CSSProperties } from 'react';
 import cls from 'classnames';
 import { Bruker, UtkastStatus } from '../../../rest/data/bruker';
 import { formatDateStr, formatDateTime } from '../../../utils/date-utils';
-import { Normaltekst, Element } from 'nav-frontend-typografi';
+import { Element, Normaltekst } from 'nav-frontend-typografi';
 import { fjernNavFraEnhetNavn, lagBrukerNavn, mapBrukerStatusTilTekst } from '../../../utils';
 import { OrNothing } from '../../../utils/types/ornothing';
-import { DialogDots, DialogReport } from '@navikt/ds-icons';
-import { AddPerson } from '@navikt/ds-icons';
+import { AddPerson, DialogDots, DialogReport } from '@navikt/ds-icons';
 import './user-table-body.less';
+import { BrukerDirektelenkeMedFeilmelding } from '../../bruker-direktelenke-med-feilmelding';
 
 export const UserRow = (props: { idx: number; bruker: Bruker; aktivEnhet: OrNothing<string> }) => {
+	const { aktivEnhet, bruker } = props;
 	const {
 		brukerFnr,
 		brukerFornavn,
@@ -20,29 +21,23 @@ export const UserRow = (props: { idx: number; bruker: Bruker; aktivEnhet: OrNoth
 		beslutterNavn,
 		veilederNavn,
 		status
-	} = props.bruker;
+	} = bruker;
 
 	const erMaskert = brukerFnr === '';
-
-	function lagBrukerUrl() {
-		if (!erMaskert) {
-			const enhetQueryParam = props.aktivEnhet ? `?enhet=${props.aktivEnhet}` : '';
-			return `/veilarbpersonflate/${brukerFnr}${enhetQueryParam}#visVedtaksstotte#visUtkast`;
-		}
-
-		return undefined;
-	}
 
 	const alignStart: CSSProperties = { textAlign: 'start' };
 
 	return (
 		<div role="row" aria-rowindex={props.idx} className="user-table-row">
-			<a
-				className={cls('user-table-row__innhold', { 'user-table-row__innhold--maskert': erMaskert })}
-				href={lagBrukerUrl()}
-			>
+			<div className={cls('user-table-row__innhold', { 'user-table-row__innhold--maskert': erMaskert })}>
 				<Normaltekst tag="span" role="cell" style={alignStart}>
-					{lagBrukerNavn(brukerEtternavn, brukerFornavn)}
+					{!erMaskert && (
+						<BrukerDirektelenkeMedFeilmelding
+							enhet={aktivEnhet}
+							fnr={brukerFnr}
+							knappTekst={`${lagBrukerNavn(brukerEtternavn, brukerFornavn)}`}
+						/>
+					)}
 				</Normaltekst>
 				<Element tag="span" role="cell">
 					{brukerFnr}
@@ -63,7 +58,7 @@ export const UserRow = (props: { idx: number; bruker: Bruker; aktivEnhet: OrNoth
 				<Normaltekst tag="span" role="cell">
 					{fjernNavFraEnhetNavn(brukerOppfolgingsenhetNavn)}
 				</Normaltekst>
-			</a>
+			</div>
 		</div>
 	);
 };
