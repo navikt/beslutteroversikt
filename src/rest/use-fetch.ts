@@ -43,8 +43,15 @@ const useFetch = <D = {}, FP = any>(createFetchInfo: (fetchParams: FP) => FetchI
 
 				if ([200, 201, 203, 206].includes(httpCode)) {
 					try {
-						const data = await res.json();
-						state = createFinishedFetchState(data, null, httpCode);
+						const data = await res.text();
+
+						if (data !== '' && data !== null) {
+							const deserializedData = await res.json();
+
+							state = createFinishedFetchState(deserializedData, null, httpCode);
+						} else {
+							state = createFinishedFetchState(null as any, null, httpCode);
+						}
 					} catch (error) {
 						state = createFinishedFetchState(null as any, error, httpCode);
 					}
