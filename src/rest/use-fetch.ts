@@ -46,7 +46,7 @@ const useFetch = <D = {}, FP = any>(createFetchInfo: (fetchParams: FP) => FetchI
 						const data = await res.text();
 
 						if (data !== '' && data !== null) {
-							const deserializedData = await res.json();
+							const deserializedData = JSON.parse(data);
 
 							state = createFinishedFetchState(deserializedData, null, httpCode);
 						} else {
