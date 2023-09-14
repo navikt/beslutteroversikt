@@ -21,9 +21,10 @@ export const BrukerDirektelenkeMedFeilmelding = ({ enhet, fnr, knappTekst }: Bru
 	const settBrukerIKontekstFetcher = useFetch<void, string>(lagSettBrukerIKontekstFetchInfo);
 
 	const lagOppfolgingsvedtakDyplenke = (enhet: OrNothing<string>) => {
-		const basePath = process.env.REACT_APP_DEV
-			? 'https://veilarbpersonflate.intern.dev.nav.no'
-			: 'https://veilarbpersonflate.intern.nav.no';
+		const basePath =
+			process.env.REACT_APP_DEV === 'true'
+				? 'https://veilarbpersonflate.intern.dev.nav.no'
+				: 'https://veilarbpersonflate.intern.nav.no';
 		const queryParams = enhet ? `?enhet=${enhet}` : '';
 
 		const anchorParams = '#visVedtaksstotte#visUtkast';
