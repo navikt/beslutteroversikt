@@ -8,6 +8,7 @@ import useFetch from '../rest/use-fetch';
 import { lagSettBrukerIKontekstFetchInfo } from '../rest/api';
 import { OrNothing } from '../utils/types/ornothing';
 import { FetchState, hasFailed } from '../rest/utils';
+import env from '../utils/environment';
 
 type BrukerDirektelenkeMedFeilmeldingProps = {
 	enhet: OrNothing<string>;
@@ -22,7 +23,7 @@ export const BrukerDirektelenkeMedFeilmelding = ({ enhet, fnr, knappTekst }: Bru
 
 	const lagOppfolgingsvedtakDyplenke = (enhet: OrNothing<string>) => {
 		const basePath =
-			process.env.REACT_APP_DEV === 'true'
+			env.isDevelopment || env.isLocal
 				? 'https://veilarbpersonflate.intern.dev.nav.no'
 				: 'https://veilarbpersonflate.intern.nav.no';
 		const queryParams = enhet ? `?enhet=${enhet}` : '';

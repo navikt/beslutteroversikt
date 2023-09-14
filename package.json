@@ -4,9 +4,10 @@
   "private": true,
   "homepage": "/beslutteroversikt",
   "scripts": {
-    "start": "cross-env REACT_APP_DEV=true craco start",
-    "build": "cross-env REACT_APP_DEV=false PUBLIC_URL=/ craco build --config craco.config.js",
-    "build:mock": "cross-env REACT_APP_DEV=true craco build",
+    "start": "cross-env REACT_APP_DEPLOYMENT_ENV=local craco start",
+    "build:dev": "cross-env REACT_APP_DEPLOYMENT_ENV=development PUBLIC_URL=/ craco build --config craco.config.js",
+    "build:prod": "cross-env REACT_APP_DEPLOYMENT_ENV=production PUBLIC_URL=/ craco build --config craco.config.js",
+    "build:mock": "cross-env REACT_APP_DEPLOYMENT_ENV=local craco build",
     "test": "echo \"Tests not yet implemented\"",
     "prettier": "prettier --write \"src/**/*.{ts,tsx}\"",
     "prepare": "husky install",
