@@ -4,6 +4,8 @@ on:
   push:
     branches:
       - master
+permissions:
+  contents: write
 env:
   CI: true
   TZ: Europe/Amsterdam
