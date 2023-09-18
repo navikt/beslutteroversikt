@@ -8,6 +8,7 @@ import useFetch from '../rest/use-fetch';
 import { lagSettBrukerIKontekstFetchInfo } from '../rest/api';
 import { OrNothing } from '../utils/types/ornothing';
 import { FetchState, hasFailed } from '../rest/utils';
+import env from '../utils/environment';
 
 type BrukerDirektelenkeMedFeilmeldingProps = {
 	enhet: OrNothing<string>;

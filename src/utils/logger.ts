@@ -1,5 +1,6 @@
 import { APP_NAME } from './constants';
 import { sendEventTilVedtaksstotte } from '../rest/api';
+import env from './environment';
 
 export interface FrontendEvent {
 	name: string;
@@ -8,7 +9,7 @@ export interface FrontendEvent {
 }
 
 export const logMetrikk = (metrikkNavn: string, fields?: {}, tags?: {}): void => {
-	if (process.env.REACT_APP_DEV === 'true') {
+	if (env.isLocal || env.isDevelopment) {
 		// eslint-disable-next-line no-console
 		console.log('Event', metrikkNavn, 'Fields:', fields, 'Tags:', tags);
 	} else {

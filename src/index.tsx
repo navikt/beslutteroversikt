@@ -10,7 +10,7 @@ import '@navikt/ds-css';
 
 dayjs.locale('nb');
 
-if (env.isDevelopment) {
+if (env.isLocal) {
 	require('./mock');
 }
 

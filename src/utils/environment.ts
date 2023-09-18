@@ -1,6 +1,14 @@
 class Environment {
+	get isLocal() {
+		return process.env.REACT_APP_DEPLOYMENT_ENV === 'local';
+	}
+
 	get isDevelopment() {
-		return process.env.REACT_APP_DEV === 'true';
+		return process.env.REACT_APP_DEPLOYMENT_ENV === 'development';
+	}
+
+	get isProduction() {
+		return process.env.REACT_APP_DEPLOYMENT_ENV === 'production';
 	}
 }
 
