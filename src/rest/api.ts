@@ -80,3 +80,14 @@ export function sendEventTilVedtaksstotte(event: FrontendEvent) {
 	// @ts-ignore
 	return fetch(url, config);
 }
+
+export const lagSettBrukerIKontekstFetchInfo = (fnr: string): FetchInfo => ({
+	body: JSON.stringify({ verdi: fnr, eventType: 'NY_AKTIV_BRUKER' }),
+	credentials: 'same-origin',
+	headers: {
+		'Nav-Consumer-Id': 'beslutteroversikt',
+		'Content-Type': 'application/json'
+	},
+	method: 'post',
+	url: `${MODIACONTEXTHOLDER_API}/context`
+});

@@ -15,10 +15,21 @@ const fetchMock = FetchMock.configure({
 });
 
 fetchMock.post(mockBeslutteroversiktSok.url, mockBeslutteroversiktSok.handler);
-fetchMock.get(`${VEILARBVEILEDER_API}/veileder/v2/me`, jsonResponse(innloggetVeileder));
-fetchMock.get(`${MODIACONTEXTHOLDER_API}/context/aktivenhet`, jsonResponse(aktivEnhet));
-fetchMock.get(`${VEILARBVEDTAKSSTOTTE_API}/utrulling/tilhorerVeilederUtrulletKontor`, jsonResponse(true));
+fetchMock.get(`${VEILARBVEILEDER_API}/veileder/v2/me`, successResponse(innloggetVeileder));
+fetchMock.get(`${MODIACONTEXTHOLDER_API}/context/aktivenhet`, successResponse(aktivEnhet));
+fetchMock.post(`${MODIACONTEXTHOLDER_API}/context`, successResponse());
+fetchMock.get(`${VEILARBVEDTAKSSTOTTE_API}/utrulling/tilhorerVeilederUtrulletKontor`, successResponse(true));
 
-function jsonResponse(value: any): MockHandler {
-	return (req, res, ctx) => res(ctx.json(value));
+function successResponse(responseData?: any): MockHandler {
+	return (req, res, ctx) => {
+		if (responseData) {
+			return res(ctx.json(responseData));
+		}
+		return res(ctx.status(200));
+	};
+}
+
+// eslint-disable-next-line
+function failureResponse(): MockHandler {
+	return (req, res, ctx) => res(ctx.status(500));
 }
