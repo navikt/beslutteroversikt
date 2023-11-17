@@ -42,9 +42,6 @@ spec:
         cascadingDelete: false
   accessPolicy:
     outbound:
-      rules:
-        - application: poao-unleash
-          namespace: poao
       external:
         - host: modiacontextholder-q1.dev-fss-pub.nais.io
         - host: veilarbveileder.dev-fss-pub.nais.io
