@@ -12,10 +12,18 @@ dayjs.locale('nb');
 
 const renderApp = () => ReactDOM.render(<App />, document.getElementById('root'));
 
-if (env.isLocal) {
-	// require('./mock');
+const renderMockedApp = () => {
+	if (window.location.pathname === process.env.PUBLIC_URL) {
+		window.location.pathname = `${process.env.PUBLIC_URL}/`;
+		return;
+	}
+
 	const { worker } = require('./mock');
-	worker.start().then(() => renderApp());
+	worker.start({ serviceWorker: { url: process.env.PUBLIC_URL + '/mockServiceWorker.js' } }).then(() => renderApp());
+};
+
+if (env.isLocal) {
+	renderMockedApp();
 } else {
 	renderApp();
 }
