@@ -10,8 +10,12 @@ import '@navikt/ds-css';
 
 dayjs.locale('nb');
 
-if (env.isLocal) {
-	require('./mock');
-}
+const renderApp = () => ReactDOM.render(<App />, document.getElementById('root'));
 
-ReactDOM.render(<App />, document.getElementById('root'));
+if (env.isLocal) {
+	// require('./mock');
+	const { worker } = require('./mock');
+	worker.start().then(() => renderApp());
+} else {
+	renderApp();
+}
