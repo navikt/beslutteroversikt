@@ -76,7 +76,10 @@
     "file-loader": "^6.2.0",
     "husky": "8.0.3",
     "lint-staged": "13.2.3",
-    "prettier": "3.0.0",
-    "yet-another-fetch-mock": "4.2.1"
+    "msw": "^2.0.10",
+    "prettier": "3.0.0"
+  },
+  "msw": {
+    "workerDirectory": "public"
   }
 }
