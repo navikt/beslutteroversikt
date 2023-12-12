@@ -1,0 +1,9 @@
+.header {
+	display: flex;
+	align-items: center;
+	gap: var(--a-spacing-8);
+	background-color: white;
+	padding: var(--a-spacing-2) var(--a-spacing-8);
+	margin-bottom: var(--a-spacing-4);
+	max-width: 1920px;
+}

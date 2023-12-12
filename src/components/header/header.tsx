@@ -1,15 +1,16 @@
 import { Heading } from '@navikt/ds-react';
 import { StatusDropdown } from '../filters/status-dropdown/status-dropdown';
 import { BrukerFilter } from '../filters/bruker-filter/bruker-filter';
+import './header.css';
 
 export const Header = () => {
 	return (
-		<div aria-label="overskrift og filtere">
-			<div className="header">
-				<Sidetittel>Kvalitetssikring 14a</Sidetittel>
-				<BrukerFilter />
-				<StatusDropdown />
-			</div>
-		</div>
+		<header title="Overskrift og filtere" className="header">
+			<Heading level="1" size="xlarge">
+				Kvalitetssikring 14a
+			</Heading>
+			<BrukerFilter />
+			<StatusDropdown />
+		</header>
 	);
 };
