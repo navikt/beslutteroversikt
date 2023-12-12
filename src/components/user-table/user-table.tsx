@@ -1,13 +1,12 @@
 import { UserTableHeader } from './header/user-table-header';
-import { AlertStripeInfo } from 'nav-frontend-alertstriper';
+import { Alert } from '@navikt/ds-react';
 import { UserTableBody } from './body/user-table-body';
 import { OrderByData } from './table-utils';
 import { useSokStore } from '../../stores/sok-store';
-import './user-table.less';
 import { useDataFetcherStore } from '../../stores/data-fetcher-store';
 import { hasFinished, isNotStartedOrPending } from '../../rest/utils';
-import Show from '../felles/show';
 import Spinner from '../felles/spinner/spinner';
+import './user-table.less';
 
 export const UserTable = () => {
 	const { brukereFetcher, aktivEnhetFetcher } = useDataFetcherStore();
@@ -32,15 +31,9 @@ export const UserTable = () => {
 			className="user-table"
 		>
 			<UserTableHeader orderByData={orderByData} onOrderByChanged={handleOnOrderByChanged} />
-			<Show if={isNotStartedOrPending(brukereFetcher)}>
-				<Spinner />
-			</Show>
+			{isNotStartedOrPending(brukereFetcher) && <Spinner />}
 			{tableBrukere.length === 0 && hasFinished(brukereFetcher) ? (
-				<AlertStripeInfo className="user-table__no-users">
-					<span role="alert" aria-live="polite">
-						Fant ingen brukere
-					</span>
-				</AlertStripeInfo>
+				<Alert variant="info">Fant ingen brukere</Alert>
 			) : (
 				<UserTableBody brukere={tableBrukere} aktivEnhet={aktivEnhet} />
 			)}

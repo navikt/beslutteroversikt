@@ -1,6 +1,7 @@
 import { OnRemoveClicked } from '../filter-etiketter';
 import xIcon from './x.svg';
 import './filter-etikett.less';
+import { Tag } from '@navikt/ds-react';
 
 interface FilterEtikettProps {
 	id: string;
@@ -13,9 +14,9 @@ export const FilterEtikett = (props: FilterEtikettProps) => {
 
 	return (
 		<button className="filter-etikett" onClick={() => onRemoveClicked(id)}>
-			<EtikettInfo>
+			<Tag variant="info">
 				{tekst} <img className="filter-etikett__icon" src={xIcon} alt="Fjern etikett" />
-			</EtikettInfo>
+			</Tag>
 		</button>
 	);
 };

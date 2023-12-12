@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { useDataFetcherStore } from '../stores/data-fetcher-store';
 import { hasAnyFailed, isAnyNotStartedOrPending, isNotStarted } from '../rest/utils';
-import { AlertStripeFeil } from 'nav-frontend-alertstriper';
+import { Alert } from '@navikt/ds-react';
 import Spinner from './felles/spinner/spinner';
 
 export function DataFetcher(props: { children: any }) {
@@ -30,10 +30,10 @@ export function DataFetcher(props: { children: any }) {
 		return <Spinner />;
 	} else if (hasAnyFailed([innloggetVeilederFetcher, aktivEnhetFetcher, tilhorerVeilederUtrulletKontorFetcher])) {
 		return (
-			<AlertStripeFeil className="vedtaksstotte-alert">
+			<Alert variant="error">
 				Det oppnås for tiden ikke kontakt med alle baksystemer. Vi jobber med å løse saken. Vennligst prøv igjen
 				senere.
-			</AlertStripeFeil>
+			</Alert>
 		);
 	}
 
