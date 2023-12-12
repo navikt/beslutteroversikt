@@ -3,7 +3,7 @@ name: paoa frontend container dev
 on:
   push:
     branches:
-      - 'dev'
+      - 'master'
     paths:
       - '.github/workflows/poao-frontend-container-dev.yaml'
       - '.nais/obo-nais-dev.yaml'
@@ -21,7 +21,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - name: deploy gcp dev
         uses: nais/deploy/actions/deploy@v1
         env:
