@@ -39,15 +39,15 @@ export const lagBrukere = (antallBrukere: number): Bruker[] => {
 		const beslutterNavn =
 			randomStatus === UtkastStatus.TRENGER_BESLUTTER
 				? null
-				: faker.name.firstName() + ' ' + faker.name.lastName();
+				: faker.person.firstName() + ' ' + faker.person.lastName();
 
 		const bruker: Bruker = {
 			beslutterNavn,
-			veilederNavn: faker.name.firstName() + ' ' + faker.name.lastName(),
+			veilederNavn: faker.person.firstName() + ' ' + faker.person.lastName(),
 			brukerFnr: randomFnr(),
-			brukerFornavn: faker.name.firstName(),
-			brukerEtternavn: faker.name.lastName(),
-			vedtakStartet: faker.date.recent(30).toISOString(),
+			brukerFornavn: faker.person.firstName(),
+			brukerEtternavn: faker.person.lastName(),
+			vedtakStartet: faker.date.recent({ days: 30 }).toISOString(),
 			brukerOppfolgingsenhetId: randomEnhet.enhetId,
 			brukerOppfolgingsenhetNavn: randomEnhet.navn,
 			status: randomStatus,
