@@ -1,5 +1,4 @@
-import React from 'react';
-import { UserTable } from '../components/user-table/user-table';
+import { Header } from '../components/header/header';
 import { PaginationBar } from '../components/pagination-bar/pagination-bar';
 import './hovedside.less';
 import { Header } from '../components/header/header';

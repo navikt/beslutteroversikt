@@ -1,5 +1,3 @@
-import React, { CSSProperties } from 'react';
-import cls from 'classnames';
 import { Bruker, UtkastStatus } from '../../../rest/data/bruker';
 import { formatDateStr, formatDateTime } from '../../../utils/date-utils';
 import { Normaltekst, Element } from 'nav-frontend-typografi';

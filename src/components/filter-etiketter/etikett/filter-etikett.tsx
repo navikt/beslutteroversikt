@@ -1,5 +1,3 @@
-import React from 'react';
-import { EtikettInfo } from 'nav-frontend-etiketter';
 import { OnRemoveClicked } from '../filter-etiketter';
 import xIcon from './x.svg';
 import './filter-etikett.less';

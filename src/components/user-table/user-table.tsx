@@ -1,4 +1,3 @@
-import React from 'react';
 import { UserTableHeader } from './header/user-table-header';
 import { AlertStripeInfo } from 'nav-frontend-alertstriper';
 import { UserTableBody } from './body/user-table-body';

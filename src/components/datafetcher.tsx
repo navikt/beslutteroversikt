@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import { useDataFetcherStore } from '../stores/data-fetcher-store';
 import { hasAnyFailed, isAnyNotStartedOrPending, isNotStarted } from '../rest/utils';
 import { AlertStripeFeil } from 'nav-frontend-alertstriper';

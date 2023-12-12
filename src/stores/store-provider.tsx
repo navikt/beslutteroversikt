@@ -1,4 +1,3 @@
-import React from 'react';
 import { DataFetcherStoreProvider } from './data-fetcher-store';
 import { SokStoreProvider } from './sok-store';
 import { ChildrenProps } from '../utils/types/children-props';

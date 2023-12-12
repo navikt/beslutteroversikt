@@ -1,5 +1,4 @@
-import React from 'react';
-import Select from 'react-select';
+import { useRef } from 'react';
 import { UtkastStatus } from '../../../rest/data/bruker';
 import { mapBrukerStatusTilTekst } from '../../../utils';
 import { useSokStore } from '../../../stores/sok-store';

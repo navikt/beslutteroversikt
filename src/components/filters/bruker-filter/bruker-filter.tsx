@@ -1,7 +1,5 @@
-import React from 'react';
-import { Checkbox } from 'nav-frontend-skjema';
 import { useSokStore } from '../../../stores/sok-store';
-import '../../filters/filters.less';
+import { Checkbox } from '@navikt/ds-react';
 
 export const BrukerFilter = () => {
 	const { filters, setVisMineBrukere } = useSokStore();

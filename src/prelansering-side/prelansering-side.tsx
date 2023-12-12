@@ -1,4 +1,3 @@
-import React from 'react';
 import pcBilde from './prelansering_info_pc.svg';
 import { Normaltekst, Systemtittel } from 'nav-frontend-typografi';
 import './prelansering-side.less';

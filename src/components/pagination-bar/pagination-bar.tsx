@@ -1,9 +1,4 @@
-import React from 'react';
-import { HoyreChevron, VenstreChevron } from 'nav-frontend-chevron';
-import cls from 'classnames';
 import { useSokStore } from '../../stores/sok-store';
-import './pagination-bar.less';
-import Show from '../felles/show';
 import { useDataFetcherStore } from '../../stores/data-fetcher-store';
 import { Element } from 'nav-frontend-typografi';
 import { hasData } from '../../rest/utils';

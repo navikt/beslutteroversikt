@@ -1,4 +1,3 @@
-import React from 'react';
 import { FilterEtikett } from './etikett/filter-etikett';
 import { isEmpty } from '../../utils';
 import './filter-etiketter.less';
