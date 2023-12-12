@@ -1,8 +1,8 @@
 import React, { useCallback, useState } from 'react';
-import { Input } from 'nav-frontend-skjema';
 import debounce from 'lodash.debounce';
 import { useSokStore } from '../../../stores/sok-store';
 import './sokefelt.less';
+import { TextField } from '@navikt/ds-react';
 
 export const Sokefelt = () => {
 	const { filters, setFnrOrNameFilter } = useSokStore();
@@ -23,7 +23,7 @@ export const Sokefelt = () => {
 
 	return (
 		<div className="sokefelt">
-			<Input
+			<TextField
 				label=""
 				placeholder="Søk etter navn eller fødselsnummer"
 				onChange={handleOnQueryChanged}

@@ -2,7 +2,8 @@ import { useRef } from 'react';
 import { UtkastStatus } from '../../../rest/data/bruker';
 import { mapBrukerStatusTilTekst } from '../../../utils';
 import { useSokStore } from '../../../stores/sok-store';
-import '../../filters/filters.less';
+import { Button, HStack, Select } from '@navikt/ds-react';
+import '../filters.css';
 
 export function mapStatusTilDropdownOption(status: UtkastStatus): DropdownOption {
 	return { value: status, label: mapBrukerStatusTilTekst(status) };
@@ -21,28 +22,40 @@ const statusOptions: DropdownOption[] = [
 
 export const StatusDropdown = () => {
 	const { filters, setStatusFilter } = useSokStore();
-	const value = filters.status ? mapStatusTilDropdownOption(filters.status) : null;
+	const value = filters?.status ?? undefined;
+	const selectRef = useRef<HTMLSelectElement>(null);
 
-	function handleOnStatusSelectedChanged(selectedOption: DropdownOption | null) {
-		const nyStatus = selectedOption ? (selectedOption.value as UtkastStatus) : undefined;
+	function handleOnStatusSelectedChanged(selectedOption: React.ChangeEvent<HTMLSelectElement>) {
+		const nyStatus = selectedOption.target.value as UtkastStatus;
 		setStatusFilter(nyStatus);
 	}
 
+	function handleOnNullstillButtonClicked() {
+		if (selectRef.current) {
+			selectRef.current.selectedIndex = 0;
+		}
+		setStatusFilter(undefined);
+	}
+
 	return (
-		<>
-			<label className="typo-element" htmlFor="status-filter">
-				Status
-			</label>
+		<HStack gap="2">
 			<Select
-				aria-label="Filtrer på status"
-				inputId="status-filter"
-				placeholder="Filtrer på status"
-				value={value}
-				isClearable
-				isSearchable={false}
-				options={statusOptions}
-				onChange={handleOnStatusSelectedChanged as any}
-			/>
-		</>
+				label="Statusfilter"
+				size="small"
+				value={value as string}
+				onChange={handleOnStatusSelectedChanged}
+				ref={selectRef}
+			>
+				<option value={''}>Velg status</option>
+				{statusOptions.map(value => (
+					<option key={value.value} value={value.value}>
+						{value.label}
+					</option>
+				))}
+			</Select>
+			<Button size="small" variant="secondary-neutral" onClick={handleOnNullstillButtonClicked}>
+				Nullstill filtervalg
+			</Button>
+		</HStack>
 	);
 };
