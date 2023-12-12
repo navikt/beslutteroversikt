@@ -1,6 +1,20 @@
 class Environment {
+	hostname: string;
+
+	constructor() {
+		this.hostname = window.location.hostname;
+	}
+
+	get isLocal() {
+		return this.hostname.includes('localhost');
+	}
+
 	get isDevelopment() {
-		return process.env.REACT_APP_DEV === 'true';
+		return this.hostname.includes('intern.dev.nav.no');
+	}
+
+	get isProduction() {
+		return this.hostname.includes('intern.nav.no');
 	}
 }
 
