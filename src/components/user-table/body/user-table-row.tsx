@@ -1,10 +1,9 @@
 import { Bruker, UtkastStatus } from '../../../rest/data/bruker';
-import { formatDateStr, formatDateTime } from '../../../utils/date-utils';
-import { Normaltekst, Element } from 'nav-frontend-typografi';
+import { formatDateStr, formatDateStrWithMonthName, formatTimeStr } from '../../../utils/date-utils';
 import { fjernNavFraEnhetNavn, lagBrukerNavn, mapBrukerStatusTilTekst } from '../../../utils';
 import { OrNothing } from '../../../utils/types/ornothing';
-import { DialogDots, DialogReport } from '@navikt/ds-icons';
-import { AddPerson } from '@navikt/ds-icons';
+import { Bleed, BodyShort } from '@navikt/ds-react';
+import { ChatElipsisIcon, ChatExclamationmarkIcon, PersonPlusIcon } from '@navikt/aksel-icons';
 import './user-table-body.less';
 
 export const UserRow = (props: { idx: number; bruker: Bruker; aktivEnhet: OrNothing<string> }) => {
@@ -34,66 +33,65 @@ export const UserRow = (props: { idx: number; bruker: Bruker; aktivEnhet: OrNoth
 	const alignStart: CSSProperties = { textAlign: 'start' };
 
 	return (
-		<div role="row" aria-rowindex={props.idx} className="user-table-row">
-			<a
-				className={cls('user-table-row__innhold', { 'user-table-row__innhold--maskert': erMaskert })}
-				href={lagBrukerUrl()}
-			>
-				<Normaltekst tag="span" role="cell" style={alignStart}>
-					{lagBrukerNavn(brukerEtternavn, brukerFornavn)}
-				</Normaltekst>
-				<Element tag="span" role="cell">
+		// idx starter på 0, men gyldige verdier for aria-rowindex er 1 og oppover
+		<div role="row" aria-rowindex={props.idx + 1} className="user-table-row">
+			<div className="user-table-row__innhold">
+				<BodyShort size="small" weight="semibold">
 					{brukerFnr}
-				</Element>
-				<Normaltekst tag="span" role="cell">
-					{formatDateStr(vedtakStartet)}
-				</Normaltekst>
+				</BodyShort>
+				<BodyShort size="small">{formatDateStr(vedtakStartet)}</BodyShort>
 				<UtkastStatusData status={status} />
-				<Element tag="span" role="cell" style={alignStart}>
+				<BodyShort size="small" weight="semibold">
 					{beslutterNavn || '-'}
-				</Element>
-				<Normaltekst tag="span" role="cell" style={alignStart}>
-					{veilederNavn}
-				</Normaltekst>
-				<Normaltekst tag="span" role="cell">
-					{formatDateTime(statusEndret)}
-				</Normaltekst>
-				<Normaltekst tag="span" role="cell">
-					{fjernNavFraEnhetNavn(brukerOppfolgingsenhetNavn)}
-				</Normaltekst>
-			</a>
+				</BodyShort>
+				<BodyShort size="small">{veilederNavn}</BodyShort>
+				<BodyShort size="small" className="user-table-row__innhold--dato">
+					<span>{formatDateStrWithMonthName(statusEndret)}</span>&nbsp;
+					<span>{formatTimeStr(statusEndret)}</span>
+				</BodyShort>
+				<BodyShort size="small">{fjernNavFraEnhetNavn(brukerOppfolgingsenhetNavn)}</BodyShort>
+			</div>
 		</div>
 	);
 };
 
 const UtkastStatusData = (props: { status: UtkastStatus }) => {
 	let StatusIkon;
-	const ariaLabel = 'Systemikon';
-	let ikonFarge;
-
 	switch (props.status) {
 		case UtkastStatus.TRENGER_BESLUTTER:
-			StatusIkon = AddPerson;
-			ikonFarge = 'status_ikon__default';
+			StatusIkon = (
+				<Bleed marginBlock="1 2" asChild>
+					<PersonPlusIcon title="Trenger kvalitetssikrer-ikon" className="status_ikon" />
+				</Bleed>
+			);
 			break;
 		case UtkastStatus.KLAR_TIL_BESLUTTER:
-			StatusIkon = DialogReport;
-			ikonFarge = 'status_ikon__oransje';
+			StatusIkon = (
+				<Bleed marginBlock="0 3" asChild>
+					<ChatExclamationmarkIcon title="Venter på tilbakemelding-ikon" className="status_ikon" />
+				</Bleed>
+			);
 			break;
 		case UtkastStatus.KLAR_TIL_VEILEDER:
-			StatusIkon = DialogDots;
-			ikonFarge = 'status_ikon__bla';
+			StatusIkon = (
+				<Bleed marginBlock="0 3" asChild>
+					<ChatElipsisIcon title="Venter på veileder-ikon" className="status_ikon" />
+				</Bleed>
+			);
 			break;
 		case UtkastStatus.GODKJENT_AV_BESLUTTER:
-			StatusIkon = DialogDots;
-			ikonFarge = 'status_ikon__bla';
+			StatusIkon = (
+				<Bleed marginBlock="0 3" asChild>
+					<ChatElipsisIcon title="Godkjent av beslutter-ikon" className="status_ikon" />
+				</Bleed>
+			);
 			break;
 	}
 
 	return (
 		<span role="cell" className={'status'}>
-			<StatusIkon className={`status_ikon ${ikonFarge}`} aria-label={ariaLabel} role="img" focusable="false" />
-			<Normaltekst>{mapBrukerStatusTilTekst(props.status)}</Normaltekst>
+			{StatusIkon}
+			<BodyShort size="small">{mapBrukerStatusTilTekst(props.status)}</BodyShort>
 		</span>
 	);
 };
