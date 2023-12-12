@@ -2,11 +2,13 @@ import { Bruker, UtkastStatus } from '../../../rest/data/bruker';
 import { formatDateStr, formatDateStrWithMonthName, formatTimeStr } from '../../../utils/date-utils';
 import { fjernNavFraEnhetNavn, lagBrukerNavn, mapBrukerStatusTilTekst } from '../../../utils';
 import { OrNothing } from '../../../utils/types/ornothing';
+import { BrukerDirektelenkeMedFeilmelding } from '../bruker-direktelenke-med-feilmelding';
 import { Bleed, BodyShort } from '@navikt/ds-react';
 import { ChatElipsisIcon, ChatExclamationmarkIcon, PersonPlusIcon } from '@navikt/aksel-icons';
 import './user-table-body.less';
 
 export const UserRow = (props: { idx: number; bruker: Bruker; aktivEnhet: OrNothing<string> }) => {
+	const { aktivEnhet } = props;
 	const {
 		brukerFnr,
 		brukerFornavn,
@@ -21,21 +23,19 @@ export const UserRow = (props: { idx: number; bruker: Bruker; aktivEnhet: OrNoth
 
 	const erMaskert = brukerFnr === '';
 
-	function lagBrukerUrl() {
-		if (!erMaskert) {
-			const enhetQueryParam = props.aktivEnhet ? `?enhet=${props.aktivEnhet}` : '';
-			return `/veilarbpersonflate/${brukerFnr}${enhetQueryParam}#visVedtaksstotte#visUtkast`;
-		}
-
-		return undefined;
-	}
-
-	const alignStart: CSSProperties = { textAlign: 'start' };
-
 	return (
 		// idx starter på 0, men gyldige verdier for aria-rowindex er 1 og oppover
 		<div role="row" aria-rowindex={props.idx + 1} className="user-table-row">
 			<div className="user-table-row__innhold">
+				<Bleed marginBlock="2" style={{ display: 'flex' }}>
+					{!erMaskert && (
+						<BrukerDirektelenkeMedFeilmelding
+							enhet={aktivEnhet}
+							fnr={brukerFnr}
+							knappTekst={`${lagBrukerNavn(brukerEtternavn, brukerFornavn)}`}
+						/>
+					)}
+				</Bleed>
 				<BodyShort size="small" weight="semibold">
 					{brukerFnr}
 				</BodyShort>
