@@ -6,7 +6,6 @@ import { BrukerDirektelenkeMedFeilmelding } from '../bruker-direktelenke-med-fei
 import { Bleed, BodyShort } from '@navikt/ds-react';
 import { ChatElipsisIcon, ChatExclamationmarkIcon, PersonPlusIcon } from '@navikt/aksel-icons';
 import './user-table-body.less';
-import { BrukerDirektelenkeMedFeilmelding } from '../../bruker-direktelenke-med-feilmelding';
 
 export const UserRow = (props: { idx: number; bruker: Bruker; aktivEnhet: OrNothing<string> }) => {
 	const { aktivEnhet } = props;
@@ -20,7 +19,7 @@ export const UserRow = (props: { idx: number; bruker: Bruker; aktivEnhet: OrNoth
 		beslutterNavn,
 		veilederNavn,
 		status
-	} = bruker;
+	} = props.bruker;
 
 	const erMaskert = brukerFnr === '';
 
@@ -43,7 +42,7 @@ export const UserRow = (props: { idx: number; bruker: Bruker; aktivEnhet: OrNoth
 				<BodyShort size="small">{formatDateStr(vedtakStartet)}</BodyShort>
 				<UtkastStatusData status={status} />
 				<BodyShort size="small" weight="semibold">
-					{beslutterNavn || '-'}
+					{beslutterNavn || '–'}
 				</BodyShort>
 				<BodyShort size="small">{veilederNavn}</BodyShort>
 				<BodyShort size="small" className="user-table-row__innhold--dato">

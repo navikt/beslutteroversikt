@@ -4,7 +4,6 @@ import env from './utils/environment';
 import * as dayjs from 'dayjs';
 import 'dayjs/locale/nb';
 import './index.less';
-import './utils.less';
 import '@navikt/ds-css';
 
 dayjs.locale('nb');
