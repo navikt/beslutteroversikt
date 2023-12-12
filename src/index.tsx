@@ -1,5 +1,4 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
+import { createRoot } from 'react-dom/client';
 import App from './app';
 import env from './utils/environment';
 import * as dayjs from 'dayjs';
@@ -8,8 +7,19 @@ import './index.less';
 
 dayjs.locale('nb');
 
-if (env.isDevelopment) {
-	require('./mock');
-}
+const renderApp = () => createRoot(document.getElementById('root')!).render(<App />);
 
-ReactDOM.render(<App />, document.getElementById('root'));
+if (env.isLocal) {
+	//@ts-ignore
+	const { worker } = await import('/src/mock/index');
+	worker
+		.start({ serviceWorker: { url: `${import.meta.env.BASE_URL}mockServiceWorker.js` } })
+		.then(() => {
+			renderApp();
+		})
+		.catch((e: Error) => {
+			console.error('Unable to setup mocked API endpoints', e);
+		});
+} else {
+	renderApp();
+}
