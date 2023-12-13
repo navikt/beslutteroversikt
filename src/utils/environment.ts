@@ -6,15 +6,15 @@ class Environment {
 	}
 
 	get isLocal() {
-		return this.hostname.includes('localhost');
+		return import.meta.env.MODE === 'lokal';
 	}
 
 	get isDevelopment() {
-		return this.hostname.includes('intern.dev.nav.no');
+		return import.meta.env.MODE === 'development';
 	}
 
 	get isProduction() {
-		return this.hostname.includes('intern.nav.no');
+		return import.meta.env.MODE === 'production';
 	}
 }
 

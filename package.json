@@ -5,9 +5,9 @@
   "private": true,
   "homepage": "/beslutteroversikt",
   "scripts": {
-    "start": "vite",
-    "build:prod": "tsc && vite build",
-    "build:dev": "tsc && vite build",
+    "start": "vite --mode lokal",
+    "build:dev": "tsc && vite build --mode development",
+    "build:prod": "tsc && vite build --mode production",
     "lint": "eslint src --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
     "prettier": "prettier --write \"src/**/*.{ts,tsx}\"",
