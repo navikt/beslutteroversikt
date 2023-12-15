@@ -9,12 +9,12 @@
     "dynamicImports": [
       "src/mock/index.ts"
     ],
-    "file": "assets/index-WgMHpD9X.js",
+    "file": "assets/index-24JfXODj.js",
     "isEntry": true,
     "src": "index.html"
   },
   "src/mock/index.ts": {
-    "file": "assets/index-HLGAbCrR.js",
+    "file": "assets/index-CWv-u9bC.js",
     "imports": [
       "index.html"
     ],
