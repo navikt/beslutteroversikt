@@ -28,6 +28,10 @@ export function fjernNavFraEnhetNavn(enhetNavn: string): string {
 	return enhetNavn.replace('NAV', '').trim();
 }
 
+export function formatStringInUpperAndLowerCase(str: string) {
+	return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
+}
+
 export function lagBrukerNavn(fornavn: string, etternavn: string): string {
 	const manglerFornavn = fornavn === '';
 	const manglerEtternavn = etternavn === '';
@@ -39,7 +43,7 @@ export function lagBrukerNavn(fornavn: string, etternavn: string): string {
 		return fornavn + etternavn;
 	}
 
-	return fornavn + ', ' + etternavn;
+	return formatStringInUpperAndLowerCase(fornavn) + ', ' + formatStringInUpperAndLowerCase(etternavn);
 }
 
 export function mapBrukerStatusTilTekst(status: UtkastStatus): string {
