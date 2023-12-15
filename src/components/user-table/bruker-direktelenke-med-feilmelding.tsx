@@ -4,8 +4,8 @@ import { vedKlikkUtenfor } from '../../utils';
 import { lagSettBrukerIKontekstFetchInfo } from '../../rest/api';
 import { OrNothing } from '../../utils/types/ornothing';
 import { FetchState, hasFailed } from '../../rest/utils';
-import { Button, Popover } from '@navikt/ds-react';
-import { XMarkOctagonIcon } from '@navikt/aksel-icons';
+import { BodyShort, Button, Popover } from '@navikt/ds-react';
+import { ExclamationmarkTriangleIcon } from '@navikt/aksel-icons';
 import useFetch from '../../rest/use-fetch';
 import env from '../../utils/environment';
 
@@ -35,7 +35,7 @@ export const BrukerDirektelenkeMedFeilmelding = ({ enhet, fnr, knappTekst }: Bru
 
 	const handleClick = () => {
 		if (hasFailed(settBrukerIKontekstFetcher)) {
-			setPopoverErApen(true);
+			setPopoverErApen(!popoverErApen);
 		} else {
 			settBrukerIKontekstFetcher.fetch(fnr, (state: FetchState) => {
 				if (!hasFailed(state)) {
@@ -58,13 +58,20 @@ export const BrukerDirektelenkeMedFeilmelding = ({ enhet, fnr, knappTekst }: Bru
 			<Button
 				size="small"
 				variant={hasFailed(settBrukerIKontekstFetcher) ? 'tertiary-neutral' : 'tertiary'}
-				icon={hasFailed(settBrukerIKontekstFetcher) ? <XMarkOctagonIcon /> : undefined}
+				icon={hasFailed(settBrukerIKontekstFetcher) ? <ExclamationmarkTriangleIcon /> : undefined}
 				loading={settBrukerIKontekstFetcher.status === 'PENDING'}
 				ref={knappeRef}
 				onClick={handleClick}
 				className="user-table-row__innhold--knapp"
+				aria-expanded={popoverErApen}
+				aria-label={
+					hasFailed(settBrukerIKontekstFetcher)
+						? `Kunne ikke åpne bruker ${knappTekst}. Fikk ikke kontakt med baksystemet. Prøv å laste siden på nytt eller åpne aktivitetsplanen og søk opp personen.`
+						: undefined
+				}
+				aria-live="assertive"
 			>
-				{hasFailed(settBrukerIKontekstFetcher) ? 'Feil i baksystem' : knappTekst}
+				{knappTekst}
 			</Button>
 			<Popover
 				anchorEl={knappeRef.current}
@@ -73,7 +80,10 @@ export const BrukerDirektelenkeMedFeilmelding = ({ enhet, fnr, knappTekst }: Bru
 				ref={popoverRef}
 			>
 				<Popover.Content>
-					Fikk ikke kontakt med baksystemet. <br /> Prøv å åpne aktivitetsplanen og søk opp personen.
+					<BodyShort size="small" role="alert">
+						Fikk ikke kontakt med baksystemet. <br /> Prøv å laste siden på nytt eller åpne aktivitetsplanen
+						og søk opp personen.
+					</BodyShort>
 				</Popover.Content>
 			</Popover>
 		</>
