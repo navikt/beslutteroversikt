@@ -6,7 +6,7 @@
   "homepage": "/beslutteroversikt",
   "scripts": {
     "start": "vite --mode lokal",
-    "build:mock": "tsc && vite build --mode lokal",
+    "build:mock": "tsc && vite build --mode lokal --base=/beslutteroversikt",
     "build:dev": "tsc && vite build --mode development",
     "build:prod": "tsc && vite build --mode production",
     "lint": "eslint src --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
