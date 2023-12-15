@@ -1,4 +1,3 @@
-import React from 'react';
 import cls from 'classnames';
 import { INITIAL_DIRECTION, OnOrderByChanged, OrderByData, toggleOrderByDirection } from '../table-utils';
 import Show from '../../felles/show';

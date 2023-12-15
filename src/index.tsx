@@ -1,29 +1,26 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
+import { createRoot } from 'react-dom/client';
 import App from './app';
 import env from './utils/environment';
 import * as dayjs from 'dayjs';
 import 'dayjs/locale/nb';
 import './index.less';
-import './utils.less';
 import '@navikt/ds-css';
 
 dayjs.locale('nb');
 
-const renderApp = () => ReactDOM.render(<App />, document.getElementById('root'));
-
-const renderMockedApp = () => {
-	if (window.location.pathname === process.env.PUBLIC_URL) {
-		window.location.pathname = `${process.env.PUBLIC_URL}/`;
-		return;
-	}
-
-	const { worker } = require('./mock');
-	worker.start({ serviceWorker: { url: process.env.PUBLIC_URL + '/mockServiceWorker.js' } }).then(() => renderApp());
-};
+const renderApp = () => createRoot(document.getElementById('root')!).render(<App />);
 
 if (env.isLocal) {
-	renderMockedApp();
+	//@ts-ignore
+	const { worker } = await import('/src/mock/index');
+	worker
+		.start({ serviceWorker: { url: `${import.meta.env.BASE_URL}mockServiceWorker.js` } })
+		.then(() => {
+			renderApp();
+		})
+		.catch((e: Error) => {
+			console.error('Unable to setup mocked API endpoints', e);
+		});
 } else {
 	renderApp();
 }

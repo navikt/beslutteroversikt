@@ -1,14 +1,20 @@
 class Environment {
+	hostname: string;
+
+	constructor() {
+		this.hostname = window.location.hostname;
+	}
+
 	get isLocal() {
-		return process.env.REACT_APP_DEPLOYMENT_ENV === 'local';
+		return import.meta.env.MODE === 'lokal';
 	}
 
 	get isDevelopment() {
-		return process.env.REACT_APP_DEPLOYMENT_ENV === 'development';
+		return import.meta.env.MODE === 'development';
 	}
 
 	get isProduction() {
-		return process.env.REACT_APP_DEPLOYMENT_ENV === 'production';
+		return import.meta.env.MODE === 'production';
 	}
 }
 

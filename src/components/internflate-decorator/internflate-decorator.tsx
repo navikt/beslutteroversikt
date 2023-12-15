@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import NAVSPA from '@navikt/navspa';
 import { DecoratorConfig } from './internflate-decorator-config';
 import { erGCP } from '../../rest/utils';
