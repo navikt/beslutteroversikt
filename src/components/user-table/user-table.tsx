@@ -23,6 +23,16 @@ export const UserTable = () => {
 		setOrderByDirection(nyData.direction);
 	}
 
+	const tableOrAlert = () => {
+		if (hasFinished(brukereFetcher)) {
+			if (tableBrukere.length === 0) {
+				return <Alert variant="info">Fant ingen brukere</Alert>;
+			} else {
+				return <UserTableBody brukere={tableBrukere} aktivEnhet={aktivEnhet} />;
+			}
+		}
+	};
+
 	return (
 		<div
 			role="table"
@@ -32,11 +42,7 @@ export const UserTable = () => {
 		>
 			<UserTableHeader orderByData={orderByData} onOrderByChanged={handleOnOrderByChanged} />
 			{isNotStartedOrPending(brukereFetcher) && <Spinner />}
-			{tableBrukere.length === 0 && hasFinished(brukereFetcher) ? (
-				<Alert variant="info">Fant ingen brukere</Alert>
-			) : (
-				<UserTableBody brukere={tableBrukere} aktivEnhet={aktivEnhet} />
-			)}
+			{tableOrAlert()}
 		</div>
 	);
 };
