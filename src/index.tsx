@@ -11,16 +11,18 @@ dayjs.locale('nb');
 const renderApp = () => createRoot(document.getElementById('root')!).render(<App />);
 
 if (env.isLocal) {
-	//@ts-ignore
-	const { worker } = await import('/src/mock/index');
-	worker
-		.start({ serviceWorker: { url: `${import.meta.env.BASE_URL}mockServiceWorker.js` } })
-		.then(() => {
-			renderApp();
+	import('./mock/index')
+		.then(({ worker }) => {
+			worker
+				.start({ serviceWorker: { url: `${import.meta.env.BASE_URL}mockServiceWorker.js` } })
+				.then(() => {
+					renderApp();
+				})
+				.catch((e: Error) => {
+					console.error('MSW - failed to start', e);
+				});
 		})
-		.catch((e: Error) => {
-			console.error('Unable to setup mocked API endpoints', e);
-		});
+		.catch(e => console.log('MSW - failed to import', e));
 } else {
 	renderApp();
 }
