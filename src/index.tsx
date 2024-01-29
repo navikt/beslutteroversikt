@@ -1,17 +1,28 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
+import { createRoot } from 'react-dom/client';
 import App from './app';
 import env from './utils/environment';
 import * as dayjs from 'dayjs';
 import 'dayjs/locale/nb';
 import './index.less';
-import './utils.less';
 import '@navikt/ds-css';
 
 dayjs.locale('nb');
 
-if (env.isLocal) {
-	require('./mock');
-}
+const renderApp = () => createRoot(document.getElementById('root')!).render(<App />);
 
-ReactDOM.render(<App />, document.getElementById('root'));
+if (env.isLocal) {
+	import('./mock/index')
+		.then(({ worker }) => {
+			worker
+				.start({ serviceWorker: { url: `${import.meta.env.BASE_URL}mockServiceWorker.js` } })
+				.then(() => {
+					renderApp();
+				})
+				.catch((e: Error) => {
+					console.error('MSW - failed to start', e);
+				});
+		})
+		.catch(e => console.log('MSW - failed to import', e));
+} else {
+	renderApp();
+}

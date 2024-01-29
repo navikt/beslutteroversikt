@@ -1,13 +1,8 @@
-import React from 'react';
-import NavFrontendSpinner from 'nav-frontend-spinner';
-import './spinner.less';
+import { Loader } from '@navikt/ds-react';
+import './spinner.css';
 
 function Spinner() {
-	return (
-		<div className="vedtaksstotte-spinner">
-			<NavFrontendSpinner type="XL" />
-		</div>
-	);
+	return <Loader size="2xlarge" title="Venter på data" className="vedtaksstotte-spinner" />;
 }
 
 export default Spinner;

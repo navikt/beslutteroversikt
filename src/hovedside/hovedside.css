@@ -1,0 +1,4 @@
+.hovedside {
+	max-width: 1920px;
+	margin: 0 auto var(--a-spacing-8);
+}

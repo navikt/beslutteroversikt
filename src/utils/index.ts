@@ -28,6 +28,12 @@ export function fjernNavFraEnhetNavn(enhetNavn: string): string {
 	return enhetNavn.replace('NAV', '').trim();
 }
 
+export function capitalize(str: string) {
+	return str
+		.toLowerCase()
+		.replace(/(^|[^a-z\u00C0-\u017F\u0400-\u04FF'])([a-z\u00C0-\u017F\u0400-\u04FF])/g, s => s.toUpperCase());
+}
+
 export function lagBrukerNavn(fornavn: string, etternavn: string): string {
 	const manglerFornavn = fornavn === '';
 	const manglerEtternavn = etternavn === '';

@@ -1,4 +1,3 @@
-import React from 'react';
 import { UserRow } from './user-table-row';
 import { Bruker } from '../../../rest/data/bruker';
 import { OrNothing } from '../../../utils/types/ornothing';

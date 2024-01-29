@@ -1,4 +1,3 @@
-import React from 'react';
 import StoreProvider from './stores/store-provider';
 
 import { InternflateDecorator } from './components/internflate-decorator/internflate-decorator';
@@ -22,13 +21,7 @@ function Innhold() {
 	const { tilhorerVeilederUtrulletKontorFetcher } = useDataFetcherStore();
 	const harTilgang = tilhorerVeilederUtrulletKontorFetcher.data;
 
-	return harTilgang ? (
-		<>
-			<Hovedside />
-		</>
-	) : (
-		<PrelanseringInfoSide />
-	);
+	return harTilgang ? <Hovedside /> : <PrelanseringInfoSide />;
 }
 
 export default App;

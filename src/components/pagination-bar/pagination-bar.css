@@ -1,0 +1,6 @@
+.pagination-bar {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 0 var(--a-spacing-8) var(--a-spacing-8);
+}

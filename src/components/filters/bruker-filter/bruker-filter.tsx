@@ -1,7 +1,6 @@
-import React from 'react';
-import { Checkbox } from 'nav-frontend-skjema';
 import { useSokStore } from '../../../stores/sok-store';
-import '../../filters/filters.less';
+import { Checkbox } from '@navikt/ds-react';
+import '../filters.css';
 
 export const BrukerFilter = () => {
 	const { filters, setVisMineBrukere } = useSokStore();
@@ -11,13 +10,8 @@ export const BrukerFilter = () => {
 	}
 
 	return (
-		<div>
-			<Checkbox
-				label="Mine brukere"
-				aria-label="Filtrer mine brukere"
-				checked={filters.visMineBrukere}
-				onChange={handleOnVisMineBrukereChanged}
-			/>
-		</div>
+		<Checkbox size="small" checked={filters.visMineBrukere} onChange={handleOnVisMineBrukereChanged}>
+			Mine brukere
+		</Checkbox>
 	);
 };

@@ -1,17 +1,16 @@
-@import '~nav-frontend-core/less/_variabler';
 @import '../user-table';
 
 .user-table-body {
 	padding: 0;
 	margin: 0;
-	border: 1px solid @navLysGra;
+	border: 1px solid var(--a-gray-50);
 
 	.user-table-row:nth-child(even) {
-		background-color: white;
+		background-color: var(--a-white);
 	}
 
 	.user-table-row:nth-child(odd) {
-		background-color: #f7f7f7;
+		background-color: var(--a-gray-50);
 	}
 }
 
@@ -21,32 +20,30 @@
 	&__innhold {
 		display: grid;
 		.column-template();
-		justify-items: start;
-		padding: 1rem 2rem;
-		text-align: center;
-		align-items: end;
-		color: @navMorkGra;
-		text-decoration: none;
+		padding: var(--a-spacing-4) var(--a-spacing-8);
+	}
+
+	&__innhold--lenke {
+		color: var(--a-blue-500);
+	}
+
+	&__innhold--dato {
+		display: flex;
+		flex-wrap: wrap;
+	}
+
+	&__innhold--knapp span {
+		text-align: left;
+		font-weight: var(--a-font-weight-regular);
 	}
 
 	.status {
-		display: grid;
-		grid-template-columns: 2rem auto;
-		align-items: center;
-		text-align: left;
+		display: flex;
+		gap: var(--a-spacing-2);
 
 		.status_ikon {
-			max-width: 26px;
+			min-width: 1.5rem;
 			font-size: 1.5rem;
-			&__bla {
-				color: @navLysBlaDarken40;
-			}
-			&__oransje {
-				color: @navOransjeDarken20;
-			}
-			&__default {
-				color: @navGra80;
-			}
 		}
 	}
 }
