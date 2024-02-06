@@ -4,17 +4,17 @@
       "assets/prelansering_info_pc-9w2dgdaR.svg"
     ],
     "css": [
-      "assets/index-ClYjbZOz.css"
+      "assets/index-A0uLK8XO.css"
     ],
     "dynamicImports": [
       "src/mock/index.ts"
     ],
-    "file": "assets/index-ZwLNeABB.js",
+    "file": "assets/index-f48FK9cR.js",
     "isEntry": true,
     "src": "index.html"
   },
   "src/mock/index.ts": {
-    "file": "assets/index-X5O_nDjv.js",
+    "file": "assets/index-wnemUbuV.js",
     "imports": [
       "index.html"
     ],
