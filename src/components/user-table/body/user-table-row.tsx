@@ -1,6 +1,6 @@
 import { Bruker, UtkastStatus } from '../../../rest/data/bruker';
 import { formatDateStr, formatDateStrWithMonthName, formatTimeStr } from '../../../utils/date-utils';
-import { fjernNavFraEnhetNavn, lagBrukerNavn, mapBrukerStatusTilTekst } from '../../../utils';
+import { capitalize, fjernNavFraEnhetNavn, lagBrukerNavn, mapBrukerStatusTilTekst } from '../../../utils';
 import { OrNothing } from '../../../utils/types/ornothing';
 import { BrukerDirektelenkeMedFeilmelding } from '../bruker-direktelenke-med-feilmelding';
 import { Bleed, BodyShort } from '@navikt/ds-react';
@@ -32,7 +32,7 @@ export const UserRow = (props: { idx: number; bruker: Bruker; aktivEnhet: OrNoth
 						<BrukerDirektelenkeMedFeilmelding
 							enhet={aktivEnhet}
 							fnr={brukerFnr}
-							knappTekst={`${lagBrukerNavn(brukerEtternavn, brukerFornavn)}`}
+							knappTekst={`${capitalize(lagBrukerNavn(brukerEtternavn, brukerFornavn))}`}
 						/>
 					)}
 				</Bleed>
