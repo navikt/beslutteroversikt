@@ -1,25 +1,25 @@
 {
   "index.html": {
-    "assets": [
-      "assets/prelansering_info_pc-9w2dgdaR.svg"
-    ],
-    "css": [
-      "assets/index-A0uLK8XO.css"
-    ],
+    "file": "assets/index-uymJEtmp.js",
+    "src": "index.html",
+    "isEntry": true,
     "dynamicImports": [
       "src/mock/index.ts"
     ],
-    "file": "assets/index-f48FK9cR.js",
-    "isEntry": true,
-    "src": "index.html"
+    "css": [
+      "assets/index--LSSpQlc.css"
+    ],
+    "assets": [
+      "assets/prelansering_info_pc-9w2dgdaR.svg"
+    ]
   },
   "src/mock/index.ts": {
-    "file": "assets/index-wnemUbuV.js",
+    "file": "assets/index-m5ms-cuY.js",
+    "src": "src/mock/index.ts",
+    "isDynamicEntry": true,
     "imports": [
       "index.html"
-    ],
-    "isDynamicEntry": true,
-    "src": "src/mock/index.ts"
+    ]
   },
   "src/prelansering-side/prelansering_info_pc.svg": {
     "file": "assets/prelansering_info_pc-9w2dgdaR.svg",
