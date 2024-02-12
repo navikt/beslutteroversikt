@@ -46,7 +46,7 @@
     "typescript": "5.3.3"
   },
   "devDependencies": {
-    "@faker-js/faker": "8.4.0",
+    "@faker-js/faker": "8.4.1",
     "@types/lodash.debounce": "4.0.9",
     "@types/react": "18.2.55",
     "@types/react-dom": "18.2.18",
