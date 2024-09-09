@@ -63,8 +63,8 @@ spec:
           "redirects": [
             {
               "fromPath": "/internarbeidsflatedecorator/*",
-              "toUrl": "https://internarbeidsflatedecorator.intern.nav.no",
-              "preserveFromPath": true
+              "toUrl": "https://cdn.nav.no/personoversikt/internarbeidsflate-decorator-v3/prod",
+              "preserveFromPath": false
             },
             {
               "fromPath": "/veilarbpersonflate/*",
