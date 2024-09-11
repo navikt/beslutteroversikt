@@ -60,11 +60,16 @@ spec:
           "gcs": {
             "bucketName": "obo-beslutteroversikt-dev"
           },
+          "header": {
+            "csp": {
+              "connectSrc": ["'self'", "wss:", "*.nav.no", "*.adeo.no"]
+             }
+          },
           "redirects": [
             {
               "fromPath": "/internarbeidsflatedecorator/*",
-              "toUrl": "https://internarbeidsflatedecorator-q1.intern.dev.nav.no",
-              "preserveFromPath": true
+              "toUrl": "https://cdn.nav.no/personoversikt/internarbeidsflate-decorator-v3/dev",
+              "preserveFromPath": false
             },
             {
               "fromPath": "/veilarbpersonflate/*",
