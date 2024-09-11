@@ -45,9 +45,10 @@ spec:
       rules:
         - application: modiacontextholder
           namespace: personoversikt
+        - application: veilarbvedtaksstotte
+          namespace: obo
       external:
         - host: veilarbveileder.dev-fss-pub.nais.io
-        - host: veilarbvedtaksstotte.dev-fss-pub.nais.io
   env:
     - name: JSON_CONFIG
       value: >
@@ -100,12 +101,12 @@ spec:
             },
             {
               "fromPath": "/veilarbvedtaksstotte",
-              "toUrl": "https://veilarbvedtaksstotte.dev-fss-pub.nais.io",
+              "toUrl": "http://veilarbvedtaksstotte.obo",
               "preserveFromPath": true,
               "toApp": {
-              "name": "veilarbvedtaksstotte",
-              "namespace": "pto",
-              "cluster": "dev-fss"
+                "name": "veilarbvedtaksstotte",
+                "namespace": "obo",
+                "cluster": "dev-gcp"
               }
             }
           ]
