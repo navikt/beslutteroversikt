@@ -47,8 +47,8 @@ spec:
           namespace: personoversikt
         - application: veilarbvedtaksstotte
           namespace: obo
-      external:
-        - host: veilarbveileder.dev-fss-pub.nais.io
+        - application: veilarbveileder
+          namespace: obo
   env:
     - name: JSON_CONFIG
       value: >
@@ -94,12 +94,12 @@ spec:
             },
             {
               "fromPath": "/veilarbveileder",
-              "toUrl": "https://veilarbveileder.dev-fss-pub.nais.io",
+              "toUrl": "http://veilarbveileder.obo",
               "preserveFromPath": true,
               "toApp": {
               "name": "veilarbveileder",
-              "namespace": "pto",
-              "cluster": "dev-fss"
+              "namespace": "obo",
+              "cluster": "dev-gcp"
               }
             },
             {
