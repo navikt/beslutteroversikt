@@ -25,7 +25,6 @@ spec:
       cpu: 500m
       memory: 500Mi
     limits:
-      cpu: "1"
       memory: 1Gi
   secureLogs:
     enabled: true
@@ -46,11 +45,7 @@ spec:
         - application: modiacontextholder
           namespace: personoversikt
         - application: veilarbveileder
-          namespace: obo
         - application: veilarbvedtaksstotte
-          namespace: obo
-      external:
-        - host: veilarbvedtaksstotte.prod-fss-pub.nais.io
   env:
     - name: JSON_CONFIG
       value: >
@@ -106,12 +101,12 @@ spec:
             },
             {
               "fromPath": "/veilarbvedtaksstotte",
-              "toUrl": "https://veilarbvedtaksstotte.prod-fss-pub.nais.io",
+              "toUrl": "http://veilarbvedtaksstotte.obo",
               "preserveFromPath": true,
               "toApp": {
-              "name": "veilarbvedtaksstotte",
-              "namespace": "pto",
-              "cluster": "prod-fss"
+                "name": "veilarbvedtaksstotte",
+                "namespace": "obo",
+                "cluster": "prod-gcp"
               }
             }
           ]
