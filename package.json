@@ -60,7 +60,7 @@
     "msw": "2.2.3",
     "prettier": "3.2.5",
     "vite": "5.1.5",
-    "vitest": "1.2.2"
+    "vitest": "2.1.5"
   },
   "msw": {
     "workerDirectory": "public"
