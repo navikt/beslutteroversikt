@@ -7,7 +7,7 @@ export const Header = () => {
 	return (
 		<header title="Overskrift og filtere" className="header">
 			<Heading level="1" size="xlarge">
-				Kvalitetssikring 14a
+				Kvalitetssikring § 14 a
 			</Heading>
 			<BrukerFilter />
 			<StatusDropdown />

@@ -82,7 +82,7 @@ const UtkastStatusData = (props: { status: UtkastStatus }) => {
 		case UtkastStatus.GODKJENT_AV_BESLUTTER:
 			StatusIkon = (
 				<Bleed marginBlock="0 3" asChild>
-					<ChatElipsisIcon title="Godkjent av beslutter-ikon" className="status_ikon" />
+					<ChatElipsisIcon title="Godkjent av kvalitetssikrer-ikon" className="status_ikon" />
 				</Bleed>
 			);
 			break;
