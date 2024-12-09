@@ -4,6 +4,7 @@ import { Label, Pagination } from '@navikt/ds-react';
 import './pagination-bar.css';
 
 export function PaginationBar() {
+	// eslint-disable-next-line @typescript-eslint/no-unused-vars
 	const { currentPage, totalPages, seeAll, setCurrentPage, pageSize } = useSokStore();
 	const { brukereFetcher } = useDataFetcherStore();
 
