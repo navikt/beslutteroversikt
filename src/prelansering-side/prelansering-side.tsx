@@ -8,20 +8,20 @@ export const PrelanseringInfoSide = () => {
 			<div className="wrapper">
 				<div className="wrapper-inneholdt">
 					<Heading size="medium" level="1">
-						Ny oversikt for besluttere som kvalitetssikrer arbeidsevnevurderinger
+						Ny oversikt for kvalitetssikring av oppfølgingsvedtak § 14 a
 					</Heading>
 					<BodyShort className="info-tekst">
-						I beslutteroversikten får du oversikt over alle enhetene du er beslutter for. Der får du også
-						oversikt over status på arbeidsevnevurderingene du er beslutter for.
+						I kvalitetssikringsoversikten ser du oversikt over alle enhetene du er kvalitetssikrer for. Der
+						får du også oversikt over status på oppfølgingsvedtakene du er kvalitetssikrer for.
 					</BodyShort>
 					<BodyShort className="info-tekst">
 						<i>Når kommer den?</i>
 						<br />
-						Beslutteroversikten lanseres sammen med ny løsning for § 14a-vedtak i Modia.
+						Kvalitetssikringsoversikten lanseres sammen med ny løsning for oppfølgingsvedtak § 14 a i Modia.
 					</BodyShort>
 				</div>
 				<div className="wrapper-inneholdt">
-					<img src={pcBilde} className="pcBilde" alt="Beslutteroversikt bilde" />
+					<img src={pcBilde} className="pcBilde" alt="Kvalitetssikringsoversikt bilde" />
 				</div>
 			</div>
 		</div>
