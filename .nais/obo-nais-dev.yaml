@@ -10,6 +10,7 @@ spec:
   port: 8080
   ingresses:
     - https://beslutteroversikt.intern.dev.nav.no
+    - https://beslutteroversikt.ansatt.dev.nav.no
   liveness:
     path: /internal/alive
     initialDelay: 10
