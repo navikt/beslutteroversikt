@@ -4,7 +4,7 @@ import { hasAnyFailed, isAnyNotStartedOrPending, isNotStarted } from '../rest/ut
 import { Alert } from '@navikt/ds-react';
 import Spinner from './felles/spinner/spinner';
 
-export function DataFetcher(props: { children: any }) {
+export function DataFetcher(props: { children: React.ReactNode }) {
 	const { innloggetVeilederFetcher, aktivEnhetFetcher, tilhorerVeilederUtrulletKontorFetcher } =
 		useDataFetcherStore();
 
