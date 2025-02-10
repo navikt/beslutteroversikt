@@ -3,7 +3,7 @@ import { formatDateStr, formatDateStrWithMonthName, formatTimeStr } from '../../
 import { capitalize, fjernNavFraEnhetNavn, lagBrukerNavn, mapBrukerStatusTilTekst } from '../../../utils';
 import { OrNothing } from '../../../utils/types/ornothing';
 import { BrukerDirektelenkeMedFeilmelding } from '../bruker-direktelenke-med-feilmelding';
-import { Bleed, BodyShort } from '@navikt/ds-react';
+import { Bleed, BodyShort, CopyButton, Tooltip } from '@navikt/ds-react';
 import { ChatElipsisIcon, ChatExclamationmarkIcon, PersonPlusIcon } from '@navikt/aksel-icons';
 import './user-table-body.less';
 
@@ -36,8 +36,18 @@ export const UserRow = (props: { idx: number; bruker: Bruker; aktivEnhet: OrNoth
 						/>
 					)}
 				</Bleed>
-				<BodyShort size="small" weight="semibold">
-					{brukerFnr}
+				<BodyShort size="small">
+					{brukerFnr && (
+						<Tooltip content="Kopier fødselsnr" placement="right">
+							<CopyButton
+								copyText={brukerFnr}
+								text={brukerFnr}
+								title="Fødselsnummer"
+								size="xsmall"
+								iconPosition="right"
+							/>
+						</Tooltip>
+					)}
 				</BodyShort>
 				<BodyShort size="small">{formatDateStr(vedtakStartet)}</BodyShort>
 				<UtkastStatusData status={status} />
