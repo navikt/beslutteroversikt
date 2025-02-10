@@ -43,7 +43,7 @@ export const UserTableHeader = (props: UserTableHeaderProps) => {
 				/>
 				<HeaderField
 					name={HeaderFieldName.VEDTAK_STARTET}
-					text="Vedtak startet"
+					text="Utkast opprettet"
 					orderByData={orderByData}
 					onOrderByChanged={handleOnOrderByChanged}
 				/>
