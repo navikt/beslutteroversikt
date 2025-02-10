@@ -41,9 +41,7 @@ export const UserRow = (props: { idx: number; bruker: Bruker; aktivEnhet: OrNoth
 				</BodyShort>
 				<BodyShort size="small">{formatDateStr(vedtakStartet)}</BodyShort>
 				<UtkastStatusData status={status} />
-				<BodyShort size="small" weight="semibold">
-					{beslutterNavn || '–'}
-				</BodyShort>
+				<BodyShort size="small">{beslutterNavn ?? '–'}</BodyShort>
 				<BodyShort size="small">{veilederNavn}</BodyShort>
 				<BodyShort size="small" className="user-table-row__innhold--dato">
 					<span>{formatDateStrWithMonthName(statusEndret)}</span>&nbsp;
