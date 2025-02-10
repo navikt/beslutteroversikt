@@ -1,6 +1,6 @@
 {
   "index.html": {
-    "file": "assets/index-2sYXrJ7w.js",
+    "file": "assets/index-Bor268qK.js",
     "name": "index",
     "src": "index.html",
     "isEntry": true,
@@ -8,14 +8,14 @@
       "src/mock/index.ts"
     ],
     "css": [
-      "assets/index-B6Gk3LLE.css"
+      "assets/index-BlYzUHz2.css"
     ],
     "assets": [
       "assets/prelansering_info_pc-D3DZ2B1p.svg"
     ]
   },
   "src/mock/index.ts": {
-    "file": "assets/index-BPlT5mBb.js",
+    "file": "assets/index-CATu-ZZP.js",
     "name": "index",
     "src": "src/mock/index.ts",
     "isDynamicEntry": true,
