@@ -28,8 +28,12 @@ export const BrukerDirektelenkeMedFeilmelding = ({ enhet, fnr, knappTekst }: Bru
 				? 'https://veilarbpersonflate.intern.dev.nav.no'
 				: 'https://veilarbpersonflate.intern.nav.no';
 		const queryParams = enhet ? `?enhet=${enhet}` : '';
-
 		const anchorParams = '#visVedtaksstotte#visUtkast';
+
+		const { hostname } = window.location;
+		if (hostname.includes('ansatt.dev.nav.no')) {
+			return `https://veilarbpersonflate.ansatt.dev.nav.no${queryParams}${anchorParams}`;
+		}
 		return `${basePath}${queryParams}${anchorParams}`;
 	};
 
