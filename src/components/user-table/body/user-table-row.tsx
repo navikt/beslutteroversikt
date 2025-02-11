@@ -39,13 +39,7 @@ export const UserRow = (props: { idx: number; bruker: Bruker; aktivEnhet: OrNoth
 				<BodyShort size="small">
 					{brukerFnr && (
 						<Tooltip content="Kopier fødselsnr" placement="right">
-							<CopyButton
-								copyText={brukerFnr}
-								text={brukerFnr}
-								title="Fødselsnummer"
-								size="xsmall"
-								iconPosition="right"
-							/>
+							<CopyButton copyText={brukerFnr} text={brukerFnr} size="xsmall" iconPosition="right" />
 						</Tooltip>
 					)}
 				</BodyShort>
