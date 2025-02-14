@@ -1,40 +1,43 @@
 import { useRef, useState } from 'react';
+import { BodyShort, Button, Popover } from '@navikt/ds-react';
+import { ExclamationmarkTriangleIcon } from '@navikt/aksel-icons';
 import { useEventListener } from '../../hooks/use-event-listener';
 import { vedKlikkUtenfor } from '../../utils';
 import { lagSettBrukerIKontekstFetchInfo } from '../../rest/api';
-import { OrNothing } from '../../utils/types/ornothing';
 import { FetchState, hasFailed } from '../../rest/utils';
-import { BodyShort, Button, Popover } from '@navikt/ds-react';
-import { ExclamationmarkTriangleIcon } from '@navikt/aksel-icons';
 import useFetch from '../../rest/use-fetch';
 import env from '../../utils/environment';
 
-type BrukerDirektelenkeMedFeilmeldingProps = {
-	enhet: OrNothing<string>;
+interface Props {
 	fnr: string;
 	knappTekst: string;
-};
+}
 
-export const BrukerDirektelenkeMedFeilmelding = ({ enhet, fnr, knappTekst }: BrukerDirektelenkeMedFeilmeldingProps) => {
+export const BrukerDirektelenkeMedFeilmelding = ({ fnr, knappTekst }: Props) => {
 	const [popoverErApen, setPopoverErApen] = useState(false);
 	const knappeRef = useRef<HTMLButtonElement>(null);
 	const popoverRef = useRef<HTMLDivElement>(null);
 
 	const settBrukerIKontekstFetcher = useFetch<void, string>(lagSettBrukerIKontekstFetchInfo);
 
-	const lagOppfolgingsvedtakDyplenke = (enhet: OrNothing<string>) => {
-		const basePath =
-			env.isDevelopment || env.isLocal
-				? 'https://veilarbpersonflate.intern.dev.nav.no'
-				: 'https://veilarbpersonflate.intern.nav.no';
-		const queryParams = enhet ? `?enhet=${enhet}` : '';
-		const anchorParams = '#visVedtaksstotte#visUtkast';
-
+	const finnBasePath = (): string => {
 		const { hostname } = window.location;
 		if (hostname.includes('ansatt.dev.nav.no')) {
-			return `https://veilarbpersonflate.ansatt.dev.nav.no${queryParams}${anchorParams}`;
+			return 'https://veilarbpersonflate.ansatt.dev.nav.no';
 		}
-		return `${basePath}${queryParams}${anchorParams}`;
+		if (env.isDevelopment || env.isLocal) {
+			return 'https://veilarbpersonflate.intern.dev.nav.no';
+		}
+
+		return 'https://veilarbpersonflate.intern.nav.no';
+	};
+
+	const lagOppfolgingsvedtakDyplenke = () => {
+		const basePath = finnBasePath();
+		const oppfolgingsvedtakSide = '/vedtaksstotte';
+		const anchorParams = '#visUtkast';
+
+		return `${basePath}${oppfolgingsvedtakSide}${anchorParams}`;
 	};
 
 	const handleClick = () => {
@@ -43,7 +46,7 @@ export const BrukerDirektelenkeMedFeilmelding = ({ enhet, fnr, knappTekst }: Bru
 		} else {
 			settBrukerIKontekstFetcher.fetch(fnr, (state: FetchState) => {
 				if (!hasFailed(state)) {
-					window.location.href = lagOppfolgingsvedtakDyplenke(enhet);
+					window.location.href = lagOppfolgingsvedtakDyplenke();
 				}
 			});
 		}

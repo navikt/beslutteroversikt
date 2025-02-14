@@ -1,5 +1,5 @@
-import { UserTableHeader } from './header/user-table-header';
 import { Alert } from '@navikt/ds-react';
+import { UserTableHeader } from './header/user-table-header';
 import { UserTableBody } from './body/user-table-body';
 import { OrderByData } from './table-utils';
 import { useSokStore } from '../../stores/sok-store';
@@ -9,10 +9,10 @@ import Spinner from '../felles/spinner/spinner';
 import './user-table.less';
 
 export const UserTable = () => {
-	const { brukereFetcher, aktivEnhetFetcher } = useDataFetcherStore();
+	const { brukereFetcher } = useDataFetcherStore();
 	const { orderByField, orderByDirection, setOrderByField, setOrderByDirection } = useSokStore();
 	const tableBrukere = (brukereFetcher.data && brukereFetcher.data.brukere) || [];
-	const aktivEnhet = aktivEnhetFetcher.data ? aktivEnhetFetcher.data.aktivEnhet : undefined;
+
 	const orderByData: OrderByData = {
 		field: orderByField,
 		direction: orderByDirection
@@ -28,7 +28,7 @@ export const UserTable = () => {
 			if (tableBrukere.length === 0) {
 				return <Alert variant="info">Fant ingen brukere</Alert>;
 			} else {
-				return <UserTableBody brukere={tableBrukere} aktivEnhet={aktivEnhet} />;
+				return <UserTableBody brukere={tableBrukere} />;
 			}
 		}
 	};

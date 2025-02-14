@@ -1,14 +1,17 @@
-import { Bruker, UtkastStatus } from '../../../rest/data/bruker';
-import { formatDateStr, formatDateStrWithMonthName, formatTimeStr } from '../../../utils/date-utils';
-import { capitalize, fjernNavFraEnhetNavn, lagBrukerNavn, mapBrukerStatusTilTekst } from '../../../utils';
-import { OrNothing } from '../../../utils/types/ornothing';
-import { BrukerDirektelenkeMedFeilmelding } from '../bruker-direktelenke-med-feilmelding';
 import { Bleed, BodyShort, CopyButton, Tooltip } from '@navikt/ds-react';
-import { ChatElipsisIcon, ChatExclamationmarkIcon, PersonPlusIcon } from '@navikt/aksel-icons';
+import { Bruker } from '../../../rest/data/bruker';
+import { formatDateStr, formatDateStrWithMonthName, formatTimeStr } from '../../../utils/date-utils';
+import { capitalize, fjernNavFraEnhetNavn, lagBrukerNavn } from '../../../utils';
+import { BrukerDirektelenkeMedFeilmelding } from '../bruker-direktelenke-med-feilmelding';
+import { UtkastStatusData } from './status/utkast-status-data';
 import './user-table-body.less';
 
-export const UserRow = (props: { idx: number; bruker: Bruker; aktivEnhet: OrNothing<string> }) => {
-	const { aktivEnhet } = props;
+interface Props {
+	idx: number;
+	bruker: Bruker;
+}
+
+export const UserRow = ({ idx, bruker }: Props) => {
 	const {
 		brukerFnr,
 		brukerFornavn,
@@ -19,18 +22,17 @@ export const UserRow = (props: { idx: number; bruker: Bruker; aktivEnhet: OrNoth
 		beslutterNavn,
 		veilederNavn,
 		status
-	} = props.bruker;
+	} = bruker;
 
 	const erMaskert = brukerFnr === '';
 
 	return (
 		// idx starter på 0, men gyldige verdier for aria-rowindex er 1 og oppover
-		<div role="row" aria-rowindex={props.idx + 1} className="user-table-row">
+		<div role="row" aria-rowindex={idx + 1} className="user-table-row">
 			<div className="user-table-row__innhold">
 				<Bleed marginBlock="2" style={{ display: 'flex' }}>
 					{!erMaskert && (
 						<BrukerDirektelenkeMedFeilmelding
-							enhet={aktivEnhet}
 							fnr={brukerFnr}
 							knappTekst={`${capitalize(lagBrukerNavn(brukerEtternavn, brukerFornavn))}`}
 						/>
@@ -54,46 +56,5 @@ export const UserRow = (props: { idx: number; bruker: Bruker; aktivEnhet: OrNoth
 				<BodyShort size="small">{fjernNavFraEnhetNavn(brukerOppfolgingsenhetNavn)}</BodyShort>
 			</div>
 		</div>
-	);
-};
-
-const UtkastStatusData = (props: { status: UtkastStatus }) => {
-	let StatusIkon;
-	switch (props.status) {
-		case UtkastStatus.TRENGER_BESLUTTER:
-			StatusIkon = (
-				<Bleed marginBlock="1 2" asChild>
-					<PersonPlusIcon title="Trenger kvalitetssikrer-ikon" className="status_ikon" />
-				</Bleed>
-			);
-			break;
-		case UtkastStatus.KLAR_TIL_BESLUTTER:
-			StatusIkon = (
-				<Bleed marginBlock="0 3" asChild>
-					<ChatExclamationmarkIcon title="Venter på tilbakemelding-ikon" className="status_ikon" />
-				</Bleed>
-			);
-			break;
-		case UtkastStatus.KLAR_TIL_VEILEDER:
-			StatusIkon = (
-				<Bleed marginBlock="0 3" asChild>
-					<ChatElipsisIcon title="Venter på veileder-ikon" className="status_ikon" />
-				</Bleed>
-			);
-			break;
-		case UtkastStatus.GODKJENT_AV_BESLUTTER:
-			StatusIkon = (
-				<Bleed marginBlock="0 3" asChild>
-					<ChatElipsisIcon title="Godkjent av kvalitetssikrer-ikon" className="status_ikon" />
-				</Bleed>
-			);
-			break;
-	}
-
-	return (
-		<span role="cell" className={'status'}>
-			{StatusIkon}
-			<BodyShort size="small">{mapBrukerStatusTilTekst(props.status)}</BodyShort>
-		</span>
 	);
 };
