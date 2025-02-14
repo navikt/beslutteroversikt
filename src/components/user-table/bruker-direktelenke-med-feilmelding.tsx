@@ -22,19 +22,24 @@ export const BrukerDirektelenkeMedFeilmelding = ({ enhet, fnr, knappTekst }: Bru
 
 	const settBrukerIKontekstFetcher = useFetch<void, string>(lagSettBrukerIKontekstFetchInfo);
 
+	const finnBasePath = (): string => {
+		const { hostname } = window.location;
+		if (hostname.includes('ansatt.dev.nav.no')) {
+			return 'https://veilarbpersonflate.ansatt.dev.nav.no';
+		}
+		if (env.isDevelopment || env.isLocal) {
+			return 'https://veilarbpersonflate.intern.dev.nav.no';
+		}
+
+		return 'https://veilarbpersonflate.intern.nav.no';
+	};
+
 	const lagOppfolgingsvedtakDyplenke = (enhet: OrNothing<string>) => {
-		const basePath =
-			env.isDevelopment || env.isLocal
-				? 'https://veilarbpersonflate.intern.dev.nav.no'
-				: 'https://veilarbpersonflate.intern.nav.no';
+		const basePath = finnBasePath();
 		const oppfolgingsvedtakSide = '/vedtaksstotte';
 		const queryParams = enhet ? `?enhet=${enhet}` : '';
 		const anchorParams = '#visVedtaksstotte#visUtkast';
 
-		const { hostname } = window.location;
-		if (hostname.includes('ansatt.dev.nav.no')) {
-			return `https://veilarbpersonflate.ansatt.dev.nav.no${oppfolgingsvedtakSide}${queryParams}${anchorParams}`;
-		}
 		return `${basePath}${oppfolgingsvedtakSide}${queryParams}${anchorParams}`;
 	};
 
