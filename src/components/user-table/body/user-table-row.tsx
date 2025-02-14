@@ -1,14 +1,12 @@
 import { Bruker, UtkastStatus } from '../../../rest/data/bruker';
 import { formatDateStr, formatDateStrWithMonthName, formatTimeStr } from '../../../utils/date-utils';
 import { capitalize, fjernNavFraEnhetNavn, lagBrukerNavn, mapBrukerStatusTilTekst } from '../../../utils';
-import { OrNothing } from '../../../utils/types/ornothing';
 import { BrukerDirektelenkeMedFeilmelding } from '../bruker-direktelenke-med-feilmelding';
 import { Bleed, BodyShort, CopyButton, Tooltip } from '@navikt/ds-react';
 import { ChatElipsisIcon, ChatExclamationmarkIcon, PersonPlusIcon } from '@navikt/aksel-icons';
 import './user-table-body.less';
 
-export const UserRow = (props: { idx: number; bruker: Bruker; aktivEnhet: OrNothing<string> }) => {
-	const { aktivEnhet } = props;
+export const UserRow = (props: { idx: number; bruker: Bruker }) => {
 	const {
 		brukerFnr,
 		brukerFornavn,
@@ -30,7 +28,6 @@ export const UserRow = (props: { idx: number; bruker: Bruker; aktivEnhet: OrNoth
 				<Bleed marginBlock="2" style={{ display: 'flex' }}>
 					{!erMaskert && (
 						<BrukerDirektelenkeMedFeilmelding
-							enhet={aktivEnhet}
 							fnr={brukerFnr}
 							knappTekst={`${capitalize(lagBrukerNavn(brukerEtternavn, brukerFornavn))}`}
 						/>

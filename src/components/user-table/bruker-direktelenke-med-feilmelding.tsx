@@ -2,7 +2,6 @@ import { useRef, useState } from 'react';
 import { useEventListener } from '../../hooks/use-event-listener';
 import { vedKlikkUtenfor } from '../../utils';
 import { lagSettBrukerIKontekstFetchInfo } from '../../rest/api';
-import { OrNothing } from '../../utils/types/ornothing';
 import { FetchState, hasFailed } from '../../rest/utils';
 import { BodyShort, Button, Popover } from '@navikt/ds-react';
 import { ExclamationmarkTriangleIcon } from '@navikt/aksel-icons';
@@ -10,12 +9,11 @@ import useFetch from '../../rest/use-fetch';
 import env from '../../utils/environment';
 
 type BrukerDirektelenkeMedFeilmeldingProps = {
-	enhet: OrNothing<string>;
 	fnr: string;
 	knappTekst: string;
 };
 
-export const BrukerDirektelenkeMedFeilmelding = ({ enhet, fnr, knappTekst }: BrukerDirektelenkeMedFeilmeldingProps) => {
+export const BrukerDirektelenkeMedFeilmelding = ({ fnr, knappTekst }: BrukerDirektelenkeMedFeilmeldingProps) => {
 	const [popoverErApen, setPopoverErApen] = useState(false);
 	const knappeRef = useRef<HTMLButtonElement>(null);
 	const popoverRef = useRef<HTMLDivElement>(null);
@@ -34,13 +32,12 @@ export const BrukerDirektelenkeMedFeilmelding = ({ enhet, fnr, knappTekst }: Bru
 		return 'https://veilarbpersonflate.intern.nav.no';
 	};
 
-	const lagOppfolgingsvedtakDyplenke = (enhet: OrNothing<string>) => {
+	const lagOppfolgingsvedtakDyplenke = () => {
 		const basePath = finnBasePath();
 		const oppfolgingsvedtakSide = '/vedtaksstotte';
-		const queryParams = enhet ? `?enhet=${enhet}` : '';
 		const anchorParams = '#visUtkast';
 
-		return `${basePath}${oppfolgingsvedtakSide}${queryParams}${anchorParams}`;
+		return `${basePath}${oppfolgingsvedtakSide}${anchorParams}`;
 	};
 
 	const handleClick = () => {
@@ -49,7 +46,7 @@ export const BrukerDirektelenkeMedFeilmelding = ({ enhet, fnr, knappTekst }: Bru
 		} else {
 			settBrukerIKontekstFetcher.fetch(fnr, (state: FetchState) => {
 				if (!hasFailed(state)) {
-					window.location.href = lagOppfolgingsvedtakDyplenke(enhet);
+					window.location.href = lagOppfolgingsvedtakDyplenke();
 				}
 			});
 		}
