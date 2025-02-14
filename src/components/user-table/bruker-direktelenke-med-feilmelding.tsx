@@ -27,14 +27,15 @@ export const BrukerDirektelenkeMedFeilmelding = ({ enhet, fnr, knappTekst }: Bru
 			env.isDevelopment || env.isLocal
 				? 'https://veilarbpersonflate.intern.dev.nav.no'
 				: 'https://veilarbpersonflate.intern.nav.no';
+		const oppfolgingsvedtakSide = '/vedtaksstotte';
 		const queryParams = enhet ? `?enhet=${enhet}` : '';
 		const anchorParams = '#visVedtaksstotte#visUtkast';
 
 		const { hostname } = window.location;
 		if (hostname.includes('ansatt.dev.nav.no')) {
-			return `https://veilarbpersonflate.ansatt.dev.nav.no${queryParams}${anchorParams}`;
+			return `https://veilarbpersonflate.ansatt.dev.nav.no${oppfolgingsvedtakSide}${queryParams}${anchorParams}`;
 		}
-		return `${basePath}${queryParams}${anchorParams}`;
+		return `${basePath}${oppfolgingsvedtakSide}${queryParams}${anchorParams}`;
 	};
 
 	const handleClick = () => {
