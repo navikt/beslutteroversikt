@@ -38,7 +38,7 @@ export const BrukerDirektelenkeMedFeilmelding = ({ enhet, fnr, knappTekst }: Bru
 		const basePath = finnBasePath();
 		const oppfolgingsvedtakSide = '/vedtaksstotte';
 		const queryParams = enhet ? `?enhet=${enhet}` : '';
-		const anchorParams = '#visVedtaksstotte#visUtkast';
+		const anchorParams = '#visUtkast';
 
 		return `${basePath}${oppfolgingsvedtakSide}${queryParams}${anchorParams}`;
 	};
