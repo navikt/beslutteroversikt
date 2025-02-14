@@ -1,19 +1,19 @@
 import { useRef, useState } from 'react';
+import { BodyShort, Button, Popover } from '@navikt/ds-react';
+import { ExclamationmarkTriangleIcon } from '@navikt/aksel-icons';
 import { useEventListener } from '../../hooks/use-event-listener';
 import { vedKlikkUtenfor } from '../../utils';
 import { lagSettBrukerIKontekstFetchInfo } from '../../rest/api';
 import { FetchState, hasFailed } from '../../rest/utils';
-import { BodyShort, Button, Popover } from '@navikt/ds-react';
-import { ExclamationmarkTriangleIcon } from '@navikt/aksel-icons';
 import useFetch from '../../rest/use-fetch';
 import env from '../../utils/environment';
 
-type BrukerDirektelenkeMedFeilmeldingProps = {
+interface Props {
 	fnr: string;
 	knappTekst: string;
-};
+}
 
-export const BrukerDirektelenkeMedFeilmelding = ({ fnr, knappTekst }: BrukerDirektelenkeMedFeilmeldingProps) => {
+export const BrukerDirektelenkeMedFeilmelding = ({ fnr, knappTekst }: Props) => {
 	const [popoverErApen, setPopoverErApen] = useState(false);
 	const knappeRef = useRef<HTMLButtonElement>(null);
 	const popoverRef = useRef<HTMLDivElement>(null);

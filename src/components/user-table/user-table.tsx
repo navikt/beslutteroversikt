@@ -1,5 +1,5 @@
-import { UserTableHeader } from './header/user-table-header';
 import { Alert } from '@navikt/ds-react';
+import { UserTableHeader } from './header/user-table-header';
 import { UserTableBody } from './body/user-table-body';
 import { OrderByData } from './table-utils';
 import { useSokStore } from '../../stores/sok-store';

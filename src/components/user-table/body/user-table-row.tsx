@@ -1,12 +1,17 @@
+import { Bleed, BodyShort, CopyButton, Tooltip } from '@navikt/ds-react';
+import { ChatElipsisIcon, ChatExclamationmarkIcon, PersonPlusIcon } from '@navikt/aksel-icons';
 import { Bruker, UtkastStatus } from '../../../rest/data/bruker';
 import { formatDateStr, formatDateStrWithMonthName, formatTimeStr } from '../../../utils/date-utils';
 import { capitalize, fjernNavFraEnhetNavn, lagBrukerNavn, mapBrukerStatusTilTekst } from '../../../utils';
 import { BrukerDirektelenkeMedFeilmelding } from '../bruker-direktelenke-med-feilmelding';
-import { Bleed, BodyShort, CopyButton, Tooltip } from '@navikt/ds-react';
-import { ChatElipsisIcon, ChatExclamationmarkIcon, PersonPlusIcon } from '@navikt/aksel-icons';
 import './user-table-body.less';
 
-export const UserRow = (props: { idx: number; bruker: Bruker }) => {
+interface UserRowProps {
+	idx: number;
+	bruker: Bruker;
+}
+
+export const UserRow = ({ idx, bruker }: UserRowProps) => {
 	const {
 		brukerFnr,
 		brukerFornavn,
@@ -17,13 +22,13 @@ export const UserRow = (props: { idx: number; bruker: Bruker }) => {
 		beslutterNavn,
 		veilederNavn,
 		status
-	} = props.bruker;
+	} = bruker;
 
 	const erMaskert = brukerFnr === '';
 
 	return (
 		// idx starter på 0, men gyldige verdier for aria-rowindex er 1 og oppover
-		<div role="row" aria-rowindex={props.idx + 1} className="user-table-row">
+		<div role="row" aria-rowindex={idx + 1} className="user-table-row">
 			<div className="user-table-row__innhold">
 				<Bleed marginBlock="2" style={{ display: 'flex' }}>
 					{!erMaskert && (
@@ -54,9 +59,13 @@ export const UserRow = (props: { idx: number; bruker: Bruker }) => {
 	);
 };
 
-const UtkastStatusData = (props: { status: UtkastStatus }) => {
+interface UtkastStatusDataProps {
+	status: UtkastStatus;
+}
+
+const UtkastStatusData = ({ status }: UtkastStatusDataProps) => {
 	let StatusIkon;
-	switch (props.status) {
+	switch (status) {
 		case UtkastStatus.TRENGER_BESLUTTER:
 			StatusIkon = (
 				<Bleed marginBlock="1 2" asChild>
@@ -90,7 +99,7 @@ const UtkastStatusData = (props: { status: UtkastStatus }) => {
 	return (
 		<span role="cell" className={'status'}>
 			{StatusIkon}
-			<BodyShort size="small">{mapBrukerStatusTilTekst(props.status)}</BodyShort>
+			<BodyShort size="small">{mapBrukerStatusTilTekst(status)}</BodyShort>
 		</span>
 	);
 };
