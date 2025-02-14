@@ -10,7 +10,7 @@ export const UserTableBody = ({ brukere }: UserTableBodyProps) => {
 	return (
 		<div role="rowgroup" className="user-table-body">
 			{brukere.map((bruker, idx) => (
-				<UserRow idx={idx} bruker={bruker} key={idx} />
+				<UserRow idx={idx} bruker={bruker} key={bruker.brukerFnr} />
 			))}
 		</div>
 	);
