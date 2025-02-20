@@ -30,7 +30,7 @@ export const UserRow = ({ idx, bruker }: Props) => {
 		// idx starter på 0, men gyldige verdier for aria-rowindex er 1 og oppover
 		<div role="row" aria-rowindex={idx + 1} className="user-table-row">
 			<div className="user-table-row__innhold">
-				<Bleed marginBlock="2" style={{ display: 'flex' }}>
+				<Bleed marginBlock="2" marginInline="3" style={{ display: 'flex' }}>
 					{!erMaskert && (
 						<BrukerDirektelenkeMedFeilmelding
 							fnr={brukerFnr}
@@ -38,13 +38,19 @@ export const UserRow = ({ idx, bruker }: Props) => {
 						/>
 					)}
 				</Bleed>
-				<BodyShort size="small">
+				<Bleed marginBlock="2" marginInline="3" style={{ display: 'flex' }}>
 					{brukerFnr && (
-						<Tooltip content="Kopier fødselsnr" placement="right">
-							<CopyButton copyText={brukerFnr} text={brukerFnr} size="xsmall" iconPosition="right" />
+						<Tooltip content="Kopier fødselsnummer" placement="right">
+							<CopyButton
+								size="small"
+								iconPosition="right"
+								copyText={brukerFnr}
+								text={brukerFnr}
+								className="user-table-row__innhold--knapp"
+							/>
 						</Tooltip>
 					)}
-				</BodyShort>
+				</Bleed>
 				<BodyShort size="small">{formatDateStr(vedtakStartet)}</BodyShort>
 				<UtkastStatusData status={status} />
 				<BodyShort size="small">{beslutterNavn ?? '–'}</BodyShort>
