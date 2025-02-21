@@ -15,7 +15,7 @@ export const UtkastStatusData = ({ status }: Props) => {
 	);
 };
 
-const utkaststatusTekstOgIkon: { [key in UtkastStatus]: { tekst: string; ikon: React.ReactNode } } = {
+export const utkaststatusTekstOgIkon: { [key in UtkastStatus]: { tekst: string; ikon: React.ReactNode } } = {
 	[UtkastStatus.TRENGER_BESLUTTER]: {
 		tekst: 'Trenger kvalitetssikring',
 		ikon: (

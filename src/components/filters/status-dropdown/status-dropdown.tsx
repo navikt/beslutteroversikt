@@ -1,12 +1,12 @@
 import { useRef } from 'react';
-import { UtkastStatus } from '../../../rest/data/bruker';
-import { mapBrukerStatusTilTekst } from '../../../utils';
-import { useSokStore } from '../../../stores/sok-store';
 import { Button, HStack, Select } from '@navikt/ds-react';
+import { UtkastStatus } from '../../../rest/data/bruker';
+import { useSokStore } from '../../../stores/sok-store';
+import { utkaststatusTekstOgIkon } from '../../user-table/body/status/utkast-status-data';
 import '../filters.css';
 
 export function mapStatusTilDropdownOption(status: UtkastStatus): DropdownOption {
-	return { value: status, label: mapBrukerStatusTilTekst(status) };
+	return { value: status, label: utkaststatusTekstOgIkon[status].tekst };
 }
 
 interface DropdownOption {
