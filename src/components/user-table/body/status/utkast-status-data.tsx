@@ -20,7 +20,7 @@ export const utkaststatusTekstOgIkon: { [key in UtkastStatus]: { tekst: string; 
 		tekst: 'Trenger kvalitetssikring',
 		ikon: (
 			<Bleed marginBlock="1 2" asChild>
-				<PersonPlusIcon title="Trenger kvalitetssikrer-ikon" className="status_ikon" />
+				<PersonPlusIcon aria-hidden={true} className="status_ikon" />
 			</Bleed>
 		)
 	},
@@ -28,7 +28,7 @@ export const utkaststatusTekstOgIkon: { [key in UtkastStatus]: { tekst: string; 
 		tekst: 'Venter på tilbakemelding',
 		ikon: (
 			<Bleed marginBlock="0 3" asChild>
-				<ChatExclamationmarkIcon title="Venter på tilbakemelding-ikon" className="status_ikon" />
+				<ChatExclamationmarkIcon aria-hidden={true} className="status_ikon" />
 			</Bleed>
 		)
 	},
@@ -36,7 +36,7 @@ export const utkaststatusTekstOgIkon: { [key in UtkastStatus]: { tekst: string; 
 		tekst: 'Venter på veileder',
 		ikon: (
 			<Bleed marginBlock="0 3" asChild>
-				<ChatElipsisIcon title="Venter på veileder-ikon" className="status_ikon" />
+				<ChatElipsisIcon aria-hidden={true} className="status_ikon" />
 			</Bleed>
 		)
 	},
@@ -44,7 +44,7 @@ export const utkaststatusTekstOgIkon: { [key in UtkastStatus]: { tekst: string; 
 		tekst: 'Klar til utsendelse',
 		ikon: (
 			<Bleed marginBlock="0 3" asChild>
-				<ChatElipsisIcon title="Godkjent av kvalitetssikrer-ikon" className="status_ikon" />
+				<ChatElipsisIcon aria-hidden={true} className="status_ikon" />
 			</Bleed>
 		)
 	}
