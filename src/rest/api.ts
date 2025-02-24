@@ -32,13 +32,40 @@ export enum OrderByField {
 	STATUS = 'STATUS',
 	STATUS_ENDRET = 'STATUS_ENDRET',
 	BESLUTTER_NAVN = 'BESLUTTER_NAVN',
-	VEILEDER_NAVN = 'VEILEDER_NAVN'
+	VEILEDER_NAVN = 'VEILEDER_NAVN',
+	TEST = 'TESTING TESTING' // TODO DENNE SKAL VEKK I ORDENTLEG SORTERING, er her berre medan eg jobbar meg rundt "undefined"-objektet Table vil ha inn i sort.
 }
 
 export enum OrderByDirection {
 	ASC = 'ASC',
 	DESC = 'DESC'
 }
+
+export type AkselSortDirection = 'ascending' | 'descending' | 'none';
+
+export const mapOrderByDirectionToAkselSortDirection = (dir: OrNothing<OrderByDirection>): AkselSortDirection => {
+	switch (dir) {
+		case OrderByDirection.ASC:
+			return 'ascending';
+		case OrderByDirection.DESC:
+			return 'descending';
+		default:
+			return 'none';
+	}
+};
+
+export const mapAkselSortDirectionToOrderByDirection = (
+	dir: AkselSortDirection | undefined
+): OrNothing<OrderByDirection> => {
+	switch (dir) {
+		case 'ascending':
+			return OrderByDirection.ASC;
+		case 'descending':
+			return OrderByDirection.DESC;
+		default:
+			return undefined;
+	}
+};
 
 export const lagHentBrukereFetchInfo = (params: { sok: BeslutteroversiktSok }): FetchInfo => ({
 	url: `${VEILARBVEDTAKSSTOTTE_API}/beslutteroversikt/sok`,

@@ -1,0 +1,10 @@
+.user-table-aksel td,
+.user-table-aksel th {
+	/* Set tekst i tabell-celler til 1rem, utan å miste padding-mengder frå tabellstorleik medium */
+	font-size: var(--a-font-size-medium);
+}
+
+.user-table-aksel button span {
+	/* Unngår feit tekst på knappar i tabell, til dømes namn og fødselsnummer */
+	font-weight: var(--a-font-weight-regular);
+}
