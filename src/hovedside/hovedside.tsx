@@ -2,7 +2,7 @@ import { Heading } from '@navikt/ds-react';
 import { Header } from '../components/header/header';
 import { PaginationBar } from '../components/pagination-bar/pagination-bar';
 import { UserTable } from '../components/user-table/user-table';
-import { UserTableAksel } from '../components/user-table/aksel-table/UserTableAksel';
+import { UserTableAksel } from '../components/user-table/aksel-table/user-table-aksel';
 import './hovedside.css';
 
 export const Hovedside = () => {
