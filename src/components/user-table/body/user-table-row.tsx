@@ -1,7 +1,7 @@
 import { Bleed, BodyShort, CopyButton, Tooltip } from '@navikt/ds-react';
 import { Bruker } from '../../../rest/data/bruker';
 import { formatDateStr, formatDateStrWithMonthName, formatTimeStr } from '../../../utils/date-utils';
-import { capitalize, fjernNavFraEnhetNavn, lagBrukerNavn } from '../../../utils';
+import { capitalize, lagBrukerNavn } from '../../../utils';
 import { BrukerDirektelenkeMedFeilmelding } from '../bruker-direktelenke-med-feilmelding';
 import { UtkastStatusData } from './status/utkast-status-data';
 import './user-table-body.less';
@@ -59,7 +59,7 @@ export const UserRow = ({ idx, bruker }: Props) => {
 					<span>{formatDateStrWithMonthName(statusEndret)}</span>&nbsp;
 					<span>{formatTimeStr(statusEndret)}</span>
 				</BodyShort>
-				<BodyShort size="small">{fjernNavFraEnhetNavn(brukerOppfolgingsenhetNavn)}</BodyShort>
+				<BodyShort size="small">{brukerOppfolgingsenhetNavn}</BodyShort>
 			</div>
 		</div>
 	);
