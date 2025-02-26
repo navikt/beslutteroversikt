@@ -1,15 +1,10 @@
-import { useState } from 'react';
 import { SortState, Table } from '@navikt/ds-react';
 import { UserTableRowAksel } from './body/user-table-row-aksel';
 import { useDataFetcherStore } from '../../../stores/data-fetcher-store';
 import { UserTableHeaderAksel } from './header/user-table-header-aksel';
-import {
-	AkselSortDirection,
-	mapAkselSortDirectionToOrderByDirection,
-	mapOrderByDirectionToAkselSortDirection,
-	OrderByField
-} from '../../../rest/api';
+import { mapOrderByDirectionToAkselSortDirection, OrderByDirection, OrderByField } from '../../../rest/api';
 import { useSokStore } from '../../../stores/sok-store';
+import { OrNothing } from '../../../utils/types/ornothing';
 import './user-table-aksel.css';
 
 interface ScopedSortState extends SortState {
@@ -20,57 +15,53 @@ export const UserTableAksel = () => {
 	const { brukereFetcher } = useDataFetcherStore();
 	const { orderByField, orderByDirection, setOrderByField, setOrderByDirection } = useSokStore();
 	const tableBrukere = (brukereFetcher.data && brukereFetcher.data.brukere) || [];
-	const [sort, setSort] = useState<ScopedSortState | undefined>();
 
-	const sortFraState: ScopedSortState = {
-		orderBy: orderByField ?? OrderByField.TEST,
-		direction: mapOrderByDirectionToAkselSortDirection(orderByDirection)
-	};
-
-	const sykleOrderBy = (nyKey: OrderByField, gamalKey: OrderByField, gamalDir: AkselSortDirection) => {
-		return nyKey === gamalKey && gamalDir === 'descending';
-	};
+	const sortState: ScopedSortState | undefined = orderByField
+		? {
+				orderBy: orderByField,
+				direction: mapOrderByDirectionToAkselSortDirection(orderByDirection)
+			}
+		: undefined;
 
 	const nextDir = (
 		nyKey: OrderByField,
-		gamalKey: OrderByField | undefined,
-		gamalDir: AkselSortDirection | undefined
-	): AkselSortDirection => {
+		gamalKey: OrNothing<OrderByField>,
+		gamalDir: OrNothing<OrderByDirection>
+	): OrderByDirection | undefined => {
 		if (gamalKey && gamalDir && nyKey === gamalKey) {
-			if (gamalDir === 'ascending') {
-				return 'descending';
+			if (gamalDir === OrderByDirection.ASC) {
+				return OrderByDirection.DESC;
 			}
-			if (gamalDir === 'descending') {
-				return 'none';
+			if (gamalDir === OrderByDirection.DESC) {
+				return undefined;
 			}
 		}
-		return 'ascending';
+		return OrderByDirection.ASC;
 	};
 
-	// Syklar gjennom "valgt kolonne asc, desc og ingen valgt kolonne" på kvart tredje klikk på same ting.
-	const handleSort = (sortKey: ScopedSortState['orderBy']) => {
-		setOrderByField(sortKey);
-		setOrderByDirection(mapAkselSortDirectionToOrderByDirection(nextDir(sortKey, sort?.orderBy, sort?.direction)));
+	const nextOrderByField = (
+		nyKey: OrderByField,
+		gamalKey: OrNothing<OrderByField>,
+		gamalDir: OrNothing<OrderByDirection>
+	): OrderByField | undefined => {
+		if (nyKey === gamalKey && gamalDir === OrderByDirection.DESC) {
+			return undefined;
+		}
+		return nyKey;
+	};
 
-		setSort(
-			sort && sykleOrderBy(sortKey, sort.orderBy, sort.direction)
-				? undefined
-				: {
-						orderBy: sortKey,
-						direction: nextDir(sortKey, sort?.orderBy, sort?.direction)
-					}
-		);
+	// Syklar gjennom "valgt kolonne asc, desc og ingen valgt kolonne" på kvart tredje klikk på same kolonneoverskrift.
+	const handleSort = (sortKey: ScopedSortState['orderBy']) => {
+		const oldSortKey = orderByField;
+		const oldSortDir = orderByDirection;
+
+		setOrderByField(nextOrderByField(sortKey, oldSortKey, oldSortDir));
+		setOrderByDirection(nextDir(sortKey, oldSortKey, oldSortDir));
 	};
 
 	return (
 		<>
 			<p>
-				Sort:
-				<br />
-				orderBy: {sort?.orderBy ?? 'undefined/null'}
-				<br />
-				direction: {sort?.direction ?? 'undefined/null'}
-				<br />
 				<br />
 				SortState:
 				<br />
@@ -80,8 +71,8 @@ export const UserTableAksel = () => {
 			</p>
 			<Table
 				title="Brukere som trenger kvalitetssikring"
-				sort={sortFraState}
-				onSortChange={sortKey => handleSort(sortKey as ScopedSortState['orderBy'])}
+				sort={sortState}
+				onSortChange={sortKey => handleSort(sortKey as OrderByField)}
 				className="user-table-aksel"
 				zebraStripes
 			>
