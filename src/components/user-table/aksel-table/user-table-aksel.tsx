@@ -30,22 +30,36 @@ export const UserTableAksel = () => {
 	const sykleOrderBy = (nyKey: OrderByField, gamalKey: OrderByField, gamalDir: AkselSortDirection) => {
 		return nyKey === gamalKey && gamalDir === 'descending';
 	};
-	const sykleDir = (nyKey: OrderByField, gamalKey: OrderByField, gamalDir: AkselSortDirection) => {
-		return nyKey === gamalKey && gamalDir === 'ascending';
+
+	const nextDir = (
+		nyKey: OrderByField,
+		gamalKey: OrderByField | undefined,
+		gamalDir: AkselSortDirection | undefined
+	): AkselSortDirection => {
+		if (gamalKey && gamalDir && nyKey === gamalKey) {
+			if (gamalDir === 'ascending') {
+				return 'descending';
+			}
+			if (gamalDir === 'descending') {
+				return 'none';
+			}
+		}
+		return 'ascending';
 	};
 
 	// Syklar gjennom "valgt kolonne asc, desc og ingen valgt kolonne" på kvart tredje klikk på same ting.
 	const handleSort = (sortKey: ScopedSortState['orderBy']) => {
+		setOrderByField(sortKey);
+		setOrderByDirection(mapAkselSortDirectionToOrderByDirection(nextDir(sortKey, sort?.orderBy, sort?.direction)));
+
 		setSort(
 			sort && sykleOrderBy(sortKey, sort.orderBy, sort.direction)
 				? undefined
 				: {
 						orderBy: sortKey,
-						direction: sort && sykleDir(sortKey, sort.orderBy, sort.direction) ? 'descending' : 'ascending'
+						direction: nextDir(sortKey, sort?.orderBy, sort?.direction)
 					}
 		);
-		setOrderByField(sort?.orderBy);
-		setOrderByDirection(mapAkselSortDirectionToOrderByDirection(sort?.direction ?? 'none'));
 	};
 
 	return (
