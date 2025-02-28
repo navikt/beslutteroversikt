@@ -1,7 +1,4 @@
-// tslint:disable-next-line:no-empty
-import { UtkastStatus } from '../rest/data/bruker';
-import { useEffect, useRef } from 'react';
-import { type RefObject } from 'react';
+import { type RefObject, useEffect, useRef } from 'react';
 
 export function usePrevious<T>(value: T) {
 	const ref = useRef<T>(value);
@@ -46,21 +43,6 @@ export function lagBrukerNavn(fornavn: string, etternavn: string): string {
 	}
 
 	return fornavn + ', ' + etternavn;
-}
-
-export function mapBrukerStatusTilTekst(status: UtkastStatus): string {
-	switch (status) {
-		case UtkastStatus.TRENGER_BESLUTTER:
-			return 'Trenger kvalitetssikring';
-		case UtkastStatus.KLAR_TIL_VEILEDER:
-			return 'Venter på veileder';
-		case UtkastStatus.KLAR_TIL_BESLUTTER:
-			return 'Venter på tilbakemelding';
-		case UtkastStatus.GODKJENT_AV_BESLUTTER:
-			return 'Klar til utsendelse';
-		default:
-			return '';
-	}
 }
 
 export const vedKlikkUtenfor = (refs: RefObject<HTMLElement>[], klikkTarget: Node | null, fn: () => void) => {

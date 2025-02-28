@@ -1,8 +1,6 @@
 import React from 'react';
 import NAVSPA from '@navikt/navspa';
-import { DecoratorConfig } from './internflate-decorator-config';
-import { erGCP } from '../../rest/utils';
-import { DecoratorPropsV3, Enhet, Environment } from './internflate-decorator-v3-config';
+import { DecoratorPropsV3, Environment } from './internflate-decorator-v3-config';
 
 const Decorator: React.ComponentType<DecoratorPropsV3> = NAVSPA.importer<DecoratorPropsV3>(
 	'internarbeidsflate-decorator-v3'
