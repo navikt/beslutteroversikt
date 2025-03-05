@@ -9,6 +9,12 @@
 	font-weight: var(--a-font-weight-regular);
 }
 
+.user-table-aksel .laster-tabelldata {
+	padding-left: calc(50% - 2rem); /* = halve tabellen minus halve breidda på loaderen i storleik 2xl.*/
+	padding-top: var(--a-spacing-12);
+	padding-bottom: var(--a-spacing-12);
+}
+
 .user-table-aksel .fant-ingen-brukere-alert {
 	padding: 0;
 }
