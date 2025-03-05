@@ -1,4 +1,4 @@
-import { SortState, Table } from '@navikt/ds-react';
+import { Alert, SortState, Table } from '@navikt/ds-react';
 import { UserTableRowAksel } from './body/user-table-row-aksel';
 import { useDataFetcherStore } from '../../../stores/data-fetcher-store';
 import { UserTableHeaderAksel } from './header/user-table-header-aksel';
@@ -50,7 +50,7 @@ export const UserTableAksel = () => {
 		return nyKey;
 	};
 
-	// Syklar gjennom "valgt kolonne asc, desc og ingen valgt kolonne" på kvart tredje klikk på same kolonneoverskrift.
+	// Vekslar mellom "valgt kolonne asc", "valgt kolonne desc" og "ingen valgt kolonne" på kvart tredje klikk på same kolonneoverskrift.
 	const handleSort = (sortKey: ScopedSortState['orderBy']) => {
 		const oldSortKey = orderByField;
 		const oldSortDir = orderByDirection;
@@ -83,6 +83,16 @@ export const UserTableAksel = () => {
 						<UserTableRowAksel bruker={bruker} key={index} />
 					))}
 				</Table.Body>
+				{tableBrukere.length === 0 && (
+					<Table.Row>
+						<Table.DataCell
+							colSpan={Object.values(OrderByField).length}
+							className="fant-ingen-brukere-alert"
+						>
+							<Alert variant="info">Fant ingen brukere</Alert>
+						</Table.DataCell>
+					</Table.Row>
+				)}
 			</Table>
 		</>
 	);

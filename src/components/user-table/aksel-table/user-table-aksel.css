@@ -8,3 +8,7 @@
 	/* Unngår feit tekst på knappar i tabell, til dømes namn og fødselsnummer */
 	font-weight: var(--a-font-weight-regular);
 }
+
+.user-table-aksel .fant-ingen-brukere-alert {
+	padding: 0;
+}
