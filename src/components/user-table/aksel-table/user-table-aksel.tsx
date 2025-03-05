@@ -5,6 +5,8 @@ import { UserTableHeaderAksel } from './header/user-table-header-aksel';
 import { mapOrderByDirectionToAkselSortDirection, OrderByDirection, OrderByField } from '../../../rest/api';
 import { useSokStore } from '../../../stores/sok-store';
 import { OrNothing } from '../../../utils/types/ornothing';
+import { hasFinished } from '../../../rest/utils';
+import Spinner from '../../felles/spinner/spinner';
 import './user-table-aksel.css';
 
 interface ScopedSortState extends SortState {
@@ -15,6 +17,7 @@ export const UserTableAksel = () => {
 	const { brukereFetcher } = useDataFetcherStore();
 	const { orderByField, orderByDirection, setOrderByField, setOrderByDirection } = useSokStore();
 	const tableBrukere = (brukereFetcher.data && brukereFetcher.data.brukere) || [];
+	const laster = !hasFinished(brukereFetcher);
 
 	const sortState: ScopedSortState | undefined = orderByField
 		? {
@@ -78,21 +81,32 @@ export const UserTableAksel = () => {
 			>
 				<UserTableHeaderAksel />
 				<Table.Body>
-					{tableBrukere.map((bruker, index) => (
-						// Bruker index som key fordi maskerte brukarar har fnr=""
-						<UserTableRowAksel bruker={bruker} key={index} />
-					))}
+					{laster ? (
+						<Table.Row>
+							<Table.DataCell colSpan={Object.values(OrderByField).length} className="laster-tabelldata">
+								<Spinner />
+							</Table.DataCell>
+						</Table.Row>
+					) : (
+						<>
+							{tableBrukere.map((bruker, index) => (
+								// Bruker index som key fordi maskerte brukarar har fnr=""
+								<UserTableRowAksel bruker={bruker} key={index} />
+							))}
+
+							{tableBrukere.length === 0 && (
+								<Table.Row>
+									<Table.DataCell
+										colSpan={Object.values(OrderByField).length}
+										className="fant-ingen-brukere-alert"
+									>
+										<Alert variant="info">Fant ingen brukere</Alert>
+									</Table.DataCell>
+								</Table.Row>
+							)}
+						</>
+					)}
 				</Table.Body>
-				{tableBrukere.length === 0 && (
-					<Table.Row>
-						<Table.DataCell
-							colSpan={Object.values(OrderByField).length}
-							className="fant-ingen-brukere-alert"
-						>
-							<Alert variant="info">Fant ingen brukere</Alert>
-						</Table.DataCell>
-					</Table.Row>
-				)}
 			</Table>
 		</>
 	);
