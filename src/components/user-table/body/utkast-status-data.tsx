@@ -8,7 +8,7 @@ interface Props {
 
 export const UtkastStatusData = ({ status }: Props) => {
 	return (
-		<span role="cell" className="status">
+		<span className="status">
 			{utkaststatusTekstOgIkon[status].ikon}
 			<BodyShort size="small">{utkaststatusTekstOgIkon[status].tekst}</BodyShort>
 		</span>

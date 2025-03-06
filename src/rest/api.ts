@@ -32,8 +32,7 @@ export enum OrderByField {
 	STATUS = 'STATUS',
 	STATUS_ENDRET = 'STATUS_ENDRET',
 	BESLUTTER_NAVN = 'BESLUTTER_NAVN',
-	VEILEDER_NAVN = 'VEILEDER_NAVN',
-	TEST = 'TESTING TESTING' // TODO DENNE SKAL VEKK I ORDENTLEG SORTERING, er her berre medan eg jobbar meg rundt "undefined"-objektet Table vil ha inn i sort.
+	VEILEDER_NAVN = 'VEILEDER_NAVN'
 }
 
 export enum OrderByDirection {
