@@ -64,14 +64,6 @@ export const UserTable = () => {
 
 	return (
 		<div className="user-table-container">
-			<p>
-				<br />
-				SortState:
-				<br />
-				orderByField: {orderByField ?? 'undefined/null'}
-				<br />
-				orderByDirection: {orderByDirection ?? 'undefined/null'}
-			</p>
 			<Table
 				aria-label="Brukere som trenger kvalitetssikring"
 				sort={sortState}
