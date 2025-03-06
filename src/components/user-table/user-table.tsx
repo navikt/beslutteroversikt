@@ -17,7 +17,7 @@ interface ScopedSortState extends SortState {
 export const UserTable = () => {
 	const { orderByField, orderByDirection, setOrderByField, setOrderByDirection } = useSokStore();
 
-	const sortState: ScopedSortState | undefined = orderByField
+	const sortStateTilTabell: ScopedSortState | undefined = orderByField
 		? {
 				orderBy: orderByField,
 				direction: mapOrderByDirectionToAkselSortDirection(orderByDirection)
@@ -39,10 +39,10 @@ export const UserTable = () => {
 		<div className="user-table-container">
 			<Table
 				aria-label="Brukere som trenger kvalitetssikring"
-				sort={sortState}
+				sort={sortStateTilTabell}
 				onSortChange={sortKey => handleSortering(sortKey as OrderByField)}
 				className="user-table"
-				zebraStripes
+				zebraStripes={true}
 			>
 				<UserTableHeader />
 				<UserTableBody />

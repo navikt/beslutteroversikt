@@ -18,7 +18,7 @@ export const UserTableBody = () => {
 			) : (
 				<>
 					{brukere.map((bruker, index) => (
-						// Bruker index som key fordi maskerte brukarar har fnr=""
+						// Bruker index som key fordi maskerte brukarar har fnr="" og vi ikkje har noko anna unik info på brukar
 						<UserTableRow bruker={bruker} key={index} />
 					))}
 
