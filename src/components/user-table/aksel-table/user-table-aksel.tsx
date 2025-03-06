@@ -63,7 +63,7 @@ export const UserTableAksel = () => {
 	};
 
 	return (
-		<>
+		<div className="user-table-container">
 			<p>
 				<br />
 				SortState:
@@ -73,7 +73,7 @@ export const UserTableAksel = () => {
 				orderByDirection: {orderByDirection ?? 'undefined/null'}
 			</p>
 			<Table
-				title="Brukere som trenger kvalitetssikring"
+				aria-label="Brukere som trenger kvalitetssikring"
 				sort={sortState}
 				onSortChange={sortKey => handleSort(sortKey as OrderByField)}
 				className="user-table-aksel"
@@ -82,7 +82,7 @@ export const UserTableAksel = () => {
 				<UserTableHeaderAksel />
 				<Table.Body>
 					{laster ? (
-						<Table.Row>
+						<Table.Row shadeOnHover={false}>
 							<Table.DataCell colSpan={Object.values(OrderByField).length} className="laster-tabelldata">
 								<Spinner />
 							</Table.DataCell>
@@ -95,7 +95,7 @@ export const UserTableAksel = () => {
 							))}
 
 							{tableBrukere.length === 0 && (
-								<Table.Row>
+								<Table.Row shadeOnHover={false}>
 									<Table.DataCell
 										colSpan={Object.values(OrderByField).length}
 										className="fant-ingen-brukere-alert"
@@ -108,6 +108,6 @@ export const UserTableAksel = () => {
 					)}
 				</Table.Body>
 			</Table>
-		</>
+		</div>
 	);
 };

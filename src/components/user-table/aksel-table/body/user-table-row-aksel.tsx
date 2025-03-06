@@ -26,7 +26,7 @@ export const UserTableRowAksel = ({ bruker }: Props) => {
 	const erMaskert = brukerFnr === '';
 
 	return (
-		<Table.Row>
+		<Table.Row shadeOnHover={false}>
 			<Table.HeaderCell>
 				{!erMaskert && (
 					<BrukerDirektelenkeMedFeilmelding
