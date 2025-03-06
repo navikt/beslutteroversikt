@@ -40,32 +40,6 @@ export enum OrderByDirection {
 	DESC = 'DESC'
 }
 
-export type AkselSortDirection = 'ascending' | 'descending' | 'none';
-
-export const mapOrderByDirectionToAkselSortDirection = (dir: OrNothing<OrderByDirection>): AkselSortDirection => {
-	switch (dir) {
-		case OrderByDirection.ASC:
-			return 'ascending';
-		case OrderByDirection.DESC:
-			return 'descending';
-		default:
-			return 'none';
-	}
-};
-
-export const mapAkselSortDirectionToOrderByDirection = (
-	dir: AkselSortDirection | undefined
-): OrNothing<OrderByDirection> => {
-	switch (dir) {
-		case 'ascending':
-			return OrderByDirection.ASC;
-		case 'descending':
-			return OrderByDirection.DESC;
-		default:
-			return undefined;
-	}
-};
-
 export const lagHentBrukereFetchInfo = (params: { sok: BeslutteroversiktSok }): FetchInfo => ({
 	url: `${VEILARBVEDTAKSSTOTTE_API}/beslutteroversikt/sok`,
 	method: 'POST',

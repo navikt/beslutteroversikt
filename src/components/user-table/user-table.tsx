@@ -2,7 +2,7 @@ import { Alert, SortState, Table } from '@navikt/ds-react';
 import { UserTableRow } from './body/user-table-row';
 import { useDataFetcherStore } from '../../stores/data-fetcher-store';
 import { UserTableHeader } from './header/user-table-header';
-import { mapOrderByDirectionToAkselSortDirection, OrderByDirection, OrderByField } from '../../rest/api';
+import { OrderByDirection, OrderByField } from '../../rest/api';
 import { useSokStore } from '../../stores/sok-store';
 import { OrNothing } from '../../utils/types/ornothing';
 import { hasFinished } from '../../rest/utils';
@@ -110,4 +110,17 @@ export const UserTable = () => {
 			</Table>
 		</div>
 	);
+};
+
+type AkselSortDirection = 'ascending' | 'descending' | 'none';
+
+const mapOrderByDirectionToAkselSortDirection = (dir: OrNothing<OrderByDirection>): AkselSortDirection => {
+	switch (dir) {
+		case OrderByDirection.ASC:
+			return 'ascending';
+		case OrderByDirection.DESC:
+			return 'descending';
+		default:
+			return 'none';
+	}
 };
