@@ -3,12 +3,12 @@ import { UserTableHeader } from './header/user-table-header';
 import { UserTableBody } from './body/user-table-body';
 import { OrderByField } from '../../rest/api';
 import { useSokStore } from '../../stores/sok-store';
-import './user-table.css';
 import {
 	finnNesteSorteringsretning,
-	finnNesteSorteringsverdi,
+	finnNesteSorteringsfelt,
 	mapOrderByDirectionToAkselSortDirection
 } from './sortering-utils';
+import './user-table.css';
 
 interface ScopedSortState extends SortState {
 	orderBy: OrderByField;
@@ -24,13 +24,15 @@ export const UserTable = () => {
 			}
 		: undefined;
 
-	// Vekslar mellom "valgt kolonne asc", "valgt kolonne desc" og "ingen valgt kolonne" på kvart tredje klikk på same kolonneoverskrift.
-	const handleSort = (sortKey: ScopedSortState['orderBy']) => {
-		const oldSortKey = orderByField;
-		const oldSortDir = orderByDirection;
+	/**
+	 * Vekslar mellom "valgt kolonne asc", "valgt kolonne desc" og "ingen valgt kolonne" på kvart tredje klikk på same kolonneoverskrift.
+	 */
+	const handleSortering = (sorteringsfelt: ScopedSortState['orderBy']) => {
+		const gammeltSorteringsfelt = orderByField;
+		const gammelSorteringsretning = orderByDirection;
 
-		setOrderByField(finnNesteSorteringsverdi(sortKey, oldSortKey, oldSortDir));
-		setOrderByDirection(finnNesteSorteringsretning(sortKey, oldSortKey, oldSortDir));
+		setOrderByField(finnNesteSorteringsfelt(sorteringsfelt, gammeltSorteringsfelt, gammelSorteringsretning));
+		setOrderByDirection(finnNesteSorteringsretning(sorteringsfelt, gammeltSorteringsfelt, gammelSorteringsretning));
 	};
 
 	return (
@@ -38,7 +40,7 @@ export const UserTable = () => {
 			<Table
 				aria-label="Brukere som trenger kvalitetssikring"
 				sort={sortState}
-				onSortChange={sortKey => handleSort(sortKey as OrderByField)}
+				onSortChange={sortKey => handleSortering(sortKey as OrderByField)}
 				className="user-table"
 				zebraStripes
 			>
