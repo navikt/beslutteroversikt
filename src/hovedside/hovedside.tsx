@@ -1,6 +1,6 @@
 import { Header } from '../components/header/header';
 import { PaginationBar } from '../components/pagination-bar/pagination-bar';
-import { UserTableAksel } from '../components/user-table/aksel-table/user-table-aksel';
+import { UserTable } from '../components/user-table/user-table';
 import './hovedside.css';
 
 export const Hovedside = () => {
@@ -8,7 +8,7 @@ export const Hovedside = () => {
 		<main className="hovedside">
 			<Header />
 			<PaginationBar />
-			<UserTableAksel />
+			<UserTable />
 		</main>
 	);
 };

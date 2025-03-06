@@ -3,27 +3,27 @@
 	padding-right: var(--a-spacing-8);
 }
 
-.user-table-aksel {
+.user-table {
 	background: white;
 }
 
-.user-table-aksel td,
-.user-table-aksel th {
+.user-table td,
+.user-table th {
 	/* Set tekst i tabell-celler til 1rem, utan å miste padding-mengder frå tabellstorleik medium */
 	font-size: var(--a-font-size-medium);
 }
 
-.user-table-aksel button span {
+.user-table button span {
 	/* Unngår feit tekst på knappar i tabell, til dømes namn og fødselsnummer */
 	font-weight: var(--a-font-weight-regular);
 }
 
-.user-table-aksel .laster-tabelldata {
+.user-table .laster-tabelldata {
 	padding-left: calc(50% - 2rem); /* = halve tabellen minus halve breidda på loaderen i storleik 2xl.*/
 	padding-top: var(--a-spacing-12);
 	padding-bottom: var(--a-spacing-12);
 }
 
-.user-table-aksel .fant-ingen-brukere-alert {
+.user-table .fant-ingen-brukere-alert {
 	padding: 0;
 }

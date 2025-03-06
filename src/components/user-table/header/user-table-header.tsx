@@ -1,7 +1,7 @@
 import { Table } from '@navikt/ds-react';
-import { OrderByField } from '../../../../rest/api';
+import { OrderByField } from '../../../rest/api';
 
-export const UserTableHeaderAksel = () => {
+export const UserTableHeader = () => {
 	return (
 		<Table.Header>
 			<Table.Row>

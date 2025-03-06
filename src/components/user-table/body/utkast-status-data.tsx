@@ -1,6 +1,6 @@
 import { Bleed, BodyShort } from '@navikt/ds-react';
 import { ChatElipsisIcon, ChatExclamationmarkIcon, PersonPlusIcon } from '@navikt/aksel-icons';
-import { UtkastStatus } from '../../../../rest/data/bruker';
+import { UtkastStatus } from '../../../rest/data/bruker';
 
 interface Props {
 	status: UtkastStatus;

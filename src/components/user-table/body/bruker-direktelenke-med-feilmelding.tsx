@@ -1,12 +1,12 @@
 import { useRef, useState } from 'react';
 import { BodyShort, Button, Popover } from '@navikt/ds-react';
 import { ExclamationmarkTriangleIcon } from '@navikt/aksel-icons';
-import { useEventListener } from '../../hooks/use-event-listener';
-import { vedKlikkUtenfor } from '../../utils';
-import { lagSettBrukerIKontekstFetchInfo } from '../../rest/api';
-import { FetchState, hasFailed } from '../../rest/utils';
-import useFetch from '../../rest/use-fetch';
-import env from '../../utils/environment';
+import { useEventListener } from '../../../hooks/use-event-listener';
+import { vedKlikkUtenfor } from '../../../utils';
+import { lagSettBrukerIKontekstFetchInfo } from '../../../rest/api';
+import { FetchState, hasFailed } from '../../../rest/utils';
+import useFetch from '../../../rest/use-fetch';
+import env from '../../../utils/environment';
 
 interface Props {
 	fnr: string;
@@ -69,7 +69,6 @@ export const BrukerDirektelenkeMedFeilmelding = ({ fnr, knappTekst }: Props) => 
 				loading={settBrukerIKontekstFetcher.status === 'PENDING'}
 				ref={knappeRef}
 				onClick={handleClick}
-				className="user-table-row__innhold--knapp"
 				aria-expanded={popoverErApen}
 				aria-label={
 					hasFailed(settBrukerIKontekstFetcher)

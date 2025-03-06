@@ -1,16 +1,16 @@
 import { CopyButton, Table, Tooltip } from '@navikt/ds-react';
-import { Bruker } from '../../../../rest/data/bruker';
-import { capitalize, fjernNavFraEnhetNavn, lagBrukerNavn } from '../../../../utils';
-import { formatDateStr, formatDateStrWithMonthName, formatTimeStr } from '../../../../utils/date-utils';
-import { UtkastStatusData } from '../../body/status/utkast-status-data';
-import { BrukerDirektelenkeMedFeilmelding } from '../../bruker-direktelenke-med-feilmelding';
-import './user-table-row-aksel.css';
+import { Bruker } from '../../../rest/data/bruker';
+import { capitalize, fjernNavFraEnhetNavn, lagBrukerNavn } from '../../../utils';
+import { formatDateStr, formatDateStrWithMonthName, formatTimeStr } from '../../../utils/date-utils';
+import { UtkastStatusData } from './utkast-status-data';
+import { BrukerDirektelenkeMedFeilmelding } from './bruker-direktelenke-med-feilmelding';
+import './user-table-row.css';
 
 interface Props {
 	bruker: Bruker;
 }
 
-export const UserTableRowAksel = ({ bruker }: Props) => {
+export const UserTableRow = ({ bruker }: Props) => {
 	const {
 		brukerFnr,
 		brukerFornavn,
@@ -49,7 +49,7 @@ export const UserTableRowAksel = ({ bruker }: Props) => {
 				)}
 			</Table.DataCell>
 			<Table.DataCell>{formatDateStr(vedtakStartet)}</Table.DataCell>
-			<Table.DataCell className="utkast-status">
+			<Table.DataCell className="utkast-status-celle">
 				<UtkastStatusData status={status} />
 			</Table.DataCell>
 			<Table.DataCell>{beslutterNavn ?? '-'}</Table.DataCell>

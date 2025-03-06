@@ -1,19 +1,19 @@
 import { Alert, SortState, Table } from '@navikt/ds-react';
-import { UserTableRowAksel } from './body/user-table-row-aksel';
-import { useDataFetcherStore } from '../../../stores/data-fetcher-store';
-import { UserTableHeaderAksel } from './header/user-table-header-aksel';
-import { mapOrderByDirectionToAkselSortDirection, OrderByDirection, OrderByField } from '../../../rest/api';
-import { useSokStore } from '../../../stores/sok-store';
-import { OrNothing } from '../../../utils/types/ornothing';
-import { hasFinished } from '../../../rest/utils';
-import Spinner from '../../felles/spinner/spinner';
-import './user-table-aksel.css';
+import { UserTableRow } from './body/user-table-row';
+import { useDataFetcherStore } from '../../stores/data-fetcher-store';
+import { UserTableHeader } from './header/user-table-header';
+import { mapOrderByDirectionToAkselSortDirection, OrderByDirection, OrderByField } from '../../rest/api';
+import { useSokStore } from '../../stores/sok-store';
+import { OrNothing } from '../../utils/types/ornothing';
+import { hasFinished } from '../../rest/utils';
+import Spinner from '../felles/spinner/spinner';
+import './user-table.css';
 
 interface ScopedSortState extends SortState {
 	orderBy: OrderByField;
 }
 
-export const UserTableAksel = () => {
+export const UserTable = () => {
 	const { brukereFetcher } = useDataFetcherStore();
 	const { orderByField, orderByDirection, setOrderByField, setOrderByDirection } = useSokStore();
 	const tableBrukere = (brukereFetcher.data && brukereFetcher.data.brukere) || [];
@@ -76,10 +76,10 @@ export const UserTableAksel = () => {
 				aria-label="Brukere som trenger kvalitetssikring"
 				sort={sortState}
 				onSortChange={sortKey => handleSort(sortKey as OrderByField)}
-				className="user-table-aksel"
+				className="user-table"
 				zebraStripes
 			>
-				<UserTableHeaderAksel />
+				<UserTableHeader />
 				<Table.Body>
 					{laster ? (
 						<Table.Row shadeOnHover={false}>
@@ -91,7 +91,7 @@ export const UserTableAksel = () => {
 						<>
 							{tableBrukere.map((bruker, index) => (
 								// Bruker index som key fordi maskerte brukarar har fnr=""
-								<UserTableRowAksel bruker={bruker} key={index} />
+								<UserTableRow bruker={bruker} key={index} />
 							))}
 
 							{tableBrukere.length === 0 && (
