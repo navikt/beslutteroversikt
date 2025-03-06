@@ -1,9 +1,9 @@
-import { Alert, Table } from '@navikt/ds-react';
-import { OrderByField } from '../../../rest/api';
+import { Table } from '@navikt/ds-react';
+import { LasterInnholdRad } from './laster-innhold-rad';
 import { UserTableRow } from './user-table-row';
+import { FantIngenBrukereAlertRad } from './fant-ingen-brukere-alert-rad';
 import { useDataFetcherStore } from '../../../stores/data-fetcher-store';
 import { hasFinished } from '../../../rest/utils';
-import Spinner from '../../felles/spinner/spinner';
 import './user-table-body.css';
 
 export const UserTableBody = () => {
@@ -14,11 +14,7 @@ export const UserTableBody = () => {
 	return (
 		<Table.Body className="user-table-body">
 			{laster ? (
-				<Table.Row shadeOnHover={false}>
-					<Table.DataCell colSpan={Object.values(OrderByField).length} className="laster-tabelldata">
-						<Spinner />
-					</Table.DataCell>
-				</Table.Row>
+				<LasterInnholdRad />
 			) : (
 				<>
 					{brukere.map((bruker, index) => (
@@ -26,16 +22,7 @@ export const UserTableBody = () => {
 						<UserTableRow bruker={bruker} key={index} />
 					))}
 
-					{brukere.length === 0 && (
-						<Table.Row shadeOnHover={false}>
-							<Table.DataCell
-								colSpan={Object.values(OrderByField).length}
-								className="fant-ingen-brukere-alert"
-							>
-								<Alert variant="info">Fant ingen brukere</Alert>
-							</Table.DataCell>
-						</Table.Row>
-					)}
+					{brukere.length === 0 && <FantIngenBrukereAlertRad />}
 				</>
 			)}
 		</Table.Body>
