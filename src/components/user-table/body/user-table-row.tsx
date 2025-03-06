@@ -38,13 +38,7 @@ export const UserTableRow = ({ bruker }: Props) => {
 			<Table.DataCell>
 				{brukerFnr && (
 					<Tooltip content="Kopier fødselsnummer" placement="right">
-						<CopyButton
-							size="small"
-							iconPosition="right"
-							copyText={brukerFnr}
-							text={brukerFnr}
-							className="user-table-row__innhold--knapp"
-						/>
+						<CopyButton size="small" iconPosition="right" copyText={brukerFnr} text={brukerFnr} />
 					</Tooltip>
 				)}
 			</Table.DataCell>

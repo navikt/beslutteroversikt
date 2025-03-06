@@ -4,6 +4,7 @@ import { UserTableRow } from './user-table-row';
 import { useDataFetcherStore } from '../../../stores/data-fetcher-store';
 import { hasFinished } from '../../../rest/utils';
 import Spinner from '../../felles/spinner/spinner';
+import './user-table-body.css';
 
 export const UserTableBody = () => {
 	const { brukereFetcher } = useDataFetcherStore();
@@ -11,7 +12,7 @@ export const UserTableBody = () => {
 	const laster = !hasFinished(brukereFetcher);
 
 	return (
-		<Table.Body>
+		<Table.Body className="user-table-body">
 			{laster ? (
 				<Table.Row shadeOnHover={false}>
 					<Table.DataCell colSpan={Object.values(OrderByField).length} className="laster-tabelldata">
