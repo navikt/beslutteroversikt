@@ -1,6 +1,6 @@
 import { CopyButton, Table, Tooltip } from '@navikt/ds-react';
 import { Bruker } from '../../../rest/data/bruker';
-import { capitalize, fjernNavFraEnhetNavn, lagBrukerNavn } from '../../../utils';
+import { capitalize, lagBrukerNavn } from '../../../utils';
 import { formatDateStr, formatDateStrWithMonthName, formatTimeStr } from '../../../utils/date-utils';
 import { UtkastStatusData } from './utkast-status-data';
 import { BrukerDirektelenkeMedFeilmelding } from './bruker-direktelenke-med-feilmelding';
@@ -52,9 +52,7 @@ export const UserTableRow = ({ bruker }: Props) => {
 			</Table.DataCell>
 			<Table.DataCell className="celle-med-tekst">{beslutterNavn ?? '-'}</Table.DataCell>
 			<Table.DataCell className="celle-med-tekst">{veilederNavn}</Table.DataCell>
-			<Table.DataCell className="celle-med-tekst">
-				{fjernNavFraEnhetNavn(brukerOppfolgingsenhetNavn)}
-			</Table.DataCell>
+			<Table.DataCell className="celle-med-tekst">{brukerOppfolgingsenhetNavn}</Table.DataCell>
 		</Table.Row>
 	);
 };
