@@ -1,48 +1,52 @@
-import { Alert } from '@navikt/ds-react';
+import { SortState, Table } from '@navikt/ds-react';
 import { UserTableHeader } from './header/user-table-header';
 import { UserTableBody } from './body/user-table-body';
-import { OrderByData } from './table-utils';
+import { OrderByField } from '../../rest/api';
 import { useSokStore } from '../../stores/sok-store';
-import { useDataFetcherStore } from '../../stores/data-fetcher-store';
-import { hasFinished, isNotStartedOrPending } from '../../rest/utils';
-import Spinner from '../felles/spinner/spinner';
-import './user-table.less';
+import {
+	finnNesteSorteringsretning,
+	finnNesteSorteringsfelt,
+	mapOrderByDirectionToAkselSortDirection
+} from './sortering-utils';
+import './user-table.css';
+
+interface ScopedSortState extends SortState {
+	orderBy: OrderByField;
+}
 
 export const UserTable = () => {
-	const { brukereFetcher } = useDataFetcherStore();
 	const { orderByField, orderByDirection, setOrderByField, setOrderByDirection } = useSokStore();
-	const tableBrukere = (brukereFetcher.data && brukereFetcher.data.brukere) || [];
 
-	const orderByData: OrderByData = {
-		field: orderByField,
-		direction: orderByDirection
-	};
-
-	function handleOnOrderByChanged(nyData: OrderByData) {
-		setOrderByField(nyData.field);
-		setOrderByDirection(nyData.direction);
-	}
-
-	const tableOrAlert = () => {
-		if (hasFinished(brukereFetcher)) {
-			if (tableBrukere.length === 0) {
-				return <Alert variant="info">Fant ingen brukere</Alert>;
-			} else {
-				return <UserTableBody brukere={tableBrukere} />;
+	const sortStateTilTabell: ScopedSortState | undefined = orderByField
+		? {
+				orderBy: orderByField,
+				direction: mapOrderByDirectionToAkselSortDirection(orderByDirection)
 			}
-		}
+		: undefined;
+
+	/**
+	 * Vekslar mellom "valgt kolonne asc", "valgt kolonne desc" og "ingen valgt kolonne" på kvart tredje klikk på same kolonneoverskrift.
+	 */
+	const handleSortering = (sorteringsfelt: ScopedSortState['orderBy']) => {
+		const gammeltSorteringsfelt = orderByField;
+		const gammelSorteringsretning = orderByDirection;
+
+		setOrderByField(finnNesteSorteringsfelt(sorteringsfelt, gammeltSorteringsfelt, gammelSorteringsretning));
+		setOrderByDirection(finnNesteSorteringsretning(sorteringsfelt, gammeltSorteringsfelt, gammelSorteringsretning));
 	};
 
 	return (
-		<div
-			role="table"
-			aria-label="Brukere som trenger kvalitetssikring"
-			aria-rowcount={tableBrukere.length}
-			className="user-table"
-		>
-			<UserTableHeader orderByData={orderByData} onOrderByChanged={handleOnOrderByChanged} />
-			{isNotStartedOrPending(brukereFetcher) && <Spinner />}
-			{tableOrAlert()}
+		<div className="user-table-container">
+			<Table
+				aria-label="Brukere som trenger kvalitetssikring"
+				sort={sortStateTilTabell}
+				onSortChange={sortKey => handleSortering(sortKey as OrderByField)}
+				className="user-table"
+				zebraStripes={true}
+			>
+				<UserTableHeader />
+				<UserTableBody />
+			</Table>
 		</div>
 	);
 };

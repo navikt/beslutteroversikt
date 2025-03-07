@@ -1,0 +1,14 @@
+.user-table-container {
+	padding-left: var(--a-spacing-8);
+	padding-right: var(--a-spacing-8);
+}
+
+.user-table {
+	background: white;
+}
+
+.user-table td,
+.user-table th {
+	/* Set tekst i tabell-celler til 1rem, utan å miste padding-mengder frå tabellstorleik medium */
+	font-size: var(--a-font-size-medium);
+}

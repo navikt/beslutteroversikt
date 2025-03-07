@@ -2,7 +2,7 @@ import { useRef } from 'react';
 import { Button, HStack, Select } from '@navikt/ds-react';
 import { UtkastStatus } from '../../../rest/data/bruker';
 import { useSokStore } from '../../../stores/sok-store';
-import { utkaststatusTekstOgIkon } from '../../user-table/body/status/utkast-status-data';
+import { utkaststatusTekstOgIkon } from '../../user-table/body/utkast-status-data';
 import '../filters.css';
 
 export const StatusDropdown = () => {

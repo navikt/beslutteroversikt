@@ -1,0 +1,14 @@
+.user-table-body button span {
+	/* Unngår feit tekst på knappar i tabell, til dømes namn og fødselsnummer */
+	font-weight: var(--a-font-weight-regular);
+}
+
+.user-table-body .laster-tabelldata {
+	padding-left: calc(50% - 2rem); /* = halve tabellen minus halve breidda på loaderen som har breidd 2xl (4rem).*/
+	padding-top: var(--a-spacing-12);
+	padding-bottom: var(--a-spacing-12);
+}
+
+.user-table-body .fant-ingen-brukere-alert {
+	padding: 0;
+}
