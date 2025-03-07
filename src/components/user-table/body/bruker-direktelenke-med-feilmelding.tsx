@@ -76,6 +76,7 @@ export const BrukerDirektelenkeMedFeilmelding = ({ fnr, knappTekst }: Props) => 
 						: undefined
 				}
 				aria-live="assertive"
+				className="bruker-direktelenke-knapp"
 			>
 				{knappTekst}
 			</Button>

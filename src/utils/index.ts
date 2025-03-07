@@ -11,18 +11,12 @@ export function usePrevious<T>(value: T) {
 	return ref.current;
 }
 
-export function doNothing() {}
-
 export function isEmpty(str: string): boolean {
 	return str ? str.trim().length === 0 : true;
 }
 
 export function randBetween(from: number, to: number): number {
 	return Math.round(Math.random() * (to - from) + from);
-}
-
-export function fjernNavFraEnhetNavn(enhetNavn: string): string {
-	return enhetNavn.replace('NAV', '').trim();
 }
 
 export function capitalize(str: string) {
