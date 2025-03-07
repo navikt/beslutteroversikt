@@ -46,12 +46,12 @@ export const UserTableRow = ({ bruker }: Props) => {
 			<Table.DataCell className="utkast-status-celle">
 				<UtkastStatusData status={status} />
 			</Table.DataCell>
-			<Table.DataCell>{beslutterNavn ?? '-'}</Table.DataCell>
-			<Table.DataCell>{veilederNavn}</Table.DataCell>
 			<Table.DataCell>
 				<span>{formatDateStrWithMonthName(statusEndret)}</span>&nbsp;
 				<span>{formatTimeStr(statusEndret)}</span>
 			</Table.DataCell>
+			<Table.DataCell>{beslutterNavn ?? '-'}</Table.DataCell>
+			<Table.DataCell>{veilederNavn}</Table.DataCell>
 			<Table.DataCell>{fjernNavFraEnhetNavn(brukerOppfolgingsenhetNavn)}</Table.DataCell>
 		</Table.Row>
 	);
