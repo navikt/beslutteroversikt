@@ -1,3 +1,8 @@
+.bruker-direktelenke-knapp {
+	/* Gjer at namna havnar rett under kvarandre i tabellen, også når nokre namn er lange eller skjermen er liten */
+	text-align: start;
+}
+
 .utkast-status-celle .status {
 	display: flex;
 	gap: var(--a-spacing-2);
