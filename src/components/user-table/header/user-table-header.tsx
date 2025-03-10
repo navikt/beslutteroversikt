@@ -17,14 +17,14 @@ export const UserTableHeader = () => {
 				<Table.ColumnHeader sortKey={OrderByField.STATUS} sortable>
 					Status
 				</Table.ColumnHeader>
+				<Table.ColumnHeader sortKey={OrderByField.STATUS_ENDRET} sortable>
+					Status endret
+				</Table.ColumnHeader>
 				<Table.ColumnHeader sortKey={OrderByField.BESLUTTER_NAVN} sortable>
 					Kvalitetssikrer
 				</Table.ColumnHeader>
 				<Table.ColumnHeader sortKey={OrderByField.VEILEDER_NAVN} sortable>
 					Veileder
-				</Table.ColumnHeader>
-				<Table.ColumnHeader sortKey={OrderByField.STATUS_ENDRET} sortable>
-					Status endret
 				</Table.ColumnHeader>
 				<Table.ColumnHeader sortKey={OrderByField.BRUKER_OPPFOLGINGSENHET_NAVN} sortable>
 					Enhet
