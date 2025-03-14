@@ -11,7 +11,7 @@ export const BrukerFilter = () => {
 
 	return (
 		<Checkbox size="small" checked={filters.visMineBrukere} onChange={handleOnVisMineBrukereChanged}>
-			Mine brukere
+			Utkast jeg kvalitetssikrer
 		</Checkbox>
 	);
 };
