@@ -118,7 +118,7 @@ spec:
               "toApp": {
                 "name": "obo-unleash",
                 "namespace": "obo",
-                "cluster": "dev-gcp"
+                "cluster": "prod-gcp"
               }
             },
           ]
