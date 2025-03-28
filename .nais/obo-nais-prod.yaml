@@ -46,6 +46,8 @@ spec:
           namespace: personoversikt
         - application: veilarbveileder
         - application: veilarbvedtaksstotte
+        - application: obo-unleash
+          namespace: obo
   env:
     - name: JSON_CONFIG
       value: >
@@ -108,6 +110,16 @@ spec:
                 "namespace": "obo",
                 "cluster": "prod-gcp"
               }
-            }
+            },
+            {
+              "fromPath": "/obo-unleash",
+              "toUrl": "http://obo-unleash.obo",
+              "preserveFromPath": false,
+              "toApp": {
+                "name": "obo-unleash",
+                "namespace": "obo",
+                "cluster": "dev-gcp"
+              }
+            },
           ]
         }
