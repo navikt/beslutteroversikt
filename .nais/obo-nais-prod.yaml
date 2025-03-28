@@ -120,6 +120,6 @@ spec:
                 "namespace": "obo",
                 "cluster": "prod-gcp"
               }
-            },
+            }
           ]
         }
