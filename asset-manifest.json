@@ -1,6 +1,6 @@
 {
   "index.html": {
-    "file": "assets/index-p4IeoW4D.js",
+    "file": "assets/index-pRhMkE4L.js",
     "name": "index",
     "src": "index.html",
     "isEntry": true,
@@ -8,23 +8,16 @@
       "src/mock/index.ts"
     ],
     "css": [
-      "assets/index-5RAbEbqK.css"
-    ],
-    "assets": [
-      "assets/prelansering_info_pc-D3DZ2B1p.svg"
+      "assets/index-CXXatR6z.css"
     ]
   },
   "src/mock/index.ts": {
-    "file": "assets/index-2-HAcVJn.js",
+    "file": "assets/index-BrbgKMi8.js",
     "name": "index",
     "src": "src/mock/index.ts",
     "isDynamicEntry": true,
     "imports": [
       "index.html"
     ]
-  },
-  "src/prelansering-side/prelansering_info_pc.svg": {
-    "file": "assets/prelansering_info_pc-D3DZ2B1p.svg",
-    "src": "src/prelansering-side/prelansering_info_pc.svg"
   }
 }
