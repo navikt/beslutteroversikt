@@ -1,11 +1,11 @@
 import { FetchInfo } from './utils';
 
-export const VIS_VEDTAKSLOSNING_14A = 'veilarbvedtaksstotte.visVedtakslosning14a';
+export const EKSEMPELTOGGLE = 'skriv-togglenavn-her';
 
-export const ALL_TOGGLES = [VIS_VEDTAKSLOSNING_14A];
+export const ALL_TOGGLES = [EKSEMPELTOGGLE];
 
 export interface OboUnleashFeatures {
-	[VIS_VEDTAKSLOSNING_14A]: boolean;
+	[EKSEMPELTOGGLE]: boolean;
 }
 
 export function lagHentUnleashFeaturetoggleInfo(): FetchInfo {
