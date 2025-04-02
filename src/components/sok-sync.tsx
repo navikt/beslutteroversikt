@@ -6,7 +6,6 @@ import { hasFinishedWithData } from '../rest/utils';
 import { usePrevious } from '../utils';
 import { BeslutteroversiktSok } from '../rest/api';
 import { logMetrikk } from '../utils/logger';
-import { VIS_VEDTAKSLOSNING_14A } from '../rest/obo-unleash';
 
 function logSokMetrikker(sok: BeslutteroversiktSok, currentPage: number): void {
 	const filterMetrikker: any = {};
@@ -32,20 +31,12 @@ function logSokMetrikker(sok: BeslutteroversiktSok, currentPage: number): void {
 }
 
 export const SokSync = () => {
-	const { brukereFetcher, tilhorerVeilederUtrulletKontorFetcher, unleashFeaturetoggleFetcher } =
-		useDataFetcherStore();
+	const { brukereFetcher } = useDataFetcherStore();
 	const { filters, currentPage, pageSize, orderByDirection, orderByField, seeAll, setTotalPages, setCurrentPage } =
 		useSokStore();
 	const previousFilters = usePrevious(filters);
-	const skalViseVedtakslosning =
-		tilhorerVeilederUtrulletKontorFetcher.data || unleashFeaturetoggleFetcher.data?.[VIS_VEDTAKSLOSNING_14A];
 
 	useEffect(() => {
-		// Ikke søk hvis man ikke har tilgang til piloten
-		if (!skalViseVedtakslosning) {
-			return;
-		}
-
 		let curPage = currentPage;
 		if (previousFilters !== filters) {
 			curPage = 1; // When filters change, start from first page
@@ -56,7 +47,7 @@ export const SokSync = () => {
 		brukereFetcher.fetch({ sok });
 		logSokMetrikker(sok, currentPage);
 		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [filters, currentPage, orderByDirection, orderByField, seeAll, skalViseVedtakslosning]);
+	}, [filters, currentPage, orderByDirection, orderByField, seeAll]);
 
 	useEffect(() => {
 		if (hasFinishedWithData(brukereFetcher)) {

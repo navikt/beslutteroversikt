@@ -4,8 +4,7 @@ import {
 	BeslutteroversiktSok,
 	lagHentAktivEnhetFetchInfo,
 	lagHentBrukereFetchInfo,
-	lagHentInnloggetVeilederFetchInfo,
-	lagHentTilhorerVeilederUtrulletKontor
+	lagHentInnloggetVeilederFetchInfo
 } from '../rest/api';
 import { BrukereMedAntall } from '../rest/data/bruker';
 import { InnloggetVeileder } from '../rest/data/innlogget-veileder';
@@ -17,14 +16,12 @@ export const [DataFetcherStoreProvider, useDataFetcherStore] = constate(() => {
 	const brukereFetcher = useFetch<BrukereMedAntall, { sok: BeslutteroversiktSok }>(lagHentBrukereFetchInfo);
 	const innloggetVeilederFetcher = useFetch<InnloggetVeileder>(lagHentInnloggetVeilederFetchInfo);
 	const aktivEnhetFetcher = useFetch<OrNothing<AktivEnhet>>(lagHentAktivEnhetFetchInfo);
-	const tilhorerVeilederUtrulletKontorFetcher = useFetch<boolean>(lagHentTilhorerVeilederUtrulletKontor);
 	const unleashFeaturetoggleFetcher = useFetch<OboUnleashFeatures>(lagHentUnleashFeaturetoggleInfo);
 
 	return {
 		brukereFetcher,
 		innloggetVeilederFetcher,
 		aktivEnhetFetcher,
-		tilhorerVeilederUtrulletKontorFetcher,
 		unleashFeaturetoggleFetcher
 	};
 });

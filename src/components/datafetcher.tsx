@@ -5,12 +5,7 @@ import { hasAnyFailed, isAnyNotStartedOrPending, isNotStarted } from '../rest/ut
 import Spinner from './felles/spinner/spinner';
 
 export function DataFetcher(props: { children: React.ReactNode }) {
-	const {
-		innloggetVeilederFetcher,
-		aktivEnhetFetcher,
-		tilhorerVeilederUtrulletKontorFetcher,
-		unleashFeaturetoggleFetcher
-	} = useDataFetcherStore();
+	const { innloggetVeilederFetcher, aktivEnhetFetcher, unleashFeaturetoggleFetcher } = useDataFetcherStore();
 
 	useEffect(() => {
 		if (isNotStarted(innloggetVeilederFetcher)) {
@@ -21,38 +16,15 @@ export function DataFetcher(props: { children: React.ReactNode }) {
 			aktivEnhetFetcher.fetch(null);
 		}
 
-		if (isNotStarted(tilhorerVeilederUtrulletKontorFetcher)) {
-			tilhorerVeilederUtrulletKontorFetcher.fetch(null);
-		}
-
 		if (isNotStarted(unleashFeaturetoggleFetcher)) {
 			unleashFeaturetoggleFetcher.fetch(null);
 		}
-	}, [
-		innloggetVeilederFetcher,
-		aktivEnhetFetcher,
-		tilhorerVeilederUtrulletKontorFetcher,
-		unleashFeaturetoggleFetcher
-	]);
+	}, [innloggetVeilederFetcher, aktivEnhetFetcher, unleashFeaturetoggleFetcher]);
 
 	// Trenger ikke å sjekke om aktivEnhetFetcher er ferdig
-	if (
-		isAnyNotStartedOrPending([
-			innloggetVeilederFetcher,
-			aktivEnhetFetcher,
-			tilhorerVeilederUtrulletKontorFetcher,
-			unleashFeaturetoggleFetcher
-		])
-	) {
+	if (isAnyNotStartedOrPending([innloggetVeilederFetcher, aktivEnhetFetcher, unleashFeaturetoggleFetcher])) {
 		return <Spinner />;
-	} else if (
-		hasAnyFailed([
-			innloggetVeilederFetcher,
-			aktivEnhetFetcher,
-			tilhorerVeilederUtrulletKontorFetcher,
-			unleashFeaturetoggleFetcher
-		])
-	) {
+	} else if (hasAnyFailed([innloggetVeilederFetcher, aktivEnhetFetcher, unleashFeaturetoggleFetcher])) {
 		return (
 			<Alert variant="error">
 				Vi får ikke kontakt med alle baksystemene, prøv igjen senere. Gjerne meld sak i Porten om problemet

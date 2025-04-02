@@ -1,8 +1,8 @@
 import { http, HttpResponse, RequestHandler } from 'msw';
-import { OboUnleashFeatures, VIS_VEDTAKSLOSNING_14A } from '../../rest/obo-unleash';
+import { EKSEMPELTOGGLE, OboUnleashFeatures } from '../../rest/obo-unleash';
 
 const mockFeatures: OboUnleashFeatures = {
-	[VIS_VEDTAKSLOSNING_14A]: true
+	[EKSEMPELTOGGLE]: false
 };
 
 export const oboUnleashHandlers: RequestHandler[] = [
