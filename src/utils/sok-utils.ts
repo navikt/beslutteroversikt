@@ -3,7 +3,7 @@ import { Filters } from '../stores/sok-store';
 import { OrNothing } from './types/ornothing';
 import { hasFilters } from './filter-utils';
 
-export const DEFAULT_PAGINATION_SIZE = 10;
+export const DEFAULT_PAGINATION_SIZE = 50;
 
 export const SEE_ALL_PAGINATION_SIZE = 10000;
 
