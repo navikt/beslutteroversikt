@@ -44,7 +44,7 @@ export const UserTable = () => {
 				className="user-table"
 				zebraStripes={true}
 			>
-				<UserTableHeader />
+				<UserTableHeader stickyHeader={true} />
 				<UserTableBody />
 			</Table>
 		</div>
