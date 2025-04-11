@@ -24,7 +24,8 @@ function lagDecoratorConfig(): DecoratorPropsV3 {
 		showSearchArea: false,
 		urlFormat: getEnv().ingressType === 'ansatt' ? 'ANSATT' : 'NAV_NO',
 		onEnhetChanged: () => {},
-		onFnrChanged: () => {}
+		onFnrChanged: () => {},
+		enhetSyncMode: 'ignore'
 	};
 }
 
