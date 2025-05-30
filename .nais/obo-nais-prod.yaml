@@ -26,6 +26,11 @@ spec:
       memory: 500Mi
     limits:
       memory: 1Gi
+  observability:
+    logging:
+      destinations:
+        - id: elastic
+        - id: loki
   secureLogs:
     enabled: true
   azure:
