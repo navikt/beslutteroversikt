@@ -4,8 +4,7 @@ on:
   push:
     branches:
       - master
-permissions:
-  contents: write
+
 env:
   CI: true
   TZ: Europe/Amsterdam
@@ -13,6 +12,8 @@ env:
 jobs:
   update-gh-pages:
     name: Update GitHub pages
+    permissions:
+      contents: write
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
