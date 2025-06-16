@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react';
+import { MouseEvent, useRef, useState } from 'react';
 import { BodyShort, Button, Popover } from '@navikt/ds-react';
 import { ExclamationmarkTriangleIcon } from '@navikt/aksel-icons';
 import { useEventListener } from '../../../hooks/use-event-listener';
@@ -40,13 +40,17 @@ export const BrukerDirektelenkeMedFeilmelding = ({ fnr, knappTekst }: Props) => 
 		return `${basePath}${oppfolgingsvedtakSide}${anchorParams}`;
 	};
 
-	const handleClick = () => {
+	const handleClick = (e: MouseEvent<HTMLButtonElement>) => {
 		if (hasFailed(settBrukerIKontekstFetcher)) {
 			setPopoverErApen(!popoverErApen);
 		} else {
 			settBrukerIKontekstFetcher.fetch(fnr, (state: FetchState) => {
 				if (!hasFailed(state)) {
-					window.location.href = lagOppfolgingsvedtakDyplenke();
+					if (e.ctrlKey || e.metaKey) {
+						window.open(lagOppfolgingsvedtakDyplenke(), '_blank', 'noopener,noreferrer');
+					} else {
+						window.location.href = lagOppfolgingsvedtakDyplenke();
+					}
 				}
 			});
 		}
