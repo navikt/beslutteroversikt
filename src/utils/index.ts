@@ -39,7 +39,7 @@ export function lagBrukerNavn(fornavn: string, etternavn: string): string {
 	return fornavn + ', ' + etternavn;
 }
 
-export const vedKlikkUtenfor = (refs: RefObject<HTMLElement>[], klikkTarget: Node | null, fn: () => void) => {
+export const vedKlikkUtenfor = (refs: Array<RefObject<Element | null>>, klikkTarget: Node | null, fn: () => void) => {
 	if (!refs.some(ref => ref.current?.contains(klikkTarget))) {
 		fn();
 	}
