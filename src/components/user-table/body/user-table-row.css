@@ -1,0 +1,26 @@
+.user-table-row .celle-med-knapp button {
+	/* Gjer at knappe-teksten i celler havnar på linje med kolonneoverskrifta */
+	padding-left: var(--a-spacing-1);
+	padding-right: var(--a-spacing-1);
+}
+
+.user-table-row .celle-med-tekst {
+	/* Gjer at celle-teksten havnar på linje med kolonneoverskrifta */
+	padding-left: var(--a-spacing-3);
+	padding-right: var(--a-spacing-3);
+}
+
+.user-table-row .bruker-direktelenke-knapp {
+	/* Gjer at namna havnar rett under kvarandre i tabellen, også når nokre namn er lange eller skjermen er liten */
+	text-align: start;
+}
+
+.user-table-row .utkast-status-celle .status {
+	display: flex;
+	gap: var(--a-spacing-2);
+}
+
+.user-table-row .utkast-status-celle .status .status_ikon {
+	min-width: 1.5rem;
+	font-size: 1.5rem;
+}

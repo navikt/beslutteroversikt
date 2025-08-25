@@ -1,0 +1,35 @@
+.user-table-container {
+	padding-left: var(--a-spacing-8);
+	padding-right: var(--a-spacing-8);
+}
+
+.user-table {
+	background: white;
+}
+
+.user-table td,
+.user-table th {
+	/* Set tekst i tabell-celler til 1rem, utan å miste padding-mengder frå tabellstorleik medium */
+	font-size: var(--a-font-size-medium);
+}
+
+/* Sticky header på tabell (start)*/
+table.user-table {
+	/* Gjer at borders "heng fast" i dei sticky cellene */
+	border-collapse: separate; /* Ikkje automagisk slå saman border-top og border-bottom */
+	border-spacing: 0; /* Unngå mellomrom/"mini-gap" mellom celler */
+}
+
+.user-table:has(.sticky-table-header) {
+	/* For at sticky-header skal fungere må header-cellene ha ein forelder med position-relative */
+	position: relative;
+}
+
+.user-table .sticky-table-header th {
+	/* Gjer header-cellene sticky og låsar dei til toppen av tabellen */
+	position: sticky;
+	top: 0;
+	/* Gjev cellene kvit bakgrunn, slik at dei skjular innhaldet som scroller forbi under dei */
+	background: var(--a-bg-default);
+}
+/* (end) Sticky headre på tabell */

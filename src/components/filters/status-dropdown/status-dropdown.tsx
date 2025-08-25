@@ -1,29 +1,17 @@
 import { useRef } from 'react';
-import { UtkastStatus } from '../../../rest/data/bruker';
-import { mapBrukerStatusTilTekst } from '../../../utils';
-import { useSokStore } from '../../../stores/sok-store';
 import { Button, HStack, Select } from '@navikt/ds-react';
+import { UtkastStatus } from '../../../rest/data/bruker';
+import { useSokStore } from '../../../stores/sok-store';
+import { utkaststatusTekstOgIkon } from '../../user-table/body/utkast-status-data';
 import '../filters.css';
-
-export function mapStatusTilDropdownOption(status: UtkastStatus): DropdownOption {
-	return { value: status, label: mapBrukerStatusTilTekst(status) };
-}
-
-interface DropdownOption {
-	value: string;
-	label: string;
-}
-
-const statusOptions: DropdownOption[] = [
-	mapStatusTilDropdownOption(UtkastStatus.TRENGER_BESLUTTER),
-	mapStatusTilDropdownOption(UtkastStatus.KLAR_TIL_VEILEDER),
-	mapStatusTilDropdownOption(UtkastStatus.KLAR_TIL_BESLUTTER)
-];
 
 export const StatusDropdown = () => {
 	const { filters, setStatusFilter } = useSokStore();
 	const value = filters?.status ?? undefined;
 	const selectRef = useRef<HTMLSelectElement>(null);
+	const statuserSomSkalVareValgbareIDropdown: UtkastStatus[] = Object.values(UtkastStatus).filter(
+		status => status != UtkastStatus.GODKJENT_AV_BESLUTTER
+	);
 
 	function handleOnStatusSelectedChanged(selectedOption: React.ChangeEvent<HTMLSelectElement>) {
 		const nyStatus = selectedOption.target.value as UtkastStatus;
@@ -47,9 +35,9 @@ export const StatusDropdown = () => {
 				ref={selectRef}
 			>
 				<option value={''}>Velg status</option>
-				{statusOptions.map(value => (
-					<option key={value.value} value={value.value}>
-						{value.label}
+				{statuserSomSkalVareValgbareIDropdown.map(status => (
+					<option key={status} value={status}>
+						{utkaststatusTekstOgIkon[status].tekst}
 					</option>
 				))}
 			</Select>

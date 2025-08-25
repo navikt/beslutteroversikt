@@ -27,6 +27,11 @@ spec:
     requests:
       cpu: 250m
       memory: 256Mi
+  observability:
+    logging:
+      destinations:
+        - id: elastic
+        - id: loki
   secureLogs:
     enabled: true
   azure:
@@ -48,6 +53,8 @@ spec:
         - application: veilarbvedtaksstotte
           namespace: obo
         - application: veilarbveileder
+          namespace: obo
+        - application: obo-unleash
           namespace: obo
   env:
     - name: JSON_CONFIG
@@ -108,6 +115,16 @@ spec:
               "preserveFromPath": true,
               "toApp": {
                 "name": "veilarbvedtaksstotte",
+                "namespace": "obo",
+                "cluster": "dev-gcp"
+              }
+            },
+            {
+              "fromPath": "/obo-unleash",
+              "toUrl": "http://obo-unleash.obo",
+              "preserveFromPath": false,
+              "toApp": {
+                "name": "obo-unleash",
                 "namespace": "obo",
                 "cluster": "dev-gcp"
               }

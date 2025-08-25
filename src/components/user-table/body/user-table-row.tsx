@@ -1,14 +1,16 @@
-import { Bruker, UtkastStatus } from '../../../rest/data/bruker';
+import { CopyButton, Table, Tooltip } from '@navikt/ds-react';
+import { Bruker } from '../../../rest/data/bruker';
+import { capitalize, lagBrukerNavn } from '../../../utils';
 import { formatDateStr, formatDateStrWithMonthName, formatTimeStr } from '../../../utils/date-utils';
-import { capitalize, fjernNavFraEnhetNavn, lagBrukerNavn, mapBrukerStatusTilTekst } from '../../../utils';
-import { OrNothing } from '../../../utils/types/ornothing';
-import { BrukerDirektelenkeMedFeilmelding } from '../bruker-direktelenke-med-feilmelding';
-import { Bleed, BodyShort } from '@navikt/ds-react';
-import { ChatElipsisIcon, ChatExclamationmarkIcon, PersonPlusIcon } from '@navikt/aksel-icons';
-import './user-table-body.less';
+import { UtkastStatusData } from './utkast-status-data';
+import { BrukerDirektelenkeMedFeilmelding } from './bruker-direktelenke-med-feilmelding';
+import './user-table-row.css';
 
-export const UserRow = (props: { idx: number; bruker: Bruker; aktivEnhet: OrNothing<string> }) => {
-	const { aktivEnhet } = props;
+interface Props {
+	bruker: Bruker;
+}
+
+export const UserTableRow = ({ bruker }: Props) => {
 	const {
 		brukerFnr,
 		brukerFornavn,
@@ -19,77 +21,38 @@ export const UserRow = (props: { idx: number; bruker: Bruker; aktivEnhet: OrNoth
 		beslutterNavn,
 		veilederNavn,
 		status
-	} = props.bruker;
+	} = bruker;
 
 	const erMaskert = brukerFnr === '';
 
 	return (
-		// idx starter på 0, men gyldige verdier for aria-rowindex er 1 og oppover
-		<div role="row" aria-rowindex={props.idx + 1} className="user-table-row">
-			<div className="user-table-row__innhold">
-				<Bleed marginBlock="2" style={{ display: 'flex' }}>
-					{!erMaskert && (
-						<BrukerDirektelenkeMedFeilmelding
-							enhet={aktivEnhet}
-							fnr={brukerFnr}
-							knappTekst={`${capitalize(lagBrukerNavn(brukerEtternavn, brukerFornavn))}`}
-						/>
-					)}
-				</Bleed>
-				<BodyShort size="small" weight="semibold">
-					{brukerFnr}
-				</BodyShort>
-				<BodyShort size="small">{formatDateStr(vedtakStartet)}</BodyShort>
+		<Table.Row shadeOnHover={false} className="user-table-row">
+			<Table.HeaderCell className="celle-med-knapp">
+				{!erMaskert && (
+					<BrukerDirektelenkeMedFeilmelding
+						fnr={brukerFnr}
+						knappTekst={`${capitalize(lagBrukerNavn(brukerEtternavn, brukerFornavn))}`}
+					/>
+				)}
+			</Table.HeaderCell>
+			<Table.DataCell className="celle-med-knapp">
+				{brukerFnr && (
+					<Tooltip content="Kopier fødselsnummer" placement="right">
+						<CopyButton size="small" iconPosition="right" copyText={brukerFnr} text={brukerFnr} />
+					</Tooltip>
+				)}
+			</Table.DataCell>
+			<Table.DataCell className="celle-med-tekst">{formatDateStr(vedtakStartet)}</Table.DataCell>
+			<Table.DataCell className="utkast-status-celle">
 				<UtkastStatusData status={status} />
-				<BodyShort size="small">{beslutterNavn ?? '–'}</BodyShort>
-				<BodyShort size="small">{veilederNavn}</BodyShort>
-				<BodyShort size="small" className="user-table-row__innhold--dato">
-					<span>{formatDateStrWithMonthName(statusEndret)}</span>&nbsp;
-					<span>{formatTimeStr(statusEndret)}</span>
-				</BodyShort>
-				<BodyShort size="small">{fjernNavFraEnhetNavn(brukerOppfolgingsenhetNavn)}</BodyShort>
-			</div>
-		</div>
-	);
-};
-
-const UtkastStatusData = (props: { status: UtkastStatus }) => {
-	let StatusIkon;
-	switch (props.status) {
-		case UtkastStatus.TRENGER_BESLUTTER:
-			StatusIkon = (
-				<Bleed marginBlock="1 2" asChild>
-					<PersonPlusIcon title="Trenger kvalitetssikrer-ikon" className="status_ikon" />
-				</Bleed>
-			);
-			break;
-		case UtkastStatus.KLAR_TIL_BESLUTTER:
-			StatusIkon = (
-				<Bleed marginBlock="0 3" asChild>
-					<ChatExclamationmarkIcon title="Venter på tilbakemelding-ikon" className="status_ikon" />
-				</Bleed>
-			);
-			break;
-		case UtkastStatus.KLAR_TIL_VEILEDER:
-			StatusIkon = (
-				<Bleed marginBlock="0 3" asChild>
-					<ChatElipsisIcon title="Venter på veileder-ikon" className="status_ikon" />
-				</Bleed>
-			);
-			break;
-		case UtkastStatus.GODKJENT_AV_BESLUTTER:
-			StatusIkon = (
-				<Bleed marginBlock="0 3" asChild>
-					<ChatElipsisIcon title="Godkjent av kvalitetssikrer-ikon" className="status_ikon" />
-				</Bleed>
-			);
-			break;
-	}
-
-	return (
-		<span role="cell" className={'status'}>
-			{StatusIkon}
-			<BodyShort size="small">{mapBrukerStatusTilTekst(props.status)}</BodyShort>
-		</span>
+			</Table.DataCell>
+			<Table.DataCell className="celle-med-tekst">
+				<span>{formatDateStrWithMonthName(statusEndret)}</span>&nbsp;
+				<span>{formatTimeStr(statusEndret)}</span>
+			</Table.DataCell>
+			<Table.DataCell className="celle-med-tekst">{beslutterNavn ?? '-'}</Table.DataCell>
+			<Table.DataCell className="celle-med-tekst">{veilederNavn}</Table.DataCell>
+			<Table.DataCell className="celle-med-tekst">{brukerOppfolgingsenhetNavn}</Table.DataCell>
+		</Table.Row>
 	);
 };

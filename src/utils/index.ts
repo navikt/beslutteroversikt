@@ -1,7 +1,4 @@
-// tslint:disable-next-line:no-empty
-import { UtkastStatus } from '../rest/data/bruker';
-import { useEffect, useRef } from 'react';
-import { type RefObject } from 'react';
+import { type RefObject, useEffect, useRef } from 'react';
 
 export function usePrevious<T>(value: T) {
 	const ref = useRef<T>(value);
@@ -14,18 +11,12 @@ export function usePrevious<T>(value: T) {
 	return ref.current;
 }
 
-export function doNothing() {}
-
 export function isEmpty(str: string): boolean {
 	return str ? str.trim().length === 0 : true;
 }
 
 export function randBetween(from: number, to: number): number {
 	return Math.round(Math.random() * (to - from) + from);
-}
-
-export function fjernNavFraEnhetNavn(enhetNavn: string): string {
-	return enhetNavn.replace('NAV', '').trim();
 }
 
 export function capitalize(str: string) {
@@ -48,22 +39,7 @@ export function lagBrukerNavn(fornavn: string, etternavn: string): string {
 	return fornavn + ', ' + etternavn;
 }
 
-export function mapBrukerStatusTilTekst(status: UtkastStatus): string {
-	switch (status) {
-		case UtkastStatus.TRENGER_BESLUTTER:
-			return 'Trenger kvalitetssikring';
-		case UtkastStatus.KLAR_TIL_VEILEDER:
-			return 'Venter på veileder';
-		case UtkastStatus.KLAR_TIL_BESLUTTER:
-			return 'Venter på tilbakemelding';
-		case UtkastStatus.GODKJENT_AV_BESLUTTER:
-			return 'Klar til utsendelse';
-		default:
-			return '';
-	}
-}
-
-export const vedKlikkUtenfor = (refs: RefObject<HTMLElement>[], klikkTarget: Node | null, fn: () => void) => {
+export const vedKlikkUtenfor = (refs: Array<RefObject<Element | null>>, klikkTarget: Node | null, fn: () => void) => {
 	if (!refs.some(ref => ref.current?.contains(klikkTarget))) {
 		fn();
 	}

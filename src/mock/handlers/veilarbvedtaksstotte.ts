@@ -11,9 +11,6 @@ export const veilarbvedtaksstotteHandlers: RequestHandler[] = [
 		const paginerteBrukere = filtrerteBrukere.slice(sokRequest.fra, sokRequest.fra + sokRequest.antall);
 
 		return HttpResponse.json({ brukere: paginerteBrukere, totaltAntall: filtrerteBrukere.length });
-	}),
-	http.get(`${VEILARBVEDTAKSSTOTTE_API}/utrulling/tilhorerVeilederUtrulletKontor`, async () => {
-		return HttpResponse.json(true);
 	})
 ];
 

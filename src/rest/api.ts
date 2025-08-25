@@ -60,11 +60,6 @@ export const lagHentAktivEnhetFetchInfo = (): FetchInfo => ({
 	url: `${MODIACONTEXTHOLDER_API}/context/aktivenhet`
 });
 
-export const lagHentTilhorerVeilederUtrulletKontor = (): FetchInfo => ({
-	credentials: 'same-origin',
-	url: `${VEILARBVEDTAKSSTOTTE_API}/utrulling/tilhorerVeilederUtrulletKontor`
-});
-
 export function sendEventTilVedtaksstotte(event: FrontendEvent) {
 	const url = `${VEILARBVEDTAKSSTOTTE_API}/logger/event`;
 	const config = {

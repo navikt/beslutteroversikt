@@ -1,12 +1,11 @@
 import { useEffect } from 'react';
+import { Alert } from '@navikt/ds-react';
 import { useDataFetcherStore } from '../stores/data-fetcher-store';
 import { hasAnyFailed, isAnyNotStartedOrPending, isNotStarted } from '../rest/utils';
-import { Alert } from '@navikt/ds-react';
 import Spinner from './felles/spinner/spinner';
 
 export function DataFetcher(props: { children: React.ReactNode }) {
-	const { innloggetVeilederFetcher, aktivEnhetFetcher, tilhorerVeilederUtrulletKontorFetcher } =
-		useDataFetcherStore();
+	const { innloggetVeilederFetcher, aktivEnhetFetcher, unleashFeaturetoggleFetcher } = useDataFetcherStore();
 
 	useEffect(() => {
 		if (isNotStarted(innloggetVeilederFetcher)) {
@@ -17,22 +16,19 @@ export function DataFetcher(props: { children: React.ReactNode }) {
 			aktivEnhetFetcher.fetch(null);
 		}
 
-		if (isNotStarted(tilhorerVeilederUtrulletKontorFetcher)) {
-			tilhorerVeilederUtrulletKontorFetcher.fetch(null);
+		if (isNotStarted(unleashFeaturetoggleFetcher)) {
+			unleashFeaturetoggleFetcher.fetch(null);
 		}
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [innloggetVeilederFetcher, aktivEnhetFetcher, tilhorerVeilederUtrulletKontorFetcher]);
+	}, [innloggetVeilederFetcher, aktivEnhetFetcher, unleashFeaturetoggleFetcher]);
 
 	// Trenger ikke å sjekke om aktivEnhetFetcher er ferdig
-	if (
-		isAnyNotStartedOrPending([innloggetVeilederFetcher, aktivEnhetFetcher, tilhorerVeilederUtrulletKontorFetcher])
-	) {
+	if (isAnyNotStartedOrPending([innloggetVeilederFetcher, aktivEnhetFetcher, unleashFeaturetoggleFetcher])) {
 		return <Spinner />;
-	} else if (hasAnyFailed([innloggetVeilederFetcher, aktivEnhetFetcher, tilhorerVeilederUtrulletKontorFetcher])) {
+	} else if (hasAnyFailed([innloggetVeilederFetcher, aktivEnhetFetcher, unleashFeaturetoggleFetcher])) {
 		return (
 			<Alert variant="error">
-				Det oppnås for tiden ikke kontakt med alle baksystemer. Vi jobber med å løse saken. Vennligst prøv igjen
-				senere.
+				Vi får ikke kontakt med alle baksystemene, prøv igjen senere. Gjerne meld sak i Porten om problemet
+				varer lenge.
 			</Alert>
 		);
 	}

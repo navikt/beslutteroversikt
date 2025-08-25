@@ -46,7 +46,7 @@ export const lagBrukere = (antallBrukere: number): Bruker[] => {
 			veilederNavn: faker.person.firstName() + ' ' + faker.person.lastName(),
 			brukerFnr: randomFnr(),
 			brukerFornavn: faker.person.firstName(),
-			brukerEtternavn: faker.person.lastName().toUpperCase(),
+			brukerEtternavn: 'Testson',
 			vedtakStartet: faker.date.recent({ days: 30 }).toISOString(),
 			brukerOppfolgingsenhetId: randomEnhet.enhetId,
 			brukerOppfolgingsenhetNavn: randomEnhet.navn,

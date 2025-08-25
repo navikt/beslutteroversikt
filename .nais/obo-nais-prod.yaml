@@ -26,6 +26,11 @@ spec:
       memory: 500Mi
     limits:
       memory: 1Gi
+  observability:
+    logging:
+      destinations:
+        - id: elastic
+        - id: loki
   secureLogs:
     enabled: true
   azure:
@@ -46,6 +51,8 @@ spec:
           namespace: personoversikt
         - application: veilarbveileder
         - application: veilarbvedtaksstotte
+        - application: obo-unleash
+          namespace: obo
   env:
     - name: JSON_CONFIG
       value: >
@@ -105,6 +112,16 @@ spec:
               "preserveFromPath": true,
               "toApp": {
                 "name": "veilarbvedtaksstotte",
+                "namespace": "obo",
+                "cluster": "prod-gcp"
+              }
+            },
+            {
+              "fromPath": "/obo-unleash",
+              "toUrl": "http://obo-unleash.obo",
+              "preserveFromPath": false,
+              "toApp": {
+                "name": "obo-unleash",
                 "namespace": "obo",
                 "cluster": "prod-gcp"
               }
