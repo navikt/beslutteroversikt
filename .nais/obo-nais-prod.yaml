@@ -6,7 +6,7 @@ metadata:
   labels:
     team: obo
 spec:
-  image: europe-north1-docker.pkg.dev/nais-management-233d/poao/poao-frontend:2025.08.25_08.52-2e34d1784892
+  image: europe-north1-docker.pkg.dev/nais-management-233d/poao/poao-frontend:2025.11.03_15.27-9bdd610c220c
   port: 8080
   ingresses:
     - https://beslutteroversikt.intern.nav.no
@@ -27,6 +27,9 @@ spec:
     limits:
       memory: 1Gi
   observability:
+    autoInstrumentation:
+      enabled: true
+      runtime: nodejs
     logging:
       destinations:
         - id: elastic
