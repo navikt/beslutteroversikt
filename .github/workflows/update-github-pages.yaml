@@ -12,12 +12,15 @@ env:
 jobs:
   update-gh-pages:
     name: Update GitHub pages
+    environment:
+      name: github-pages
     permissions:
-      contents: write
+      id-token: write
+      pages: write
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
       - name: Setup node
         uses: actions/setup-node@v6
         with:
@@ -30,8 +33,9 @@ jobs:
           NODE_AUTH_TOKEN: ${{ secrets.READER_TOKEN }}
       - name: Build mock application
         run: npm run build:mock
-      - name: Update GitHub pages
-        uses: peaceiris/actions-gh-pages@v4
+      - name: Upload static files as artifact
+        uses: actions/upload-pages-artifact@v4
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./dist
+          path: ./dist
+      - name: Deploy to GitHub Pages
+        uses: actions/deploy-pages@v4
