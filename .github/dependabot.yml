@@ -9,7 +9,13 @@ updates:
     directory: "/.github/workflows"
     schedule:
       # Check for updates to GitHub Actions every weekday
-      interval: "monthly"
+      interval: "weekly"
+    cooldown:
+      default-days: 7
+    groups:
+      workflow-updates:
+        patterns:
+          - "*"
 
   - package-ecosystem: "npm" # See documentation for possible values
     directory: "/" # Location of package manifests
