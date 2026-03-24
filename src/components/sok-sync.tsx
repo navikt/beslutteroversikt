@@ -8,7 +8,7 @@ import { BeslutteroversiktSok } from '../rest/api';
 import { logMetrikk } from '../utils/logger';
 
 function logSokMetrikker(sok: BeslutteroversiktSok, currentPage: number): void {
-	const filterMetrikker: any = {};
+	const filterMetrikker: Record<string, unknown> = {};
 
 	if (sok.filter) {
 		filterMetrikker.antallEnheter = sok.filter.enheter ? sok.filter.enheter.length : 0;
