@@ -1,6 +1,6 @@
 .user-table-container {
-	padding-left: var(--a-spacing-8);
-	padding-right: var(--a-spacing-8);
+	padding-left: var(--ax-space-32);
+	padding-right: var(--ax-space-32);
 }
 
 .user-table {
@@ -10,7 +10,7 @@
 .user-table td,
 .user-table th {
 	/* Set tekst i tabell-celler til 1rem, utan å miste padding-mengder frå tabellstorleik medium */
-	font-size: var(--a-font-size-medium);
+	font-size: var(--ax-font-size-medium);
 }
 
 /* Sticky header på tabell (start)*/
@@ -30,6 +30,6 @@ table.user-table {
 	position: sticky;
 	top: 0;
 	/* Gjev cellene kvit bakgrunn, slik at dei skjular innhaldet som scroller forbi under dei */
-	background: var(--a-bg-default);
+	background: var(--ax-bg-default);
 }
 /* (end) Sticky headre på tabell */

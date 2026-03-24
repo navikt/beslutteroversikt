@@ -1,13 +1,13 @@
 .user-table-row .celle-med-knapp button {
 	/* Gjer at knappe-teksten i celler havnar på linje med kolonneoverskrifta */
-	padding-left: var(--a-spacing-1);
-	padding-right: var(--a-spacing-1);
+	padding-left: var(--ax-space-4);
+	padding-right: var(--ax-space-4);
 }
 
 .user-table-row .celle-med-tekst {
 	/* Gjer at celle-teksten havnar på linje med kolonneoverskrifta */
-	padding-left: var(--a-spacing-3);
-	padding-right: var(--a-spacing-3);
+	padding-left: var(--ax-space-12);
+	padding-right: var(--ax-space-12);
 }
 
 .user-table-row .bruker-direktelenke-knapp {
@@ -17,7 +17,7 @@
 
 .user-table-row .utkast-status-celle .status {
 	display: flex;
-	gap: var(--a-spacing-2);
+	gap: var(--ax-space-8);
 }
 
 .user-table-row .utkast-status-celle .status .status_ikon {
