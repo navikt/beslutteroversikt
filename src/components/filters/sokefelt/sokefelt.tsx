@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import debounce from 'lodash.debounce';
 import { useSokStore } from '../../../stores/sok-store';
 import './sokefelt.less';
@@ -8,11 +8,12 @@ export const Sokefelt = () => {
 	const { filters, setFnrOrNameFilter } = useSokStore();
 	const [tekst, setTekst] = useState(filters.fnrOrName);
 
-	const oppdaterFilter = useCallback(
-		debounce((nyTekst: string) => {
-			setFnrOrNameFilter(nyTekst);
-		}, 500),
-		[]
+	const oppdaterFilter = useMemo(
+		() =>
+			debounce((nyTekst: string) => {
+				setFnrOrNameFilter(nyTekst);
+			}, 500),
+		[setFnrOrNameFilter]
 	);
 
 	function handleOnQueryChanged(e: React.ChangeEvent<HTMLInputElement>) {

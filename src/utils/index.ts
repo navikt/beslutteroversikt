@@ -1,14 +1,15 @@
-import { type RefObject, useEffect, useRef } from 'react';
+import { type RefObject, useState } from 'react';
 
 export function usePrevious<T>(value: T) {
-	const ref = useRef<T>(value);
+	const [prev, setPrev] = useState<T>(value);
+	const [curr, setCurr] = useState<T>(value);
 
-	// Store current value in ref
-	useEffect(() => {
-		ref.current = value;
-	}, [value]);
+	if (curr !== value) {
+		setPrev(curr);
+		setCurr(value);
+	}
 
-	return ref.current;
+	return prev;
 }
 
 export function isEmpty(str: string): boolean {

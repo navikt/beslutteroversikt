@@ -6,9 +6,9 @@ export enum FetchStatus {
 	FINISHED = 'FINISHED'
 }
 
-export interface FetchState<D = any> {
+export interface FetchState<D = unknown> {
 	status: FetchStatus;
-	error: any;
+	error: unknown;
 	data: D;
 	httpCode: number;
 }
