@@ -10,12 +10,7 @@ export const BrukerFilter = () => {
 	}
 
 	return (
-		<Checkbox
-			className="filter-field"
-			size="small"
-			checked={filters.visMineBrukere}
-			onChange={handleOnVisMineBrukereChanged}
-		>
+		<Checkbox size="small" checked={filters.visMineBrukere} onChange={handleOnVisMineBrukereChanged}>
 			Utkast jeg kvalitetssikrer
 		</Checkbox>
 	);
