@@ -43,8 +43,9 @@ export const UserTable = () => {
 				onSortChange={sortKey => handleSortering(sortKey as OrderByField)}
 				className="user-table"
 				zebraStripes={true}
+				stickyHeader={true}
 			>
-				<UserTableHeader stickyHeader={true} />
+				<UserTableHeader />
 				<UserTableBody />
 			</Table>
 		</div>

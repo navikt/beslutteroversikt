@@ -1,6 +1,7 @@
 import React from 'react';
 import NAVSPA from '@navikt/navspa';
 import { DecoratorPropsV3, Environment } from './internflate-decorator-v3-config';
+import { EnvType, getEnv } from './internflate-decorator-env';
 
 const Decorator: React.ComponentType<DecoratorPropsV3> = NAVSPA.importer<DecoratorPropsV3>(
 	'internarbeidsflate-decorator-v3'
@@ -38,29 +39,3 @@ function getDecoratorEnv(): Environment {
 		return 'q2';
 	}
 }
-
-export const getEnv = (): EnvConfig => {
-	const { hostname } = window.location;
-	if (hostname.includes('intern.dev.nav.no')) return Env.dev;
-	if (hostname.includes('ansatt.dev.nav.no')) return Env.ansattDev;
-	if (hostname.includes('intern.nav.no')) return Env.prod;
-	return Env.local;
-};
-
-interface EnvConfig {
-	ingressType: 'ansatt' | 'intern';
-	type: EnvType;
-}
-
-export enum EnvType {
-	prod = 'prod',
-	dev = 'dev',
-	local = 'local'
-}
-
-const Env = {
-	ansattDev: { ingressType: 'ansatt', type: EnvType.dev },
-	dev: { ingressType: 'intern', type: EnvType.dev },
-	prod: { ingressType: 'intern', type: EnvType.prod },
-	local: { ingressType: 'intern', type: EnvType.local }
-} as const;
