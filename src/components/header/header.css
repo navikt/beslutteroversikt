@@ -4,6 +4,5 @@
 	gap: var(--ax-space-32);
 	background-color: white;
 	padding: var(--ax-space-8) var(--ax-space-32);
-	margin-bottom: var(--ax-space-16);
 	max-width: 1920px;
 }
