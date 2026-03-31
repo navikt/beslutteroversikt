@@ -58,7 +58,7 @@ export const BrukerDirektelenkeMedFeilmelding = ({ fnr, knappTekst }: Props) => 
 	};
 
 	useEventListener('mousedown', e =>
-		vedKlikkUtenfor([{ current: knappeEl }, popoverRef], (e?.target ?? null) as Node | null, () => {
+		vedKlikkUtenfor([{ current: knappeEl }, popoverRef], e.target as Node | null, () => {
 			if (hasFailed(settBrukerIKontekstFetcher)) {
 				settBrukerIKontekstFetcher.reset();
 			}
