@@ -69,7 +69,8 @@ export const BrukerDirektelenkeMedFeilmelding = ({ fnr, knappTekst }: Props) => 
 		<>
 			<Button
 				size="small"
-				variant={hasFailed(settBrukerIKontekstFetcher) ? 'tertiary-neutral' : 'tertiary'}
+				variant="tertiary"
+				data-color={hasFailed(settBrukerIKontekstFetcher) ? 'neutral' : 'accent'}
 				icon={hasFailed(settBrukerIKontekstFetcher) ? <ExclamationmarkTriangleIcon /> : undefined}
 				loading={settBrukerIKontekstFetcher.status === 'PENDING'}
 				ref={setKnappeEl}
@@ -81,7 +82,6 @@ export const BrukerDirektelenkeMedFeilmelding = ({ fnr, knappTekst }: Props) => 
 						: undefined
 				}
 				aria-live="assertive"
-				className="bruker-direktelenke-knapp"
 			>
 				{knappTekst}
 			</Button>

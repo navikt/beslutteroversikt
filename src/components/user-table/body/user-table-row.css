@@ -10,14 +10,6 @@
 	padding-right: var(--ax-space-12);
 }
 
-.user-table-row .bruker-direktelenke-knapp {
-	/* Gjer at namna havnar rett under kvarandre i tabellen, også når nokre namn er lange eller skjermen er liten */
-	text-align: start;
-	color: var(
-		--ax-bg-accent-strong
-	); /* For at ikonfargen i knappen skal følge temaet, og ikkje bli svart på mørkt tema */
-}
-
 .user-table-row .utkast-status-celle .status {
 	display: flex;
 	gap: var(--ax-space-8);
