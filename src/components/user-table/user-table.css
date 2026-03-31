@@ -11,10 +11,4 @@
 .user-table th {
 	/* Set tekst i tabell-celler til 1rem, utan å miste padding-mengder frå tabellstorleik medium */
 	font-size: var(--ax-font-size-medium);
-	padding-top: var(--ax-space-16);
-	padding-bottom: var(--ax-space-16);
-}
-
-.user-table thead th {
-	color: var(--ax-bg-accent-strong);
 }

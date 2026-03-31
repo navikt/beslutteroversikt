@@ -17,7 +17,7 @@ const Env = {
 } as const;
 
 export const getEnv = (): EnvConfig => {
-	const { hostname } = window.location;
+	const { hostname } = globalThis.location;
 	if (hostname.includes('intern.dev.nav.no')) return Env.dev;
 	if (hostname.includes('ansatt.dev.nav.no')) return Env.ansattDev;
 	if (hostname.includes('intern.nav.no')) return Env.prod;
