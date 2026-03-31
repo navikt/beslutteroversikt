@@ -40,6 +40,7 @@ export function PaginationBar() {
 			{/*</PagineringKnapp>*/}
 			<Pagination
 				size="small"
+				data-color="accent"
 				count={totalPages}
 				page={currentPage}
 				onPageChange={handlePageChanged}

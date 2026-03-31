@@ -1,80 +1,81 @@
 import { useCallback, useMemo, useState } from 'react';
 import { FetchInfo, FetchState, FetchStatus } from './utils';
 
-export interface Fetch<D = any, FP = any> extends FetchState<D> {
+export interface Fetch<D = unknown, FP = unknown> extends FetchState<D> {
 	fetch: (fetchParams: FP, onFinished?: (fetchState: FetchState<D>) => void) => void;
 	reset: () => void;
 }
 
-const createInitialFetchState = (): FetchState => ({
+const createInitialFetchState = <D>(): FetchState<D> => ({
 	status: FetchStatus.NOT_STARTED,
 	error: null,
-	data: null as any,
+	data: null as unknown as D,
 	httpCode: -1
 });
 
-const createPendingFetchState = (): FetchState => ({
+const createPendingFetchState = <D>(): FetchState<D> => ({
 	status: FetchStatus.PENDING,
 	error: null,
-	data: null as any,
+	data: null as unknown as D,
 	httpCode: -1
 });
 
-const createFinishedFetchState = <D = {}>(data: D | null, error: any | null, httpCode: number): FetchState<D> => ({
+const createFinishedFetchState = <D = {}>(data: D | null, error: unknown, httpCode: number): FetchState<D> => ({
 	status: FetchStatus.FINISHED,
 	error,
 	data: data as D,
 	httpCode
 });
 
-const useFetch = <D = {}, FP = any>(createFetchInfo: (fetchParams: FP) => FetchInfo): Fetch<D, FP> => {
-	const [fetchState, setFetchState] = useState<FetchState<D>>(createInitialFetchState());
+const useFetch = <D = {}, FP = unknown>(createFetchInfo: (fetchParams: FP) => FetchInfo): Fetch<D, FP> => {
+	const [fetchState, setFetchState] = useState<FetchState<D>>(createInitialFetchState<D>());
 
-	const apiFetch = (fetchParams: FP, onFinished?: (fetchState: FetchState<D>) => void) => {
-		const fetchInfo = createFetchInfo(fetchParams);
-		const { url, ...restInfo } = fetchInfo;
+	const apiFetchCallback = useCallback(
+		(fetchParams: FP, onFinished?: (fetchState: FetchState<D>) => void) => {
+			const fetchInfo = createFetchInfo(fetchParams);
+			const { url, ...restInfo } = fetchInfo;
 
-		setFetchState(createPendingFetchState());
+			setFetchState(createPendingFetchState<D>());
 
-		fetch(url, restInfo)
-			.then(async res => {
-				const httpCode = res.status;
-				let state: FetchState<D>;
+			fetch(url, restInfo)
+				.then(async res => {
+					const httpCode = res.status;
+					let state: FetchState<D>;
 
-				if ([200, 201, 203, 206].includes(httpCode)) {
-					try {
-						const data = await res.text();
+					if ([200, 201, 203, 206].includes(httpCode)) {
+						try {
+							const data = await res.text();
 
-						if (data !== '' && data !== null) {
-							const deserializedData = JSON.parse(data);
+							if (data !== '' && data !== null) {
+								const deserializedData = JSON.parse(data);
 
-							state = createFinishedFetchState(deserializedData, null, httpCode);
-						} else {
-							state = createFinishedFetchState(null as any, null, httpCode);
+								state = createFinishedFetchState<D>(deserializedData, null, httpCode);
+							} else {
+								state = createFinishedFetchState<D>(null, null, httpCode);
+							}
+						} catch (error) {
+							state = createFinishedFetchState<D>(null, error, httpCode);
 						}
-					} catch (error) {
-						state = createFinishedFetchState(null as any, error, httpCode);
+					} else {
+						state = createFinishedFetchState<D>(null, null, httpCode);
 					}
-				} else {
-					state = createFinishedFetchState(null as any, null, httpCode);
-				}
 
-				return state;
-			})
-			.catch(error => {
-				return createFinishedFetchState(null as any, error, -1);
-			})
-			.then(state => {
-				if (onFinished) {
-					onFinished(state);
-				}
+					return state;
+				})
+				.catch(error => {
+					return createFinishedFetchState<D>(null, error, -1);
+				})
+				.then(state => {
+					if (onFinished) {
+						onFinished(state);
+					}
 
-				setFetchState(state);
-			});
-	};
-
-	const apiFetchCallback = useCallback(apiFetch, [createFetchInfo]);
-	const resetCallback = useCallback(() => setFetchState(createInitialFetchState()), []);
+					setFetchState(state);
+				});
+		},
+		[createFetchInfo]
+	);
+	const resetCallback = useCallback(() => setFetchState(createInitialFetchState<D>()), []);
 
 	return useMemo(() => {
 		return { ...fetchState, fetch: apiFetchCallback, reset: resetCallback };

@@ -1,13 +1,9 @@
 import { Table } from '@navikt/ds-react';
 import { OrderByField } from '../../../rest/api';
 
-interface Props {
-	stickyHeader: boolean;
-}
-
-export const UserTableHeader = ({ stickyHeader }: Props) => {
+export const UserTableHeader = () => {
 	return (
-		<Table.Header className={stickyHeader ? 'sticky-table-header' : undefined}>
+		<Table.Header>
 			<Table.Row>
 				<Table.ColumnHeader sortKey={OrderByField.BRUKER_ETTERNAVN} sortable>
 					Etternavn, Fornavn

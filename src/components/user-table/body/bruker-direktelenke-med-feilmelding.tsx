@@ -1,4 +1,5 @@
 import { MouseEvent, useRef, useState } from 'react';
+
 import { BodyShort, Button, Popover } from '@navikt/ds-react';
 import { ExclamationmarkTriangleIcon } from '@navikt/aksel-icons';
 import { useEventListener } from '../../../hooks/use-event-listener';
@@ -15,7 +16,7 @@ interface Props {
 
 export const BrukerDirektelenkeMedFeilmelding = ({ fnr, knappTekst }: Props) => {
 	const [popoverErApen, setPopoverErApen] = useState(false);
-	const knappeRef = useRef<HTMLButtonElement>(null);
+	const [knappeEl, setKnappeEl] = useState<HTMLButtonElement | null>(null);
 	const popoverRef = useRef<HTMLDivElement>(null);
 
 	const settBrukerIKontekstFetcher = useFetch<void, string>(lagSettBrukerIKontekstFetchInfo);
@@ -57,7 +58,7 @@ export const BrukerDirektelenkeMedFeilmelding = ({ fnr, knappTekst }: Props) => 
 	};
 
 	useEventListener('mousedown', e =>
-		vedKlikkUtenfor([knappeRef, popoverRef], e.target, () => {
+		vedKlikkUtenfor([{ current: knappeEl }, popoverRef], e.target as Node | null, () => {
 			if (hasFailed(settBrukerIKontekstFetcher)) {
 				settBrukerIKontekstFetcher.reset();
 			}
@@ -68,10 +69,11 @@ export const BrukerDirektelenkeMedFeilmelding = ({ fnr, knappTekst }: Props) => 
 		<>
 			<Button
 				size="small"
-				variant={hasFailed(settBrukerIKontekstFetcher) ? 'tertiary-neutral' : 'tertiary'}
+				variant="tertiary"
+				data-color={hasFailed(settBrukerIKontekstFetcher) ? 'neutral' : 'accent'}
 				icon={hasFailed(settBrukerIKontekstFetcher) ? <ExclamationmarkTriangleIcon /> : undefined}
 				loading={settBrukerIKontekstFetcher.status === 'PENDING'}
-				ref={knappeRef}
+				ref={setKnappeEl}
 				onClick={handleClick}
 				aria-expanded={popoverErApen}
 				aria-label={
@@ -80,16 +82,10 @@ export const BrukerDirektelenkeMedFeilmelding = ({ fnr, knappTekst }: Props) => 
 						: undefined
 				}
 				aria-live="assertive"
-				className="bruker-direktelenke-knapp"
 			>
 				{knappTekst}
 			</Button>
-			<Popover
-				anchorEl={knappeRef.current}
-				open={popoverErApen}
-				onClose={() => setPopoverErApen(false)}
-				ref={popoverRef}
-			>
+			<Popover anchorEl={knappeEl} open={popoverErApen} onClose={() => setPopoverErApen(false)} ref={popoverRef}>
 				<Popover.Content>
 					<BodyShort size="small" role="alert">
 						Fikk ikke kontakt med baksystemet. <br /> Prøv å laste siden på nytt eller åpne aktivitetsplanen
