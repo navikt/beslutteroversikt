@@ -1,9 +1,8 @@
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import { useDataFetcherStore } from '../stores/data-fetcher-store';
 import { lagBeslutterOversiktSok } from '../utils/sok-utils';
 import { useSokStore } from '../stores/sok-store';
 import { hasFinishedWithData } from '../rest/utils';
-import { usePrevious } from '../utils';
 import { BeslutteroversiktSok } from '../rest/api';
 import { logMetrikk } from '../utils/logger';
 
@@ -34,18 +33,24 @@ export const SokSync = () => {
 	const { brukereFetcher } = useDataFetcherStore();
 	const { filters, currentPage, pageSize, orderByDirection, orderByField, seeAll, setTotalPages, setCurrentPage } =
 		useSokStore();
-	const previousFilters = usePrevious(filters);
+	const previousFiltersRef = useRef(filters);
 
 	useEffect(() => {
-		let curPage = currentPage;
-		if (previousFilters !== filters) {
-			curPage = 1; // When filters change, start from first page
-			setCurrentPage(curPage);
+		const previousFilters = previousFiltersRef.current;
+		previousFiltersRef.current = filters;
+		const filtersChanged = previousFilters !== filters;
+
+		// Når filtrene endres starter vi på side 1
+		if (filtersChanged && currentPage !== 1) {
+			setCurrentPage(1);
+			return;
 		}
 
-		const sok = lagBeslutterOversiktSok(filters, curPage, pageSize, seeAll, orderByDirection, orderByField);
+		const fetchPage = filtersChanged ? 1 : currentPage;
+
+		const sok = lagBeslutterOversiktSok(filters, fetchPage, pageSize, seeAll, orderByDirection, orderByField);
 		brukereFetcher.fetch({ sok });
-		logSokMetrikker(sok, currentPage);
+		logSokMetrikker(sok, fetchPage);
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [filters, currentPage, orderByDirection, orderByField, seeAll]);
 
