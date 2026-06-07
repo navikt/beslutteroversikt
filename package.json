@@ -39,7 +39,7 @@
     "@navikt/navspa": "7.5.0",
     "classnames": "2.5.1",
     "constate": "3.3.3",
-    "dayjs": "1.11.20",
+    "dayjs": "1.11.21",
     "lodash.debounce": "4.0.8",
     "react": "19.2.6",
     "react-dom": "19.2.6"
