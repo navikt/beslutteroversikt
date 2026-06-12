@@ -16,5 +16,6 @@
     "target": "ESNext",
     "types": ["vite/client", "vitest/globals"]
   },
+  "files": ["src/components/internflate-decorator/internflate-decorator.d.ts"],
   "include": ["src"]
 }
