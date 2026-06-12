@@ -1,40 +1,28 @@
-import React from 'react';
-import NAVSPA from '@navikt/navspa';
-import { DecoratorPropsV3, Environment } from './internflate-decorator-v3-config';
 import { EnvType, getEnv } from './internflate-decorator-env';
 
-const Decorator: React.ComponentType<DecoratorPropsV3> = NAVSPA.importer<DecoratorPropsV3>(
-	'internarbeidsflate-decorator-v3'
-);
+type Environment = 'q0' | 'q1' | 'q2' | 'q3' | 'q4' | 'prod' | 'local' | 'mock';
 
 export function InternflateDecorator() {
-	return (
-		<nav>
-			<Decorator {...lagDecoratorConfig()} />
-		</nav>
-	);
-}
+	const urlFormat = getEnv().ingressType === 'ansatt' ? 'ANSATT' : 'NAV_NO';
 
-function lagDecoratorConfig(): DecoratorPropsV3 {
-	return {
-		appName: 'Arbeidsrettet oppfølging',
-		proxy: '/modiacontextholder',
-		environment: getDecoratorEnv(),
-		showEnheter: false,
-		showHotkeys: false,
-		showSearchArea: false,
-		urlFormat: getEnv().ingressType === 'ansatt' ? 'ANSATT' : 'NAV_NO',
-		onEnhetChanged: () => {},
-		onFnrChanged: () => {},
-		enhetSyncMode: 'ignore',
-		fnrSyncMode: 'writeOnly'
-	};
+	return (
+		<internarbeidsflate-decorator
+			app-name="Arbeidsrettet oppfølging"
+			enhet-sync-mode="ignore"
+			environment={getDecoratorEnv()}
+			fnr-sync-mode="writeOnly"
+			proxy="/modiacontextholder"
+			url-format={urlFormat}
+		/>
+	);
 }
 
 function getDecoratorEnv(): Environment {
 	const env = getEnv();
 	if (env.type === EnvType.prod) {
 		return 'prod';
+	} else if (env.type === EnvType.local) {
+		return 'local';
 	} else {
 		return 'q2';
 	}
