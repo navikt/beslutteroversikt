@@ -1,4 +1,4 @@
-import { CopyButton, Table, Tooltip } from '@navikt/ds-react';
+import { BodyShort, CopyButton, Table, Tooltip } from '@navikt/ds-react';
 import { Bruker } from '../../../rest/data/bruker';
 import { capitalize, lagBrukerNavn } from '../../../utils';
 import { formatDateStr, formatDateStrWithMonthName, formatTimeStr } from '../../../utils/date-utils';
@@ -34,6 +34,7 @@ export const UserTableRow = ({ bruker }: Props) => {
 						knappTekst={`${capitalize(lagBrukerNavn(brukerEtternavn, brukerFornavn))}`}
 					/>
 				)}
+				{erMaskert && <BodyShort size="small">Ikke tilgang til bruker</BodyShort>}
 			</Table.HeaderCell>
 			<Table.DataCell className="celle-med-knapp">
 				{brukerFnr && (
@@ -41,6 +42,7 @@ export const UserTableRow = ({ bruker }: Props) => {
 						<CopyButton size="small" iconPosition="right" copyText={brukerFnr} text={brukerFnr} />
 					</Tooltip>
 				)}
+				{!brukerFnr && 'Ikke tilgang'}
 			</Table.DataCell>
 			<Table.DataCell className="celle-med-tekst">{formatDateStr(vedtakStartet)}</Table.DataCell>
 			<Table.DataCell className="utkast-status-celle">
