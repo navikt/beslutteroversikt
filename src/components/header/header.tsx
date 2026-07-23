@@ -6,9 +6,10 @@ import './header.css';
 type HeaderProps = {
 	isDarkMode: boolean;
 	onDarkModeChange: (isDarkMode: boolean) => void;
+	showDarkModeToggle: boolean;
 };
 
-export const Header = ({ isDarkMode, onDarkModeChange }: HeaderProps) => {
+export const Header = ({ isDarkMode, onDarkModeChange, showDarkModeToggle }: HeaderProps) => {
 	return (
 		<header title="Overskrift og filtere" className="header">
 			<div className="header__content">
@@ -17,15 +18,17 @@ export const Header = ({ isDarkMode, onDarkModeChange }: HeaderProps) => {
 				</Heading>
 				<BrukerFilter />
 				<StatusDropdown />
-				<div className="header__darkmode">
-					<Switch
-						size="small"
-						checked={isDarkMode}
-						onChange={event => onDarkModeChange(event.currentTarget.checked)}
-					>
-						{isDarkMode ? 'Slå av mørk modus' : 'Slå på mørk modus'}
-					</Switch>
-				</div>
+				{showDarkModeToggle && (
+					<div className="header__darkmode">
+						<Switch
+							size="small"
+							checked={isDarkMode}
+							onChange={event => onDarkModeChange(event.currentTarget.checked)}
+						>
+							{isDarkMode ? 'Slå av mørk modus' : 'Slå på mørk modus'}
+						</Switch>
+					</div>
+				)}
 			</div>
 		</header>
 	);
