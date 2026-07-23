@@ -1,16 +1,32 @@
-import { Heading } from '@navikt/ds-react';
+import { Heading, Switch } from '@navikt/ds-react';
 import { StatusDropdown } from '../filters/status-dropdown/status-dropdown';
 import { BrukerFilter } from '../filters/bruker-filter/bruker-filter';
 import './header.css';
 
-export const Header = () => {
+type HeaderProps = {
+	isDarkMode: boolean;
+	onDarkModeChange: (isDarkMode: boolean) => void;
+};
+
+export const Header = ({ isDarkMode, onDarkModeChange }: HeaderProps) => {
 	return (
 		<header title="Overskrift og filtere" className="header">
-			<Heading level="1" size="xlarge">
-				Kvalitetssikring § 14 a
-			</Heading>
-			<BrukerFilter />
-			<StatusDropdown />
+			<div className="header__content">
+				<Heading level="1" size="xlarge">
+					Kvalitetssikring § 14 a
+				</Heading>
+				<BrukerFilter />
+				<StatusDropdown />
+				<div className="header__darkmode">
+					<Switch
+						size="small"
+						checked={isDarkMode}
+						onChange={event => onDarkModeChange(event.currentTarget.checked)}
+					>
+						{isDarkMode ? 'Slå av mørk modus' : 'Slå på mørk modus'}
+					</Switch>
+				</div>
+			</div>
 		</header>
 	);
 };
