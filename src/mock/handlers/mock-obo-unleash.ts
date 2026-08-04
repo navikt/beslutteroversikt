@@ -1,8 +1,9 @@
 import { http, HttpResponse, RequestHandler } from 'msw';
-import { EKSEMPELTOGGLE, OboUnleashFeatures } from '../../rest/obo-unleash';
+import { DARKMODE_TOGGLE, EKSEMPELTOGGLE, OboUnleashFeatures } from '../../rest/obo-unleash';
 
 const mockFeatures: OboUnleashFeatures = {
-	[EKSEMPELTOGGLE]: false
+	[EKSEMPELTOGGLE]: false,
+	[DARKMODE_TOGGLE]: false
 };
 
 export const oboUnleashHandlers: RequestHandler[] = [

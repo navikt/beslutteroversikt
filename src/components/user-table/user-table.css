@@ -4,7 +4,7 @@
 }
 
 .user-table {
-	background: white;
+	background: var(--ax-bg-default);
 }
 
 .user-table td,

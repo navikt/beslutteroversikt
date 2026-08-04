@@ -1,11 +1,13 @@
 import { FetchInfo } from './utils';
 
 export const EKSEMPELTOGGLE = 'skriv-togglenavn-her';
+export const DARKMODE_TOGGLE = 'beslutteroversikt.darkmode';
 
-export const ALL_TOGGLES = [EKSEMPELTOGGLE];
+export const ALL_TOGGLES = [EKSEMPELTOGGLE, DARKMODE_TOGGLE];
 
 export interface OboUnleashFeatures {
 	[EKSEMPELTOGGLE]: boolean;
+	[DARKMODE_TOGGLE]: boolean;
 }
 
 export function lagHentUnleashFeaturetoggleInfo(): FetchInfo {
