@@ -35,10 +35,9 @@ export const BrukerDirektelenkeMedFeilmelding = ({ fnr, knappTekst }: Props) => 
 
 	const lagOppfolgingsvedtakDyplenke = () => {
 		const basePath = finnBasePath();
-		const oppfolgingsvedtakSide = '/vedtaksstotte';
-		const anchorParams = '#visUtkast';
+		const oppfolgingsvedtakSide = '/vedtaksstotte/utkast';
 
-		return `${basePath}${oppfolgingsvedtakSide}${anchorParams}`;
+		return `${basePath}${oppfolgingsvedtakSide}`;
 	};
 
 	const handleClick = (e: MouseEvent<HTMLButtonElement>) => {

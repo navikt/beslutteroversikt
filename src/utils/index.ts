@@ -1,16 +1,4 @@
-import { type RefObject, useState } from 'react';
-
-export function usePrevious<T>(value: T) {
-	const [prev, setPrev] = useState<T>(value);
-	const [curr, setCurr] = useState<T>(value);
-
-	if (curr !== value) {
-		setPrev(curr);
-		setCurr(value);
-	}
-
-	return prev;
-}
+import { type RefObject } from 'react';
 
 export function isEmpty(str: string): boolean {
 	return str ? str.trim().length === 0 : true;

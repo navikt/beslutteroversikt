@@ -2,7 +2,18 @@
 	display: flex;
 	align-items: center;
 	gap: var(--ax-space-32);
-	background-color: white;
+	background-color: var(--ax-bg-default);
 	padding: var(--ax-space-8) var(--ax-space-32);
 	max-width: 1920px;
+}
+
+.header__darkmode {
+	display: flex;
+	margin-left: auto;
+}
+
+.header__content {
+	display: flex;
+	align-items: center;
+	gap: var(--ax-space-32);
 }
