@@ -3,7 +3,6 @@ import App from './app';
 import env from './utils/environment';
 import dayjs from 'dayjs';
 import 'dayjs/locale/nb';
-import './index.less';
 
 dayjs.locale('nb');
 

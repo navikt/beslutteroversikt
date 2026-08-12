@@ -1,9 +1,5 @@
-.hovedside-theme {
-	background-color: var(--ax-bg-neutral-moderate);
-	min-height: 100vh;
-}
-
-.hovedside {
+#hovedside {
 	max-width: 1920px;
-	margin: 0 auto var(--ax-space-32);
+	padding-bottom: var(--ax-space-32);
+	background-color: var(--ax-bg-neutral-moderate);
 }
