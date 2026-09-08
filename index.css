@@ -1,1 +1,17 @@
 @import '@navikt/ds-css' layer(aksel);
+
+html,
+body,
+#root {
+	min-height: 100vh;
+}
+
+/* Disse to reglene sørger for at siste barn (main#hovedside) tar opp resterende plass */
+#root {
+	display: flex;
+	flex-direction: column;
+}
+
+#root > :last-child {
+	flex: 1;
+}
