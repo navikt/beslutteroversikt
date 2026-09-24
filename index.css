@@ -10,6 +10,7 @@ body,
 #root {
 	display: flex;
 	flex-direction: column;
+	background-color: var(--ax-bg-neutral-moderate);
 }
 
 #root > :last-child {
