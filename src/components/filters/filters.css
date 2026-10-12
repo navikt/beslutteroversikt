@@ -2,3 +2,25 @@
 	display: flex;
 	align-items: center;
 }
+
+.enhet-filter {
+	gap: var(--ax-space-8);
+	max-width: 100%;
+}
+
+.enhet-filter > label {
+	flex-shrink: 0;
+	margin-bottom: 0;
+}
+
+.enhet-filter .aksel-combobox__wrapper {
+	width: 20rem;
+	min-width: 0;
+}
+
+.enhet-filter .aksel-combobox__selected-options {
+	max-height: 2rem;
+	min-width: 0;
+	overflow-y: auto;
+	padding: var(--ax-space-4);
+}

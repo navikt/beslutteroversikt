@@ -3,8 +3,19 @@ import { http, HttpResponse, RequestHandler } from 'msw';
 import { Bruker } from '../../rest/data/bruker';
 import { innloggetVeileder } from '../data/innlogget-veileder';
 import { lagBrukere } from '../data/brukere';
+import { enheter } from '../data/enheter';
+import { EnheterMedUtkast } from '../../rest/data/enheter-med-utkast';
 
 export const veilarbvedtaksstotteHandlers: RequestHandler[] = [
+	http.get(`${VEILARBVEDTAKSSTOTTE_API}/beslutteroversikt/enheter`, () => {
+		const enheterMedUtkast = enheter.filter(enhet =>
+			alleBrukere.some(bruker => bruker.brukerOppfolgingsenhetId === enhet.enhetId)
+		);
+		return HttpResponse.json<EnheterMedUtkast>({
+			medTilgang: enheterMedUtkast.slice(0, 3),
+			utenTilgang: enheterMedUtkast.slice(3)
+		});
+	}),
 	http.post(`${VEILARBVEDTAKSSTOTTE_API}/beslutteroversikt/sok`, async ({ request }) => {
 		const sokRequest = (await request.json()) as BeslutteroversiktSok;
 		const filtrerteBrukere = filtrerBrukere(sokRequest, alleBrukere);

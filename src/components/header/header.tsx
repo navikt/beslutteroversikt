@@ -1,6 +1,7 @@
 import { Heading, Switch } from '@navikt/ds-react';
 import { StatusDropdown } from '../filters/status-dropdown/status-dropdown';
 import { BrukerFilter } from '../filters/bruker-filter/bruker-filter';
+import { EnhetFilter } from '../filters/enhet-filter/enhet-filter';
 import './header.css';
 
 type HeaderProps = {
@@ -16,6 +17,7 @@ export const Header = ({ isDarkMode, onDarkModeChange, showDarkModeToggle }: Hea
 				Kvalitetssikring § 14 a
 			</Heading>
 			<BrukerFilter />
+			<EnhetFilter />
 			<StatusDropdown />
 			{showDarkModeToggle && (
 				<Switch

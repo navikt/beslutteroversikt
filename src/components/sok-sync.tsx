@@ -31,11 +31,23 @@ function logSokMetrikker(sok: BeslutteroversiktSok, currentPage: number): void {
 
 export const SokSync = () => {
 	const { brukereFetcher } = useDataFetcherStore();
-	const { filters, currentPage, pageSize, orderByDirection, orderByField, seeAll, setTotalPages, setCurrentPage } =
-		useSokStore();
+	const {
+		filters,
+		enhetsfilterKlart,
+		currentPage,
+		pageSize,
+		orderByDirection,
+		orderByField,
+		seeAll,
+		setTotalPages,
+		setCurrentPage
+	} = useSokStore();
 	const previousFiltersRef = useRef(filters);
 
 	useEffect(() => {
+		if (!enhetsfilterKlart) {
+			return;
+		}
 		const previousFilters = previousFiltersRef.current;
 		previousFiltersRef.current = filters;
 		const filtersChanged = previousFilters !== filters;
@@ -52,7 +64,7 @@ export const SokSync = () => {
 		brukereFetcher.fetch({ sok });
 		logSokMetrikker(sok, fetchPage);
 		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [filters, currentPage, orderByDirection, orderByField, seeAll]);
+	}, [filters, enhetsfilterKlart, currentPage, orderByDirection, orderByField, seeAll]);
 
 	useEffect(() => {
 		if (hasFinishedWithData(brukereFetcher)) {

@@ -6,7 +6,7 @@ import { utkaststatusTekstOgIkon } from '../../user-table/body/utkast-status-tek
 import '../filters.css';
 
 export const StatusDropdown = () => {
-	const { filters, setStatusFilter } = useSokStore();
+	const { filters, setStatusFilter, setEnheterFilter } = useSokStore();
 	const value = filters?.status ?? undefined;
 	const selectRef = useRef<HTMLSelectElement>(null);
 	const statuserSomSkalVareValgbareIDropdown: UtkastStatus[] = Object.values(UtkastStatus).filter(
@@ -23,6 +23,7 @@ export const StatusDropdown = () => {
 			selectRef.current.selectedIndex = 0;
 		}
 		setStatusFilter(undefined);
+		setEnheterFilter([]);
 	}
 
 	return (

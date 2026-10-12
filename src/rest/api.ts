@@ -55,6 +55,12 @@ export const lagHentInnloggetVeilederFetchInfo = (): FetchInfo => ({
 	url: `${VEILARBVEILEDER_API}/veileder/v2/me`
 });
 
+export const lagHentEnheterMedUtkastFetchInfo = (): FetchInfo => ({
+	credentials: 'same-origin',
+	method: 'GET',
+	url: `${VEILARBVEDTAKSSTOTTE_API}/beslutteroversikt/enheter`
+});
+
 export const lagHentAktivEnhetFetchInfo = (): FetchInfo => ({
 	credentials: 'same-origin',
 	url: `${MODIACONTEXTHOLDER_API}/context/aktivenhet`

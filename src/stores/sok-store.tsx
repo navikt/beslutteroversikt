@@ -5,6 +5,8 @@ import { UtkastStatus } from '../rest/data/bruker';
 import { OrNothing } from '../utils/types/ornothing';
 import { OrderByDirection, OrderByField } from '../rest/api';
 import { DEFAULT_PAGINATION_SIZE } from '../utils/sok-utils';
+import { useDataFetcherStore } from './data-fetcher-store';
+import { hasFailed, hasFinishedWithData } from '../rest/utils';
 
 export interface Filters {
 	fnrOrName: string;
@@ -27,6 +29,8 @@ const storedSearchJson = window.sessionStorage.getItem(SOK_STORAGE_NAME);
 const storedSearch: StoredSearch = storedSearchJson ? JSON.parse(storedSearchJson) : {};
 
 export const [SokStoreProvider, useSokStore] = constate(() => {
+	const { enheterMedUtkastFetcher } = useDataFetcherStore();
+	const enhetsfilterKlart = hasFinishedWithData(enheterMedUtkastFetcher) && !hasFailed(enheterMedUtkastFetcher);
 	// Paginering
 	const [totalPages, setTotalPages] = useState(1);
 	const [currentPage, setCurrentPage] = useState(storedSearch.currentPage || 1);
@@ -41,7 +45,16 @@ export const [SokStoreProvider, useSokStore] = constate(() => {
 
 	// Filtrering
 	const [fnrOrNameFilter, setFnrOrNameFilter] = useState<string>('');
-	const [enheterFilter, setEnheterFilter] = useState<Enhet[]>([]);
+	const [valgteEnheter, setValgteEnheter] = useState<Enhet[]>();
+	const enheterFilter = useMemo(
+		() => valgteEnheter ?? enheterMedUtkastFetcher.data?.medTilgang ?? [],
+		[valgteEnheter, enheterMedUtkastFetcher.data]
+	);
+	const setEnheterFilter: React.Dispatch<React.SetStateAction<Enhet[]>> = oppdatering => {
+		setValgteEnheter(gjeldendeEnheter =>
+			typeof oppdatering === 'function' ? oppdatering(gjeldendeEnheter ?? enheterFilter) : oppdatering
+		);
+	};
 	const [statusFilter, setStatusFilter] = useState<UtkastStatus | undefined>(storedSearch.status || undefined);
 	const [visMineBrukere, setVisMineBrukere] = useState<boolean>(storedSearch.visMineBrukere || false);
 
@@ -79,6 +92,7 @@ export const [SokStoreProvider, useSokStore] = constate(() => {
 		orderByDirection,
 		setOrderByDirection,
 		filters,
+		enhetsfilterKlart,
 		setFnrOrNameFilter,
 		setEnheterFilter,
 		setStatusFilter,
