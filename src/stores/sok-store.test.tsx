@@ -9,7 +9,13 @@ const mocks = vi.hoisted(() => ({
 	capture: vi.fn<(state: ReturnType<typeof useSokStore>) => void>()
 }));
 
-vi.mock('./data-fetcher-store', () => ({ useDataFetcherStore: mocks.useDataFetcherStore }));
+vi.mock('./data-fetcher-store', () => ({
+	useDataFetcherStore: () => ({
+		enhetsfilterOgEnkelttilgangAktivert: true,
+		unleashFeaturetoggleFetcher: { status: FetchStatus.FINISHED, data: {}, error: null, httpCode: 200 },
+		...mocks.useDataFetcherStore()
+	})
+}));
 vi.mock('constate', () => ({
 	default: (hook: () => ReturnType<typeof useSokStore>) => [
 		() => {
@@ -112,5 +118,35 @@ describe('standardvalg for enhetsfilteret', () => {
 		const state = mocks.capture.mock.calls.at(-1)![0];
 		expect(state.enhetsfilterKlart).toBe(true);
 		expect(state.filters.enheter).toEqual([]);
+	});
+
+	it('søker uten enhetsfilter når bryteren er av, uten å vente på enhetslisten', () => {
+		mocks.useDataFetcherStore.mockReturnValue({
+			enhetsfilterOgEnkelttilgangAktivert: false,
+			enheterMedUtkastFetcher: { status: FetchStatus.NOT_STARTED, data: null, error: null, httpCode: -1 }
+		});
+		renderToStaticMarkup(
+			<SokStoreProvider>
+				<span />
+			</SokStoreProvider>
+		);
+		const state = mocks.capture.mock.calls.at(-1)![0];
+		expect(state.enhetsfilterKlart).toBe(true);
+		expect(state.filters.enheter).toEqual([]);
+		expect(lagBeslutterOversiktSok(state.filters, 1, 50, false, undefined, undefined).filter).toBeUndefined();
+	});
+
+	it('venter på bryteren før første søk', () => {
+		mocks.useDataFetcherStore.mockReturnValue({
+			enhetsfilterOgEnkelttilgangAktivert: false,
+			unleashFeaturetoggleFetcher: { status: FetchStatus.PENDING, data: null, error: null, httpCode: -1 },
+			enheterMedUtkastFetcher: { status: FetchStatus.NOT_STARTED, data: null, error: null, httpCode: -1 }
+		});
+		renderToStaticMarkup(
+			<SokStoreProvider>
+				<span />
+			</SokStoreProvider>
+		);
+		expect(mocks.capture.mock.calls.at(-1)![0].enhetsfilterKlart).toBe(false);
 	});
 });

@@ -5,6 +5,7 @@ import { UtkastStatus } from '../../../rest/data/bruker';
 import { UserTableRow } from './user-table-row';
 
 const mocks = vi.hoisted(() => ({
+	aktivert: true,
 	direktelenke: vi.fn<(props: { trengerEnkelttilgang: boolean }) => null>(() => null)
 }));
 
@@ -13,6 +14,7 @@ vi.mock('./bruker-direktelenke-med-feilmelding', () => ({
 }));
 vi.mock('../../../stores/data-fetcher-store', () => ({
 	useDataFetcherStore: () => ({
+		enhetsfilterOgEnkelttilgangAktivert: mocks.aktivert,
 		enheterMedUtkastFetcher: {
 			data: {
 				medTilgang: [{ enhetId: '0234', navn: 'Nav Gjerdrum' }],
@@ -36,7 +38,10 @@ const bruker: Bruker = {
 };
 
 describe('enhetstilgang for hver rad', () => {
-	beforeEach(() => vi.clearAllMocks());
+	beforeEach(() => {
+		vi.clearAllMocks();
+		mocks.aktivert = true;
+	});
 
 	it.each([
 		['0234', false],
@@ -61,5 +66,17 @@ describe('enhetstilgang for hver rad', () => {
 			</table>
 		);
 		expect(mocks.direktelenke).not.toHaveBeenCalled();
+	});
+
+	it('krever ikke enkelttilgang når bryteren er av', () => {
+		mocks.aktivert = false;
+		renderToStaticMarkup(
+			<table>
+				<tbody>
+					<UserTableRow bruker={{ ...bruker, brukerOppfolgingsenhetId: '0219' }} />
+				</tbody>
+			</table>
+		);
+		expect(mocks.direktelenke.mock.calls.at(-1)![0].trengerEnkelttilgang).toBe(false);
 	});
 });

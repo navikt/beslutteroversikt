@@ -29,8 +29,13 @@ const storedSearchJson = window.sessionStorage.getItem(SOK_STORAGE_NAME);
 const storedSearch: StoredSearch = storedSearchJson ? JSON.parse(storedSearchJson) : {};
 
 export const [SokStoreProvider, useSokStore] = constate(() => {
-	const { enheterMedUtkastFetcher } = useDataFetcherStore();
-	const enhetsfilterKlart = hasFinishedWithData(enheterMedUtkastFetcher) && !hasFailed(enheterMedUtkastFetcher);
+	const { enheterMedUtkastFetcher, unleashFeaturetoggleFetcher, enhetsfilterOgEnkelttilgangAktivert } =
+		useDataFetcherStore();
+	const enhetsfilterKlart =
+		hasFinishedWithData(unleashFeaturetoggleFetcher) &&
+		!hasFailed(unleashFeaturetoggleFetcher) &&
+		(!enhetsfilterOgEnkelttilgangAktivert ||
+			(hasFinishedWithData(enheterMedUtkastFetcher) && !hasFailed(enheterMedUtkastFetcher)));
 	// Paginering
 	const [totalPages, setTotalPages] = useState(1);
 	const [currentPage, setCurrentPage] = useState(storedSearch.currentPage || 1);
@@ -47,8 +52,11 @@ export const [SokStoreProvider, useSokStore] = constate(() => {
 	const [fnrOrNameFilter, setFnrOrNameFilter] = useState<string>('');
 	const [valgteEnheter, setValgteEnheter] = useState<Enhet[]>();
 	const enheterFilter = useMemo(
-		() => valgteEnheter ?? enheterMedUtkastFetcher.data?.medTilgang ?? [],
-		[valgteEnheter, enheterMedUtkastFetcher.data]
+		() =>
+			enhetsfilterOgEnkelttilgangAktivert
+				? (valgteEnheter ?? enheterMedUtkastFetcher.data?.medTilgang ?? [])
+				: [],
+		[valgteEnheter, enheterMedUtkastFetcher.data, enhetsfilterOgEnkelttilgangAktivert]
 	);
 	const setEnheterFilter: React.Dispatch<React.SetStateAction<Enhet[]>> = oppdatering => {
 		setValgteEnheter(gjeldendeEnheter =>

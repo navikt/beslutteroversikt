@@ -12,10 +12,10 @@ interface Props {
 }
 
 export const UserTableRow = ({ bruker }: Props) => {
-	const { enheterMedUtkastFetcher } = useDataFetcherStore();
-	const trengerEnkelttilgang = enheterMedUtkastFetcher.data.utenTilgang.some(
-		enhet => enhet.enhetId === bruker.brukerOppfolgingsenhetId
-	);
+	const { enheterMedUtkastFetcher, enhetsfilterOgEnkelttilgangAktivert } = useDataFetcherStore();
+	const trengerEnkelttilgang =
+		enhetsfilterOgEnkelttilgangAktivert &&
+		enheterMedUtkastFetcher.data.utenTilgang.some(enhet => enhet.enhetId === bruker.brukerOppfolgingsenhetId);
 	const {
 		brukerFnr,
 		brukerFornavn,

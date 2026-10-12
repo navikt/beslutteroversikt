@@ -3,6 +3,7 @@ import { StatusDropdown } from '../filters/status-dropdown/status-dropdown';
 import { BrukerFilter } from '../filters/bruker-filter/bruker-filter';
 import { EnhetFilter } from '../filters/enhet-filter/enhet-filter';
 import './header.css';
+import { useDataFetcherStore } from '../../stores/data-fetcher-store';
 
 type HeaderProps = {
 	isDarkMode: boolean;
@@ -11,13 +12,17 @@ type HeaderProps = {
 };
 
 export const Header = ({ isDarkMode, onDarkModeChange, showDarkModeToggle }: HeaderProps) => {
+	const { enhetsfilterOgEnkelttilgangAktivert } = useDataFetcherStore();
 	return (
-		<header title="Overskrift og filtere" className="header">
+		<header
+			title="Overskrift og filtere"
+			className={enhetsfilterOgEnkelttilgangAktivert ? 'header header--enhetsfilter' : 'header'}
+		>
 			<Heading level="1" size="xlarge">
 				Kvalitetssikring § 14 a
 			</Heading>
 			<BrukerFilter />
-			<EnhetFilter />
+			{enhetsfilterOgEnkelttilgangAktivert && <EnhetFilter />}
 			<StatusDropdown />
 			{showDarkModeToggle && (
 				<Switch
