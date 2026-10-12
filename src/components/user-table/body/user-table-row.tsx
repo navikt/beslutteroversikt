@@ -5,12 +5,17 @@ import { formatDateStr, formatDateStrWithMonthName, formatTimeStr } from '../../
 import { UtkastStatusData } from './utkast-status-data';
 import { BrukerDirektelenkeMedFeilmelding } from './bruker-direktelenke-med-feilmelding';
 import './user-table-row.css';
+import { useDataFetcherStore } from '../../../stores/data-fetcher-store';
 
 interface Props {
 	bruker: Bruker;
 }
 
 export const UserTableRow = ({ bruker }: Props) => {
+	const { enheterMedUtkastFetcher } = useDataFetcherStore();
+	const trengerEnkelttilgang = enheterMedUtkastFetcher.data.utenTilgang.some(
+		enhet => enhet.enhetId === bruker.brukerOppfolgingsenhetId
+	);
 	const {
 		brukerFnr,
 		brukerFornavn,
@@ -31,6 +36,7 @@ export const UserTableRow = ({ bruker }: Props) => {
 				{!erMaskert && (
 					<BrukerDirektelenkeMedFeilmelding
 						fnr={brukerFnr}
+						trengerEnkelttilgang={trengerEnkelttilgang}
 						knappTekst={`${capitalize(lagBrukerNavn(brukerEtternavn, brukerFornavn))}`}
 					/>
 				)}

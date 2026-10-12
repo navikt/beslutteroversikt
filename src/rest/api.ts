@@ -92,3 +92,14 @@ export const lagSettBrukerIKontekstFetchInfo = (fnr: string): FetchInfo => ({
 	method: 'post',
 	url: `${MODIACONTEXTHOLDER_API}/context`
 });
+
+export const lagGiEnkelttilgangFetchInfo = (fnr: string): FetchInfo => ({
+	url: `${VEILARBVEDTAKSSTOTTE_API}/v1/tilgang/enkelttilgang`,
+	method: 'POST',
+	credentials: 'same-origin',
+	headers: {
+		'Nav-Consumer-Id': 'beslutteroversikt',
+		'Content-Type': 'application/json'
+	},
+	body: JSON.stringify({ brukerId: fnr })
+});

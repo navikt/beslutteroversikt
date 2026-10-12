@@ -7,6 +7,7 @@ import { enheter } from '../data/enheter';
 import { EnheterMedUtkast } from '../../rest/data/enheter-med-utkast';
 
 export const veilarbvedtaksstotteHandlers: RequestHandler[] = [
+	http.post(`${VEILARBVEDTAKSSTOTTE_API}/v1/tilgang/enkelttilgang`, () => new HttpResponse(null, { status: 204 })),
 	http.get(`${VEILARBVEDTAKSSTOTTE_API}/beslutteroversikt/enheter`, () => {
 		const enheterMedUtkast = enheter.filter(enhet =>
 			alleBrukere.some(bruker => bruker.brukerOppfolgingsenhetId === enhet.enhetId)
