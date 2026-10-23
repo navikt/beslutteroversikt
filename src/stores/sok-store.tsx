@@ -3,8 +3,9 @@ import constate from 'constate';
 import { Enhet } from '../rest/data/innlogget-veileder';
 import { UtkastStatus } from '../rest/data/bruker';
 import { OrNothing } from '../utils/types/ornothing';
-import { OrderByDirection, OrderByField } from '../rest/api';
+import { lagHentEnheterMedUtkastFetchInfo, OrderByDirection, OrderByField } from '../rest/api';
 import { DEFAULT_PAGINATION_SIZE } from '../utils/sok-utils';
+import useFetch from '../rest/use-fetch';
 
 export interface Filters {
 	fnrOrName: string;
@@ -44,6 +45,12 @@ export const [SokStoreProvider, useSokStore] = constate(() => {
 	const [enheterFilter, setEnheterFilter] = useState<Enhet[]>([]);
 	const [statusFilter, setStatusFilter] = useState<UtkastStatus | undefined>(storedSearch.status || undefined);
 	const [visMineBrukere, setVisMineBrukere] = useState<boolean>(storedSearch.visMineBrukere || false);
+	const enheterFetcher = useFetch<Enhet[]>(lagHentEnheterMedUtkastFetchInfo);
+	const hentEnheter = enheterFetcher.fetch;
+
+	useEffect(() => {
+		hentEnheter(null);
+	}, [hentEnheter]);
 
 	const filters: Filters = useMemo(() => {
 		return {
@@ -79,6 +86,7 @@ export const [SokStoreProvider, useSokStore] = constate(() => {
 		orderByDirection,
 		setOrderByDirection,
 		filters,
+		enheter: enheterFetcher.data ?? [],
 		setFnrOrNameFilter,
 		setEnheterFilter,
 		setStatusFilter,

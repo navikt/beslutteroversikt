@@ -3,8 +3,10 @@ import { http, HttpResponse, RequestHandler } from 'msw';
 import { Bruker } from '../../rest/data/bruker';
 import { innloggetVeileder } from '../data/innlogget-veileder';
 import { lagBrukere } from '../data/brukere';
+import { enheter } from '../data/enheter';
 
 export const veilarbvedtaksstotteHandlers: RequestHandler[] = [
+	http.get(`${VEILARBVEDTAKSSTOTTE_API}/beslutteroversikt/enheter`, () => HttpResponse.json(enheter)),
 	http.post(`${VEILARBVEDTAKSSTOTTE_API}/beslutteroversikt/sok`, async ({ request }) => {
 		const sokRequest = (await request.json()) as BeslutteroversiktSok;
 		const filtrerteBrukere = filtrerBrukere(sokRequest, alleBrukere);

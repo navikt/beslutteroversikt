@@ -60,6 +60,12 @@ export const lagHentAktivEnhetFetchInfo = (): FetchInfo => ({
 	url: `${MODIACONTEXTHOLDER_API}/context/aktivenhet`
 });
 
+export const lagHentEnheterMedUtkastFetchInfo = (): FetchInfo => ({
+	credentials: 'same-origin',
+	method: 'GET',
+	url: `${VEILARBVEDTAKSSTOTTE_API}/beslutteroversikt/enheter`
+});
+
 export function sendEventTilVedtaksstotte(event: FrontendEvent) {
 	const url = `${VEILARBVEDTAKSSTOTTE_API}/logger/event`;
 	const config = {
