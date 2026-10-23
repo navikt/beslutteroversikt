@@ -2,5 +2,5 @@
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
-	padding: var(--ax-space-32);
+	padding: var(--ax-space-24) var(--ax-space-32) var(--ax-space-12);
 }

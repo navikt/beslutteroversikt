@@ -2,6 +2,8 @@ import { useSokStore } from '../../stores/sok-store';
 import { useDataFetcherStore } from '../../stores/data-fetcher-store';
 import { Label, Pagination } from '@navikt/ds-react';
 import './pagination-bar.css';
+import { StatusDropdown } from '../filters/status-dropdown/status-dropdown';
+import { BrukerFilter } from '../filters/bruker-filter/bruker-filter';
 
 export function PaginationBar() {
 	// eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -38,6 +40,8 @@ export function PaginationBar() {
 			{/*<PagineringKnapp onClick={handleSeeAllChanged}>*/}
 			{/*    {!seeAll ? 'Se alle' : 'Se færre'}*/}
 			{/*</PagineringKnapp>*/}
+			<BrukerFilter />
+			<StatusDropdown />
 			<Pagination
 				size="small"
 				data-color="accent"
