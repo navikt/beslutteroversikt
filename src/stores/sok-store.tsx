@@ -4,8 +4,10 @@ import { Enhet } from '../rest/data/innlogget-veileder';
 import { UtkastStatus } from '../rest/data/bruker';
 import { OrNothing } from '../utils/types/ornothing';
 import { lagHentEnheterMedUtkastFetchInfo, OrderByDirection, OrderByField } from '../rest/api';
+import { KVALITETSSIKRERROLLE_TOGGLE } from '../rest/obo-unleash';
 import { DEFAULT_PAGINATION_SIZE } from '../utils/sok-utils';
 import useFetch from '../rest/use-fetch';
+import { useDataFetcherStore } from './data-fetcher-store';
 
 export interface Filters {
 	fnrOrName: string;
@@ -46,11 +48,15 @@ export const [SokStoreProvider, useSokStore] = constate(() => {
 	const [statusFilter, setStatusFilter] = useState<UtkastStatus | undefined>(storedSearch.status || undefined);
 	const [visMineBrukere, setVisMineBrukere] = useState<boolean>(storedSearch.visMineBrukere || false);
 	const enheterFetcher = useFetch<Enhet[]>(lagHentEnheterMedUtkastFetchInfo);
+	const { unleashFeaturetoggleFetcher } = useDataFetcherStore();
+	const visEnhetsvelger = Boolean(unleashFeaturetoggleFetcher.data?.[KVALITETSSIKRERROLLE_TOGGLE]);
 	const hentEnheter = enheterFetcher.fetch;
 
 	useEffect(() => {
-		hentEnheter(null);
-	}, [hentEnheter]);
+		if (visEnhetsvelger) {
+			hentEnheter(null);
+		}
+	}, [hentEnheter, visEnhetsvelger]);
 
 	const filters: Filters = useMemo(() => {
 		return {

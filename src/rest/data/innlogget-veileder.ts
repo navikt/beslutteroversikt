@@ -1,6 +1,6 @@
 export interface Enhet {
 	enhetId: string;
-	navn: string;
+	enhetNavn: string;
 }
 
 export interface InnloggetVeileder {

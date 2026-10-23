@@ -11,7 +11,7 @@ export const Enhetsvelger = () => {
 				label="Velg enheter"
 				hideLabel
 				size="small"
-				options={enheter.map(enhet => ({ value: enhet.enhetId, label: `${enhet.enhetId} ${enhet.navn}` }))}
+				options={enheter.map(enhet => ({ value: enhet.enhetId, label: `${enhet.enhetId} ${enhet.enhetNavn}` }))}
 				selectedOptions={filters.enheter.map(enhet => enhet.enhetId)}
 				onToggleSelected={(enhetId, isSelected) => {
 					const valgtEnhet = enheter.find(enhet => enhet.enhetId === enhetId);

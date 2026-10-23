@@ -49,7 +49,7 @@ export const lagBrukere = (antallBrukere: number): Bruker[] => {
 			brukerEtternavn: 'Testson',
 			vedtakStartet: faker.date.recent({ days: 30 }).toISOString(),
 			brukerOppfolgingsenhetId: randomEnhet.enhetId,
-			brukerOppfolgingsenhetNavn: randomEnhet.navn,
+			brukerOppfolgingsenhetNavn: randomEnhet.enhetNavn,
 			status: randomStatus,
 			statusEndret: faker.date.recent().toISOString()
 		};
