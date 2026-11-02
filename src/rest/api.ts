@@ -6,6 +6,19 @@ import { FrontendEvent } from '../utils/logger';
 export const VEILARBVEDTAKSSTOTTE_API = '/veilarbvedtaksstotte/api';
 export const VEILARBVEILEDER_API = '/veilarbveileder/api';
 export const MODIACONTEXTHOLDER_API = '/modiacontextholder/api';
+export const VEILARBPERSON_GRAPHQL = '/veilarbperson/graphql';
+
+const BEHANDLINGSNUMMER = 'B643';
+
+const personaliaGraphqlQuery = `
+	query($fnr: ID!, $behandlingsnummer: String!) {
+		person(fnr: $fnr, behandlingsnummer: $behandlingsnummer) {
+			dodsdato
+			diskresjonskode
+			egenAnsatt
+		}
+	}
+`;
 
 export interface BeslutteroversiktSok {
 	fra: number;
@@ -81,6 +94,20 @@ export function sendEventTilVedtaksstotte(event: FrontendEvent) {
 	// @ts-ignore
 	return fetch(url, config);
 }
+
+export const lagHentPersonaliaFetchInfo = (fnr: string): FetchInfo => ({
+	url: VEILARBPERSON_GRAPHQL,
+	method: 'POST',
+	credentials: 'same-origin',
+	headers: {
+		'Nav-Consumer-Id': 'beslutteroversikt',
+		'Content-Type': 'application/json'
+	},
+	body: JSON.stringify({
+		query: personaliaGraphqlQuery,
+		variables: { fnr, behandlingsnummer: BEHANDLINGSNUMMER }
+	})
+});
 
 export const lagSettBrukerIKontekstFetchInfo = (fnr: string): FetchInfo => ({
 	body: JSON.stringify({ verdi: fnr, eventType: 'NY_AKTIV_BRUKER' }),

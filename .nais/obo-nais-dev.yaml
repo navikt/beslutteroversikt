@@ -54,6 +54,8 @@ spec:
           namespace: obo
         - application: veilarbveileder
           namespace: obo
+        - application: veilarbperson
+          namespace: obo
         - application: obo-unleash
           namespace: obo
   env:
@@ -110,6 +112,16 @@ spec:
               "preserveFromPath": true,
               "toApp": {
                 "name": "veilarbvedtaksstotte",
+                "namespace": "obo",
+                "cluster": "dev-gcp"
+              }
+            },
+            {
+              "fromPath": "/veilarbperson",
+              "toUrl": "http://veilarbperson.obo",
+              "preserveFromPath": true,
+              "toApp": {
+                "name": "veilarbperson",
                 "namespace": "obo",
                 "cluster": "dev-gcp"
               }
