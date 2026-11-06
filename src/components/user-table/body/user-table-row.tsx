@@ -4,13 +4,16 @@ import { capitalize, lagBrukerNavn } from '../../../utils';
 import { formatDateStr, formatDateStrWithMonthName, formatTimeStr } from '../../../utils/date-utils';
 import { UtkastStatusData } from './utkast-status-data';
 import { BrukerDirektelenkeMedFeilmelding } from './bruker-direktelenke-med-feilmelding';
+import { PersonEtiketter } from './person-etiketter';
+import { Etiketter } from '../../../rest/data/etiketter';
 import './user-table-row.css';
 
 interface Props {
 	bruker: Bruker;
+	etiketter?: Etiketter;
 }
 
-export const UserTableRow = ({ bruker }: Props) => {
+export const UserTableRow = ({ bruker, etiketter }: Props) => {
 	const {
 		brukerFnr,
 		brukerFornavn,
@@ -55,6 +58,9 @@ export const UserTableRow = ({ bruker }: Props) => {
 			<Table.DataCell className="celle-med-tekst">{beslutterNavn ?? '-'}</Table.DataCell>
 			<Table.DataCell className="celle-med-tekst">{veilederNavn}</Table.DataCell>
 			<Table.DataCell className="celle-med-tekst">{brukerOppfolgingsenhetNavn}</Table.DataCell>
+			<Table.DataCell className="celle-med-tekst">
+				<PersonEtiketter etiketter={etiketter} />
+			</Table.DataCell>
 		</Table.Row>
 	);
 };
