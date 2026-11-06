@@ -1,7 +1,11 @@
-export interface BrukerEtiketter {
-	fnr: string;
+export interface Etiketter {
 	erDoed: boolean;
-	diskresjonskodeFortrolig: string | null;
 	egenAnsatt: boolean;
+	diskresjonskodeFortrolig: string | null;
 	kandidatForUtmelding: boolean;
+}
+
+export interface EtiketterForBruker {
+	fnr: string;
+	etiketter: Etiketter;
 }

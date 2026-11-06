@@ -5,12 +5,12 @@ import { formatDateStr, formatDateStrWithMonthName, formatTimeStr } from '../../
 import { UtkastStatusData } from './utkast-status-data';
 import { BrukerDirektelenkeMedFeilmelding } from './bruker-direktelenke-med-feilmelding';
 import { PersonEtiketter } from './person-etiketter';
-import { BrukerEtiketter } from '../../../rest/data/etiketter';
+import { Etiketter } from '../../../rest/data/etiketter';
 import './user-table-row.css';
 
 interface Props {
 	bruker: Bruker;
-	etiketter?: BrukerEtiketter;
+	etiketter?: Etiketter;
 }
 
 export const UserTableRow = ({ bruker, etiketter }: Props) => {

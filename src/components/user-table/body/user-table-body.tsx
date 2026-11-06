@@ -9,7 +9,7 @@ import './user-table-body.css';
 export const UserTableBody = () => {
 	const { brukereFetcher, etiketterFetcher } = useDataFetcherStore();
 	const brukere = (brukereFetcher.data && brukereFetcher.data.brukere) || [];
-	const etiketterPerFnr = new Map((etiketterFetcher.data ?? []).map(etiketter => [etiketter.fnr, etiketter]));
+	const etiketterPerFnr = new Map((etiketterFetcher.data ?? []).map(({ fnr, etiketter }) => [fnr, etiketter]));
 	const laster = !hasFinished(brukereFetcher);
 
 	return (

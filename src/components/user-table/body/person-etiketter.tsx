@@ -1,8 +1,8 @@
 import { HStack, Tag } from '@navikt/ds-react';
-import { BrukerEtiketter } from '../../../rest/data/etiketter';
+import { Etiketter } from '../../../rest/data/etiketter';
 
 interface Props {
-	etiketter?: BrukerEtiketter;
+	etiketter?: Etiketter;
 }
 
 export const PersonEtiketter = ({ etiketter }: Props) => {
