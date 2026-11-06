@@ -52,7 +52,7 @@ spec:
           namespace: personoversikt
         - application: veilarbveileder
         - application: veilarbvedtaksstotte
-        - application: veilarbperson
+        - application: veilarbportefolje
           namespace: obo
         - application: obo-unleash
           namespace: obo
@@ -115,11 +115,11 @@ spec:
               }
             },
             {
-              "fromPath": "/veilarbperson",
-              "toUrl": "http://veilarbperson.obo",
+              "fromPath": "/veilarbportefolje",
+              "toUrl": "http://veilarbportefolje.obo",
               "preserveFromPath": true,
               "toApp": {
-                "name": "veilarbperson",
+                "name": "veilarbportefolje",
                 "namespace": "obo",
                 "cluster": "prod-gcp"
               }

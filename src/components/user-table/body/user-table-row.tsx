@@ -5,13 +5,15 @@ import { formatDateStr, formatDateStrWithMonthName, formatTimeStr } from '../../
 import { UtkastStatusData } from './utkast-status-data';
 import { BrukerDirektelenkeMedFeilmelding } from './bruker-direktelenke-med-feilmelding';
 import { PersonEtiketter } from './person-etiketter';
+import { BrukerEtiketter } from '../../../rest/data/etiketter';
 import './user-table-row.css';
 
 interface Props {
 	bruker: Bruker;
+	etiketter?: BrukerEtiketter;
 }
 
-export const UserTableRow = ({ bruker }: Props) => {
+export const UserTableRow = ({ bruker, etiketter }: Props) => {
 	const {
 		brukerFnr,
 		brukerFornavn,
@@ -57,7 +59,7 @@ export const UserTableRow = ({ bruker }: Props) => {
 			<Table.DataCell className="celle-med-tekst">{veilederNavn}</Table.DataCell>
 			<Table.DataCell className="celle-med-tekst">{brukerOppfolgingsenhetNavn}</Table.DataCell>
 			<Table.DataCell className="celle-med-tekst">
-				<PersonEtiketter fnr={brukerFnr} />
+				<PersonEtiketter etiketter={etiketter} />
 			</Table.DataCell>
 		</Table.Row>
 	);

@@ -1,44 +1,35 @@
-import { useEffect } from 'react';
 import { HStack, Tag } from '@navikt/ds-react';
-import useFetch from '../../../rest/use-fetch';
-import { lagHentPersonaliaFetchInfo } from '../../../rest/api';
-import { PersonaliaResponse } from '../../../rest/data/personalia';
+import { BrukerEtiketter } from '../../../rest/data/etiketter';
 
 interface Props {
-	fnr: string;
+	etiketter?: BrukerEtiketter;
 }
 
-export const PersonEtiketter = ({ fnr }: Props) => {
-	const personaliaFetcher = useFetch<PersonaliaResponse, string>(lagHentPersonaliaFetchInfo);
-	const { fetch: hentPersonalia } = personaliaFetcher;
-
-	useEffect(() => {
-		if (fnr) {
-			hentPersonalia(fnr);
-		}
-	}, [fnr, hentPersonalia]);
-
-	const personalia = personaliaFetcher.data?.errors ? undefined : personaliaFetcher.data?.data?.person;
-
-	if (!personalia) {
+export const PersonEtiketter = ({ etiketter }: Props) => {
+	if (!etiketter) {
 		return null;
 	}
 
 	return (
 		<HStack gap="space-2" wrap>
-			{personalia.dodsdato && (
+			{etiketter.erDoed && (
 				<Tag variant="neutral" size="small">
 					Død
 				</Tag>
 			)}
-			{personalia.diskresjonskode && (
+			{etiketter.diskresjonskodeFortrolig && (
 				<Tag variant="error" size="small">
-					Kode {personalia.diskresjonskode}
+					Kode {etiketter.diskresjonskodeFortrolig}
 				</Tag>
 			)}
-			{personalia.egenAnsatt && (
+			{etiketter.egenAnsatt && (
 				<Tag variant="error" size="small">
 					Skjermet
+				</Tag>
+			)}
+			{etiketter.kandidatForUtmelding && (
+				<Tag variant="warning" size="small">
+					Kandidat for avslutning
 				</Tag>
 			)}
 		</HStack>
