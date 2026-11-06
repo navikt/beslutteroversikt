@@ -14,7 +14,7 @@ const lagEtiketter = (fnr: string): BrukerEtiketter => {
 };
 
 export const veilarbportefoljeHandlers: RequestHandler[] = [
-	http.post(`${VEILARBPORTEFOLJE_API}/api/v1/beslutteroversikt/hent-etiketter`, async ({ request }) => {
+	http.post(`${VEILARBPORTEFOLJE_API}/v1/beslutteroversikt/hent-etiketter`, async ({ request }) => {
 		const body = (await request.json()) as { fnrListe: string[] };
 		return HttpResponse.json(body.fnrListe.map(lagEtiketter));
 	})

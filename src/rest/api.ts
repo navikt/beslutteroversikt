@@ -84,7 +84,7 @@ export function sendEventTilVedtaksstotte(event: FrontendEvent) {
 }
 
 export const lagHentEtiketterFetchInfo = (fnr: string[]): FetchInfo => ({
-	url: `${VEILARBPORTEFOLJE_API}/api/v1/beslutteroversikt/hent-etiketter`,
+	url: `${VEILARBPORTEFOLJE_API}/v1/beslutteroversikt/hent-etiketter`,
 	method: 'POST',
 	credentials: 'same-origin',
 	headers: {
