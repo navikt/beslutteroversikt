@@ -7,9 +7,8 @@ import { hasFinished } from '../../../rest/utils';
 import './user-table-body.css';
 
 export const UserTableBody = () => {
-	const { brukereFetcher, etiketterFetcher } = useDataFetcherStore();
+	const { brukereFetcher } = useDataFetcherStore();
 	const brukere = (brukereFetcher.data && brukereFetcher.data.brukere) || [];
-	const etiketterPerFnr = new Map((etiketterFetcher.data ?? []).map(({ fnr, etiketter }) => [fnr, etiketter]));
 	const laster = !hasFinished(brukereFetcher);
 
 	return (
@@ -20,7 +19,7 @@ export const UserTableBody = () => {
 				<>
 					{brukere.map((bruker, index) => (
 						// Bruker index som key fordi maskerte brukarar har fnr="" og vi ikkje har noko anna unik info på brukar
-						<UserTableRow bruker={bruker} etiketter={etiketterPerFnr.get(bruker.brukerFnr)} key={index} />
+						<UserTableRow bruker={bruker} key={index} />
 					))}
 
 					{brukere.length === 0 && <FantIngenBrukereAlertRad />}

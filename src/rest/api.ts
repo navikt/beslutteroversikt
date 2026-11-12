@@ -6,7 +6,6 @@ import { FrontendEvent } from '../utils/logger';
 export const VEILARBVEDTAKSSTOTTE_API = '/veilarbvedtaksstotte/api';
 export const VEILARBVEILEDER_API = '/veilarbveileder/api';
 export const MODIACONTEXTHOLDER_API = '/modiacontextholder/api';
-export const VEILARBPORTEFOLJE_API = '/veilarbportefolje/api';
 
 export interface BeslutteroversiktSok {
 	fra: number;
@@ -82,17 +81,6 @@ export function sendEventTilVedtaksstotte(event: FrontendEvent) {
 	// @ts-ignore
 	return fetch(url, config);
 }
-
-export const lagHentEtiketterFetchInfo = (fnr: string[]): FetchInfo => ({
-	url: `${VEILARBPORTEFOLJE_API}/v1/beslutteroversikt/hent-etiketter`,
-	method: 'POST',
-	credentials: 'same-origin',
-	headers: {
-		'Nav-Consumer-Id': 'beslutteroversikt',
-		'Content-Type': 'application/json'
-	},
-	body: JSON.stringify({ fnr })
-});
 
 export const lagSettBrukerIKontekstFetchInfo = (fnr: string): FetchInfo => ({
 	body: JSON.stringify({ verdi: fnr, eventType: 'NY_AKTIV_BRUKER' }),

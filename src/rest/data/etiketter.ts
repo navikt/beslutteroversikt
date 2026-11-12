@@ -1,11 +1,6 @@
 export interface Etiketter {
 	erDoed: boolean;
 	egenAnsatt: boolean;
-	diskresjonskodeFortrolig: string | null;
+	adressebeskyttelse: string | null;
 	kandidatForUtmelding: boolean;
-}
-
-export interface EtiketterForBruker {
-	fnr: string;
-	etiketter: Etiketter;
 }

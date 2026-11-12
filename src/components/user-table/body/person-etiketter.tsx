@@ -17,13 +17,13 @@ export const PersonEtiketter = ({ etiketter }: Props) => {
 					Død
 				</Tag>
 			)}
-			{etiketter.diskresjonskodeFortrolig && (
+			{etiketter.adressebeskyttelse && (
 				<Tag variant="error" size="small">
-					Kode {etiketter.diskresjonskodeFortrolig}
+					{etiketter.adressebeskyttelse}
 				</Tag>
 			)}
 			{etiketter.egenAnsatt && (
-				<Tag variant="error" size="small">
+				<Tag variant="warning" size="small">
 					Skjermet
 				</Tag>
 			)}

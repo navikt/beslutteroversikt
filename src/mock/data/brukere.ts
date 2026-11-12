@@ -41,6 +41,8 @@ export const lagBrukere = (antallBrukere: number): Bruker[] => {
 				? null
 				: faker.person.firstName() + ' ' + faker.person.lastName();
 
+		const siffer = randBetween(1, 8);
+
 		const bruker: Bruker = {
 			beslutterNavn,
 			veilederNavn: faker.person.firstName() + ' ' + faker.person.lastName(),
@@ -51,7 +53,13 @@ export const lagBrukere = (antallBrukere: number): Bruker[] => {
 			brukerOppfolgingsenhetId: randomEnhet.enhetId,
 			brukerOppfolgingsenhetNavn: randomEnhet.enhetNavn,
 			status: randomStatus,
-			statusEndret: faker.date.recent().toISOString()
+			statusEndret: faker.date.recent().toISOString(),
+			etiketter: {
+				erDoed: siffer === 1,
+				egenAnsatt: siffer === 3,
+				adressebeskyttelse: siffer === 1 ? 'Fortrolig' : siffer === 2 ? 'Strengt fortrolig' : null,
+				kandidatForUtmelding: siffer === 4
+			}
 		};
 
 		if (maskerteBrukere > 0) {
