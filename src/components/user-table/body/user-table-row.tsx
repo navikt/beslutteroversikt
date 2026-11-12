@@ -4,6 +4,7 @@ import { capitalize, lagBrukerNavn } from '../../../utils';
 import { formatDateStr, formatDateStrWithMonthName, formatTimeStr } from '../../../utils/date-utils';
 import { UtkastStatusData } from './utkast-status-data';
 import { BrukerDirektelenkeMedFeilmelding } from './bruker-direktelenke-med-feilmelding';
+import { PersonEtiketter } from './person-etiketter';
 import './user-table-row.css';
 
 interface Props {
@@ -20,7 +21,8 @@ export const UserTableRow = ({ bruker }: Props) => {
 		vedtakStartet,
 		beslutterNavn,
 		veilederNavn,
-		status
+		status,
+		etiketter
 	} = bruker;
 
 	const erMaskert = brukerFnr === '';
@@ -55,6 +57,9 @@ export const UserTableRow = ({ bruker }: Props) => {
 			<Table.DataCell className="celle-med-tekst">{beslutterNavn ?? '-'}</Table.DataCell>
 			<Table.DataCell className="celle-med-tekst">{veilederNavn}</Table.DataCell>
 			<Table.DataCell className="celle-med-tekst">{brukerOppfolgingsenhetNavn}</Table.DataCell>
+			<Table.DataCell className="celle-med-tekst">
+				<PersonEtiketter etiketter={etiketter} />
+			</Table.DataCell>
 		</Table.Row>
 	);
 };
