@@ -1,3 +1,5 @@
+import { Etiketter } from './etiketter';
+
 export enum UtkastStatus {
 	TRENGER_BESLUTTER = 'TRENGER_BESLUTTER',
 	KLAR_TIL_BESLUTTER = 'KLAR_TIL_BESLUTTER',
@@ -16,6 +18,7 @@ export interface Bruker {
 	brukerEtternavn: string;
 	brukerOppfolgingsenhetId: string;
 	brukerOppfolgingsenhetNavn: string;
+	etiketter: Etiketter;
 
 	status: UtkastStatus;
 	beslutterNavn: string | null;

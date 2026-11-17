@@ -5,7 +5,7 @@ import Spinner from '../../felles/spinner/spinner';
 export const LasterInnholdRad = () => {
 	return (
 		<Table.Row shadeOnHover={false}>
-			<Table.DataCell colSpan={Object.values(OrderByField).length} className="laster-tabelldata">
+			<Table.DataCell colSpan={Object.values(OrderByField).length + 1} className="laster-tabelldata">
 				<Spinner />
 			</Table.DataCell>
 		</Table.Row>

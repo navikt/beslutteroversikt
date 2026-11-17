@@ -53,6 +53,7 @@ export const UserTableHeader = () => {
 				>
 					Enhet
 				</Table.ColumnHeader>
+				<Table.ColumnHeader title="Etiketter for brukeren">Etiketter</Table.ColumnHeader>
 			</Table.Row>
 		</Table.Header>
 	);
