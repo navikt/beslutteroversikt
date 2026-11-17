@@ -22,12 +22,12 @@ export const PersonEtiketter = ({ etiketter }: Props) => {
 					{etiketter.adressebeskyttelse}
 				</Tag>
 			)}
-			{etiketter.egenAnsatt && (
+			{etiketter.skjermet && (
 				<Tag variant="warning" size="small">
 					Skjermet
 				</Tag>
 			)}
-			{etiketter.kandidatForUtmelding && (
+			{etiketter.kandidatForAvslutning && (
 				<Tag variant="warning" size="small">
 					Kandidat for avslutning
 				</Tag>

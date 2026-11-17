@@ -56,9 +56,9 @@ export const lagBrukere = (antallBrukere: number): Bruker[] => {
 			statusEndret: faker.date.recent().toISOString(),
 			etiketter: {
 				erDoed: siffer === 1,
-				egenAnsatt: siffer === 3,
+				skjermet: siffer === 3,
 				adressebeskyttelse: siffer === 1 ? 'Fortrolig' : siffer === 2 ? 'Strengt fortrolig' : null,
-				kandidatForUtmelding: siffer === 4
+				kandidatForAvslutning: siffer === 4
 			}
 		};
 

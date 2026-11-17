@@ -1,6 +1,6 @@
 export interface Etiketter {
 	erDoed: boolean;
-	egenAnsatt: boolean;
+	skjermet: boolean;
 	adressebeskyttelse: string | null;
-	kandidatForUtmelding: boolean;
+	kandidatForAvslutning: boolean;
 }
