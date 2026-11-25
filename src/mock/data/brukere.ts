@@ -44,7 +44,9 @@ export const lagBrukere = (antallBrukere: number): Bruker[] => {
 		const siffer = randBetween(1, 8);
 
 		const bruker: Bruker = {
+			vedtakId: i + 1,
 			beslutterNavn,
+			beslutterIdent: beslutterNavn === null ? null : `Z${String(i + 1).padStart(6, '0')}`,
 			veilederNavn: faker.person.firstName() + ' ' + faker.person.lastName(),
 			brukerFnr: randomFnr(),
 			brukerFornavn: faker.person.firstName(),
