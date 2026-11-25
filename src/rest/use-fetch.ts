@@ -1,46 +1,52 @@
 import { useCallback, useMemo, useState } from 'react';
 import { FetchInfo, FetchState, FetchStatus } from './utils';
 
-export interface Fetch<D = unknown, FP = unknown> extends FetchState<D> {
-	fetch: (fetchParams: FP, onFinished?: (fetchState: FetchState<D>) => void) => void;
+export interface Fetch<Data = unknown, FetchParams = unknown> extends FetchState<Data> {
+	fetch: (fetchParams: FetchParams, onFinished?: (fetchState: FetchState<Data>) => void) => void;
 	reset: () => void;
 }
 
-const createInitialFetchState = <D>(): FetchState<D> => ({
+const createInitialFetchState = <Data>(): FetchState<Data> => ({
 	status: FetchStatus.NOT_STARTED,
 	error: null,
-	data: null as unknown as D,
+	data: null as unknown as Data,
 	httpCode: -1
 });
 
-const createPendingFetchState = <D>(): FetchState<D> => ({
+const createPendingFetchState = <Data>(): FetchState<Data> => ({
 	status: FetchStatus.PENDING,
 	error: null,
-	data: null as unknown as D,
+	data: null as unknown as Data,
 	httpCode: -1
 });
 
-const createFinishedFetchState = <D = {}>(data: D | null, error: unknown, httpCode: number): FetchState<D> => ({
+const createFinishedFetchState = <Data = {}>(
+	data: Data | null,
+	error: unknown,
+	httpCode: number
+): FetchState<Data> => ({
 	status: FetchStatus.FINISHED,
 	error,
-	data: data as D,
+	data: data as Data,
 	httpCode
 });
 
-const useFetch = <D = {}, FP = unknown>(createFetchInfo: (fetchParams: FP) => FetchInfo): Fetch<D, FP> => {
-	const [fetchState, setFetchState] = useState<FetchState<D>>(createInitialFetchState<D>());
+const useFetch = <Data = {}, FetchParams = unknown>(
+	createFetchInfo: (fetchParams: FetchParams) => FetchInfo
+): Fetch<Data, FetchParams> => {
+	const [fetchState, setFetchState] = useState<FetchState<Data>>(createInitialFetchState<Data>());
 
 	const apiFetchCallback = useCallback(
-		(fetchParams: FP, onFinished?: (fetchState: FetchState<D>) => void) => {
+		(fetchParams: FetchParams, onFinished?: (fetchState: FetchState<Data>) => void) => {
 			const fetchInfo = createFetchInfo(fetchParams);
 			const { url, ...restInfo } = fetchInfo;
 
-			setFetchState(createPendingFetchState<D>());
+			setFetchState(createPendingFetchState<Data>());
 
 			fetch(url, restInfo)
 				.then(async res => {
 					const httpCode = res.status;
-					let state: FetchState<D>;
+					let state: FetchState<Data>;
 
 					if ([200, 201, 203, 206].includes(httpCode)) {
 						try {
@@ -49,21 +55,21 @@ const useFetch = <D = {}, FP = unknown>(createFetchInfo: (fetchParams: FP) => Fe
 							if (data !== '' && data !== null) {
 								const deserializedData = JSON.parse(data);
 
-								state = createFinishedFetchState<D>(deserializedData, null, httpCode);
+								state = createFinishedFetchState<Data>(deserializedData, null, httpCode);
 							} else {
-								state = createFinishedFetchState<D>(null, null, httpCode);
+								state = createFinishedFetchState<Data>(null, null, httpCode);
 							}
 						} catch (error) {
-							state = createFinishedFetchState<D>(null, error, httpCode);
+							state = createFinishedFetchState<Data>(null, error, httpCode);
 						}
 					} else {
-						state = createFinishedFetchState<D>(null, null, httpCode);
+						state = createFinishedFetchState<Data>(null, null, httpCode);
 					}
 
 					return state;
 				})
 				.catch(error => {
-					return createFinishedFetchState<D>(null, error, -1);
+					return createFinishedFetchState<Data>(null, error, -1);
 				})
 				.then(state => {
 					if (onFinished) {
@@ -75,7 +81,7 @@ const useFetch = <D = {}, FP = unknown>(createFetchInfo: (fetchParams: FP) => Fe
 		},
 		[createFetchInfo]
 	);
-	const resetCallback = useCallback(() => setFetchState(createInitialFetchState<D>()), []);
+	const resetCallback = useCallback(() => setFetchState(createInitialFetchState<Data>()), []);
 
 	return useMemo(() => {
 		return { ...fetchState, fetch: apiFetchCallback, reset: resetCallback };
