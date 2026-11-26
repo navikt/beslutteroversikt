@@ -1,6 +1,7 @@
 import { faker } from '@faker-js/faker';
 import { Bruker, UtkastStatus } from '../../rest/data/bruker';
 import { enheter } from './enheter';
+import { innloggetVeileder } from './innlogget-veileder';
 import { randBetween } from '../../utils';
 
 function randomFnr(): string {
@@ -48,6 +49,7 @@ export const lagBrukere = (antallBrukere: number): Bruker[] => {
 			beslutterNavn,
 			beslutterIdent: beslutterNavn === null ? null : `Z${String(i + 1).padStart(6, '0')}`,
 			veilederNavn: faker.person.firstName() + ' ' + faker.person.lastName(),
+			veilederIdent: i === 0 ? innloggetVeileder.ident : `Z${String(i + 1).padStart(6, '0')}`,
 			brukerFnr: randomFnr(),
 			brukerFornavn: faker.person.firstName(),
 			brukerEtternavn: 'Testson',

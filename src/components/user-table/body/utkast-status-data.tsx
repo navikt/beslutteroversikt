@@ -11,12 +11,20 @@ import { KVALITETSSIKRERROLLE_TOGGLE } from '../../../rest/obo-unleash';
 interface Props {
 	status: UtkastStatus;
 	vedtakId: number;
+	veilederIdent: string;
 	onBeslutterRegistrert: (vedtakId: number) => void;
 }
 
-export const UtkastStatusData = ({ status, vedtakId, onBeslutterRegistrert }: Props) => {
-	const { unleashFeaturetoggleFetcher } = useDataFetcherStore();
+export const UtkastStatusData = ({ status, vedtakId, veilederIdent, onBeslutterRegistrert }: Props) => {
+	const { unleashFeaturetoggleFetcher, innloggetVeilederFetcher } = useDataFetcherStore();
 	const visBliKvalitetssikrerKnapp = Boolean(unleashFeaturetoggleFetcher.data?.[KVALITETSSIKRERROLLE_TOGGLE]);
+	const innloggetVeilederIdent = innloggetVeilederFetcher.data?.ident;
+	const kanBliKvalitetssikrer = Boolean(
+		status === UtkastStatus.TRENGER_BESLUTTER &&
+		innloggetVeilederIdent &&
+		veilederIdent &&
+		innloggetVeilederIdent !== veilederIdent
+	);
 
 	const bliBeslutter = useFetch<void, number>(lagBliBeslutterFetchInfo);
 	const laster = bliBeslutter.status === FetchStatus.PENDING;
@@ -32,7 +40,7 @@ export const UtkastStatusData = ({ status, vedtakId, onBeslutterRegistrert }: Pr
 
 	return (
 		<span className="status">
-			{visBliKvalitetssikrerKnapp && status === UtkastStatus.TRENGER_BESLUTTER ? (
+			{visBliKvalitetssikrerKnapp && kanBliKvalitetssikrer ? (
 				<Button
 					size="small"
 					icon={<PersonPlusIcon />}

@@ -24,6 +24,7 @@ export const UserTableRow = ({ bruker }: Props) => {
 		status,
 		beslutterNavn,
 		veilederNavn,
+		veilederIdent,
 		statusEndret,
 		vedtakStartet
 	} = bruker;
@@ -51,7 +52,12 @@ export const UserTableRow = ({ bruker }: Props) => {
 			</Table.DataCell>
 			<Table.DataCell className="celle-med-tekst">{formatDateStr(vedtakStartet)}</Table.DataCell>
 			<Table.DataCell className="utkast-status-celle">
-				<UtkastStatusData status={status} vedtakId={vedtakId} onBeslutterRegistrert={oppdaterBeslutter} />
+				<UtkastStatusData
+					status={status}
+					vedtakId={vedtakId}
+					veilederIdent={veilederIdent}
+					onBeslutterRegistrert={oppdaterBeslutter}
+				/>
 			</Table.DataCell>
 			<Table.DataCell className="celle-med-tekst">
 				<span>{formatDateStrWithMonthName(statusEndret)}</span>&nbsp;

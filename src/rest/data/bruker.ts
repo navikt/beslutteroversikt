@@ -25,6 +25,7 @@ export interface Bruker {
 	beslutterNavn: string | null;
 	beslutterIdent: string | null;
 	veilederNavn: string;
+	veilederIdent: string;
 
 	statusEndret: string; // dato og tidspunkt
 	vedtakStartet: string; // dato og tidspunkt
