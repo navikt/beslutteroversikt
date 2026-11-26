@@ -66,6 +66,12 @@ export const lagHentEnheterMedUtkastFetchInfo = (): FetchInfo => ({
 	url: `${VEILARBVEDTAKSSTOTTE_API}/beslutteroversikt/enheter`
 });
 
+export const lagBliBeslutterFetchInfo = (vedtakId: number): FetchInfo => ({
+	credentials: 'same-origin',
+	method: 'POST',
+	url: `${VEILARBVEDTAKSSTOTTE_API}/beslutter/bliBeslutter?vedtakId=${vedtakId}`
+});
+
 export function sendEventTilVedtaksstotte(event: FrontendEvent) {
 	const url = `${VEILARBVEDTAKSSTOTTE_API}/logger/event`;
 	const config = {

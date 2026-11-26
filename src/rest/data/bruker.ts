@@ -20,10 +20,13 @@ export interface Bruker {
 	brukerOppfolgingsenhetNavn: string;
 	etiketter: Etiketter;
 
+	vedtakId: number;
 	status: UtkastStatus;
 	beslutterNavn: string | null;
+	beslutterIdent: string | null;
 	veilederNavn: string;
+	veilederIdent: string;
 
-	statusEndret: string; // dato
-	vedtakStartet: string; // dato
+	statusEndret: string; // dato og tidspunkt
+	vedtakStartet: string; // dato og tidspunkt
 }
