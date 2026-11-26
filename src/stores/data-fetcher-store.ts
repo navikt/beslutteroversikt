@@ -6,7 +6,7 @@ import {
 	lagHentBrukereFetchInfo,
 	lagHentInnloggetVeilederFetchInfo
 } from '../rest/api';
-import { BrukereMedAntall } from '../rest/data/bruker';
+import { BrukereMedAntall, UtkastStatus } from '../rest/data/bruker';
 import { InnloggetVeileder } from '../rest/data/innlogget-veileder';
 import { AktivEnhet } from '../rest/data/aktiv-enhet';
 import { OrNothing } from '../utils/types/ornothing';
@@ -18,7 +18,28 @@ export const [DataFetcherStoreProvider, useDataFetcherStore] = constate(() => {
 	const aktivEnhetFetcher = useFetch<OrNothing<AktivEnhet>>(lagHentAktivEnhetFetchInfo);
 	const unleashFeaturetoggleFetcher = useFetch<OboUnleashFeatures>(lagHentUnleashFeaturetoggleInfo);
 
+	function oppdaterBeslutter(vedtakId: number) {
+		const statusEndret = new Date().toISOString();
+		const veileder = innloggetVeilederFetcher.data;
+
+		brukereFetcher.updateData(data => ({
+			...data,
+			brukere: data.brukere.map(bruker =>
+				bruker.vedtakId === vedtakId
+					? {
+							...bruker,
+							status: UtkastStatus.KLAR_TIL_BESLUTTER,
+							beslutterNavn: veileder.navn,
+							beslutterIdent: veileder.ident,
+							statusEndret
+						}
+					: bruker
+			)
+		}));
+	}
+
 	return {
+		oppdaterBeslutter,
 		brukereFetcher,
 		innloggetVeilederFetcher,
 		aktivEnhetFetcher,

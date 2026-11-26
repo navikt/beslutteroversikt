@@ -3,6 +3,7 @@ import { FetchInfo, FetchState, FetchStatus } from './utils';
 
 export interface Fetch<Data = unknown, FetchParams = unknown> extends FetchState<Data> {
 	fetch: (fetchParams: FetchParams, onFinished?: (fetchState: FetchState<Data>) => void) => void;
+	updateData: (update: (data: Data) => Data) => void;
 	reset: () => void;
 }
 
@@ -81,11 +82,14 @@ const useFetch = <Data = {}, FetchParams = unknown>(
 		},
 		[createFetchInfo]
 	);
+	const updateData = useCallback((update: (data: Data) => Data) => {
+		setFetchState(state => (state.data == null ? state : { ...state, data: update(state.data) }));
+	}, []);
 	const resetCallback = useCallback(() => setFetchState(createInitialFetchState<Data>()), []);
 
 	return useMemo(() => {
-		return { ...fetchState, fetch: apiFetchCallback, reset: resetCallback };
-	}, [fetchState, apiFetchCallback, resetCallback]);
+		return { ...fetchState, fetch: apiFetchCallback, updateData, reset: resetCallback };
+	}, [fetchState, apiFetchCallback, updateData, resetCallback]);
 };
 
 export default useFetch;
