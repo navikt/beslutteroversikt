@@ -5,6 +5,7 @@ import { formatDateStr, formatDateStrWithMonthName, formatTimeStr } from '../../
 import { UtkastStatusData } from './utkast-status-data';
 import { BrukerDirektelenkeMedFeilmelding } from './bruker-direktelenke-med-feilmelding';
 import { PersonEtiketter } from './person-etiketter';
+import { useDataFetcherStore } from '../../../stores/data-fetcher-store';
 import './user-table-row.css';
 
 interface Props {
@@ -12,17 +13,19 @@ interface Props {
 }
 
 export const UserTableRow = ({ bruker }: Props) => {
+	const { oppdaterBeslutter } = useDataFetcherStore();
 	const {
 		brukerFnr,
 		brukerFornavn,
 		brukerEtternavn,
-		statusEndret,
 		brukerOppfolgingsenhetNavn,
-		vedtakStartet,
+		etiketter,
+		vedtakId,
+		status,
 		beslutterNavn,
 		veilederNavn,
-		status,
-		etiketter
+		statusEndret,
+		vedtakStartet
 	} = bruker;
 
 	const erMaskert = brukerFnr === '';
@@ -48,7 +51,7 @@ export const UserTableRow = ({ bruker }: Props) => {
 			</Table.DataCell>
 			<Table.DataCell className="celle-med-tekst">{formatDateStr(vedtakStartet)}</Table.DataCell>
 			<Table.DataCell className="utkast-status-celle">
-				<UtkastStatusData status={status} />
+				<UtkastStatusData status={status} vedtakId={vedtakId} onBeslutterRegistrert={oppdaterBeslutter} />
 			</Table.DataCell>
 			<Table.DataCell className="celle-med-tekst">
 				<span>{formatDateStrWithMonthName(statusEndret)}</span>&nbsp;
